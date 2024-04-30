@@ -1,0 +1,1 @@
+// Show all appointments by clinic id

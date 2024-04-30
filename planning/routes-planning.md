@@ -9,6 +9,7 @@
 | POST        | /register/info          | Submit Info collect form                         |
 | GET         | /profile/:id            | Display user profile                             |
 | POST        | /profile/:id            | Edit user profile                                |
+| GET         | /doctors/               | Display all doctors                              |
 | GET         | /doctor/:id             | Display a doctor                                 |
 | POST        | /doctor                 | Create new doctor                                |
 | PUT         | /doctor/:id             | Edit existing doctor                             |
@@ -18,6 +19,7 @@
 | POST        | /appointment            | Create a new appointment                         |
 | PUT         | /appointment/:id        | Edit appointment (patient booking & cancelling)  |
 | DELETE      | /appointment/:id/delete | Delete appointment (clinic)                      |
+| GET         | /documents              | Display all documents                            |
 | GET         | /document/:id           | Display a document                               |
 | POST        | /document               | Create a new document                            |
 | DELETE      | /document/:id/delete    | Delete a document                                |

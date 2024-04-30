@@ -1,0 +1,1 @@
+// Get all documents by patient id

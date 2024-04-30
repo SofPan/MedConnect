@@ -1,0 +1,1 @@
+// Get all doctors by clinic id
