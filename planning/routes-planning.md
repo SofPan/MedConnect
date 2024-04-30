@@ -21,4 +21,3 @@
 | GET         | /document/:id           | Display a document                               |
 | POST        | /document               | Create a new document                            |
 | DELETE      | /document/:id/delete    | Delete a document                                |
-|------------ | ------------------------|--------------------------------------------------|
