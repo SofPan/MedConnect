@@ -18,3 +18,7 @@
 | POST        | /appointment            | Create a new appointment                         |
 | PUT         | /appointment/:id        | Edit appointment (patient booking & cancelling)  |
 | DELETE      | /appointment/:id/delete | Delete appointment (clinic)                      |
+| GET         | /document/:id           | Display a document                               |
+| POST        | /document               | Create a new document                            |
+| DELETE      | /document/:id/delete    | Delete a document                                |
+|------------ | ------------------------|--------------------------------------------------|
