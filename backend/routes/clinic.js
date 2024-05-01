@@ -26,19 +26,21 @@ const router  = express.Router();
   });
 
 // Route to handle geocoding of addresses
-router.get('/api/geocode', async (req, res) => {
+router.get('/api/geocode', (req, res) => {
   const address = req.query.address;
-  try {
-    const location = await geocodeAddress(address);
-    if (location) {
-      res.json({ latitude: location.lat, longitude: location.lng });
-    } else {
+  
+  geocodeAddress(address)
+    .then(location => {
+      if (location) {
+        res.json({ latitude: location.lat, longitude: location.lng });
+      } else {
+        res.status(500).json({ error: 'Error geocoding address' });
+      }
+    })
+    .catch(error => {
+      console.error('Error geocoding address:', error);
       res.status(500).json({ error: 'Error geocoding address' });
-    }
-  } catch (error) {
-    console.error('Error geocoding address:', error);
-    res.status(500).json({ error: 'Error geocoding address' });
-  }
+    });
 });
 
 module.exports = router;

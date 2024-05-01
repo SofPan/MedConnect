@@ -29,31 +29,33 @@ const MapComponent = () => {
   });
 
   useEffect(() => {
-    const fetchClinics = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/clinics');
-        setClinicLocations(response.data);
-      } catch (error) {
-        console.error('Error fetching clinics:', error);
-      }
+    const fetchClinics = () => {
+      axios.get('http://localhost:8080/clinics')
+        .then(response => {
+          setClinicLocations(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching clinics:', error);
+        });
     };
-
     if (isLoaded) {
       fetchClinics();
     }
   }, [isLoaded]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(`clinics/api/geocode?address=${searchTerm}`);
+  const handleSearch = (e) => {
+  e.preventDefault();
+
+  axios.get(`clinics/api/geocode?address=${searchTerm}`)
+    .then(response => {
       const { latitude, longitude } = response.data;
       setCoordinates({ lat: latitude, lng: longitude });
       setSearchTermMarker(true);
-    } catch (error) {
+    })
+    .catch(error => {
       console.error('Error geocoding address:', error);
-    }
-  };
+    });
+};
 
   if (!isLoaded) {
     return <div>Loading...</div>;
