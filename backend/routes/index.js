@@ -11,6 +11,7 @@ router.use(cookieSession({
 
 router.get('/', (req, res) => {
   const userId = req.session.user_id;
+  console.log("UserId", userId)
   if (userId) {
     getUserById(userId)
       .then(user => {

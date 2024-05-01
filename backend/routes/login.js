@@ -6,11 +6,6 @@
 const { getUserById } = require('../src/db/queries/users/getUserById');
 const express = require('express');
 const router  = express.Router();
-const cookieSession = require('cookie-session');
-router.use(cookieSession({
-  name: 'session',
-  keys: ["somelongsecretkey987654321"],
-}));
 
 router.get('/login/:id', (req, res) => {
   req.session.user_id = req.params.id;
@@ -28,7 +23,7 @@ router.get('/login/:id', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/');
+  console.log("logout")
 });
 
 module.exports = router;

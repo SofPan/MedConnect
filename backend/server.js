@@ -1,12 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const db = require('./src/db/connection');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
-
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
