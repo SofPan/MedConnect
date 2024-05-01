@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MapComponent from './components/MapComponent';
 
+import ClinicList from './components/ClinicsList/ClinicsList'
+
 function App() {
   const [user, setUser] = useState({});
 
@@ -29,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={handleLogin}>Login</button>
+      {/* <ClinicList /> */}
       <MapComponent />
     </div>
   );
