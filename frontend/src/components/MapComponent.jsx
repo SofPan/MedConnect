@@ -31,7 +31,7 @@ const MapComponent = () => {
   useEffect(() => {
     const fetchClinics = async () => {
       try {
-        const response = await axios.get('/api/clinics');
+        const response = await axios.get('http://localhost:8080/clinics');
         setClinicLocations(response.data);
       } catch (error) {
         console.error('Error fetching clinics:', error);
@@ -46,7 +46,7 @@ const MapComponent = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`/api/geocode?address=${searchTerm}`);
+      const response = await axios.get(`clinics/api/geocode?address=${searchTerm}`);
       const { latitude, longitude } = response.data;
       setCoordinates({ lat: latitude, lng: longitude });
       setSearchTermMarker(true);
@@ -93,7 +93,7 @@ const MapComponent = () => {
                 scaledSize: new window.google.maps.Size(50, 50)
               }}
               label={{
-                text: `${clinic.number_of_spots}`,
+                text: `${clinic.number_of_spots ? clinic.number_of_spots : 0}`,
                 fontWeight: 'bold',
                 fontSize: '18px',
                 color: 'white',

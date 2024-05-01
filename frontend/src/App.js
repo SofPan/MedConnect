@@ -1,19 +1,20 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import MapComponent from './components/MapComponent';
 
 function App() {
   const [user, setUser] = useState({});
 
   //This part doesn't work/////
-  useEffect(() => {
-    axios.get(`http://localhost:8080/`)
-      .then(res => {
-        console.log(res.data)
-        setUser(res.data);
-      })
-      .catch(error => console.error('Error fetching user:', error));
-  }, []); 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8080/`)
+  //     .then(res => {
+  //       console.log(res.data)
+  //       setUser(res.data);
+  //     })
+  //     .catch(error => console.error('Error fetching user:', error));
+  // }, []); 
  //////////////////
   const handleLogin = (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={handleLogin}>Login</button>
+      <MapComponent />
     </div>
   );
 }

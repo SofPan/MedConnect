@@ -31,6 +31,7 @@ const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
 //const googleApiRoutes = require('./routes/googleApi');
+const clinicsRoutes = require('./routes/clinic');
 
 app.use('/appointments', appointmentsRoutes);
 app.use('/doctors', doctorsRoutes);
@@ -40,6 +41,7 @@ app.use('/register', registerRoutes);
 app.use('/', loginRoutes);
 app.use('/', indexRoutes);
 //app.use('/maps/api', googleApiRoutes);
+app.use('/clinics', clinicsRoutes);
 
 
 // Testing frontend connection
