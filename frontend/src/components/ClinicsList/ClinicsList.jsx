@@ -19,9 +19,19 @@ const DUMMY_CLINICS = [
 ]
 
 const ClinicList = () => {
+
+  const mapClinics = DUMMY_CLINICS.map(clinic => {
+    return <ClinicListItem 
+              key={clinic.id} 
+              id={clinic.id}
+              name={clinic.name}
+              address={clinic.address}
+            />
+  })
+
   return(
     <ul>
-      <ClinicListItem />
+      {mapClinics}
     </ul>
   )
 }
