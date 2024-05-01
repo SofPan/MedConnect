@@ -29,7 +29,7 @@ const ClinicList = () => {
   })
 
   return(
-    <ul>
+    <ul className="available-clinics">
       {mapClinics}
     </ul>
   )
