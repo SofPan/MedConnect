@@ -30,6 +30,7 @@ const profileRoutes = require('./routes/profile');
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
+const clinicsRoutes = require('./routes/clinic');
 
 app.use('/appointments', appointmentsRoutes);
 app.use('/doctors', doctorsRoutes);
@@ -38,17 +39,12 @@ app.use('/profile', profileRoutes);
 app.use('/register', registerRoutes);
 app.use('/', loginRoutes);
 app.use('/', indexRoutes);
+app.use('/clinics', clinicsRoutes);
 
 
 // Testing frontend connection
 app.get('/api', (req, res) => {
   res.json({ test: "test" });
-});
-
-// Testing db connection
-app.get('/api/users', async (req, res) => {
-  db.query('SELECT * FROM users;')
-    .then(data => console.log(data.rows))
 });
 
 // Start the server
