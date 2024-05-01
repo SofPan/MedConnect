@@ -9,3 +9,8 @@
 
 // DELETE Delete existing doctor /doctor/:id/delete
 
+const express = require('express');
+const router  = express.Router();
+
+
+module.exports = router;

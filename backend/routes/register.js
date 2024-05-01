@@ -6,3 +6,8 @@
 
 // POST Submit info page form /register/info
 // The info collected changes the query based on Clinic vs. Patient
+const express = require('express');
+const router  = express.Router();
+
+
+module.exports = router;
