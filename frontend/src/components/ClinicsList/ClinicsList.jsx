@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
+
 import ClinicListItem from "./ClinicsListItem";
 
 const DUMMY_CLINICS = [
@@ -19,7 +22,16 @@ const DUMMY_CLINICS = [
 ]
 
 const ClinicList = () => {
-  const mapClinics = DUMMY_CLINICS.map(clinic => {
+  const [clinicsList, setClinicsList] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/clinics')
+      .then(response => setClinicsList(response.data))
+      .catch(error => console.error('Error fetching clinicsList', error));
+  }, []);
+
+
+  const mapClinics = clinicsList.map(clinic => {
     return <ClinicListItem 
               key={clinic.id} 
               id={clinic.id}
