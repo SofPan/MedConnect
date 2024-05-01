@@ -1,0 +1,7 @@
+/* TEMPORARY STYLES -- CONVERT TO TAILWIND */
+
+.available-clinics .roster,
+.clinic-profile .available-doctors{
+  display: none;
+}
+

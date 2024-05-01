@@ -4,11 +4,11 @@ const DoctorsListItem = (props) => {
   return(
     <li>
       {/* For Available Doctors page */}
-      <span className="available_doctors">
+      <span className="available-doctors">
         <p>{name} accepting {patients} patients </p>
       </span>
       {/* For Clinic Profile Page */}
-      {/* <span className="roster">
+      <span className="roster">
         <div>
           <img src={photo} />
         </div>
@@ -22,7 +22,7 @@ const DoctorsListItem = (props) => {
           <button>Edit</button>
           <button>Delete</button>
         </div>
-      </span> */}
+      </span>
     </li>
   )
 }
