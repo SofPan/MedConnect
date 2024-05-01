@@ -16,6 +16,7 @@ const DoctorsListItem = (props) => {
           <p>{name} <br />
               Can accept {patients} more patients
           </p>
+          <p> {qualifications} </p>
         </div>
         <div>
           <button>Edit</button>
