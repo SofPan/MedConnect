@@ -1,7 +1,27 @@
-const DoctorsListItem = () => {
+const DoctorsListItem = (props) => {
+  const {name, qualifications, photo, patients} = props;
+
   return(
     <li>
-      <p>Dr. Medici accepting <span>4</span> patients </p>
+      {/* For Available Doctors page */}
+      <span className="available_doctors">
+        <p>{name} accepting {patients} patients </p>
+      </span>
+      {/* For Clinic Profile Page */}
+      {/* <span className="roster">
+        <div>
+          <img src={photo} />
+        </div>
+        <div>    
+          <p>{name} <br />
+              Can accept {patients} more patients
+          </p>
+        </div>
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </span> */}
     </li>
   )
 }
