@@ -1,11 +1,11 @@
-import DoctorListItem from "./ClinicsListItem";
+import ClinicListItem from "./ClinicsListItem";
 
-const DoctorList = () => {
+const ClinicList = () => {
   return(
     <ul>
-      <DoctorListItem />
+      <ClinicListItem />
     </ul>
   )
 }
 
-export default DoctorList;
+export default ClinicList;

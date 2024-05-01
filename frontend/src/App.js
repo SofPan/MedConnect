@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import DoctorList from './components/ClinicsList/ClinicsList'
+import ClinicList from './components/ClinicsList/ClinicsList'
 
 function App() {
   const [user, setUser] = useState({});
@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={handleLogin}>Login</button>
-      <DoctorList />
+      <ClinicList />
     </div>
   );
 }
