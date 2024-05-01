@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import DoctorList from './components/ClinicsList/ClinicsList'
 
 function App() {
   const [user, setUser] = useState({});
@@ -13,8 +14,8 @@ function App() {
         setUser(res.data);
       })
       .catch(error => console.error('Error fetching user:', error));
-  }, []); 
- //////////////////
+  }, []);
+  //////////////////
   const handleLogin = (e) => {
     e.preventDefault();
     axios.get(`http://localhost:8080/login/1`)
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={handleLogin}>Login</button>
+      <DoctorList />
     </div>
   );
 }
