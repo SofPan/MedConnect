@@ -9,7 +9,8 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 ('clinic4@example.com', 'hashed_password_7', TRUE, NOW()),
 ('clinic5@example.com', 'hashed_password_8', TRUE, NOW()),
 ('clinic6@example.com', 'hashed_password_9', TRUE, NOW()),
-('clinic7@example.com', 'hashed_password_10', TRUE, NOW());
+('clinic7@example.com', 'hashed_password_11', TRUE, NOW()),
+('clinic8@example.com', 'hashed_password_12', TRUE, NOW())
 
 -- Seed data for patients table
 INSERT INTO patients (user_id, name, date_of_birth, gender, created_at) VALUES
@@ -21,11 +22,14 @@ INSERT INTO patients (user_id, name, date_of_birth, gender, created_at) VALUES
 
 -- Seed data for clinics table
 INSERT INTO clinics (name, user_id, address, created_at) VALUES
-('City Medical Center', 4, '123 Main St, City, Country', NOW()),
-('Suburb Clinic', 5, '456 Elm St, Suburb, Country', NOW()),
-('Rural Health Clinic', 6, '789 Oak St, Rural Area, Country', NOW()),
-('Urban Family Clinic', 7, '101 Pine St, Urban Area, Country', NOW()),
-('Pediatric Clinic', 8, '111 Maple St, City, Country', NOW());
+('City Medical Center', 4, '4G Spadina Ave., Toronto, ON M5V 3Z9', NOW()),
+('Suburb Clinic', 5, '486 Front St W Lower Ground, Unit 14, Toronto, ON M5V 0V2', NOW()),
+('Rural Health Clinic', 6, '39 Lower Simcoe St, Toronto, ON M5J 3A6', NOW()),
+('Urban Family Clinic', 7, '1154 Danforth Ave, Toronto, ON M4J 1M3', NOW()),
+('Pediatric Clinic', 8, '550 Queens Quay W, Toronto, ON M5V 3M8', NOW()),
+('Monarch Park Clinic', 9, '840 Coxwell Ave #205, Toronto, ON M4C 5T2', NOW()),
+('Albany Medical Clinic', 10, '807 Broadview Ave, Toronto, ON M4K 2P8', NOW()),
+('Paper & Danforth Community Care Clinic', 11, '752 Danforth Ave, Toronto, ON M4J 1L5', NOW());
 
 -- Seed data for doctors table
 INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, photo_url, number_of_patients, created_at) VALUES
