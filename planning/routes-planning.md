@@ -10,16 +10,16 @@
 | GET         | /profile/:id            | Display user profile                             |
 | POST        | /profile/:id            | Edit user profile                                |
 | GET         | /doctors/               | Display all doctors                              |
-| GET         | /doctor/:id             | Display a doctor                                 |
-| POST        | /doctor                 | Create new doctor                                |
-| PUT         | /doctor/:id             | Edit existing doctor                             |
-| DELETE      | /doctor/:id/delete      | Delete existing doctor                           |
+| GET         | /doctors/:id            | Display a doctor                                 |
+| POST        | /doctors                | Create new doctor                                |
+| PUT         | /doctors/:id            | Edit existing doctor                             |
+| DELETE      | /doctors/:id/delete     | Delete existing doctor                           |
 | GET         | /appointments           | Display all appointments (clinic)                |
-| GET         | /appointment/:id        | Display an appointment                           |
-| POST        | /appointment            | Create a new appointment                         |
-| PUT         | /appointment/:id        | Edit appointment (patient booking & cancelling)  |
-| DELETE      | /appointment/:id/delete | Delete appointment (clinic)                      |
+| GET         | /appointments/:id       | Display an appointment                           |
+| POST        | /appointments           | Create a new appointment                         |
+| PUT         | /appointments/:id       | Edit appointment (patient booking & cancelling)  |
+| DELETE      | /appointments/:id/delete| Delete appointment (clinic)                      |
 | GET         | /documents              | Display all documents                            |
-| GET         | /document/:id           | Display a document                               |
-| POST        | /document               | Create a new document                            |
-| DELETE      | /document/:id/delete    | Delete a document                                |
+| GET         | /documents/:id          | Display a document                               |
+| POST        | /documents              | Create a new document                            |
+| DELETE      | /documents/:id/delete   | Delete a document                                |

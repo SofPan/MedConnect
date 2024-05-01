@@ -1,6 +1,6 @@
 // GET Display all of a clinic's appointments /appointments 
 
-// POST create new appointment /appointment
+// POST create new appointment /appointments
 
 // GET one appointment /appointment/:id
 
@@ -14,4 +14,9 @@
 
 // DELETE delete appointment /appointment/:id/delete
 // Used only on clinic side to delete appointment slot entirely
+const express = require('express');
+const router  = express.Router();
 
+
+
+module.exports = router;

@@ -6,3 +6,8 @@
 // GET display a single document /document/:id 
 
 // DELETE delete a document /document/:id/delete
+const express = require('express');
+const router  = express.Router();
+
+
+module.exports = router;
