@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-dotenv.config();
 const db = require('./src/db/connection');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
@@ -31,6 +30,7 @@ const profileRoutes = require('./routes/profile');
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
+//const googleApiRoutes = require('./routes/googleApi');
 
 app.use('/appointments', appointmentsRoutes);
 app.use('/doctors', doctorsRoutes);
@@ -39,6 +39,7 @@ app.use('/profile', profileRoutes);
 app.use('/register', registerRoutes);
 app.use('/', loginRoutes);
 app.use('/', indexRoutes);
+//app.use('/maps/api', googleApiRoutes);
 
 
 // Testing frontend connection
