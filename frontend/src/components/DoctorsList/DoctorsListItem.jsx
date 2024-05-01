@@ -10,7 +10,7 @@ const DoctorsListItem = (props) => {
       {/* For Clinic Profile Page */}
       <span className="roster">
         <div>
-          <img src={photo} />
+          <img src={photo} alt={name}/>
         </div>
         <div>    
           <p>{name} <br />
