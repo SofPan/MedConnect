@@ -52,9 +52,18 @@ const DUMMY_DOCTORS = [
 ]
 
 const DoctorsList = ({clinic_id}) => {
+  const mapDoctors = DUMMY_DOCTORS.map(doctor => {
+    return <DoctorsListItem
+              key={doctor.id}
+              name={doctor.name}
+              qualifications={doctor.qualifications}
+              photo={doctor.photo_url}
+              patients={doctor.number_of_patients}
+            />
+  })
   return(
     <ul>
-      <DoctorsListItem />
+      {mapDoctors}
     </ul>
   )
 }
