@@ -19,7 +19,6 @@ const DUMMY_CLINICS = [
 ]
 
 const ClinicList = () => {
-
   const mapClinics = DUMMY_CLINICS.map(clinic => {
     return <ClinicListItem 
               key={clinic.id} 

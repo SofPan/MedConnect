@@ -51,7 +51,9 @@ const DUMMY_DOCTORS = [
   }
 ]
 
-const DoctorsList = ({clinic_id}) => {
+const DoctorsList = (props) => {
+  const {clinic_id, renderClinic} = props;
+
   const mapAndFilterDoctors = DUMMY_DOCTORS.filter(doctor => {
       // Only show the Clinic's doctors that are accepting patients
       return doctor.clinic_id === clinic_id && doctor.number_of_patients
@@ -65,7 +67,8 @@ const DoctorsList = ({clinic_id}) => {
               patients={doctor.number_of_patients}
             />
     });
-    console.log("mapAndFilter length", mapAndFilterDoctors.length);
+    
+    renderClinic(mapAndFilterDoctors.length > 0);
   return(
     <ul>
       {mapAndFilterDoctors}

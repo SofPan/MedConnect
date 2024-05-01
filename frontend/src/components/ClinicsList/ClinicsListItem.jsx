@@ -1,22 +1,30 @@
+import { useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 
 const ClinicListItem = (props) => {
   const {name, address, id} = props;
 
+  const [visible, setVisible] = useState(true);
+  
   // If there are no doctors to display, hide clinic from list
-  const checkIfRenderClinic = render => render;
+  const checkIfRenderClinic = render => {
+    setVisible(render);
+  };
+  
   return(
     <>
-      {
-        checkIfRenderClinic && 
-        <li>
-          <p>
-            {name} <br />
-            {address}
-          </p>
-          <DoctorsList clinic_id={id}/>
-        </li>
-      }
+    { visible &&
+      <li>
+        <p>
+          {name} <br />
+          {address}
+        </p>
+        <DoctorsList 
+          clinic_id={id} 
+          renderClinic={checkIfRenderClinic}
+        />
+      </li>
+    }
     </>
   )
 }
