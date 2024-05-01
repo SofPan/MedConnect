@@ -1,9 +1,15 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
+import NavBar from './components/NavBar';
+
+export const UserSignedIn = createContext();
 
 function App() {
-  const [user, setUser] = useState({});
+
+  const [user, setUser] = useState(false);
+
+  
 
   //This part doesn't work/////
   useEffect(() => {
@@ -27,7 +33,13 @@ function App() {
 
   return (
     <div className="App">
+
+       <UserSignedIn.Provider value={{ user, setUser }}>
+        <NavBar />
+      </UserSignedIn.Provider>
+
       <button onClick={handleLogin}>Login</button>
+
     </div>
   );
 }
