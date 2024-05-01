@@ -65,6 +65,7 @@ const DoctorsList = ({clinic_id}) => {
               patients={doctor.number_of_patients}
             />
     });
+    console.log("mapAndFilter length", mapAndFilterDoctors.length);
   return(
     <ul>
       {mapAndFilterDoctors}
