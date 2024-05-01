@@ -1,13 +1,14 @@
 import DoctorsList from "../DoctorsList/DoctorsList";
 
-const ClinicListItem = () => {
+const ClinicListItem = (props) => {
+  const {name, address, id} = props;
   return(
     <li>
       <p>
-        123 Fake Street<br />
-        City, Province L0L 0L0
+        {name} <br />
+        {address}
       </p>
-      <DoctorsList />
+      <DoctorsList clinic_id={id}/>
     </li>
   )
 }
