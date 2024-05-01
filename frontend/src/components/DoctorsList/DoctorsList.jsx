@@ -52,18 +52,23 @@ const DUMMY_DOCTORS = [
 ]
 
 const DoctorsList = ({clinic_id}) => {
-  const mapDoctors = DUMMY_DOCTORS.map(doctor => {
-    return <DoctorsListItem
+  const mapAndFilterDoctors = DUMMY_DOCTORS
+    .filter(doctor => {
+      // Only show the Clinic's doctors that are accepting patients
+      return doctor.clinic_id === clinic_id && doctor.number_of_patients
+    })
+    .map(doctor => {
+      return <DoctorsListItem
               key={doctor.id}
               name={doctor.name}
               qualifications={doctor.qualifications}
               photo={doctor.photo_url}
               patients={doctor.number_of_patients}
             />
-  })
+    });
   return(
     <ul>
-      {mapDoctors}
+      {mapAndFilterDoctors}
     </ul>
   )
 }
