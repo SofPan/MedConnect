@@ -15,7 +15,7 @@ const ClinicProfile = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:8080/profile/4`)
-      .then(res => console.log(res.data))
+      .then(res => setUserProfile(res.data))
       .catch(error => console.error("user profile error", error));
     
   }, [])
@@ -34,8 +34,8 @@ const ClinicProfile = () => {
           <div className='profile-information'>
             <h2>Information</h2>
             <div>
-              <p>Name Name</p>
-              <p>Address</p>
+              <p>{userProfile.name}</p>
+              <p>{userProfile.address && userProfile.address}</p>
             </div>
             <Button>Edit</Button>
           </div>
