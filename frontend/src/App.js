@@ -3,10 +3,10 @@ import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import NavBar from './components/NavBar';
 
-export const UserSignedIn = createContext();
 import MapComponent from './components/MapComponent';
-
 import ClinicList from './components/ClinicsList/ClinicsList'
+export const UserSignedIn = createContext();
+
 
 function App() {
 
