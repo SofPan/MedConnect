@@ -6,6 +6,7 @@ import useApplicationData from './hooks/useApplicationData';
 
 import MapComponent from './components/MapComponent';
 import ClinicList from './components/ClinicsList/ClinicsList'
+
 export const UserSignedIn = createContext();
 
 
@@ -25,24 +26,16 @@ function App() {
   //     .catch(error => console.error('Error fetching user:', error));
   // }, []); 
   //////////////////
-  const handleLogin = (e) => {
-    e.preventDefault();
-    axios.get(`http://localhost:8080/login/1`)
-      .then(res => {
-        console.log("Login", res.data)
-        dispatch(res.data);
-      })
-      .catch(error => console.error('Error fetching user:', error));
-  }
+ 
 
   return (
     <div className="App">
 
-       <UserSignedIn.Provider value={{ user, setUser }}>
+       <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar />
       </UserSignedIn.Provider>
 
-      <button onClick={handleLogin}>Login</button>
+      
 
       {/* <ClinicList /> */}
       <MapComponent />
