@@ -11,7 +11,6 @@ const ClinicProfile = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:8080/doctors`)
       .then(res => {
-        console.log("doctors array?", res.data);
         setDoctors(res.data)
       })
       .catch(error => console.error("user profile error", error));
