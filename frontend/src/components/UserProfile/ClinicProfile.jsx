@@ -1,8 +1,21 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
+
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/doctors`)
+      .then(res => {
+        console.log("doctors array?", res.data);
+        setDoctors(res.data)
+      })
+      .catch(error => console.error("user profile error", error));
+  }, [])
 
   return(
     <div>
@@ -30,9 +43,7 @@ const ClinicProfile = (props) => {
           </div>
         </div>
         <div className="profile-right">
-            {/* <DoctorsList clinic_id={userProfile.id} /> */}
-              
-          
+            <DoctorsList clinic_id={userProfile.id} doctors={doctors}/>
         </div>
       </article>
     </div>
