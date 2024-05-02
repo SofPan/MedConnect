@@ -17,6 +17,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { UserSignedIn } from "../App"
+import LoginForm from './LoginForm';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -62,12 +63,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
 
-    const { user, setUser } = useContext(UserSignedIn);
+    const { userState, dispatch } = useContext(UserSignedIn);
 
-
+    
 
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [showLogin, setShowLogin] = React.useState(false)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 
@@ -82,10 +84,9 @@ export default function NavBar() {
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
-        setUser(true)
-        setAnchorEl(null);
-        handleMobileMenuClose();
+    const handleLogin = () => {
+        setShowLogin(true);
+
     };
 
     const handleMobileMenuOpen = (event) => {
@@ -107,9 +108,9 @@ export default function NavBar() {
                 horizontal: 'right',
             }}
             open={isMenuOpen}
-            onClose={handleMenuClose}
+            onClose={handleLogin}
         >
-            {user ? <MenuItem onClick={handleMenuClose}>Profile</MenuItem> : <MenuItem onClick={handleMenuClose}>Login</MenuItem>}
+            {userState.userLoggedIn ? <MenuItem onClick={handleLogin}>Profile</MenuItem> : <MenuItem onClick={handleLogin}>Login</MenuItem>}
 
         </Menu>
     );
@@ -192,13 +193,18 @@ export default function NavBar() {
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
 
-                        {user ? (
+                        {userState.userLoggedIn ? (
                             <>
-                                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+                                <MenuItem onClick={handleLogin}>Profile</MenuItem>
+                                <MenuItem onClick={handleLogin}>Logout</MenuItem>
                             </>
                         ) : (
-                            <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+                            null
+                        )}
+                        {showLogin ? (
+                            <LoginForm  />
+                        ) : (
+                            <MenuItem onClick={handleLogin}>Login</MenuItem>
                         )}
 
                     </Box>
