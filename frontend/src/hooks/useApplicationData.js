@@ -13,7 +13,6 @@ export default function useApplicationData() {
     switch (action.type) {
       case "USER_LOGIN":
         return {...userState, userInfo: action.payload}
-      
       default:
         return userState;
     }
@@ -28,11 +27,8 @@ export default function useApplicationData() {
     .then((res)=>{return res.json()})
     .then((res)=>{
       console.log(res);
-      
     }
       )
-  
-    
 
   }
 
