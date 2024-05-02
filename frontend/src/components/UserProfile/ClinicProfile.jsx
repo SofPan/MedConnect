@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
 
@@ -8,8 +9,9 @@ const DUMMY_CLINIC = {
   }
 
 const ClinicProfile = () => {
-  // Temporary function
-  const renderClinic = () => true;
+  const [hasDoctors, setHasDoctors] = useState(true);
+
+  const checkIfClinicHasDoctors = hasDoctors => setHasDoctors(hasDoctors);
 
   return(
     <div>
@@ -37,7 +39,10 @@ const ClinicProfile = () => {
           </div>
         </div>
         <div className="profile-right">
-          <DoctorsList clinic_id={DUMMY_CLINIC.id} renderClinic={renderClinic}/>
+            { !hasDoctors && <span>Please click New to add a doctor</span> }
+            <DoctorsList clinic_id={DUMMY_CLINIC.id} renderClinic={checkIfClinicHasDoctors}/>
+              
+          
         </div>
       </article>
     </div>
