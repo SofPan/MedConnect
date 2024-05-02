@@ -10,7 +10,7 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 ('clinic5@example.com', 'hashed_password_8', TRUE, NOW()),
 ('clinic6@example.com', 'hashed_password_9', TRUE, NOW()),
 ('clinic7@example.com', 'hashed_password_11', TRUE, NOW()),
-('clinic8@example.com', 'hashed_password_12', TRUE, NOW())
+('clinic8@example.com', 'hashed_password_12', TRUE, NOW());
 
 -- Seed data for patients table
 INSERT INTO patients (user_id, name, date_of_birth, gender, created_at) VALUES
