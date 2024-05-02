@@ -28,18 +28,10 @@ export default function LoginForm() {
     const submitForm = async (e) => {
         e.preventDefault();
     
-        // Get form data
-        
-        console.log(
-            "YPPPPPPPPPPP", formData
-        );
-        // Construct request body
-        
-    
         try {
             // Make POST request to your backend
-            const response = await fetch('your_backend_endpoint', {
-                method: 'GET',
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'Post',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -52,10 +44,11 @@ export default function LoginForm() {
     
             // Assuming response is JSON
             const data = await response.json();
+
+           
+            dispatch({ type: "USER_INFO", payload: data });
     
-            // Dispatch action or handle response data
-            dispatch({ type: "USER_INFO", payload: true });
-    
+            dispatch({ type: "USER_LOGIN", payload: true });
             
         } catch (error) {
             console.error('Error:', error);
