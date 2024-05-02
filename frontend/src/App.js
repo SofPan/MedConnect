@@ -3,15 +3,14 @@ import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import NavBar from './components/NavBar';
 import useApplicationData from './hooks/useApplicationData';
+import UserProfile from './components/UserProfile/UserProfile';
 
-import MapComponent from './components/MapComponent';
-import ClinicList from './components/ClinicsList/ClinicsList'
 export const UserSignedIn = createContext();
 
 
 function App() {
 
-  const {userState, dispatch} = useApplicationData();
+  // const { userState, dispatch } = useApplicationData();
 
 
 
@@ -30,7 +29,7 @@ function App() {
     axios.get(`http://localhost:8080/login/1`)
       .then(res => {
         console.log("Login", res.data)
-        dispatch(res.data);
+        // dispatch(res.data);
       })
       .catch(error => console.error('Error fetching user:', error));
   }
@@ -38,14 +37,12 @@ function App() {
   return (
     <div className="App">
 
-       <UserSignedIn.Provider value={{ user, setUser }}>
+      {/* <UserSignedIn.Provider value={{ user, setUser }}>
         <NavBar />
-      </UserSignedIn.Provider>
-
+      </UserSignedIn.Provider> */}
       <button onClick={handleLogin}>Login</button>
 
-      {/* <ClinicList /> */}
-      <MapComponent />
+      <UserProfile />
     </div>
   );
 }
