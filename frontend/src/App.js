@@ -2,12 +2,13 @@ import './App.css';
 import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import NavBar from './components/NavBar';
+import useApplicationData from './hooks/useApplicationData';
 
 export const UserSignedIn = createContext();
 
 function App() {
 
-  const [user, setUser] = useState(false);
+  const {userState, dispatch} = useApplicationData();
 
   
 
@@ -16,7 +17,7 @@ function App() {
     axios.get(`http://localhost:8080/`)
       .then(res => {
         console.log(res.data)
-        setUser(res.data);
+        dispatch(res.data);
       })
       .catch(error => console.error('Error fetching user:', error));
   }, []); 
@@ -26,7 +27,7 @@ function App() {
     axios.get(`http://localhost:8080/login/1`)
       .then(res => {
         console.log("Login", res.data)
-        setUser(res.data);
+        dispatch(res.data);
       })
       .catch(error => console.error('Error fetching user:', error));
   }
@@ -34,7 +35,7 @@ function App() {
   return (
     <div className="App">
 
-       <UserSignedIn.Provider value={{ user, setUser }}>
+       <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar />
       </UserSignedIn.Provider>
 
