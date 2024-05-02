@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
+import NewDoctorForm from '../Forms/NewDoctorForm';
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
@@ -17,7 +18,11 @@ const ClinicProfile = (props) => {
         setDoctors(filterData)
       })
       .catch(error => console.error("user profile error", error));
-  }, [])
+  }, [doctors])
+
+  const handleClick = () => {
+    console.log("New Doctor")
+  }
 
   return(
     <div>
@@ -45,7 +50,11 @@ const ClinicProfile = (props) => {
           </div>
         </div>
         <div className="profile-right">
+          <div>
             <h2>Doctors</h2>
+            <Button onClick={handleClick}>New</Button>
+            <NewDoctorForm />
+          </div>
             {!doctors.length && <span>You do not have any doctors listed</span>}
             <DoctorsList clinic_id={userProfile.id} doctors={doctors}/>
         </div>
