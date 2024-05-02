@@ -1,16 +1,8 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
 
-const ClinicProfile = () => {
-  const [userProfile, setUserProfile] = useState({});
-
-  useEffect(() => {
-    axios.get(`http://localhost:8080/profile/4`)
-      .then(res => setUserProfile(res.data))
-      .catch(error => console.error("user profile error", error));
-  }, [])
+const ClinicProfile = (props) => {
+  const {userProfile} = props;
 
   return(
     <div>
