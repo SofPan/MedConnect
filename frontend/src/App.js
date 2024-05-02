@@ -38,14 +38,14 @@ function App() {
   return (
     <div className="App">
 
-       <UserSignedIn.Provider value={{ user, setUser }}>
+       {/* <UserSignedIn.Provider value={{ user, setUser }}>
         <NavBar />
-      </UserSignedIn.Provider>
+      </UserSignedIn.Provider> */}
 
       <button onClick={handleLogin}>Login</button>
 
-      {/* <ClinicList /> */}
       <MapComponent />
+     
     </div>
   );
 }
