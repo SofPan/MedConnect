@@ -10,7 +10,7 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 ('clinic5@example.com', 'hashed_password_8', TRUE, NOW()),
 ('clinic6@example.com', 'hashed_password_9', TRUE, NOW()),
 ('clinic7@example.com', 'hashed_password_11', TRUE, NOW()),
-('clinic8@example.com', 'hashed_password_12', TRUE, NOW())
+('clinic8@example.com', 'hashed_password_12', TRUE, NOW());
 
 -- Seed data for patients table
 INSERT INTO patients (user_id, name, date_of_birth, gender, created_at) VALUES
@@ -37,7 +37,8 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 (2, 'Dr. Johnson', 'Pediatrics', 'MD, DNB', 'Specializes in pediatric care.', 'johnson.jpg', 15, NOW()),
 (3, 'Dr. Brown', 'Cardiology', 'MD, PhD', 'Expert in cardiology.', 'brown.jpg', 25, NOW()),
 (4, 'Dr. Wilson', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'wilson.jpg', 10, NOW()),
-(5, 'Dr. Davis', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'davis.jpg', 30, NOW());
+(5, 'Dr. Davis', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'davis.jpg', 30, NOW()),
+(5, 'Dr. Davidson', 'General Medicine', 'MD, DNB', 'General practitioner.', 'davidson.jpg', 5, NOW());
 
 -- Seed data for appointments table
 INSERT INTO appointments (patient_id, doctor_id, details, clinic_id, status, created_at) VALUES
