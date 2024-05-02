@@ -11,7 +11,10 @@ const ClinicProfile = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:8080/doctors`)
       .then(res => {
-        setDoctors(res.data)
+        const filterData = res.data.filter(doctor => {
+          return doctor.clinic_id === userProfile.id;
+        })
+        setDoctors(filterData)
       })
       .catch(error => console.error("user profile error", error));
   }, [])
@@ -42,6 +45,8 @@ const ClinicProfile = (props) => {
           </div>
         </div>
         <div className="profile-right">
+            <h2>Doctors</h2>
+            {!doctors.length && <span>You do not have any doctors listed</span>}
             <DoctorsList clinic_id={userProfile.id} doctors={doctors}/>
         </div>
       </article>
