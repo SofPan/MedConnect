@@ -20,10 +20,10 @@ const ClinicListItem = (props) => {
             {name} <br />
             {address}
           </p>
-          <DoctorsList 
+          {/* <DoctorsList 
             clinic_id={id} 
             renderClinic={checkIfRenderClinic}
-          />
+          /> */}
         </div>
         <div>
             <button>Request to Register</button>

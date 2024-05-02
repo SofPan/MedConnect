@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import axios from 'axios';
+import ClinicList from './ClinicsList/ClinicsList';
 
 const mapContainerStyle = {
   width: '50vw',
@@ -104,6 +105,7 @@ const MapComponent = () => {
           ))}
         </GoogleMap>
       </div>
+      <ClinicList searchCoordinates={coordinates} />
     </div>
   );
 };
