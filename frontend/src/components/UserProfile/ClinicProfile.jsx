@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
 
@@ -10,6 +11,15 @@ const DUMMY_CLINIC = {
 
 const ClinicProfile = () => {
   const [hasDoctors, setHasDoctors] = useState(true);
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/profile/4`)
+      .then(res => console.log(res.data))
+      .catch(error => console.error("user profile error", error));
+    
+  }, [])
+
 
   const checkIfClinicHasDoctors = hasDoctors => setHasDoctors(hasDoctors);
 
@@ -39,8 +49,8 @@ const ClinicProfile = () => {
           </div>
         </div>
         <div className="profile-right">
-            { !hasDoctors && <span>Please click New to add a doctor</span> }
-            <DoctorsList clinic_id={DUMMY_CLINIC.id} renderClinic={checkIfClinicHasDoctors}/>
+            {/* { !hasDoctors && <span>Please click New to add a doctor</span> }
+            <DoctorsList clinic_id={DUMMY_CLINIC.id} renderClinic={checkIfClinicHasDoctors}/> */}
               
           
         </div>
