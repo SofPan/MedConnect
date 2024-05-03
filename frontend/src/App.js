@@ -7,6 +7,7 @@ import useApplicationData from './hooks/useApplicationData';
 
 import MapComponent from './components/MapComponent';
 import ClinicList from './components/ClinicsList/ClinicsList'
+import SignUp from './components/SignUp/SignUpForm';
 
 export const UserSignedIn = createContext();
 
@@ -14,6 +15,7 @@ export const UserSignedIn = createContext();
 function App() {
 
   const {userState, dispatch} = useApplicationData();
+  const [SignInDisplay, setSignInDisplay ] = useState(false);
 
 
 
@@ -34,8 +36,9 @@ function App() {
     <div className="App">
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
-        <NavBar />
-        <PatientScheduler />
+        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
+        {userState.UserSignedIn && <PatientScheduler />}
+        {SignInDisplay && < SignUp />}
       </UserSignedIn.Provider> 
 
       
