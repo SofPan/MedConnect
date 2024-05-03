@@ -33,6 +33,7 @@ const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
 const clinicsRoutes = require('./routes/clinic');
+const calendarRoutes = require('./routes/calendar');
 
 app.use('/appointments', appointmentsRoutes);
 app.use('/doctors', doctorsRoutes);
@@ -42,6 +43,8 @@ app.use('/register', registerRoutes);
 app.use('/', loginRoutes);
 app.use('/', indexRoutes);
 app.use('/clinics', clinicsRoutes);
+app.use('/calendar', calendarRoutes);
+
 
 
 // Testing frontend connection
