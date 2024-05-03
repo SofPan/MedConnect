@@ -24,6 +24,7 @@ export default function PatientScheduler() {
   const handleChange = (e) =>{
     
     dispatch({type:"USER_SELECTED_CLINIC", payload: e.target.value})
+    
   }
 
   const [inputValue, setinputValue ] = useState('');

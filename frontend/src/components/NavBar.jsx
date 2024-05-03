@@ -61,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-export default function NavBar() {
+export default function NavBar({setSignInDisplay, SignInDisplay}) {
 
     const { userState, dispatch } = useContext(UserSignedIn);
 
@@ -84,6 +84,9 @@ export default function NavBar() {
     const handleProfileClick = () => {
         setShowLogin(true);
     };
+    const handleSignUp = () =>{
+        setSignInDisplay(!SignInDisplay)
+    }
     const handleLogout = () => {
         dispatch({type:"USER_INFO_LOGOUT", payload:{}})
         dispatch({type:"USER_STATE_LOGOUT", payload:false})
@@ -126,7 +129,10 @@ export default function NavBar() {
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
                         {!showLogin && (
+                            <>
                             <MenuItem onClick={handleLogin}>Login</MenuItem>
+                            <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                            </>
                         )}
                         {!userState.userLoggedIn && showLogin && (<LoginForm  />)}
 

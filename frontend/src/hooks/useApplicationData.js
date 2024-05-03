@@ -8,8 +8,34 @@ export default function useApplicationData() {
     userLoggedIn: false,
     userInfo: {},
     selectedClinicId: 0,
-    events:[{ title: 'Event 1', start: new Date('2024-05-01T10:00:00') }]
+    events:[{ title: 'Event 1', start: new Date('2024-05-01T10:00:00') }],
+    newUser: null
   }
+
+  const registerUser = async (userData) => {
+    try {
+      const response = await fetch('http://localhost:8080/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+  
+      const data = await response.json();
+      // Assuming the response contains some information about the newly registered user
+      // You can handle the response data as needed
+      console.log('User registered successfully:', data);
+    } catch (error) {
+      console.error('Error registering user:', error);
+      // Handle error
+    }
+  };
+  
 
   const [userState, dispatch] = useReducer((userState, action) => {
     switch (action.type) {
@@ -24,8 +50,11 @@ export default function useApplicationData() {
     case "USER_SELECTED_CLINIC":
         return {...userState, selectedClinicId: action.payload}
     case "CLINIC_EVENTS":
-        console.log("new event", action);
         return {...userState, events: action.payload}
+    case "NEW_USER":
+        registerUser();
+        return {...userState, events: action.payload}
+
       default:
         return userState;
     }
@@ -47,9 +76,13 @@ export default function useApplicationData() {
             }
 
             const data = await response.json();
-            const newEvent = { title: data.patient_id, start: new Date(data.details) };
+            
+            const newEvents = data.map((event)=>{
 
-            dispatch({ type: "CLINIC_EVENTS", payload: [newEvent]});
+              return { title: event.patient_id, start: new Date(event.details) };
+
+            })
+            dispatch({ type: "CLINIC_EVENTS", payload: newEvents});
 
         } catch (error) {
             console.error('Error:', error);
@@ -64,18 +97,6 @@ export default function useApplicationData() {
 }, [userState.selectedClinicId]);
 
 
-  //fetches photo info related to specific topic from backend
-//   useEffect(()=>{
-//     fetch(`/login/1`)
-//     .then((res)=>{return res.json()})
-//     .then((res)=>{
-//       console.log(res);
-//     }
-//       )
-
-//   }
-
-//     , [userState.user]);
 
  
   return { userState, dispatch }
