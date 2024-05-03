@@ -12,17 +12,16 @@ const ClinicProfile = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:8080/doctors`)
       .then(res => {
-        const filterData = res.data.filter(doctor => {
-          return doctor.clinic_id === userProfile.id;
-        })
-        setDoctors(filterData)
+        setDoctors(res.data)
       })
       .catch(error => console.error("user profile error", error));
-  }, [doctors])
+  }, []);
 
   const handleClick = () => {
     console.log("New Doctor")
   }
+
+  // const setNewDoctor = ()
 
   return(
     <div>
