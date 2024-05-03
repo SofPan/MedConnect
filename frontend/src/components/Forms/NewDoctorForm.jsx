@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Input,
     InputLabel,
@@ -5,10 +6,11 @@ import {
   } from '@mui/material';
 
 const NewDoctorForm = () => {
-
+  const [doctor, setDoctor] = useState({});
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    console.log(e.target.elements.name.value);
   }
   return(
     <form onSubmit={handleSubmit}>

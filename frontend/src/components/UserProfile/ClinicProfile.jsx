@@ -53,7 +53,7 @@ const ClinicProfile = (props) => {
           <div>
             <h2>Doctors</h2>
             <Button onClick={handleClick}>New</Button>
-            <NewDoctorForm />
+            <NewDoctorForm clinic_id={userProfile.id}/>
           </div>
             {!doctors.length && <span>You do not have any doctors listed</span>}
             <DoctorsList clinic_id={userProfile.id} doctors={doctors}/>
