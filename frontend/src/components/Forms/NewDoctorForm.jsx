@@ -1,17 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import {
     Input,
     InputLabel,
     Button
   } from '@mui/material';
 
-const NewDoctorForm = () => {
+const NewDoctorForm = (props) => {
+  const {clinic_id} = props;
   const [doctor, setDoctor] = useState({});
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.elements.name.value);
+    const target = e.target.elements;
+    setDoctor({
+      clinic_id,
+      name: target.name.value,
+      qualifications: target.qualifications.value,
+      description: target.description.value,
+      photo_url: 'brown.jpg',
+      number_of_patients: target.num_patients.value
+    });
   }
+
+  useEffect(() => {
+    if (doctor.name) {
+      axios.post('http://localhost:8080/doctors', doctor)
+      .then(res => console.log("post doctor response", res))
+      .catch(error => console.error("NewDoctorForm submit error", error));
+    }
+  }, [doctor])
   return(
     <form onSubmit={handleSubmit}>
       <div>
