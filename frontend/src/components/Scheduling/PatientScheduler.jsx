@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import Calendar from './Calendar';
@@ -12,15 +12,20 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import Grid from '@mui/material/Grid';
 
+import { UserSignedIn } from "../../App"
 
 
 
 
 export default function PatientScheduler() {
 
+    const { userState, dispatch } = useContext(UserSignedIn);
+
   const handleChange = (e) =>{
-    setinputValue(e.target.value)
+    
+    dispatch({type:"USER_SELECTED_CLINIC", payload: e.target.value})
   }
+
   const [inputValue, setinputValue ] = useState('');
 
   return (
@@ -37,7 +42,6 @@ export default function PatientScheduler() {
             <Paper>
             <h1>HEYYYY</h1>
             <input type="text"
-                value={inputValue}
                 onChange={handleChange}>
                 </input>
             </Paper>

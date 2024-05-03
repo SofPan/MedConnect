@@ -35,10 +35,10 @@ function App() {
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar />
+        <PatientScheduler />
       </UserSignedIn.Provider> 
 
       
-      <PatientScheduler />
       <MapComponent />
      
     </div>
