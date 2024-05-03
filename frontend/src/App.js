@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import NavBar from './components/NavBar';
+import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
 
 import MapComponent from './components/MapComponent';
@@ -29,6 +30,7 @@ function App() {
  
 
   return (
+   
     <div className="App">
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
@@ -36,10 +38,11 @@ function App() {
       </UserSignedIn.Provider> 
 
       
-
+      <PatientScheduler />
       <MapComponent />
      
     </div>
+    
   );
 }
 

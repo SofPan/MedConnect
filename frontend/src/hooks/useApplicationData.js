@@ -6,7 +6,8 @@ export default function useApplicationData() {
 
   const initialState = {
     userLoggedIn: false,
-    userInfo: {}
+    userInfo: {},
+    selectedClinicId: 0
   }
 
   const [userState, dispatch] = useReducer((userState, action) => {

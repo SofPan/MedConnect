@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { getUserById } = require('../src/db/queries/users/getUserById');
-const router  = express.Router();
+const router = express.Router();
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
   name: 'session',
