@@ -8,6 +8,7 @@ import useApplicationData from './hooks/useApplicationData';
 import MapComponent from './components/MapComponent';
 import ClinicList from './components/ClinicsList/ClinicsList'
 import SignUp from './components/SignUp/SignUpForm';
+import LoginForm from './components/LoginForm';
 
 export const UserSignedIn = createContext();
 
@@ -16,20 +17,7 @@ function App() {
 
   const {userState, dispatch} = useApplicationData();
   const [SignInDisplay, setSignInDisplay ] = useState(false);
-
-
-
-  //This part doesn't work/////
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/`)
-  //     .then(res => {
-  //       console.log(res.data)
-  //       setUser(res.data);
-  //     })
-  //     .catch(error => console.error('Error fetching user:', error));
-  // }, []); 
-  //////////////////
-
+  const [LoginDisplay, setLoginDisplay ] = useState(false);
 
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
@@ -51,9 +39,13 @@ function App() {
     <div className="App" >
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
-        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
-         <PatientScheduler />
-        {SignInDisplay && < SignUp />}
+        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay}/>
+        {SignInDisplay && (<>
+        < SignUp />
+        
+        </>) }
+        {LoginDisplay && <LoginForm  />}
+        <PatientScheduler />
       </UserSignedIn.Provider> 
 
       

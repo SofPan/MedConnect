@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
-import { Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+import { Snackbar,Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
 
 
 
@@ -20,25 +20,58 @@ export default function SignUp() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    type: ''
+    password_check:'',
+    type: 'Patient'
 });
+const [openSnackbar, setOpenSnackbar] = useState(false);
+const [errors, setErrors] = useState({});
 
 // Change handler to update state
 const handleChange = (e) => {
     const { name, value } = e.target;
-
+   
     setFormData({
         ...formData,
         [name]: value
     });
+   
+};
+
+const validate = (formData) => {
+  const errors = {};
+
+  for(const key in formData){
+    console.log(key);
+    if(!formData[key]){
+      errors[key] = `${key} is required`
+    }
+  }
+
+  console.log(errors);
+
+  // You can add more complex validation rules here
+
+  return errors;
 };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({type: "NEW_USER", payload: formData})
+    console.log(formData);
+    const formErrors = validate(formData);
+    if(formData.password === formData.password_check && Object.keys(formErrors).length === 0){
+      dispatch({type: "NEW_USER", payload: formData})
+    }else{
+      setErrors(formErrors);
+      setOpenSnackbar(true);
+    }
+   
     
   }
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,6 +91,7 @@ const handleChange = (e) => {
                 id="email"
                 label="Email Address"
                 name="email"
+                error={!!errors.email}
                 autoComplete="email"
                 onChange={handleChange}
               />
@@ -67,10 +101,25 @@ const handleChange = (e) => {
                 variant="outlined"
                 required
                 fullWidth
+                error={!!errors.password}
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
+                autoComplete="current-password"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password_check"
+                label="Re-Type Password"
+                type="password"
+                id="password_check"
+                error={!!errors.type}
                 autoComplete="current-password"
                 onChange={handleChange}
               />
@@ -80,9 +129,10 @@ const handleChange = (e) => {
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
                 onChange={handleChange}
+                defaultValue="patient"
               >
-                <FormControlLabel value="Patient" control={<Radio />} label="patient" name="type"/>
-                <FormControlLabel value="Clinic" control={<Radio />} label="clinic" name="type"/>
+                <FormControlLabel value="patient" control={<Radio />} label="Patient" name="type"  />
+                <FormControlLabel value="clinic" control={<Radio />} label="Clinic" name="type" />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -102,6 +152,12 @@ const handleChange = (e) => {
               </Link>
             </Grid>
           </Grid>
+          <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message="Please correct the errors and resubmit the form."
+      />
         </form>
       </div>
       <Box mt={5}>
