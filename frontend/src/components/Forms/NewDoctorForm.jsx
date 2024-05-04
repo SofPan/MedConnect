@@ -7,7 +7,7 @@ import {
 import { postDoctor } from '../../hooks/tempUseAPI';
 
 const NewDoctorForm = (props) => {
-  const {clinic_id, handleHideForm, addDoctor} = props;
+  const {clinic_id, addDoctor} = props;
   const [doctor, setDoctor] = useState({});
 
   const handleSubmit = (e) => {
@@ -54,7 +54,7 @@ const NewDoctorForm = (props) => {
         <Input id="num_patients" type="number" />
       </div>
       <div>
-        <Button type="submit" onClick={handleHideForm}>Submit</Button>
+        <Button type="submit">Submit</Button>
       </div>
 
     </form>

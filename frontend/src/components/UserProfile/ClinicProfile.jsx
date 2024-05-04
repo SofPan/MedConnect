@@ -8,7 +8,7 @@ const ClinicProfile = (props) => {
   const {userProfile} = props;
 
   const [doctors, setDoctors] = useState([]);
-  // const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [addDoctor, setAddDoctor] = useState(0);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const ClinicProfile = (props) => {
     fetchClinicsDoctors();
   }, [addDoctor]);
 
-  // const handleClick = () => {
-  //   setShowForm(!showForm);
-  // }
+  const handleClick = () => {
+    setShowForm(!showForm);
+  }
 
   const triggerDoctorStateUpdate = () => {
     setAddDoctor(addDoctor + 1);
@@ -56,7 +56,7 @@ const ClinicProfile = (props) => {
         <div className="profile-right">
           <div>
             <h2>Doctors</h2>
-            {/* <Button onClick={handleClick}>New</Button> */}
+            <Button onClick={handleClick}>New</Button>
               <NewDoctorForm 
                 clinic_id={userProfile.id}
                 addDoctor={triggerDoctorStateUpdate}
