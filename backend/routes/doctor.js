@@ -19,9 +19,13 @@ router.get('/', (req, res) => {
 // POST create a new doctor entry /doctors
 router.post('/', (req, res) => {
   addNewDoctor(req.body)
+    .then(result => {
+      return result;
+    })
     .catch(error => {
-      console.error("post new doctor error:", error);
-      res.status(500);
+      res
+        .status(500)
+        .json({ error: error.message });
     });
 })
 // GET one doctor /doctors/:id

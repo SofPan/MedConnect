@@ -8,7 +8,6 @@ const getAllDoctors = () => {
   FROM doctors;`;
   return db.query(query)
     .then(results => {
-      console.log(results.rows)
       return results.rows;
     })
     .catch(error => console.log("getAllDoctors error", error));

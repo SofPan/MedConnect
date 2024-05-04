@@ -7,7 +7,7 @@ import {
 import { postDoctor } from '../../hooks/tempUseAPI';
 
 const NewDoctorForm = (props) => {
-  const {clinic_id, handleHideForm} = props;
+  const {clinic_id, handleHideForm, addDoctor} = props;
   const [doctor, setDoctor] = useState({});
 
   const handleSubmit = (e) => {
@@ -28,8 +28,11 @@ const NewDoctorForm = (props) => {
       await postDoctor(doctor);
     }
 
-    createDoctor();
-  }, [doctor]);
+    if (doctor.name){
+      createDoctor();
+      addDoctor();
+    } 
+  }, [doctor, addDoctor]);
 
 
   return(
