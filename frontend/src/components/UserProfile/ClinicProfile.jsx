@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import { fetchDoctors } from '../../hooks/tempUseAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
 import NewDoctorForm from '../Forms/NewDoctorForm';
@@ -11,11 +11,12 @@ const ClinicProfile = (props) => {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/doctors`)
-      .then(res => {
-        setDoctors(res.data)
-      })
-      .catch(error => console.error("user profile error", error));
+    const fetchClinicsDoctors = async () => {
+      const doctorData = await fetchDoctors();
+      setDoctors(doctorData);
+    }
+
+    fetchClinicsDoctors();
   }, []);
 
   const handleClick = () => {
