@@ -63,7 +63,7 @@ const ClinicProfile = (props) => {
               />
           </div>
             {!doctors.length && <span>You do not have any doctors listed</span>}
-            <DoctorsList clinic_id={userProfile.id} doctors={doctors} />
+            <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} />
         </div>
       </article>
     </div>

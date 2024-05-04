@@ -1,14 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Button} from '@mui/material';
 import { deleteDoctor } from "../../hooks/tempUseAPI";
 
 const DoctorsListItem = (props) => {
-  const {name, qualifications, photo, patients, id} = props;
+  const {
+          name,
+          qualifications, 
+          photo, 
+          patients, 
+          id,
+          changeDoctorState
+        } = props;
 
+  const [deleting, setDeleting] = useState(false);
 
-  const handleClickDelete = async () => {
-    return await deleteDoctor(id);
+  useEffect(() => {
+    const deleteDoctorFromList = async () => {
+      await deleteDoctor(id);
+    }
+    if (deleting){
+      deleteDoctorFromList();
+      changeDoctorState();
+    }
+  }, [deleting]);
+
+  const handleClickDelete = () => {
+    setDeleting(true);
   }
+
   return(
     <li>
       {/* For Available Doctors page */}

@@ -1,7 +1,7 @@
 import DoctorsListItem from "./DoctorsListItem";
 
 const DoctorsList = (props) => {
-  const {clinic_id, doctors} = props;
+  const {clinic_id, doctors, changeDoctorState} = props;
 
   const mapAndFilterDoctors = doctors.filter(doctor => {
       // Only show the Clinic's doctors that are accepting patients
@@ -15,6 +15,7 @@ const DoctorsList = (props) => {
               qualifications={doctor.qualifications}
               photo={`./assets/images/${doctor.photo_url}`}
               patients={doctor.number_of_patients}
+              changeDoctorState={changeDoctorState}
             />
     });
 
