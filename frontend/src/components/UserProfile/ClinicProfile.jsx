@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../../hooks/tempUseAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import Button from '@mui/material/Button'
-import NewDoctorForm from '../Forms/NewDoctorForm';
+import NewDoctorForm from '../DoctorsList/NewDoctor';
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
