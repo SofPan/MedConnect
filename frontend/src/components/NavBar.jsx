@@ -61,29 +61,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-export default function NavBar({setSignInDisplay, SignInDisplay}) {
+export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay, LoginDisplay}) {
 
     const { userState, dispatch } = useContext(UserSignedIn);
-
-
-
-
-    
-   
-   
-
-
-    
-   
-
   
-
     
     const handleProfileClick = () => {
        
     };
     const handleSignUp = () =>{
+        if(LoginDisplay){
+            setLoginDisplay(!LoginDisplay)
+        }
         setSignInDisplay(!SignInDisplay)
+    }
+    const handleLogin = () =>{
+        if(SignInDisplay){
+            setSignInDisplay(!SignInDisplay)
+        }
+        setLoginDisplay(!LoginDisplay)
     }
     const handleLogout = () => {
         sessionStorage.user_id = '';
@@ -128,18 +124,19 @@ export default function NavBar({setSignInDisplay, SignInDisplay}) {
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
                        
-                        {!userState.userLoggedIn && (
-                            <>
-                                <LoginForm  />
-                                <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
-                            </>)}
+                       
+                               
+                                
 
-                        {userState.userLoggedIn &&  (
+
+                        {userState.userLoggedIn ?  (
                             <>
                                 <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
                                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             </>
-                        )}
+                        ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
+                        <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                        </>)}
                         
                         
 
