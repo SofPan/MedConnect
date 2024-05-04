@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {Button} from '@mui/material';
 import { deleteDoctor } from "../../hooks/tempUseAPI";
+import EditDoctorForm from "./EditDoctor";
 
 const DoctorsListItem = (props) => {
   const {
@@ -47,6 +48,7 @@ const DoctorsListItem = (props) => {
         </div>
         <div>
           <Button>Edit</Button>
+          <EditDoctorForm doctor_id={id} />
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>
       </span>
