@@ -21,3 +21,13 @@ export const fetchDoctors = async () => {
     throw error;
   }
 }
+
+export const postDoctor = async (doctor) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}doctors`, doctor);
+    return response;
+  } catch (error) {
+    console.error("Error posting new doctor", error);
+    throw error;
+  }
+}

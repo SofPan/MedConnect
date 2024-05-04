@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
 import {
     Input,
     InputLabel,
     Button
   } from '@mui/material';
+import { postDoctor } from '../../hooks/tempUseAPI';
 
 const NewDoctorForm = (props) => {
   const {clinic_id, handleHideForm} = props;
@@ -24,13 +24,14 @@ const NewDoctorForm = (props) => {
   }
 
   useEffect(() => {
-    if (doctor.name) {
-      axios.post('http://localhost:8080/doctors', doctor)
-      .catch(error => console.error("NewDoctorForm submit error", error));
+    const createDoctor = async () => {
+      await postDoctor(doctor);
     }
+
+    createDoctor();
   }, [doctor]);
 
-  
+
   return(
     <form onSubmit={handleSubmit}>
       <div>
