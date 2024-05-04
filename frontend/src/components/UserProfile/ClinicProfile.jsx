@@ -8,6 +8,7 @@ const ClinicProfile = (props) => {
   const {userProfile} = props;
 
   const [doctors, setDoctors] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:8080/doctors`)
@@ -18,7 +19,7 @@ const ClinicProfile = (props) => {
   }, []);
 
   const handleClick = () => {
-    console.log("New Doctor")
+    setShowForm(true);
   }
 
   // const setNewDoctor = ()
@@ -52,10 +53,10 @@ const ClinicProfile = (props) => {
           <div>
             <h2>Doctors</h2>
             <Button onClick={handleClick}>New</Button>
-            <NewDoctorForm clinic_id={userProfile.id}/>
+            {showForm && <NewDoctorForm clinic_id={userProfile.id}/>}
           </div>
             {!doctors.length && <span>You do not have any doctors listed</span>}
-            <DoctorsList clinic_id={userProfile.id} doctors={doctors}/>
+            <DoctorsList clinic_id={userProfile.id} doctors={doctors} />
         </div>
       </article>
     </div>

@@ -7,7 +7,7 @@ import {
   } from '@mui/material';
 
 const NewDoctorForm = (props) => {
-  const {clinic_id} = props;
+  const {clinic_id, handleHideForm} = props;
   const [doctor, setDoctor] = useState({});
 
   const handleSubmit = (e) => {
@@ -26,10 +26,11 @@ const NewDoctorForm = (props) => {
   useEffect(() => {
     if (doctor.name) {
       axios.post('http://localhost:8080/doctors', doctor)
-      .then(res => console.log("post doctor response", res))
       .catch(error => console.error("NewDoctorForm submit error", error));
     }
-  }, [doctor])
+  }, [doctor]);
+
+  
   return(
     <form onSubmit={handleSubmit}>
       <div>
@@ -49,7 +50,7 @@ const NewDoctorForm = (props) => {
         <Input id="num_patients" type="number" />
       </div>
       <div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onClick={handleHideForm}>Submit</Button>
       </div>
 
     </form>
