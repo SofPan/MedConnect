@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import ClinicProfile from "./ClinicProfile";
+import { fetchUser } from '../../hooks/tempUseAPI';
 
 const UserProfile = (props) => {
   const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/profile/4`)
-      .then(res => setUserProfile(res.data))
-      .catch(error => console.error("user profile error", error));
-  }, []);
+    const fetchUserProfile = async () => {
+      const userData = await fetchUser(4);
+      setUserProfile(userData);
+    };
+    fetchUserProfile();
+  },[]);
 
   return(
     <section>
