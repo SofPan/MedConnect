@@ -15,7 +15,7 @@ export default function LoginForm() {
     // Change handler to update state
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(e.target);
+        console.log(value);
         setFormData({
             ...formData,
             [name]: value
