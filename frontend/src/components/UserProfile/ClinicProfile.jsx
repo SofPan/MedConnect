@@ -9,7 +9,7 @@ const ClinicProfile = (props) => {
 
   const [doctors, setDoctors] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [addDoctor, setAddDoctor] = useState(0);
+  const [alterDoctors, setAlterDoctors] = useState(0);
 
   useEffect(() => {
     const fetchClinicsDoctors = async () => {
@@ -18,14 +18,14 @@ const ClinicProfile = (props) => {
     }
 
     fetchClinicsDoctors();
-  }, [addDoctor]);
+  }, [alterDoctors]);
 
   const handleClick = () => {
     setShowForm(!showForm);
   }
 
   const triggerDoctorStateUpdate = () => {
-    setAddDoctor(addDoctor + 1);
+    setAlterDoctors(alterDoctors + 1);
   }
 
   return(
