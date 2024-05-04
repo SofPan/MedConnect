@@ -4,7 +4,7 @@ import axios from 'axios';
 import NavBar from './components/NavBar';
 import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
-
+import PatientInfo from './components/SignUp/PatientInfo';
 import MapComponent from './components/MapComponent';
 import ClinicList from './components/ClinicsList/ClinicsList'
 import SignUp from './components/SignUp/SignUpForm';
@@ -39,6 +39,7 @@ function App() {
     <div className="App" >
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
+        <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay}/>
         {SignInDisplay && (<>
         < SignUp />
