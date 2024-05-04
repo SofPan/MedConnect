@@ -32,7 +32,7 @@ const NewDoctorForm = (props) => {
       createDoctor();
       addDoctor();
     } 
-  }, [doctor, addDoctor]);
+  }, [doctor]);
 
 
   return(
