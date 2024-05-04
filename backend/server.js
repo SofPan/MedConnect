@@ -5,19 +5,15 @@ const cors = require('cors');
 
 const bcrypt = require("bcryptjs");
 
-
+const { getUserById } = require('./src/db/queries/users/getUserById')
 const db = require('./src/db/connection');
 const morgan = require('morgan');
-const cookieSession = require('cookie-session');
+
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ["somelongsecretkey987654321"],
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}));
+
 
 app.use(cors({
   origin: 'http://localhost:3000'
@@ -55,6 +51,9 @@ app.use('/calendar', calendarRoutes);
 app.get('/api', (req, res) => {
   res.json({ test: "test" });
 });
+
+
+
 
 // Start the server
 app.listen(PORT, () => {

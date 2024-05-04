@@ -29,11 +29,26 @@ function App() {
   //     .catch(error => console.error('Error fetching user:', error));
   // }, []); 
   //////////////////
+
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem('user_id');
+    if(userId){
+
+      dispatch({type:"USER_SESSION", payload: true})
+
+    }else{
+      console.log("else statment hit");
+      dispatch({type:"USER_SESSION", payload: false})
+
+    }
+  }, []);
+ 
  
 
   return (
    
-    <div className="App">
+    <div className="App" >
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>

@@ -43,10 +43,11 @@ export default function LoginForm() {
             }
     
             // Assuming response is JSON
-            const data = await response.json();
-
+            const user = await response.json();
+            
+            sessionStorage.setItem("user_id", user.id)
            
-            dispatch({ type: "USER_INFO", payload: data });
+            dispatch({ type: "USER_INFO", payload: user });
     
             dispatch({ type: "USER_LOGIN", payload: true });
             
