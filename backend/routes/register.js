@@ -8,19 +8,29 @@
 // The info collected changes the query based on Clinic vs. Patient
 const express = require('express');
 const router  = express.Router();
+const { getUserByEmail } = require('../src/db/queries/users/getUserByEmail');
+const { addNewUser } = require("../src/db/queries/users/addNewUser")
 
 router.post('/', async (req, res) => {
 
-    const { email, password, firstName, lastName} = req.body;
+    const { email, password, type} = req.body;
+
+    const newUser = {
+        email,
+        password,
+    }
+
+    type === "clinic" ? newUser.isClinic = true : newUser.isClinic = false;
+
+    console.log(newUser);
     
-    console.log(email,password, "email and password")
-    
-    ;
     try {
+
       const user = await getUserByEmail(email);
       
       if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+        console.log("Function triggered");
+        addNewUser(newUser)
       }
   
       // Compare the provided password with the hashed password stored in the database

@@ -37,7 +37,7 @@ function App() {
 
        <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
-        {userState.UserSignedIn && <PatientScheduler />}
+         <PatientScheduler />
         {SignInDisplay && < SignUp />}
       </UserSignedIn.Provider> 
 

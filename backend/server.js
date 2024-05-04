@@ -3,6 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
+const bcrypt = require("bcryptjs");
+
+
 const db = require('./src/db/connection');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
@@ -13,6 +16,7 @@ const PORT = process.env.PORT || 8080;
 app.use(cookieSession({
   name: 'session',
   keys: ["somelongsecretkey987654321"],
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
 app.use(cors({

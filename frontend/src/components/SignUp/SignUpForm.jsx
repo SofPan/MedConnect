@@ -1,4 +1,9 @@
 import React from "react";
+import { useState } from "react";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
 import { Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
@@ -10,8 +15,28 @@ import { Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid,
 export default function SignUp() {
 
   const { dispatch } = useContext(UserSignedIn);
- 
-  const handleSubmit = () => {
+
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    type: ''
+});
+
+// Change handler to update state
+const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+        ...formData,
+        [name]: value
+    });
+};
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({type: "NEW_USER", payload: formData})
     
   }
 
@@ -19,35 +44,12 @@ export default function SignUp() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div >
-        
+
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form  noValidate onSubmit={handleSubmit}>
+        <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -57,6 +59,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -69,16 +72,26 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
               />
             </Grid>
-            
+            <FormControl >
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                onChange={handleChange}
+              >
+                <FormControlLabel value="Patient" control={<Radio />} label="patient" name="type"/>
+                <FormControlLabel value="Clinic" control={<Radio />} label="clinic" name="type"/>
+              </RadioGroup>
+            </FormControl>
           </Grid>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            
+
           >
             Sign Up
           </Button>
@@ -92,7 +105,7 @@ export default function SignUp() {
         </form>
       </div>
       <Box mt={5}>
-        
+
       </Box>
     </Container>
   );

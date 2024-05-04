@@ -26,10 +26,10 @@ export default function useApplicationData() {
         throw new Error('Failed to register user');
       }
   
-      const data = await response.json();
+      
       // Assuming the response contains some information about the newly registered user
       // You can handle the response data as needed
-      console.log('User registered successfully:', data);
+      console.log('User registered successfully:');
     } catch (error) {
       console.error('Error registering user:', error);
       // Handle error
@@ -52,8 +52,8 @@ export default function useApplicationData() {
     case "CLINIC_EVENTS":
         return {...userState, events: action.payload}
     case "NEW_USER":
-        registerUser();
-        return {...userState, events: action.payload}
+        registerUser(action.payload);
+        return {...userState, userInfo: action.payload}
 
       default:
         return userState;
