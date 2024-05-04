@@ -31,3 +31,13 @@ export const postDoctor = async (doctor) => {
     throw error;
   }
 }
+
+export const deleteDoctor = async (doctorId) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}doctors/${doctorId}/delete`);
+    return response;
+  } catch (error) {
+    console.error("Error deleting doctor", error);
+    throw error;
+  }
+}
