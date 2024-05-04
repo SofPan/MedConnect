@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAllDoctors } = require('../src/db/queries/doctors/getAllDoctors');
-const { addNewDoctor } = require('../src/db/queries/doctors/addNewDoctor')
+const { addNewDoctor } = require('../src/db/queries/doctors/addNewDoctor');
+const { deleteDoctor } = require('../src/db/queries/doctors/deleteDoctor');
 const router = express.Router();
 
 // GET all doctors /doctors
@@ -33,5 +34,16 @@ router.post('/', (req, res) => {
 // PUT Edit existing doctor /doctors/:id
 
 // DELETE Delete existing doctor /doctors/:id/delete
+router.delete('/:id/delete', (req, res) => {
+  deleteDoctor(req.params.id)
+    .then(result => {
+      return result;
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ error: error.message });
+    });
+})
 
 module.exports = router;
