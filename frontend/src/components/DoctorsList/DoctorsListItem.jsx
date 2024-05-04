@@ -1,6 +1,14 @@
-const DoctorsListItem = (props) => {
-  const {name, qualifications, photo, patients} = props;
+import { useState } from "react";
+import {Button} from '@mui/material';
+import { deleteDoctor } from "../../hooks/tempUseAPI";
 
+const DoctorsListItem = (props) => {
+  const {name, qualifications, photo, patients, id} = props;
+
+
+  const handleClickDelete = async () => {
+    return await deleteDoctor(id);
+  }
   return(
     <li>
       {/* For Available Doctors page */}
@@ -19,8 +27,8 @@ const DoctorsListItem = (props) => {
           <p> {qualifications} </p>
         </div>
         <div>
-          <button>Edit</button>
-          <button>Delete</button>
+          <Button>Edit</Button>
+          <Button onClick={handleClickDelete}>Delete</Button>
         </div>
       </span>
     </li>

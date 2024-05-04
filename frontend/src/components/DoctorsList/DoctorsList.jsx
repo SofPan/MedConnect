@@ -10,6 +10,7 @@ const DoctorsList = (props) => {
     .map(doctor => {
       return <DoctorsListItem
               key={doctor.id}
+              id={doctor.id}
               name={doctor.name}
               qualifications={doctor.qualifications}
               photo={`./assets/images/${doctor.photo_url}`}
