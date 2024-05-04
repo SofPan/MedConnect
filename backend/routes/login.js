@@ -9,12 +9,18 @@ const { getUserByEmail } = require('../src/db/queries/users/getUserByEmail');
 const express = require('express');
 const router  = express.Router();
 
+
+
+
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email,password, "email and password")
+
   
-  ;
+
+  const { email, password } = req.body;
+  
+  
   try {
+
     const user = await getUserByEmail(email);
     
     if (!user) {
@@ -27,8 +33,11 @@ router.post('/login', async (req, res) => {
     if (password !== user.password_hash) {
       return res.status(401).json({ error: 'Invalid password' });
     }
-
+    //set cookie in browser on login
+  
     // Password is correct, send user information as JSON data to the frontend
+   
+
     res.json(user);
 
   } catch (error) {
@@ -38,8 +47,9 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/login/:id', (req, res) => {
-  req.session.user_id = req.params.id;
+  
   const userId = req.session.user_id;
+
   getUserById(userId)
       .then(user => {
         // Send the user information as JSON data to the frontend

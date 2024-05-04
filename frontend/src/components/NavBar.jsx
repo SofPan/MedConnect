@@ -69,7 +69,7 @@ export default function NavBar({setSignInDisplay, SignInDisplay}) {
 
 
     
-    const [showLogin, setShowLogin] = React.useState(false)
+   
    
 
 
@@ -78,19 +78,18 @@ export default function NavBar({setSignInDisplay, SignInDisplay}) {
 
   
 
-    const handleLogin = () => {
-        setShowLogin(true);
-    };
+    
     const handleProfileClick = () => {
-        setShowLogin(true);
+       
     };
     const handleSignUp = () =>{
         setSignInDisplay(!SignInDisplay)
     }
     const handleLogout = () => {
+        sessionStorage.user_id = '';
         dispatch({type:"USER_INFO_LOGOUT", payload:{}})
         dispatch({type:"USER_STATE_LOGOUT", payload:false})
-        setShowLogin(false);
+       
     };
 
 
@@ -128,15 +127,14 @@ export default function NavBar({setSignInDisplay, SignInDisplay}) {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-                        {!showLogin && (
+                       
+                        {!userState.userLoggedIn && (
                             <>
-                            <MenuItem onClick={handleLogin}>Login</MenuItem>
-                            <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
-                            </>
-                        )}
-                        {!userState.userLoggedIn && showLogin && (<LoginForm  />)}
+                                <LoginForm  />
+                                <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                            </>)}
 
-                        {userState.userLoggedIn && showLogin && (
+                        {userState.userLoggedIn &&  (
                             <>
                                 <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
                                 <MenuItem onClick={handleLogout}>Logout</MenuItem>

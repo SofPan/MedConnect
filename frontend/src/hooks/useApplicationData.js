@@ -35,6 +35,8 @@ export default function useApplicationData() {
       // Handle error
     }
   };
+
+ 
   
 
   const [userState, dispatch] = useReducer((userState, action) => {
@@ -54,7 +56,10 @@ export default function useApplicationData() {
     case "NEW_USER":
         registerUser(action.payload);
         return {...userState, userInfo: action.payload}
+    case "USER_SESSION":
 
+        return {...userState, userLoggedIn: action.payload }
+      
       default:
         return userState;
     }
