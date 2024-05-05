@@ -27,6 +27,8 @@ CREATE TABLE clinics (
   name VARCHAR(255) NOT NULL,
   user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE,
   address VARCHAR(255) NOT NULL,
+  latitude  Decimal(8,6),
+  longitude Decimal(9,6),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

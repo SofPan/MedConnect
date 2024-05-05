@@ -61,102 +61,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-export default function NavBar() {
+export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay, LoginDisplay}) {
 
     const { userState, dispatch } = useContext(UserSignedIn);
-
+  
     
-
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [showLogin, setShowLogin] = React.useState(false)
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleProfileClick = () => {
+       
+    };
+    const handleSignUp = () =>{
+        if(LoginDisplay){
+            setLoginDisplay(!LoginDisplay)
+        }
+        setSignInDisplay(!SignInDisplay)
+    }
+    const handleLogin = () =>{
+        if(SignInDisplay){
+            setSignInDisplay(!SignInDisplay)
+        }
+        setLoginDisplay(!LoginDisplay)
+    }
+    const handleLogout = () => {
+        sessionStorage.user_id = '';
+        dispatch({type:"USER_INFO_LOGOUT", payload:{}})
+        dispatch({type:"USER_STATE_LOGOUT", payload:false})
+       
     };
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
-
-    const handleLogin = () => {
-        setShowLogin(true);
-
-    };
-
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleLogin}
-        >
-            {userState.userLoggedIn ? <MenuItem onClick={handleLogin}>Profile</MenuItem> : <MenuItem onClick={handleLogin}>Login</MenuItem>}
-
-        </Menu>
-    );
-
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-            <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="error">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-
-
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
 
     return (
 
@@ -192,38 +123,27 @@ export default function NavBar() {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
+                       
+                       
+                               
+                                
 
-                        {userState.userLoggedIn ? (
+
+                        {userState.userLoggedIn ?  (
                             <>
-                                <MenuItem onClick={handleLogin}>Profile</MenuItem>
-                                <MenuItem onClick={handleLogin}>Logout</MenuItem>
+                                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             </>
-                        ) : (
-                            null
-                        )}
-                        {showLogin ? (
-                            <LoginForm  />
-                        ) : (
-                            <MenuItem onClick={handleLogin}>Login</MenuItem>
-                        )}
+                        ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
+                        <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                        </>)}
+                        
+                        
 
                     </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
+                   
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
         </Box>
     );
 }
