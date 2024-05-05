@@ -12,7 +12,6 @@ const getUserById = (id) => {
   `;
   return db.query(query, values)
     .then(results => {
-      console.log(results.rows[0])
       return results.rows[0];
     })
     .catch(error => console.log("getUserById error", error));

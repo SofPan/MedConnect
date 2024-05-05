@@ -1,5 +1,34 @@
+import { useEffect, useState } from "react";
+import {Button} from '@mui/material';
+import { deleteDoctor } from "../../hooks/tempUseAPI";
+import EditDoctorForm from "./EditDoctor";
+
 const DoctorsListItem = (props) => {
-  const {name, qualifications, photo, patients} = props;
+  const {
+          name,
+          qualifications, 
+          photo, 
+          patients, 
+          id,
+          changeDoctorState,
+          doctor
+        } = props;
+
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const deleteDoctorFromList = async () => {
+      await deleteDoctor(id);
+    }
+    if (deleting){
+      deleteDoctorFromList();
+      changeDoctorState();
+    }
+  }, [deleting]);
+
+  const handleClickDelete = () => {
+    setDeleting(true);
+  }
 
   return(
     <li>
@@ -19,8 +48,9 @@ const DoctorsListItem = (props) => {
           <p> {qualifications} </p>
         </div>
         <div>
-          <button>Edit</button>
-          <button>Delete</button>
+          <Button>Edit</Button>
+          <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+          <Button onClick={handleClickDelete}>Delete</Button>
         </div>
       </span>
     </li>
