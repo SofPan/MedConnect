@@ -10,7 +10,8 @@ const EditDoctorForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const target = e.target.elements;
-    setEditDoctor(() => ({
+    setEditDoctor(prev => ({
+      ...prev,
       name: target.name.value && target.name.value,
       qualifications: target.qualifications.value && target.qualifications.value,
       description: target.description.value && target.description.value,
@@ -22,7 +23,8 @@ const EditDoctorForm = (props) => {
     const editDoctorRequest = async () => {
       await putDoctor(editDoctor);
     }
-
+    
+    console.log("sending", editDoctor);
     editDoctorRequest();
   }, [editDoctor])
 
