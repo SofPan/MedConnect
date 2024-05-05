@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../../hooks/tempUseAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
-import Button from '@mui/material/Button'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
+import {
+        Button,
+        Tabs,
+        Tab,
+        Box,
+      } from '@mui/material'
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
@@ -30,10 +35,12 @@ const ClinicProfile = (props) => {
 
   return(
     <div>
-      <aside>
-        <Button>Clinic Profile</Button>
-        <Button>Scheduling</Button>
-      </aside>
+      <Box height="100vh" width="20vw" display={'inline-block'} borderRight={'1px solid lightgrey'}>
+        <Tabs orientation='vertical'>
+          <Tab label="Clinic Profile" />
+          <Tab label="Scheduling" />
+        </Tabs>
+      </Box>
       <article className="profile-main">
         <div className="profile-left">
           <div className='profile-information'>
