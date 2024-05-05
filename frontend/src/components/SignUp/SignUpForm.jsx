@@ -6,8 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
-import { Snackbar,Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
-
+import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+import './SignUp.scss'; // Import the specific SASS file
 
 
 
@@ -16,57 +16,59 @@ export default function SignUp() {
 
   const { dispatch } = useContext(UserSignedIn);
 
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    password_check:'',
+    password_check: '',
     type: 'Patient'
-});
-const [openSnackbar, setOpenSnackbar] = useState(false);
-const [errors, setErrors] = useState({});
+  });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errors, setErrors] = useState({});
 
-// Change handler to update state
-const handleChange = (e) => {
+  // Change handler to update state
+  const handleChange = (e) => {
     const { name, value } = e.target;
-   
+
     setFormData({
-        ...formData,
-        [name]: value
+      ...formData,
+      [name]: value
     });
-   
-};
 
-const validate = (formData) => {
-  const errors = {};
+  };
 
-  for(const key in formData){
-    console.log(key);
-    if(!formData[key]){
-      errors[key] = `${key} is required`
+
+
+  const validate = (formData) => {
+    const errors = {};
+
+    for (const key in formData) {
+      console.log(key);
+      if (!formData[key]) {
+        errors[key] = `${key} is required`
+      }
     }
-  }
 
-  console.log(errors);
+    console.log(errors);
 
-  // You can add more complex validation rules here
+    // You can add more complex validation rules here
 
-  return errors;
-};
+    return errors;
+  };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
     const formErrors = validate(formData);
-    if(formData.password === formData.password_check && Object.keys(formErrors).length === 0){
-      dispatch({type: "NEW_USER", payload: formData})
-    }else{
+    if (formData.password === formData.password_check && Object.keys(formErrors).length === 0) {
+      dispatch({ type: "NEW_USER", payload: formData })
+    } else {
       setErrors(formErrors);
       setOpenSnackbar(true);
     }
-   
-    
+
+
   }
 
   const handleCloseSnackbar = () => {
@@ -124,17 +126,20 @@ const validate = (formData) => {
                 onChange={handleChange}
               />
             </Grid>
-            <FormControl >
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                onChange={handleChange}
-                defaultValue="patient"
-              >
-                <FormControlLabel value="patient" control={<Radio />} label="Patient" name="type"  />
-                <FormControlLabel value="clinic" control={<Radio />} label="Clinic" name="type" />
-              </RadioGroup>
-            </FormControl>
+            <Grid item xs={12} className="grid-radio-container">
+              <FormControl  >
+                <RadioGroup
+                 className="radio-container"
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  onChange={handleChange}
+                  defaultValue="patient"
+                >
+                  <FormControlLabel value="patient" control={<Radio />} label="Patient" name="type" />
+                  <FormControlLabel value="clinic" control={<Radio />} label="Clinic" name="type" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -153,11 +158,11 @@ const validate = (formData) => {
             </Grid>
           </Grid>
           <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message="Please correct the errors and resubmit the form."
-      />
+            open={openSnackbar}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+            message="Please correct the errors and resubmit the form."
+          />
         </form>
       </div>
       <Box mt={5}>
