@@ -10,7 +10,6 @@ const editDoctor = (doctor) => {
     doctor.photo_url, // $5
     doctor.number_of_patients // $6
   ]
-  console.log("value!", value);
   const query = `
     UPDATE doctors
     SET name = $2, qualifications = $3, description = $4, photo_url = $5, number_of_patients = $6
@@ -19,7 +18,6 @@ const editDoctor = (doctor) => {
 
   return db.query(query, value)
     .then(data => {
-      console.log("editDoctor data", data.rows[0]);
       return data.rows[0];
     })
     .catch(error => console.error('editDoctor query error:', error));
