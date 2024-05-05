@@ -49,7 +49,7 @@ const DoctorsListItem = (props) => {
         </div>
         <div>
           <Button>Edit</Button>
-          <EditDoctorForm doctor={doctor}/>
+          <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>
       </span>

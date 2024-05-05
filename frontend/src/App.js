@@ -2,9 +2,9 @@ import './App.css';
 import { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import NavBar from './components/NavBar';
-import PatientScheduler from './components/Scheduling/PatientScheduler';
+// import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
-import PatientInfo from './components/SignUp/PatientInfo';
+// import PatientInfo from './components/SignUp/PatientInfo';
 import UserProfile from './components/UserProfile/UserProfile';
 
 import SignUp from './components/SignUp/SignUpForm';
@@ -39,14 +39,15 @@ function App() {
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        <PatientInfo />
+        {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
           < SignUp />
 
         </>)}
         {LoginDisplay && <LoginForm />}
-        <PatientScheduler />
+        <UserProfile />
+        {/* <PatientScheduler /> */}
       </UserSignedIn.Provider>
 
     </div>
