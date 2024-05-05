@@ -4,7 +4,8 @@ import axios from 'axios';
 import NavBar from './components/NavBar';
 import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
-import PatientInfo from './components/SignUp/PatientInfo'; import UserProfile from './components/UserProfile/UserProfile';
+import PatientInfo from './components/SignUp/PatientInfo';
+import UserProfile from './components/UserProfile/UserProfile';
 
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
