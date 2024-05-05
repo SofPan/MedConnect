@@ -12,7 +12,7 @@ const deleteDoctor = (id) => {
     .then(data => {
       return data.rows[0];
     })
-    .catch(err => console.error('addNewDoctor query error:', error));
+    .catch(error => console.error('deleteDoctor query error:', error));
 }
 
 module.exports = { deleteDoctor }

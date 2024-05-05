@@ -21,7 +21,7 @@ const addNewDoctor = (doctor) => {
     .then(data => {
       return data.rows[0];
     })
-    .catch(err => console.error('addNewDoctor query error:', error));
+    .catch(error => console.error('addNewDoctor query error:', error));
 }
 
 module.exports = { addNewDoctor }
