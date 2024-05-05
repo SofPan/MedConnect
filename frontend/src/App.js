@@ -46,7 +46,6 @@ function App() {
 
         </>)}
         {LoginDisplay && <LoginForm />}
-        <UserProfile />
         <PatientScheduler />
       </UserSignedIn.Provider>
 
