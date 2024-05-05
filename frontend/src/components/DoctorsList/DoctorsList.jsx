@@ -15,6 +15,7 @@ const DoctorsList = (props) => {
               qualifications={doctor.qualifications}
               photo={`./assets/images/${doctor.photo_url}`}
               patients={doctor.number_of_patients}
+              doctor={doctor}
               changeDoctorState={changeDoctorState}
             />
     });

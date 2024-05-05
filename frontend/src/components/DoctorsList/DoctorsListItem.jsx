@@ -10,7 +10,8 @@ const DoctorsListItem = (props) => {
           photo, 
           patients, 
           id,
-          changeDoctorState
+          changeDoctorState,
+          doctor
         } = props;
 
   const [deleting, setDeleting] = useState(false);
@@ -48,7 +49,7 @@ const DoctorsListItem = (props) => {
         </div>
         <div>
           <Button>Edit</Button>
-          <EditDoctorForm doctor_id={id} />
+          <EditDoctorForm doctor={doctor}/>
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>
       </span>
