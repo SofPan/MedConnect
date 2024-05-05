@@ -32,9 +32,9 @@ export const postDoctor = async (doctor) => {
   }
 }
 
-export const putDoctor = async (doctorId) => {
+export const putDoctor = async (doctor) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}doctors/${doctorId}`);
+    const response = await axios.put(`${API_BASE_URL}doctors/${doctor.id}`, doctor);
     return response;
   } catch (error) {
     console.error("Error editing doctor", error);

@@ -20,7 +20,7 @@ const EditDoctorForm = (props) => {
 
   useEffect(() => {
     const editDoctorRequest = async () => {
-      await putDoctor(doctor.id);
+      await putDoctor(editDoctor);
     }
 
     editDoctorRequest();
