@@ -7,17 +7,8 @@ const router  = express.Router();
 // Route to fetch clinics with geocoded addresses
   router.get('/', (req, res) => {
     getAllClinics()
-      .then(clinicData => {
-        return Promise.all(clinicData.map(clinic => {
-          return geocodeAddress(clinic.address)
-            .then(location => {
-              return { ...clinic, location };
-            });
-        }));
-      })
-      .then(clinicsWithGeocoding => {
-        console.log(clinicsWithGeocoding);
-        res.json(clinicsWithGeocoding);
+      .then(clinics => {
+        res.json(clinics);
       })
       .catch(error => {
         console.error('Error fetching clinics:', error);
