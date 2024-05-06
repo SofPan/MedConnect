@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { getAllDocuments } = require('../src/db/queries/documents/getAllDocuments')
 // GET all documents /documents
 router.get('/', (req, res) => {
   getAllDocuments()

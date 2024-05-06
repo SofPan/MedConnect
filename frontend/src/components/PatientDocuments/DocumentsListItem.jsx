@@ -1,3 +1,5 @@
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+
 const DocumentsListItem = (props) => {
   const {
     id,
@@ -8,7 +10,7 @@ const DocumentsListItem = (props) => {
 
   return(
     <li>
-      <img alt="X" />
+      <DescriptionOutlinedIcon/>
       <span>{name}</span>
     </li>
   )
