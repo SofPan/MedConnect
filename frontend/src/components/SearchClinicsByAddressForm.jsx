@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React, { useState } from 'react';
 import axios from 'axios';
-import ClinicsList from './ClinicsList/ClinicsList';
-
 
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');
