@@ -1,5 +1,39 @@
+import { useEffect, useState } from "react";
+import { deleteDoctor } from "../../hooks/tempUseAPI";
+import EditDoctorForm from "./EditDoctor";
+import {
+  Box,
+    Button,
+    Card,
+  } from '@mui/material';
+import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
+
 const DoctorsListItem = (props) => {
-  const {name, qualifications, photo, patients} = props;
+  const {
+          name,
+          qualifications, 
+          photo, 
+          patients, 
+          id,
+          changeDoctorState,
+          doctor
+        } = props;
+
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const deleteDoctorFromList = async () => {
+      await deleteDoctor(id);
+    }
+    if (deleting){
+      deleteDoctorFromList();
+      changeDoctorState();
+    }
+  }, [deleting]);
+
+  const handleClickDelete = () => {
+    setDeleting(true);
+  }
 
   return(
     <li>
@@ -8,10 +42,10 @@ const DoctorsListItem = (props) => {
         <p>{name} accepting {patients} patients </p>
       </span>
       {/* For Clinic Profile Page */}
-      <span className="roster">
-        <div>
+      <Card className="roster">
+        <Box width="50px" height="50px" borderRadius={'50%'}>
           <img src={photo} alt={name}/>
-        </div>
+        </Box>
         <div>    
           <p>{name} <br />
               Can accept {patients} more patients
@@ -19,10 +53,12 @@ const DoctorsListItem = (props) => {
           <p> {qualifications} </p>
         </div>
         <div>
-          <button>Edit</button>
-          <button>Delete</button>
+          <AccordionWrapper title={"Edit"}>
+            <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+          </AccordionWrapper>
+          <Button onClick={handleClickDelete}>Delete</Button>
         </div>
-      </span>
+      </Card>
     </li>
   )
 }

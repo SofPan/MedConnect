@@ -1,8 +1,7 @@
-import axios from "axios";
 import DoctorsListItem from "./DoctorsListItem";
 
 const DoctorsList = (props) => {
-  const {clinic_id, renderClinic, doctors} = props;
+  const {clinic_id, doctors, changeDoctorState} = props;
 
   const mapAndFilterDoctors = doctors.filter(doctor => {
       // Only show the Clinic's doctors that are accepting patients
@@ -11,14 +10,16 @@ const DoctorsList = (props) => {
     .map(doctor => {
       return <DoctorsListItem
               key={doctor.id}
+              id={doctor.id}
               name={doctor.name}
               qualifications={doctor.qualifications}
               photo={`./assets/images/${doctor.photo_url}`}
               patients={doctor.number_of_patients}
+              doctor={doctor}
+              changeDoctorState={changeDoctorState}
             />
     });
 
-  //   // renderClinic(mapAndFilterDoctors.length > 0);
   return(
     <ul>
       {mapAndFilterDoctors}
