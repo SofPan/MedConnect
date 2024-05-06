@@ -14,8 +14,13 @@ const ClinicList = ({ searchCoordinates }) => {
         axios.get('http://localhost:8080/doctors')
       ])
       .then(([clinicsResponse, doctorsResponse]) => {
+        
         const clinicPromises = clinicsResponse.data.map(clinic => {
-          return calcRoute(searchCoordinates, clinic.location)
+          const location = {
+            lat: parseFloat(clinic.latitude),
+            lng: parseFloat(clinic.longitude),
+          } 
+          return calcRoute(searchCoordinates, location)
             .then(distance => ({ ...clinic, distance }))
             .catch(error => {
               console.error('Error calculating distance:', error);
