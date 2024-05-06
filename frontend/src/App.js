@@ -4,9 +4,9 @@ import NavBar from './components/NavBar';
 import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
 import PatientInfo from './components/SignUp/PatientInfo';
-import MapComponent from './components/MapComponent';
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
+import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 
 export const UserSignedIn = createContext();
 
@@ -45,6 +45,7 @@ function App() {
         </>) }
         {LoginDisplay && <LoginForm  />}
         <PatientScheduler />
+        <ClinicSignUpInfo />
       </UserSignedIn.Provider> 
 
     </div>

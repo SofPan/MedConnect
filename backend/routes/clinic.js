@@ -2,6 +2,7 @@
 const express = require('express');
 const { getAllClinics } = require('../src/db/queries/clinics/getAllClinics');
 const { geocodeAddress } = require('../helpers/geocodeAdress');
+const { addClinic } = require('../src/db/queries/clinics/addClinic');
 const router  = express.Router();
 
 // Route to fetch clinics with geocoded addresses
@@ -12,6 +13,24 @@ const router  = express.Router();
       })
       .catch(error => {
         console.error('Error fetching clinics:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+  });
+
+  router.post('/', (req, res) => {
+    const clinicData = {
+      name: req.body.clinic_name,
+      user_id: req.body.user_id,
+      address: req.body.address
+    };
+
+    addClinic(clinicData)
+      .then(clinic => {
+        console.log(clinic)
+        res.json(clinic);
+      })
+      .catch(error => {
+        console.error('Error adding clinic:', error);
         res.status(500).json({ error: 'Internal server error' });
       });
   });
