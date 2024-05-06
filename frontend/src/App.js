@@ -39,15 +39,14 @@ function App() {
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        {/* <PatientInfo /> */}
+        <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
           < SignUp />
 
         </>)}
         {LoginDisplay && <LoginForm />}
-        <UserProfile />
-        {/* <PatientScheduler /> */}
+        <PatientScheduler />
       </UserSignedIn.Provider>
 
     </div>
