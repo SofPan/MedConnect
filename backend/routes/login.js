@@ -62,7 +62,7 @@ router.get('/login/:id', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  req.session = null;
+  
   console.log("logout")
 });
 

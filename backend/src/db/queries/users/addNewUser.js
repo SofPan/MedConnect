@@ -12,7 +12,7 @@ RETURNING *
   `;
   return db.query(query, values)
     .then(results => {
-    console.log('DATABASE CALL');
+      
       return results.rows[0];
     })
     .catch(error => console.log("addNewUser error", error));

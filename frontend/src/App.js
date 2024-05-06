@@ -42,7 +42,7 @@ function App() {
         <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay}/>
         {SignInDisplay && (<>
-        < SignUp />
+        < SignUp SignInDisplay={SignInDisplay} setSignInDisplay={setSignInDisplay}/>
         
         </>) }
         {LoginDisplay && <LoginForm  />}

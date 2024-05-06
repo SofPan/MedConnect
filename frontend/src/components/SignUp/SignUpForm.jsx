@@ -7,12 +7,12 @@ import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
 import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
-import './SignUp.scss'; // Import the specific SASS file
+// import './SignUp.scss'; // Import the specific SASS file
 
 
 
 
-export default function SignUp() {
+export default function SignUp({setSignInDisplay, SignInDisplay}) {
 
   const { dispatch } = useContext(UserSignedIn);
 
@@ -43,13 +43,13 @@ export default function SignUp() {
     const errors = {};
 
     for (const key in formData) {
-      console.log(key);
+      
       if (!formData[key]) {
         errors[key] = `${key} is required`
       }
     }
 
-    console.log(errors);
+    
 
     // You can add more complex validation rules here
 
@@ -57,19 +57,60 @@ export default function SignUp() {
   };
 
 
-  const handleSubmit = (e) => {
+
+  const registerUser = async (userData) => {
+    try {
+      const response = await fetch('http://localhost:8080/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+      ;
+      const responseData = await response.json();
+      
+      
+      // Assuming the response contains some information about the newly registered user
+      // You can handle the response data as needed
+      
+      return responseData;
+
+    } catch (error) {
+      console.error('Error registering user:', error);
+      // Handle error
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
     const formErrors = validate(formData);
     if (formData.password === formData.password_check && Object.keys(formErrors).length === 0) {
-      dispatch({ type: "NEW_USER", payload: formData })
+        try {
+          const user = await registerUser(formData);
+          
+          sessionStorage.setItem("user_id", user.id);
+
+          dispatch({ type: "USER_INFO", payload: user });
+    
+          dispatch({ type: "USER_LOGIN", payload: true });
+                    
+        } catch (error) {
+          console.error('Registration failed', error);
+          // Handle registration failure (e.g., notify the user)
+        }
+      setSignInDisplay(!SignInDisplay);
     } else {
-      setErrors(formErrors);
-      setOpenSnackbar(true);
+        setErrors(formErrors);
+        setOpenSnackbar(true);
     }
+};
 
-
-  }
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
