@@ -10,6 +10,7 @@ const UserProfile = (props) => {
   useEffect(() => {
     // console.log("userContext", userContext.userState)
     const fetchUserProfile = async () => {
+      // console.log("userContext", userContext)
       const userData = await fetchUser(21);
       setUserProfile(userData);
     };
