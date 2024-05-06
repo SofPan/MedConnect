@@ -29,12 +29,12 @@ const ClinicProfile = (props) => {
   }
 
   return(
-    <div>
+    <div className="clinic-profile">
       <Box width="20vw" display={'inline-block'} borderRight={'1px solid lightgrey'}>
-        <Tabs orientation='vertical'>
+        {/* <Tabs orientation='vertical'>
           <Tab label="Clinic Profile" />
           <Tab label="Scheduling" />
-        </Tabs>
+        </Tabs> */}
       </Box>
       <Box width="60vw" display={'inline-block'}>
         <article className="profile-main">

@@ -9,7 +9,7 @@ const AccordionWrapper = (props) => {
   const [expanded, setExpanded] = useState(false);
 
   return(
-    <Accordion expanded={expanded} onClick={() => setExpanded(!expanded)}>
+    <Accordion expanded={expanded} onClick={() => setExpanded(true)} onSubmit={() => setExpanded(false)}>
       <AccordionSummary>{props.title}</AccordionSummary>
       <AccordionDetails>
         {props.children}
