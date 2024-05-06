@@ -9,6 +9,8 @@ import UserProfile from './components/UserProfile/UserProfile';
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
+import AvailableDoctors from './components/AvailableDoctors';
+// import MapComponent from './components/MapComponent';
 
 export const UserSignedIn = createContext();
 
@@ -49,7 +51,8 @@ function App() {
         <PatientScheduler />
         <ClinicSignUpInfo />
       
-
+          {/* <MapComponent /> */}
+          <AvailableDoctors />
       </UserSignedIn.Provider>
 
     </div>
