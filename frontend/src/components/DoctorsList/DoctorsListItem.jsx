@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import {Button} from '@mui/material';
 import { deleteDoctor } from "../../hooks/tempUseAPI";
 import EditDoctorForm from "./EditDoctor";
+import {
+  Box,
+    Button,
+    Card,
+  } from '@mui/material';
+import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 
 const DoctorsListItem = (props) => {
   const {
@@ -37,10 +42,10 @@ const DoctorsListItem = (props) => {
         <p>{name} accepting {patients} patients </p>
       </span>
       {/* For Clinic Profile Page */}
-      <span className="roster">
-        <div>
+      <Card className="roster">
+        <Box width="50px" height="50px" borderRadius={'50%'}>
           <img src={photo} alt={name}/>
-        </div>
+        </Box>
         <div>    
           <p>{name} <br />
               Can accept {patients} more patients
@@ -48,11 +53,12 @@ const DoctorsListItem = (props) => {
           <p> {qualifications} </p>
         </div>
         <div>
-          <Button>Edit</Button>
-          <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+          <AccordionWrapper title={"Edit"}>
+            <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+          </AccordionWrapper>
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>
-      </span>
+      </Card>
     </li>
   )
 }
