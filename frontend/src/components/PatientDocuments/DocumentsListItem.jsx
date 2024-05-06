@@ -1,8 +1,15 @@
 const DocumentsListItem = (props) => {
+  const {
+    id,
+    name,
+    document,
+    changeDocumentState
+  } = props;
 
   return(
     <li>
-      A document
+      <img alt="X" />
+      <span>{name}</span>
     </li>
   )
 }
