@@ -3,18 +3,20 @@ import { fetchDoctors } from '../../hooks/tempUseAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import {
-        Button,
         Tabs,
         Tab,
         Box,
+        Accordion,
+        AccordionSummary,
+        AccordionDetails
       } from '@mui/material'
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
 
   const [doctors, setDoctors] = useState([]);
-  const [showForm, setShowForm] = useState(false);
   const [alterDoctors, setAlterDoctors] = useState(0);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchClinicsDoctors = async () => {
@@ -24,10 +26,6 @@ const ClinicProfile = (props) => {
 
     fetchClinicsDoctors();
   }, [alterDoctors]);
-
-  const handleClick = () => {
-    setShowForm(!showForm);
-  }
 
   const triggerDoctorStateUpdate = () => {
     setAlterDoctors(alterDoctors + 1);
@@ -64,11 +62,15 @@ const ClinicProfile = (props) => {
           <Box className="profile-right" width="60%" display={'inline-block'}>
             <div>
               <h2>Doctors</h2>
-              <Button onClick={handleClick}>New</Button>
-                <NewDoctorForm 
-                  clinic_id={userProfile.id}
-                  addDoctor={triggerDoctorStateUpdate}
-                />
+              <Accordion expanded={expanded} onClick={() => setExpanded(!expanded)}>
+                <AccordionSummary>New</AccordionSummary>
+                <AccordionDetails>
+                  <NewDoctorForm 
+                    clinic_id={userProfile.id}
+                    addDoctor={triggerDoctorStateUpdate}
+                  />
+                </AccordionDetails>
+              </Accordion>
             </div>
               {!doctors.length && <span>You do not have any doctors listed</span>}
               <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} />
