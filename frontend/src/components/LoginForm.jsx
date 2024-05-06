@@ -15,7 +15,7 @@ export default function LoginForm() {
     // Change handler to update state
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(e.target);
+        console.log(value);
         setFormData({
             ...formData,
             [name]: value
@@ -28,18 +28,10 @@ export default function LoginForm() {
     const submitForm = async (e) => {
         e.preventDefault();
     
-        // Get form data
-        
-        console.log(
-            "YPPPPPPPPPPP", formData
-        );
-        // Construct request body
-        
-    
         try {
             // Make POST request to your backend
-            const response = await fetch('your_backend_endpoint', {
-                method: 'GET',
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,11 +43,13 @@ export default function LoginForm() {
             }
     
             // Assuming response is JSON
-            const data = await response.json();
+            const user = await response.json();
+            
+            sessionStorage.setItem("user_id", user.id)
+           
+            dispatch({ type: "USER_INFO", payload: user });
     
-            // Dispatch action or handle response data
-            dispatch({ type: "USER_INFO", payload: true });
-    
+            dispatch({ type: "USER_LOGIN", payload: true });
             
         } catch (error) {
             console.error('Error:', error);

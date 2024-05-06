@@ -3,7 +3,7 @@ import DoctorForm from '../Forms/DoctorForm';
 import { putDoctor } from '../../hooks/tempUseAPI';
 
 const EditDoctorForm = (props) => {
-  const {doctor} = props;
+  const {doctor, changeDoctorState} = props;
 
   const [editDoctor, setEditDoctor] = useState(doctor);
   
@@ -23,9 +23,8 @@ const EditDoctorForm = (props) => {
     const editDoctorRequest = async () => {
       await putDoctor(editDoctor);
     }
-    
-    console.log("sending", editDoctor);
     editDoctorRequest();
+    changeDoctorState();
   }, [editDoctor])
 
   return(

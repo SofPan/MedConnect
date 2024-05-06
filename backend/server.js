@@ -3,17 +3,17 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
+const bcrypt = require("bcryptjs");
+
+const { getUserById } = require('./src/db/queries/users/getUserById')
 const db = require('./src/db/connection');
 const morgan = require('morgan');
-const cookieSession = require('cookie-session');
+
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ["somelongsecretkey987654321"],
-}));
+
 
 app.use(cors({
   origin: 'http://localhost:3000'
@@ -33,6 +33,7 @@ const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
 const clinicsRoutes = require('./routes/clinic');
+const calendarRoutes = require('./routes/calendar');
 
 app.use('/appointments', appointmentsRoutes);
 app.use('/doctors', doctorsRoutes);
@@ -42,12 +43,17 @@ app.use('/register', registerRoutes);
 app.use('/', loginRoutes);
 app.use('/', indexRoutes);
 app.use('/clinics', clinicsRoutes);
+app.use('/calendar', calendarRoutes);
+
 
 
 // Testing frontend connection
 app.get('/api', (req, res) => {
   res.json({ test: "test" });
 });
+
+
+
 
 // Start the server
 app.listen(PORT, () => {
