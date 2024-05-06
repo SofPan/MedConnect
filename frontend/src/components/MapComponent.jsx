@@ -20,7 +20,7 @@ const customMarkerIcon = `
 `;
 
 const MapComponent = () => {
-  const [clinicLocations, setClinicLocations] = useState([]);
+  const [clinics, setClinics] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [coordinates, setCoordinates] = useState(defaultCenter);
   const [searchTermMarker, setSearchTermMarker] = useState(false);
@@ -33,7 +33,7 @@ const MapComponent = () => {
     const fetchClinics = () => {
       axios.get('http://localhost:8080/clinics')
         .then(response => {
-          setClinicLocations(response.data);
+          setClinics(response.data);
         })
         .catch(error => {
           console.error('Error fetching clinics:', error);
@@ -87,22 +87,29 @@ const MapComponent = () => {
             />
           }
 
-          {clinicLocations.map((clinic, index) => (
-            <Marker
-              key={index}
-              position={clinic.location}
-              icon={{
-                url: `data:image/svg+xml;utf8,${encodeURIComponent(customMarkerIcon)}`,
-                scaledSize: new window.google.maps.Size(50, 50)
-              }}
-              label={{
-                text: `${clinic.number_of_spots ? clinic.number_of_spots : 0}`,
-                fontWeight: 'bold',
-                fontSize: '18px',
-                color: 'white',
-              }}
-            />
-          ))}
+          {clinics.map((clinic, index) => {
+            const clinicCoordinates = {
+              lat: parseFloat(clinic.latitude), 
+              lng: parseFloat(clinic.longitude), 
+            };
+
+            return (
+              <Marker
+                key={index}
+                position={clinicCoordinates}
+                icon={{
+                  url: `data:image/svg+xml;utf8,${encodeURIComponent(customMarkerIcon)}`,
+                  scaledSize: new window.google.maps.Size(50, 50)
+                }}
+                label={{
+                  text: `${clinic.number_of_spots ? clinic.number_of_spots : 0}`,
+                  fontWeight: 'bold',
+                  fontSize: '18px',
+                  color: 'white',
+                }}
+              />
+            );
+          })}
         </GoogleMap>
       </div>
       <ClinicList searchCoordinates={coordinates} />

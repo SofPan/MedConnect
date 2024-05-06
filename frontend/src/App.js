@@ -1,6 +1,5 @@
 import './App.css';
 import { useEffect, useState, createContext } from 'react';
-import axios from 'axios';
 import NavBar from './components/NavBar';
 import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
@@ -9,6 +8,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
+import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 
 export const UserSignedIn = createContext();
 
@@ -47,6 +47,9 @@ function App() {
         </>)}
         {LoginDisplay && <LoginForm />}
         <PatientScheduler />
+        <ClinicSignUpInfo />
+      
+
       </UserSignedIn.Provider>
 
     </div>
