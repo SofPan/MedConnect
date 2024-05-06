@@ -5,18 +5,15 @@ import NewDoctorForm from '../DoctorsList/NewDoctor';
 import {
         Tabs,
         Tab,
-        Box,
-        Accordion,
-        AccordionSummary,
-        AccordionDetails
+        Box
       } from '@mui/material'
+import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
 
   const [doctors, setDoctors] = useState([]);
   const [alterDoctors, setAlterDoctors] = useState(0);
-  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const fetchClinicsDoctors = async () => {
@@ -62,15 +59,13 @@ const ClinicProfile = (props) => {
           <Box className="profile-right" width="60%" display={'inline-block'}>
             <div>
               <h2>Doctors</h2>
-              <Accordion expanded={expanded} onClick={() => setExpanded(!expanded)}>
-                <AccordionSummary>New</AccordionSummary>
-                <AccordionDetails>
-                  <NewDoctorForm 
-                    clinic_id={userProfile.id}
-                    addDoctor={triggerDoctorStateUpdate}
-                  />
-                </AccordionDetails>
-              </Accordion>
+              <AccordionWrapper title="New">
+                <NewDoctorForm 
+                  clinic_id={userProfile.id}
+                  addDoctor={triggerDoctorStateUpdate}
+                />
+              </AccordionWrapper>
+                
             </div>
               {!doctors.length && <span>You do not have any doctors listed</span>}
               <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} />
