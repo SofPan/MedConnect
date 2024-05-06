@@ -11,8 +11,8 @@ const PatientProfile = (props) => {
 
   useEffect(() => {
     const fetchPatientDocuments = async () => {
-      const doctorData = await fetchDocuments();
-      setDocuments(doctorData);
+      const documentData = await fetchDocuments();
+      setDocuments(documentData);
     }
 
     fetchPatientDocuments();
