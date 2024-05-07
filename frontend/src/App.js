@@ -35,7 +35,7 @@ function App() {
     }
   }, []);
 
-
+  // console.log("userState", userState);
 
   return (
 
@@ -53,9 +53,9 @@ function App() {
 
 
 
-
-        <PatientScheduler />
-        <ClinicSignUpInfo />
+        <UserProfile />
+        {/* <PatientScheduler />
+        <ClinicSignUpInfo /> */}
         {/* <AvailableDoctorsRoute /> */}
       </UserSignedIn.Provider>
 
