@@ -11,6 +11,11 @@ const ClinicListItem = (props) => {
   //   setVisible(render);
   // };
 
+  const [alterDoctors, setAlterDoctors] = useState(0);
+  const triggerDoctorStateUpdate = () => {
+    setAlterDoctors(alterDoctors + 1);
+  }
+
   return(
     <>
     { visible &&
@@ -25,6 +30,7 @@ const ClinicListItem = (props) => {
             clinic_id={id} 
             doctors={doctors}
             // renderClinic={checkIfRenderClinic}
+            changeDoctorState={triggerDoctorStateUpdate}
           />
         </div>
         <div>
