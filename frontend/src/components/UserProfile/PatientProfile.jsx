@@ -4,6 +4,7 @@ import UserInformation from "./UserInformation";
 import { fetchDocuments } from "../../hooks/tempUseAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import {Button} from "@mui/material";
+import NewDocument from "../PatientDocuments/NewDocument";
 
 const PatientProfile = (props) => {
   const {userProfile} = props;
@@ -29,7 +30,7 @@ const PatientProfile = (props) => {
       <UserInformation userProfile={userProfile} />
       <h2>Documents</h2>
         <AccordionWrapper title="Add">
-          
+          <NewDocument patient_id={userProfile.id} />
         </AccordionWrapper>
         <DocumentsList 
           patient_id={userProfile.id} 
