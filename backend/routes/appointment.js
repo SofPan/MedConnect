@@ -21,9 +21,10 @@ const { getAllAppointmentsByPatient } = require('../src/db/queries/appointments/
 
 // Get appointments by patient id
 router.get("/patients/:id", (req, res) => {
+  console.log("req params", req.params.id);
   const patientId = req.params.id;
   getAllAppointmentsByPatient(patientId)
-    .then(appointmentData => appointmentData)
+    .then(appointmentData => res.json(appointmentData))
     .catch(error => {
       console.error("Error fetching patient's appointments: ", error);
       res.status(500).json({ error: 'Internal server error' });

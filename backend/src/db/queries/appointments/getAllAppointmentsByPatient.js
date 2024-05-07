@@ -2,6 +2,7 @@
 const db = require('../../connection');
 
 const getAllAppointmentsByPatient = (patientId) => {
+  console.log("get patient ID", patientId);
   const value = [patientId]
   const query = `
     SELECT patient_id, doctors.name as doctor_name, clinics.address as clinic_address
