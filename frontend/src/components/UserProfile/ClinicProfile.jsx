@@ -8,6 +8,7 @@ import {
         Box
       } from '@mui/material'
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
+import UserInformation from './UserInformation';
 
 const ClinicProfile = (props) => {
   const {userProfile} = props;
@@ -39,15 +40,7 @@ const ClinicProfile = (props) => {
       <Box width="60vw" display={'inline-block'}>
         <article className="profile-main">
           <Box className="profile-left" width="30%" display={'inline-block'}>
-            <div className='profile-information'>
-              <h2>Information</h2>
-              <div>
-                <p>{userProfile.name}</p>
-                <p>{userProfile.address && userProfile.address}</p>
-              </div>
-              {/* <Button>Edit</Button> */}
-            </div>
-
+            <UserInformation userProfile={userProfile} />
             <div className='profile-notifications'>
               <h2>Notifications</h2>
               <ul>

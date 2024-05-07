@@ -9,6 +9,9 @@ import UserProfile from './components/UserProfile/UserProfile';
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
+import AvailableDoctors from './components/AvailableDoctors';
+import ClinicProfile from './components/UserProfile/ClinicProfile';
+import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
 
 export const UserSignedIn = createContext();
 
@@ -33,30 +36,27 @@ function App() {
     }
   }, []);
 
-
+  // console.log("userState", userState);
 
   return (
 
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        {/* <PatientInfo />
-         */}
+        <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
-          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
+          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
         </>)}
         {LoginDisplay && <LoginForm />}
-       
-     
 
-        
-        
-        <PatientScheduler />
-        <ClinicSignUpInfo />
-      
 
+
+
+        {/* <PatientScheduler />
+        <ClinicSignUpInfo /> */}
+        {/* <AvailableDoctorsRoute /> */}
       </UserSignedIn.Provider>
 
     </div>
