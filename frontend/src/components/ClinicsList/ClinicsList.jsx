@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import ClinicListItem from "./ClinicsListItem";
 import { calcRoute } from "../../helpers/calcRoute";
 
-const ClinicList = ({ searchCoordinates, clinics, doctors }) => {
+const ClinicList = ({ searchCoordinates, clinics, doctors, handleRequestToRegister }) => {
   const [clinicsList, setClinicsList] = useState([]);
-  console.log(clinics)
-  console.log(doctors)
 
   useEffect(() => {
     if (searchCoordinates && clinics && doctors) {
@@ -41,6 +39,7 @@ const ClinicList = ({ searchCoordinates, clinics, doctors }) => {
       address={clinic.address}
       distance={clinic.distance}
       doctors={doctors} 
+      handleRequestToRegister={handleRequestToRegister}
     />
   ));
   return (

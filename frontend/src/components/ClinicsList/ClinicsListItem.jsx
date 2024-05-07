@@ -2,7 +2,12 @@ import { useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 
 const ClinicListItem = (props) => {
-  const {name, address, id, distance, doctors} = props;
+  const {name, address, id, distance, doctors, handleRequestToRegister} = props;
+  const clinicInfo = {
+    clinic_id: id,
+    clinic_name: name,
+    clinic_address: address
+  }
 
   const [visible, setVisible] = useState(true);
  
@@ -35,7 +40,7 @@ const ClinicListItem = (props) => {
           />
         </div>
         <div>
-            <button on>Request to Register</button>
+            <button onClick={() => handleRequestToRegister(clinicInfo)}>Request to Register</button>
         </div>
       </li>
     }
