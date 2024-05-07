@@ -13,20 +13,21 @@ const defaultTheme = createTheme();
 
 export default function ClinicSignUpInfo() {
 
+  const userId = sessionStorage.getItem('user_id');
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    if (userId) {
+      const data = new FormData(event.currentTarget);
     axios.post(`http://localhost:8080/clinics`, {
       clinic_name: data.get('clinic_name'),
       address: data.get('address'),
       user_id: sessionStorage.getItem('user_id')
     })
-    .then(response => {
-      console.log(response.data); 
-    })
     .catch(error => {
       console.error('Error:', error);
     });
+    }
   };
 
   return (
@@ -41,31 +42,33 @@ export default function ClinicSignUpInfo() {
             alignItems: 'center',
           }}
         >
-        
           <Typography component="h1" variant="h5">
             Required information
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="clinic_name"
-              label="Clinic name"
-              name="clinic_name"
-              autoComplete="clinic_name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address"
-              label="address"
-              type="text"
-              id="address"
-              autoComplete="current-address"
-            />
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="clinic_name"
+            label="Clinic name"
+            name="clinic_name"
+            autoComplete="clinic_name"
+            autoFocus
+            inputProps={{ minLength: 1 }}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="address"
+            label="address"
+            type="text"
+            id="address"
+            autoComplete="current-address"
+            inputProps={{ minLength: 1 }}
+          />
             <Button
               type="submit"
               fullWidth
