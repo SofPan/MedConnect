@@ -43,10 +43,15 @@ function App() {
         <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
-          < SignUp />
+          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
 
         </>)}
         {LoginDisplay && <LoginForm />}
+       
+     
+
+        
+        
         <PatientScheduler />
         <ClinicSignUpInfo />
       

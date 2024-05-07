@@ -44,6 +44,7 @@ export default function LoginForm() {
     
             // Assuming response is JSON
             const user = await response.json();
+           
             
             sessionStorage.setItem("user_id", user.id)
            

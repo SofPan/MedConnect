@@ -12,32 +12,6 @@ export default function useApplicationData() {
     newUser: null
   }
 
-  const registerUser = async (userData) => {
-    try {
-      const response = await fetch('http://localhost:8080/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to register user');
-      }
-  
-      
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      console.log('User registered successfully:');
-    } catch (error) {
-      console.error('Error registering user:', error);
-      // Handle error
-    }
-  };
-
- 
-  
 
   const [userState, dispatch] = useReducer((userState, action) => {
     switch (action.type) {
@@ -54,10 +28,8 @@ export default function useApplicationData() {
     case "CLINIC_EVENTS":
         return {...userState, events: action.payload}
     case "NEW_USER":
-        registerUser(action.payload);
-        return {...userState, userInfo: action.payload}
+        return {...userState, userInfo: action.payload, userLoggedIn: true}
     case "USER_SESSION":
-
         return {...userState, userLoggedIn: action.payload }
       
       default:
