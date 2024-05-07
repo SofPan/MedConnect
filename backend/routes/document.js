@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllDocuments } = require('../src/db/queries/documents/getAllDocuments');
+const { addNewDocument } = require('../src/db/queries/documents/addNewDocument');
 const { deleteDocument } = require('../src/db/queries/documents/deleteDocument');
 // GET all documents /documents
 router.get('/', (req, res) => {
@@ -14,7 +15,17 @@ router.get('/', (req, res) => {
     });
 });
 // POST create a new document /document
-
+router.post('/', (req, res) => {
+  addNewDocument(req.body)
+    .then(result => {
+      return result;
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ error: error.message });
+    });
+})
 // GET display a single document /document/:id 
 
 // DELETE delete a document /document/:id/delete
