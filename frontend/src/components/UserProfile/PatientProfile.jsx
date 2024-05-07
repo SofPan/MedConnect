@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import UserInformation from "./UserInformation";
 import { fetchDocuments } from "../../hooks/tempUseAPI";
+import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
+import {Button} from "@mui/material";
 
 const PatientProfile = (props) => {
   const {userProfile} = props;
@@ -26,7 +28,9 @@ const PatientProfile = (props) => {
     <div className="patient-profile">
       <UserInformation userProfile={userProfile} />
       <h2>Documents</h2>
-        <button>Add</button>
+        <AccordionWrapper title="Add">
+          
+        </AccordionWrapper>
         <DocumentsList 
           patient_id={userProfile.id} 
           documents={documents}
