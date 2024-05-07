@@ -4,6 +4,8 @@ import UserInformation from "./UserInformation";
 import { fetchDocuments } from "../../hooks/tempUseAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
+import { Box } from "@mui/material";
+import AppointmentsList from "../Scheduling/AppointmentsList";
 
 const PatientProfile = (props) => {
   const {userProfile} = props;
@@ -26,19 +28,27 @@ const PatientProfile = (props) => {
 
   return(
     <div className="patient-profile">
-      <UserInformation userProfile={userProfile} />
-      <h2>Documents</h2>
-        <AccordionWrapper title="Add">
-          <NewDocument 
-            patient_id={userProfile.id} 
-            addDocument={triggerDocumentStateUpdate}  
-          />
-        </AccordionWrapper>
-        <DocumentsList 
-          patient_id={userProfile.id} 
-          documents={documents}
-          changeDocumentState={triggerDocumentStateUpdate}
-        />
+      <article className="profile-main">
+        <Box className="profile-left" width="30%" display={'inline-block'}>
+          <UserInformation userProfile={userProfile} />
+          <h2>Documents</h2>
+            <AccordionWrapper title="Add">
+              <NewDocument 
+                patient_id={userProfile.id} 
+                addDocument={triggerDocumentStateUpdate}  
+              />
+            </AccordionWrapper>
+            <DocumentsList 
+              patient_id={userProfile.id} 
+              documents={documents}
+              changeDocumentState={triggerDocumentStateUpdate}
+            />
+        </Box>
+        <Box className="profile-right" width="60%" height="100%" display={'inline-flex'} flexDirection={"column"} justifyContent={"flex-start"} marginLeft={"50px"}>
+          <h2>Appointments</h2>
+          <AppointmentsList patient_id={userProfile.id}/>
+        </Box>
+      </article>
     </div>
   )
 }
