@@ -53,7 +53,6 @@ function App() {
 
 
 
-        <UserProfile />
         {/* <PatientScheduler />
         <ClinicSignUpInfo /> */}
         {/* <AvailableDoctorsRoute /> */}
