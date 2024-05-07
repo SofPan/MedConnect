@@ -1,8 +1,10 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import FullCalendar from '@fullcalendar/react';
+import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import timeGridPlugin from '@fullcalendar/timegrid';
 
-import Calendar from './Calendar';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -27,31 +29,76 @@ export default function PatientScheduler() {
     
   }
 
-  const [inputValue, setinputValue ] = useState('');
+  const getAppointments =  async () => {
+    
+
+    if(userState.is_clinic){
+      
+      try {
+        const response = await fetch(`http://localhost:8080/appointments/${userState.user_id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to register user');
+        }
+        ;
+        const responseData = await response.json();
+        
+        
+        // Assuming the response contains some information about the newly registered user
+        // You can handle the response data as needed
+        
+        return responseData;
+  
+      } catch (error) {
+        console.error('Error registering user:', error);
+        // Handle error
+      }
+    }
+  }
+
+  useEffect(()=>{
+    getAppointments();
+  },[])
+
+  function renderEventContent(eventInfo) {
+    return (
+      <>
+        <b>{eventInfo.time}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
+  }
+
+ 
 
   return (
     <div className="App">
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       
-        <Grid container spacing={3}  justify="center">
-          <Grid item xs={5} md={6}>
-            <Paper>
-              <Calendar inputValue={inputValue}/>
-            </Paper>
-          </Grid>
-          <Grid item xs={4}>
-            <Paper>
-            <h1>HEYYYY</h1>
-            <input type="text"
-                onChange={handleChange}>
-                </input>
-            </Paper>
-          </Grid>
+       
+          
          
           
           
       
-      </Grid>
+    <h1>Clinic Appointments</h1>
+      <FullCalendar
+        plugins={[timeGridPlugin, interactionPlugin]}
+        initialView='timeGridWeek'
+        weekends={false}
+        events={userState.events}
+        eventContent={renderEventContent}
+        
+        slotMinTime={"10:00:00"}
+        slotMaxTime={"20:00:00"}
+        
+      />
     </LocalizationProvider>
     </div>
   );

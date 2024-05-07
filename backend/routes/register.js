@@ -28,4 +28,30 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/info', async (req, res) => {
+  const { name, gender, health_card, DOB } = req.body;
+  const newUserInfo = { name, gender, health_card, DOB };
+
+ 
+
+  try {
+    // Check if the user already exists
+    const user = await getUserByEmail(email);
+
+    if (user) {
+      
+      res.status(400).json({ error: 'User already exists' });
+    } else {
+      
+      const newUserResponse = await addNewUser(newUser);
+      
+      res.status(200).json(newUserResponse);
+    }
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 module.exports = router;
