@@ -1,7 +1,9 @@
 /* TEMPORARY STYLES -- CONVERT TO TAILWIND */
 
 .available-clinics .roster,
-.clinic-profile .available-doctors{
+.clinic-profile .available-doctors,
+.appointments-open .patient-appointments,
+.appointments-booked .unbooked-appointments{
   display: none;
 }
 
