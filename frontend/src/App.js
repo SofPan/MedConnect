@@ -35,28 +35,27 @@ function App() {
     }
   }, []);
 
-
+  // console.log("userState", userState);
 
   return (
 
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        <PatientInfo />
+        {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
-          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay}/>
+          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
         </>)}
         {LoginDisplay && <LoginForm />}
-       
-     
 
-        
-        
-        <PatientScheduler />
-        <ClinicSignUpInfo />
-          {/* <AvailableDoctorsRoute /> */}
+
+
+
+        {/* <PatientScheduler />
+        <ClinicSignUpInfo /> */}
+        {/* <AvailableDoctorsRoute /> */}
       </UserSignedIn.Provider>
 
     </div>
