@@ -21,11 +21,11 @@ const NewDocument = (props) => {
       await postDocument(document);
     }
 
-    if (document.name){
+    if (document.document_name){
       createDocument();
       addDocument();
     } 
-  }, [document, addDocument]);
+  }, [document]);
 
 
   return(

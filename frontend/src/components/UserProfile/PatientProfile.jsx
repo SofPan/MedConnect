@@ -29,7 +29,10 @@ const PatientProfile = (props) => {
       <UserInformation userProfile={userProfile} />
       <h2>Documents</h2>
         <AccordionWrapper title="Add">
-          <NewDocument patient_id={userProfile.id} />
+          <NewDocument 
+            patient_id={userProfile.id} 
+            addDocument={triggerDocumentStateUpdate}  
+          />
         </AccordionWrapper>
         <DocumentsList 
           patient_id={userProfile.id} 
