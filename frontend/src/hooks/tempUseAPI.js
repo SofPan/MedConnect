@@ -61,3 +61,13 @@ export const deleteDoctor = async (doctorId) => {
     throw error;
   }
 }
+
+export const deleteDocument = async (documentId) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}documents/${documentId}/delete`);
+    return response;
+  } catch (error) {
+    console.error("Error deleting document", error);
+    throw error;
+  }
+}
