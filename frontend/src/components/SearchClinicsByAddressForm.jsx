@@ -26,7 +26,7 @@ const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Enter your zip code" 
       />
-      <button>Search</button>
+      <button type='submit'>Search</button>
     </form>
   );
 };
