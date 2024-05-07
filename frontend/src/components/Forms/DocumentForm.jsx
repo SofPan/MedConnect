@@ -4,8 +4,6 @@ import {
   Button
 } from '@mui/material';
 
-const DUMMY_PDF = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-
 const DocumentForm = (props) => {
   const {handleSubmit} = props;
   
@@ -17,7 +15,7 @@ const DocumentForm = (props) => {
       </div>
       <div>
         <InputLabel>DocumentURL</InputLabel>
-        <Input id="document_url" type="text" value={DUMMY_PDF} disabled/>
+        <Input id="document_url" type="text" value="xray.jpg" disabled/>
       </div>
       <div>
         <Button type="submit">Submit</Button>
