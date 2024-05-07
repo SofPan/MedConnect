@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import axios from 'axios';
-import ClinicList from './ClinicsList/ClinicsList';
+
 
 const mapContainerStyle = {
   width: '50vw',
   height: '50vh',
-};
-
-const defaultCenter = {
-  lat: 43.642567, // default latitude
-  lng: -79.387054, // default longitude
 };
 
 const customMarkerIcon = `
@@ -19,78 +13,31 @@ const customMarkerIcon = `
   </svg>
 `;
 
-const MapComponent = () => {
-  const [clinicLocations, setClinicLocations] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [coordinates, setCoordinates] = useState(defaultCenter);
-  const [searchTermMarker, setSearchTermMarker] = useState(false);
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-
-  useEffect(() => {
-    const fetchClinics = () => {
-      axios.get('http://localhost:8080/clinics')
-        .then(response => {
-          setClinicLocations(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching clinics:', error);
-        });
-    };
-    if (isLoaded) {
-      fetchClinics();
-    }
-  }, [isLoaded]);
-
-  const handleSearch = (e) => {
-  e.preventDefault();
-
-  axios.get(`clinics/api/geocode?address=${searchTerm}`)
-    .then(response => {
-      const { latitude, longitude } = response.data;
-      setCoordinates({ lat: latitude, lng: longitude });
-      setSearchTermMarker(true);
-    })
-    .catch(error => {
-      console.error('Error geocoding address:', error);
-    });
-};
-
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
+const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
 
   return (
-    <div>
-      <div>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Enter your zip code" 
+    <div style={{ height: '400px', width: '100%' }}>
+      <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={15}
+      center={coordinates}
+      >
+        { searchTermMarker && 
+          <Marker 
+            position={coordinates} 
           />
-          <button>Search</button>
-        </form>
-      </div>
-      <div style={{ height: '400px', width: '100%' }}>
-        <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={15}
-          center={coordinates}
-        >
-          { searchTermMarker && 
-            <Marker 
-              position={coordinates} 
-            />
-          }
+        }
 
-          {clinicLocations.map((clinic, index) => (
+        {clinics.map((clinic, index) => {
+          const clinicCoordinates = {
+            lat: parseFloat(clinic.latitude), 
+            lng: parseFloat(clinic.longitude), 
+          };
+
+          return (
             <Marker
               key={index}
-              position={clinic.location}
+              position={clinicCoordinates}
               icon={{
                 url: `data:image/svg+xml;utf8,${encodeURIComponent(customMarkerIcon)}`,
                 scaledSize: new window.google.maps.Size(50, 50)
@@ -102,10 +49,9 @@ const MapComponent = () => {
                 color: 'white',
               }}
             />
-          ))}
-        </GoogleMap>
-      </div>
-      <ClinicList searchCoordinates={coordinates} />
+          );
+        })}
+      </GoogleMap>
     </div>
   );
 };

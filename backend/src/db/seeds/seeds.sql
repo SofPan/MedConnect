@@ -103,7 +103,11 @@ INSERT INTO appointments (patient_id, doctor_id, details, clinic_id, status, cre
 (17, 7, '2024-05-05 08:30:00', 1, FALSE, NOW()),
 (18, 8, '2024-05-05 12:15:00', 1, TRUE, NOW()),
 (19, 9, '2024-05-06 09:45:00', 1, FALSE, NOW()),
-(20, 10, '2024-05-06 15:00:00', 1, TRUE, NOW());
+(20, 10, '2024-05-06 15:00:00', 1, TRUE, NOW()),
+-- unbooked appointments
+(null, 6, '2024-05-05 08:30:00', 1, FALSE, NOW()),
+(null, 7, '2024-05-05 12:15:00', 1, FALSE, NOW()),
+(null, 8, '2024-05-06 09:45:00', 1, FALSE, NOW());
 
 -- Seed data for documents table
 INSERT INTO documents (patient_id, document_name, document_url, created_at) VALUES

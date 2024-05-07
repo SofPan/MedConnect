@@ -1,6 +1,5 @@
 import './App.css';
 import { useEffect, useState, createContext } from 'react';
-import axios from 'axios';
 import NavBar from './components/NavBar';
 import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
@@ -9,6 +8,10 @@ import UserProfile from './components/UserProfile/UserProfile';
 
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
+import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
+import AvailableDoctors from './components/AvailableDoctors';
+import ClinicProfile from './components/UserProfile/ClinicProfile';
+import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
 
 export const UserSignedIn = createContext();
 
@@ -42,12 +45,18 @@ function App() {
         {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
-          < SignUp />
+          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
         </>)}
         {LoginDisplay && <LoginForm />}
-        <UserProfile />
-        {/* <PatientScheduler /> */}
+
+
+
+
+
+        <PatientScheduler />
+        <ClinicSignUpInfo />
+        {/* <AvailableDoctorsRoute /> */}
       </UserSignedIn.Provider>
 
     </div>
