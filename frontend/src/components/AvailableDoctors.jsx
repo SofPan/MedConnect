@@ -18,18 +18,12 @@ const AvailableDoctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [coordinates, setCoordinates] = useState(defaultCenter);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoaded, setIsLoaded] = useState(false);
   const [displayedClinics, setDisplayedClinics] = useState([])
 
-  const { isLoaded: isMapsLoaded } = useJsApiLoader({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  useEffect(() => {
-    if (isMapsLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isMapsLoaded]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -64,7 +58,10 @@ const AvailableDoctors = () => {
   
   }, [searchTerm]);
 
-
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div>
       <form>
@@ -76,7 +73,7 @@ const AvailableDoctors = () => {
         />
       </form>
       <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker}/>
-      {/* <MapComponent clinics={displayedClinics} coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
+      <MapComponent clinics={displayedClinics} coordinates={coordinates} searchTermMarker={searchTermMarker}/>
       <ClinicsList clinics={displayedClinics} doctors={doctors} searchCoordinates={coordinates} />
     </div>
   );

@@ -18,9 +18,9 @@ const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={15}
-        center={coordinates}
+      mapContainerStyle={mapContainerStyle}
+      zoom={15}
+      center={coordinates}
       >
         { searchTermMarker && 
           <Marker 
