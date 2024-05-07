@@ -5,7 +5,7 @@ import { fetchDocuments } from "../../hooks/tempUseAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
 import { Box } from "@mui/material";
-import AppointmentsList from "../Scheduling/AppointmentsList";
+import PatientAppointments from "../Scheduling/PatientAppointments";
 
 const PatientProfile = (props) => {
   const {userProfile} = props;
@@ -46,7 +46,7 @@ const PatientProfile = (props) => {
         </Box>
         <Box className="profile-right" width="60%" height="100%" display={'inline-flex'} flexDirection={"column"} justifyContent={"flex-start"} marginLeft={"50px"}>
           <h2>Appointments</h2>
-          <AppointmentsList patient_id={userProfile.id}/>
+          <PatientAppointments patient_id={userProfile.id}/>
         </Box>
       </article>
     </div>
