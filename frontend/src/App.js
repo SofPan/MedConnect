@@ -54,7 +54,6 @@ function App() {
         
         <PatientScheduler />
         <ClinicSignUpInfo />
-      
           {/* <AvailableDoctors /> */}
       </UserSignedIn.Provider>
 

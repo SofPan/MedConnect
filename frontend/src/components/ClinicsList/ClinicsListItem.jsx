@@ -5,6 +5,7 @@ const ClinicListItem = (props) => {
   const {name, address, id, distance, doctors} = props;
 
   const [visible, setVisible] = useState(true);
+ 
 
   // If there are no doctors to display, hide clinic from list
   // const checkIfRenderClinic = render => {
@@ -34,7 +35,7 @@ const ClinicListItem = (props) => {
           />
         </div>
         <div>
-            <button>Request to Register</button>
+            <button on>Request to Register</button>
         </div>
       </li>
     }
