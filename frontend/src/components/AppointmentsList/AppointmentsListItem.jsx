@@ -5,11 +5,11 @@ import {
     Button,
     Card,
   } from '@mui/material';
+import { putAppointment } from "../../hooks/tempUseAPI";
 
 const AppointmentsListItem = (props) => {
   
   const {
-    id,
     doctor_name,
     details,
     clinic_address,
@@ -17,7 +17,20 @@ const AppointmentsListItem = (props) => {
     appointment
   } = props;
   
+  const [cancelling, setCancelling] = useState(false);
+
   const formattedDate = details.replace(":00.000Z", "").split("T");
+
+  useEffect(() => {
+    // PUT instead of DELETE because the Clinic should retain the appointment slot
+    const cancelAppointment = async () => {
+      await putAppointment(appointment);
+    };
+
+    if (cancelling){
+      cancelAppointment();
+    }
+  }, [cancelling]);
 
   return(
     <Box marginBottom={"24px"}>
@@ -26,7 +39,7 @@ const AppointmentsListItem = (props) => {
           <p>{status ? "Approved" : "Pending"}</p>
           <p>You have an appointment {!status && "requested"} on {formattedDate[0]} at {formattedDate[1]} with {doctor_name}.</p> 
           <p>Clinic address: {clinic_address}</p>
-          <Button>Cancel</Button>
+          <Button onClick={() => setCancelling(true)}>Cancel</Button>
         </Box>
       </Card>
     </Box>
