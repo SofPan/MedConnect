@@ -42,6 +42,16 @@ export const postDoctor = async (doctor) => {
   }
 }
 
+export const postDocument = async (document) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}documents`, document);
+    return response;
+  } catch (error) {
+    console.error("Error posting new document", error);
+    throw error;
+  }
+}
+
 export const putDoctor = async (doctor) => {
   try {
     const response = await axios.put(`${API_BASE_URL}doctors/${doctor.id}`, doctor);
@@ -58,16 +68,6 @@ export const deleteDoctor = async (doctorId) => {
     return response;
   } catch (error) {
     console.error("Error deleting doctor", error);
-    throw error;
-  }
-}
-
-export const postDocument = async (document) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}documents`, document);
-    return response;
-  } catch (error) {
-    console.error("Error posting new document", error);
     throw error;
   }
 }
