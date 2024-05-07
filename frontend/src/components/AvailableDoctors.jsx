@@ -4,6 +4,7 @@ import axios from 'axios';
 import ClinicsList from './ClinicsList/ClinicsList';
 import SearchClinicsByAddressForm from './SearchClinicsByAddressForm';
 import MapComponent from './MapComponent';
+import { calculateCenter } from '../helpers/calcCenter';
 
 const defaultCenter = {
   lat: 43.642567, // default latitude
@@ -50,11 +51,16 @@ const AvailableDoctors = () => {
         return doctor && doctor.name.toLowerCase().includes(searchTerm);
       });
       setDisplayedClinics(filteredClinics);
+      // Calculate the center of filtered clinics
+      const filteredClinicsCenter = calculateCenter(filteredClinics, defaultCenter);
+      setCoordinates(filteredClinicsCenter);
     } else {
-      setDisplayedClinics(clinics)
+      setDisplayedClinics(clinics);
+      setCoordinates(defaultCenter);
     }
-  
   }, [searchTerm]);
+
+  
 
   if (!isLoaded) {
     return <div>Loading...</div>;
