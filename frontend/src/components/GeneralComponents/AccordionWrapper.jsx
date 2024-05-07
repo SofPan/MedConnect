@@ -11,7 +11,7 @@ const AccordionWrapper = (props) => {
   return(
     <Accordion expanded={expanded} onClick={() => setExpanded(true)} onSubmit={() => setExpanded(false)}>
       <AccordionSummary>{props.title}</AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails onClick={() => setExpanded(true)}>
         {props.children}
       </AccordionDetails>
     </Accordion>
