@@ -1,5 +1,3 @@
-// 
-
 import React, { useState, useEffect } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
@@ -61,7 +59,7 @@ const AvailableDoctors = () => {
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <div>
       <form>

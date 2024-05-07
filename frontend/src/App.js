@@ -50,7 +50,7 @@ function App() {
         <PatientScheduler />
         <ClinicSignUpInfo />
       
-          <AvailableDoctors />
+          {/* <AvailableDoctors /> */}
       </UserSignedIn.Provider>
 
     </div>
