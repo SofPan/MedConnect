@@ -26,16 +26,19 @@ const DUMMY_OPEN_APPOINTMENTS = [
 const PatientAppointments = (props) => {
   const {patient_id } = props;
   const [appointments, setAppointments] = useState([]);
-
-  const mapOpenAppointments = DUMMY_OPEN_APPOINTMENTS.map(appointment => {
-    return <li key={appointment.id}>{appointment.details}</li>
-  });
+  const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
   useEffect(() => {
     const fetchAppointments = async () => {
       const appointmentData = await fetchPatientAppointments(patient_id);
       setAppointments(appointmentData);
     }
+
+    const fetchUnbookedAppointments = async () => {
+      console.log("fetching unbooked appointments...");
+    }
+
+    fetchUnbookedAppointments();
 
     if (patient_id){
       fetchAppointments();
