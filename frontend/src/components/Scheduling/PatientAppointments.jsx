@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
+import AppointmentsList from "../AppointmentsList/AppointmentsList";
 
 const DUMMY_APPOINTMENTS = [
   {
@@ -37,7 +38,8 @@ const DUMMY_APPOINTMENTS = [
 ];
 
 const PatientAppointments = (props) => {
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(DUMMY_APPOINTMENTS);
+
 
   return(
     <>
@@ -49,6 +51,7 @@ const PatientAppointments = (props) => {
       </AccordionWrapper>                
       {!appointments.length && <span>You do not have any appointments booked</span>}
       {/* <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} /> */}
+      <AppointmentsList patient_id={1} appointments={appointments}/>
     </>
   )
 }
