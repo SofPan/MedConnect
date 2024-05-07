@@ -22,6 +22,7 @@ function App() {
   const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
 
+
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
     if (userId) {
@@ -42,7 +43,7 @@ function App() {
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        {/* <PatientInfo /> */}
+        <PatientInfo />
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />

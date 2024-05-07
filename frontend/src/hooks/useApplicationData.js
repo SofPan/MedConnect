@@ -31,7 +31,6 @@ export default function useApplicationData() {
         return {...userState, userInfo: action.payload, userLoggedIn: true}
     case "USER_SESSION":
         return {...userState, userLoggedIn: action.payload }
-      
       default:
         return userState;
     }
