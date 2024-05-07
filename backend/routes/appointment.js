@@ -14,7 +14,6 @@ const { editAppointment } = require('../src/db/queries/appointments/editAppointm
 
 // Get appointments by patient id
 router.get("/patients/:id", (req, res) => {
-  console.log("req params", req.params.id);
   const patientId = req.params.id;
   getAllAppointmentsByPatient(patientId)
     .then(appointmentData => res.json(appointmentData))

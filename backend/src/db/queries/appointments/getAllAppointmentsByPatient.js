@@ -2,10 +2,9 @@
 const db = require('../../connection');
 
 const getAllAppointmentsByPatient = (patientId) => {
-  console.log("get patient ID", patientId);
   const value = [patientId]
   const query = `
-    SELECT patient_id, appointments.details, appointments.status, doctors.name as doctor_name, clinics.address as clinic_address
+    SELECT appointments.id, patient_id, appointments.details, appointments.status, doctors.name as doctor_name, clinics.address as clinic_address
     FROM appointments
     JOIN doctors ON appointments.doctor_id = doctors.id
     JOIN clinics ON appointments.clinic_id = clinics.id

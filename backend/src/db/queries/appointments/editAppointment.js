@@ -5,6 +5,7 @@
   So that it re-opens on clinic side
   if cancelled
 */
+const db = require('../../connection');
 
 const editAppointment = (appointment) => {
   const values = [

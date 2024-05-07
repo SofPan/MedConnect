@@ -18,19 +18,29 @@ const AppointmentsListItem = (props) => {
   } = props;
   
   const [cancelling, setCancelling] = useState(false);
+  const [cancelledAppointment, setCancelledAppointment] = useState(appointment);
 
   const formattedDate = details.replace(":00.000Z", "").split("T");
 
   useEffect(() => {
     // PUT instead of DELETE because the Clinic should retain the appointment slot
     const cancelAppointment = async () => {
-      await putAppointment(appointment);
+      await putAppointment(cancelledAppointment);
     };
 
     if (cancelling){
       cancelAppointment();
     }
   }, [cancelling]);
+
+  const handleClick = () => {
+    setCancelledAppointment(prev => ({
+      ...prev,
+      patient_id: null
+      })
+    );
+    setCancelling(true);
+  }
 
   return(
     <Box marginBottom={"24px"}>
@@ -39,7 +49,7 @@ const AppointmentsListItem = (props) => {
           <p>{status ? "Approved" : "Pending"}</p>
           <p>You have an appointment {!status && "requested"} on {formattedDate[0]} at {formattedDate[1]} with {doctor_name}.</p> 
           <p>Clinic address: {clinic_address}</p>
-          <Button onClick={() => setCancelling(true)}>Cancel</Button>
+          <Button onClick={handleClick}>Cancel</Button>
         </Box>
       </Card>
     </Box>

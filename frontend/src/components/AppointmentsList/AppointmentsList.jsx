@@ -6,6 +6,7 @@ const AppointmentsList = (props) => {
   } = props;
   
   const mapAppointments = appointments.map(appointment => {
+    console.log("appointment in map", appointment)
     return <AppointmentsListItem
             key={appointment.id}
             id={appointment.id}
