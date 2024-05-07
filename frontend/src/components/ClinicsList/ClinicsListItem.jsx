@@ -2,9 +2,15 @@ import { useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 
 const ClinicListItem = (props) => {
-  const {name, address, id, distance, doctors} = props;
+  const {name, address, id, distance, doctors, handleRequestToRegister} = props;
+  const clinicInfo = {
+    clinic_id: id,
+    clinic_name: name,
+    clinic_address: address
+  }
 
   const [visible, setVisible] = useState(true);
+ 
 
   // If there are no doctors to display, hide clinic from list
   // const checkIfRenderClinic = render => {
@@ -34,7 +40,7 @@ const ClinicListItem = (props) => {
           />
         </div>
         <div>
-            <button>Request to Register</button>
+            <button onClick={() => handleRequestToRegister(clinicInfo)}>Request to Register</button>
         </div>
       </li>
     }
