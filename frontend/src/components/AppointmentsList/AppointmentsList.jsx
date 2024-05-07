@@ -17,13 +17,14 @@ const AppointmentsList = (props) => {
             doctor_id={appointment.doctor_id}
             details={appointment.details}
             clinic_id={appointment.clinic_id}
+            status={appointment.status}
             appointment={appointment}
           />
   });
 
   return(
     <ul>
-      <AppointmentsListItem />
+      {mapAndFilterAppointments}
     </ul>
   )
 }

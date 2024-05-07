@@ -9,7 +9,7 @@ const DUMMY_APPOINTMENTS = [
     doctor_id: 1,
     details: '2024-05-12 09:00:00',
     clinic_id: 1,
-    status: false
+    status: true
   },
   {
     id: 2,
@@ -50,7 +50,6 @@ const PatientAppointments = (props) => {
         /> */}
       </AccordionWrapper>                
       {!appointments.length && <span>You do not have any appointments booked</span>}
-      {/* <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} /> */}
       <AppointmentsList patient_id={1} appointments={appointments}/>
     </>
   )
