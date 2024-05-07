@@ -60,7 +60,7 @@ const DUMMY_OPEN_APPOINTMENTS = [
 ]
 
 const PatientAppointments = (props) => {
-  const {patient_id} = props;
+  const {patient_id } = props;
   const [appointments, setAppointments] = useState([]);
 
   const mapOpenAppointments = DUMMY_OPEN_APPOINTMENTS.map(appointment => {
@@ -69,14 +69,15 @@ const PatientAppointments = (props) => {
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      console.log("patient_id in component", patient_id);
       const appointmentData = await fetchPatientAppointments(patient_id);
       console.log("fetchAppointments", appointmentData);
       setAppointments(appointmentData);
     }
 
-    fetchAppointments();
-  }, []);
+    if (patient_id){
+      fetchAppointments();
+    }
+  }, [patient_id]);
 
   return(
     <>
