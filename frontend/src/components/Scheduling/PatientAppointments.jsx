@@ -70,7 +70,6 @@ const PatientAppointments = (props) => {
   useEffect(() => {
     const fetchAppointments = async () => {
       const appointmentData = await fetchPatientAppointments(patient_id);
-      console.log("fetchAppointments", appointmentData);
       setAppointments(appointmentData);
     }
 

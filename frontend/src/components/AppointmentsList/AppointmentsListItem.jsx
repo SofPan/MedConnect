@@ -10,24 +10,22 @@ const AppointmentsListItem = (props) => {
   
   const {
     id,
-    doctor_id,
+    doctor_name,
     details,
-    clinic_id,
+    clinic_address,
     status,
     appointment
   } = props;
   
-  const [confirmed, setConfirmed] = useState(status);
-
-  const splitDate = details.split(" ")
+  const formattedDate = details.replace(":00.000Z", "").split("T");
 
   return(
     <Box marginBottom={"24px"}>
       <Card className="patient-appointments">
         <Box padding={"20px"}>
-          <p>{confirmed ? "Approved" : "Pending"}</p>
-          <p>You have an appointment {!confirmed && "requested"} on {splitDate[0]} at {splitDate[1]} with {doctor_id}.</p> 
-          <p>Clinic address: {clinic_id}</p>
+          <p>{status ? "Approved" : "Pending"}</p>
+          <p>You have an appointment {!status && "requested"} on {formattedDate[0]} at {formattedDate[1]} with {doctor_name}.</p> 
+          <p>Clinic address: {clinic_address}</p>
           <Button>Cancel</Button>
         </Box>
       </Card>

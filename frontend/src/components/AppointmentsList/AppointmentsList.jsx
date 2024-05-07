@@ -2,21 +2,16 @@ import AppointmentsListItem from "./AppointmentsListItem"
 
 const AppointmentsList = (props) => {
   const {
-    patient_id,
     appointments
   } = props;
-
-  const mapAndFilterAppointments = appointments.filter(appointment => {
-    // Only show the Clinic's appointments that are accepting patients
-    return appointment.patient_id === patient_id
-  })
-  .map(appointment => {
+  
+  const mapAppointments = appointments.map(appointment => {
     return <AppointmentsListItem
             key={appointment.id}
             id={appointment.id}
-            doctor_id={appointment.doctor_id}
+            doctor_name={appointment.doctor_name}
             details={appointment.details}
-            clinic_id={appointment.clinic_id}
+            clinic_address={appointment.clinic_address}
             status={appointment.status}
             appointment={appointment}
           />
@@ -24,7 +19,7 @@ const AppointmentsList = (props) => {
 
   return(
     <ul>
-      {mapAndFilterAppointments}
+      {mapAppointments}
     </ul>
   )
 }
