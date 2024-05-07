@@ -15,9 +15,20 @@
 // DELETE delete appointment /appointment/:id/delete
 // Used only on clinic side to delete appointment slot entirely
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
+const { getAllAppointmentsByPatient } = require('../src/db/queries/appointments/getAllAppointmentsByPatient');
 
+// Get appointments by patient id
+router.get("/patients/:id", (req, res) => {
+  const patientId = req.params.id;
+  getAllAppointmentsByPatient(patientId)
+    .then(appointmentData => appointmentData)
+    .catch(error => {
+      console.error("Error fetching patient's appointments: ", error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
 
 
 module.exports = router;
