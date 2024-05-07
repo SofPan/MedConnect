@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import DocumentForm from '../Forms/DocumentForm';
+import { postDocument } from '../../hooks/tempUseAPI';
 
 const NewDocument = (props) => {
   const {patient_id, addDocument} = props;
@@ -17,7 +18,7 @@ const NewDocument = (props) => {
 
   useEffect(() => {
     const createDocument = async () => {
-      // await postDoctor(doctor);
+      await postDocument(document);
     }
 
     if (document.name){

@@ -11,7 +11,7 @@ const UserProfile = (props) => {
   useEffect(() => {
     // console.log("userContext", userContext.userState)
     const fetchUserProfile = async () => {
-      const userData = await fetchUser(1);
+      const userData = await fetchUser(tempIsClinic? 21: 1);
       setUserProfile(userData);
     };
     fetchUserProfile();

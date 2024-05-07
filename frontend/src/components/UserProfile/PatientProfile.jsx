@@ -3,7 +3,6 @@ import DocumentsList from "../PatientDocuments/DocumentsList";
 import UserInformation from "./UserInformation";
 import { fetchDocuments } from "../../hooks/tempUseAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
-import {Button} from "@mui/material";
 import NewDocument from "../PatientDocuments/NewDocument";
 
 const PatientProfile = (props) => {

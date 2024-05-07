@@ -62,6 +62,16 @@ export const deleteDoctor = async (doctorId) => {
   }
 }
 
+export const postDocument = async (document) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}documents`, document);
+    return response;
+  } catch (error) {
+    console.error("Error posting new document", error);
+    throw error;
+  }
+}
+
 export const deleteDocument = async (documentId) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}documents/${documentId}/delete`);
