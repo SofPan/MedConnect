@@ -29,6 +29,7 @@ export default function PatientScheduler() {
   const getClinicByUserId = async () => {
 
     const userId = sessionStorage.getItem("user_id");
+
     try {
       const response = await fetch(`http://localhost:8080/profile/${userId}`, {
         method: 'GET',
@@ -63,8 +64,9 @@ export default function PatientScheduler() {
     
     const clinic = await getClinicByUserId();
     
+    
    
-    if (clinic) {
+    if (userState.is_clinic) {
 
       try {
         const response = await fetch(`http://localhost:8080/appointments/1`, {
