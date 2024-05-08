@@ -45,13 +45,15 @@ CREATE TABLE doctors (
 );
 
 CREATE TABLE appointments (
-  id SERIAL PRIMARY KEY,
-  patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
-  doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
-  details TIMESTAMP,
-  clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
-  status BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
+    doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
+    patient_name VARCHAR(255),
+    start_time TIMESTAMP,
+    end_time TIMESTAMP,
+    clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
+    status BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE documents (

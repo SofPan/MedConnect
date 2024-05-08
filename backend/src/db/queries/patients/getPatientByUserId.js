@@ -9,6 +9,7 @@ const getPatientByUserId = (id) => {
   `
   return db.query(query, values)
     .then(results => {
+      console.log("results", results.row);
       return results.rows[0];
     })
     .catch(error => console.log("getPatientByUserId error", error));
