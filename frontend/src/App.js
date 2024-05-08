@@ -37,7 +37,7 @@ function App() {
         throw new Error('Failed to register user');
       }
       const responseData = await response.json();
-    
+      console.log(responseData);
      
       dispatch({ type: "USER_INFO", payload: responseData});
 
@@ -51,11 +51,11 @@ function App() {
   useEffect(() => {
 
     const userId = sessionStorage.getItem('user_id');
-
+    console.log(userId);
     if (userId) {
 
       dispatch({ type: "USER_SESSION", payload: true })
-      
+      console.log(userId);
       getUserInfoForSession(userId);
 
      
@@ -66,7 +66,7 @@ function App() {
     }
   }, []);
 
-  // console.log("userState", userState);
+  console.log("userState", userState);
 
   return (
 
