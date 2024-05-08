@@ -36,9 +36,16 @@ router.post('/login', async (req, res) => {
     //set cookie in browser on login
   
     // Password is correct, send user information as JSON data to the frontend
+   const filteredUser = Object.keys(user).map(key=>{
+    if(key !== "password_hash"){
+      return {
+        [key]: user[key]
+      }
+    }
    
+   })
 
-    res.json(user);
+    res.json(filteredUser);
 
   } catch (error) {
     console.error('Error fetching user information:', error);
