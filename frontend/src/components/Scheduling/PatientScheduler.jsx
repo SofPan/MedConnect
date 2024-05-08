@@ -1,5 +1,5 @@
 
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
@@ -21,40 +21,71 @@ import { UserSignedIn } from "../../App"
 
 export default function PatientScheduler() {
 
-    const { userState, dispatch } = useContext(UserSignedIn);
+  const { userState, dispatch } = useContext(UserSignedIn);
 
-  const handleChange = (e) =>{
-    
-    dispatch({type:"USER_SELECTED_CLINIC", payload: e.target.value})
-    
+  const [events, setEvents ] = useState([])
+
+
+  const getClinicByUserId = async () => {
+
+    const userId = sessionStorage.getItem("user_id");
+    try {
+      const response = await fetch(`http://localhost:8080/profile/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+      
+      const responseData = await response.json();
+
+
+      // Assuming the response contains some information about the newly registered user
+      // You can handle the response data as needed
+      
+      return responseData;
+
+    } catch (error) {
+      console.error('Error registering user:', error);
+      // Handle error
+    }
   }
 
-  const getAppointments =  async () => {
-    
 
-    if(userState.is_clinic){
-      
+  const getAppointments = async () => {
+
+   
+    
+    const clinic = await getClinicByUserId();
+    
+   
+    if (clinic) {
+
       try {
-        const response = await fetch(`http://localhost:8080/appointments/${userState.user_id}`, {
+        const response = await fetch(`http://localhost:8080/appointments/1`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          
+
         });
-        
+
         if (!response.ok) {
           throw new Error('Failed to register user');
         }
-        ;
-        const responseData = await response.json();
+        const responseData = response.json();
+
         
         
-        // Assuming the response contains some information about the newly registered user
-        // You can handle the response data as needed
-        
-        return responseData;
-  
+
+
+       return responseData;
+
       } catch (error) {
         console.error('Error registering user:', error);
         // Handle error
@@ -62,9 +93,25 @@ export default function PatientScheduler() {
     }
   }
 
-  useEffect(()=>{
-    getAppointments();
-  },[])
+  useEffect(() => {
+   
+    const fetchAppointments = async () => {
+
+      const appointments = await getAppointments();
+      console.log(appointments);
+      if (appointments) {
+        const dates = appointments.map((date)=>{
+          return {id:date.id,title:date.patient_name,start:date.start_time, end: date.end_time}
+        })
+
+        setEvents(dates);
+      }
+     
+    };
+
+    fetchAppointments();
+    
+  }, []);
 
   function renderEventContent(eventInfo) {
     return (
@@ -75,31 +122,23 @@ export default function PatientScheduler() {
     )
   }
 
- 
+console.log(events);
 
   return (
     <div className="App">
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      
-       
-          
-         
-          
-          
-      
-    <h1>Clinic Appointments</h1>
-      <FullCalendar
-        plugins={[timeGridPlugin, interactionPlugin]}
-        initialView='timeGridWeek'
-        weekends={false}
-        events={userState.events}
-        eventContent={renderEventContent}
-        
-        slotMinTime={"10:00:00"}
-        slotMaxTime={"20:00:00"}
-        
-      />
-    </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <h1>Clinic Appointments</h1>
+        <FullCalendar
+          plugins={[timeGridPlugin, interactionPlugin]}
+          initialView='timeGridWeek'
+          weekends={false}
+          events={events}
+          eventContent={renderEventContent}
+          slotMinTime={"10:00:00"}
+          slotMaxTime={"20:00:00"}
+
+        />
+      </LocalizationProvider>
     </div>
   );
 }

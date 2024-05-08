@@ -11,6 +11,30 @@ const router = express.Router();
 
 const { getAllAppointmentsByPatient } = require('../src/db/queries/appointments/getAllAppointmentsByPatient');
 const { editAppointment } = require('../src/db/queries/appointments/editAppointment');
+const { getCalendarByClinicId} = require("../src/db/queries/calendar/getCalendarByClinicId");
+
+router.get('/:id', (req, res) => {
+  
+  const clinicId = req.params.id;
+  
+  getCalendarByClinicId(clinicId)
+      .then(calendar => {
+
+        if (!calendar) {
+            // If no calendar is found for the given clinic ID, return a 404 response
+            return res.status(404).json({ error: 'Calendar not found' });
+          }
+          
+          // If calendar is found, return it as JSON response
+          
+          res.json(calendar);
+      })
+      .catch(error => {
+        console.error('Error fetching user information:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+
+  });
 
 // Get appointments by patient id
 router.get("/patients/:id", (req, res) => {
@@ -31,27 +55,6 @@ router.get("/patients/:id", (req, res) => {
   if cancelled
 */
 
-router.get('/:id', (req, res) => {
-  
-  req.session.clinic_id = req.params.id;
-  const clinicId = req.session.clinic_id;
-
-  getCalendarByClinicId(clinicId)
-      .then(calendar => {
-        if (!calendar) {
-            // If no calendar is found for the given clinic ID, return a 404 response
-            return res.status(404).json({ error: 'Calendar not found' });
-          }
-          
-          // If calendar is found, return it as JSON response
-          res.json(calendar);
-      })
-      .catch(error => {
-        console.error('Error fetching user information:', error);
-        res.status(500).json({ error: 'Internal server error' });
-      });
-
-    });
 
 router.put("/:id", (req, res) => {
   editAppointment(req.body)

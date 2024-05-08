@@ -23,8 +23,8 @@ const router  = express.Router();
     const userId = req.session.user_id;
 
     getClinicIdbyUserID(userId)
-      .then(clinics => {
-        res.json(clinics);
+      .then(clinic => {
+        res.json(clinic);
       })
       .catch(error => {
         console.error('Error fetching clinics:', error);
