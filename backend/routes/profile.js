@@ -12,11 +12,11 @@ router.get("/:id", (req, res) => {
       if (userData.is_clinic) {
         getClinicByUserId(userId)
           .then(clinicData =>{
-            res.json(clinicData)});
+            res.json({...clinicData, is_clinic: userData.is_clinic})});
       } else {
         getPatientByUserId(userId)
           .then(patientData => {
-            res.json(patientData)});
+            res.json({...patientData, is_clinic: userData.is_clinic})});
       }
     })
     .catch(error => console.error("user profile error", error));
