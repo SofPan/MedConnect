@@ -29,27 +29,66 @@ export default function PatientInfo() {
 
   const { userState, dispatch } = useContext(UserSignedIn);
 
-  
+  const registerUserInfo = async (userData) => {
+    try {
+      const response = await fetch('http://localhost:8080/register/info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to register user');
+      }
+      ;
+      const responseData = await response.json();
+      
+      
+      // Assuming the response contains some information about the newly registered user
+      // You can handle the response data as needed
+      
+      return responseData;
+
+    } catch (error) {
+      console.error('Error registering user:', error);
+      // Handle error
+    }
+  };
 
 
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
-    DOB: '',
+    health_card: '',
+    DOB: null,
   });
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errors, setErrors] = useState({});
 
   // Change handler to update state
   const handleChange = (e) => {
+   
     const { name, value } = e.target;
 
     setFormData({
       ...formData,
       [name]: value
     });
-
+    console.log(formData);
   };
+
+  const handleDateChange = (date) => {
+    
+    setFormData({
+      ...formData,
+      DOB: date.$d // Store the selected date
+    });
+    console.log(formData);
+  };
+
 
   const validate = (formData) => {
     const errors = {};
@@ -70,9 +109,12 @@ export default function PatientInfo() {
 
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    console.log(formData);
+
+    
     const formErrors = validate(formData);
+
     if (Object.keys(formErrors).length === 0) {
       dispatch({ type: "NEW_USER_INFO", payload: formData })
     } else {
@@ -138,7 +180,11 @@ export default function PatientInfo() {
               </Grid>
               <Grid item xs={12}>
                 <InputLabel>Date Of Birth</InputLabel>
-                <DatePicker onChange={handleChange}/>
+                <DatePicker
+                  value={formData.DOB} // Pass the selected date value
+                  onChange={handleDateChange} // Use the date change handler
+                  name="DOB"
+                />
               </Grid>
        
              

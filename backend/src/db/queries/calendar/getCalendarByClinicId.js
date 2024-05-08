@@ -11,6 +11,7 @@ const getCalendarByClinicId = (clinic_id) => {
   `;
   return db.query(query, values)
     .then(results => {
+      console.log("results", results.rows);
       return results.rows;
     })
     .catch(error => console.log("getCalendarByClinicId error", error));

@@ -17,6 +17,23 @@ const router  = express.Router();
       });
   });
 
+  router.get('/:id', (req, res) => {
+
+    req.session.user_id = req.params.id;
+    const userId = req.session.user_id;
+
+    getClinicIdbyUserID(userId)
+      .then(clinic => {
+        res.json(clinic);
+      })
+      .catch(error => {
+        console.error('Error fetching clinics:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+  });
+
+
+
   router.post('/', (req, res) => {
     const clinicData = {
       name: req.body.clinic_name,
