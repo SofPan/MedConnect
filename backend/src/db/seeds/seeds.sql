@@ -31,28 +31,6 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 ('clinic9@example.com', 'hashed_password_29', TRUE, NOW()),
 ('clinic10@example.com', 'hashed_password_30', TRUE, NOW());
 
--- Seed data for patients table
-INSERT INTO patients (user_id, name, date_of_birth, gender, created_at) VALUES
-(1, 'John Doe', '1990-05-15', 'Male', NOW()),
-(2, 'Jane Smith', '1985-10-20', 'Female', NOW()),
-(3, 'Michael Johnson', '1978-03-08', 'Male', NOW()),
-(4, 'Emily Brown', '2000-12-03', 'Female', NOW()),
-(5, 'David Wilson', '1995-08-25', 'Male', NOW()),
-(6, 'Sarah Jones', '1992-06-18', 'Female', NOW()),
-(7, 'Matthew Davis', '1983-09-10', 'Male', NOW()),
-(8, 'Jennifer Garcia', '1976-04-22', 'Female', NOW()),
-(9, 'Daniel Martinez', '1998-11-30', 'Male', NOW()),
-(10, 'Jessica Rodriguez', '1991-07-12', 'Female', NOW()),
-(11, 'Christopher Hernandez', '1980-02-05', 'Male', NOW()),
-(12, 'Amanda Wilson', '1997-10-15', 'Female', NOW()),
-(13, 'James Lee', '1989-03-28', 'Male', NOW()),
-(14, 'Elizabeth Taylor', '1973-12-10', 'Female', NOW()),
-(15, 'Andrew Clark', '1993-05-20', 'Male', NOW()),
-(16, 'Lauren Martinez', '1987-08-08', 'Female', NOW()),
-(17, 'Kevin Thompson', '1979-01-25', 'Male', NOW()),
-(18, 'Megan White', '1996-07-04', 'Female', NOW()),
-(19, 'Ryan Adams', '1984-11-17', 'Male', NOW()),
-(20, 'Stephanie Harris', '1975-02-28', 'Female', NOW());
 
 -- Seed data for clinics table
 INSERT INTO clinics (name, user_id, address, latitude, longitude, created_at) VALUES
@@ -81,6 +59,29 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 (8, 'Dr. Garcia', 'Neurology', 'MD, PhD', 'Expert in neurological disorders.', 'garcia.jpg', 12, NOW()),
 (9, 'Dr. Lopez', 'Psychiatry', 'MD, DNB', 'Specializes in mental health.', 'lopez.jpg', 28, NOW()),
 (10, 'Dr. Flores', 'Endocrinology', 'MD, MBBS', 'Expert in hormonal disorders.', 'flores.jpg', 15, NOW());
+
+-- Seed data for patients table
+INSERT INTO patients (user_id, name, date_of_birth, gender, doctor_id, created_at) VALUES
+(1, 'John Doe', '1990-05-15', 'Male', 1, NOW()),
+(2, 'Jane Smith', '1985-10-20', 'Female', 1, NOW()),
+(3, 'Michael Johnson', '1978-03-08', 'Male', 2, NOW()),
+(4, 'Emily Brown', '2000-12-03', 'Female', 2, NOW()),
+(5, 'David Wilson', '1995-08-25', 'Male', null, NOW()),
+(6, 'Sarah Jones', '1992-06-18', 'Female', null, NOW()),
+(7, 'Matthew Davis', '1983-09-10', 'Male', null, NOW()),
+(8, 'Jennifer Garcia', '1976-04-22', 'Female', null, NOW()),
+(9, 'Daniel Martinez', '1998-11-30', 'Male', null, NOW()),
+(10, 'Jessica Rodriguez', '1991-07-12', 'Female', null, NOW()),
+(11, 'Christopher Hernandez', '1980-02-05', 'Male', null, NOW()),
+(12, 'Amanda Wilson', '1997-10-15', 'Female', null, NOW()),
+(13, 'James Lee', '1989-03-28', 'Male', null, NOW()),
+(14, 'Elizabeth Taylor', '1973-12-10', 'Female', null, NOW()),
+(15, 'Andrew Clark', '1993-05-20', 'Male', null, NOW()),
+(16, 'Lauren Martinez', '1987-08-08', 'Female', null, NOW()),
+(17, 'Kevin Thompson', '1979-01-25', 'Male', null, NOW()),
+(18, 'Megan White', '1996-07-04', 'Female', null, NOW()),
+(19, 'Ryan Adams', '1984-11-17', 'Male', null, NOW()),
+(20, 'Stephanie Harris', '1975-02-28', 'Female', null, NOW());
 
 -- Seed data for appointments table
 INSERT INTO appointments (patient_id, doctor_id, details, clinic_id, status, created_at) VALUES

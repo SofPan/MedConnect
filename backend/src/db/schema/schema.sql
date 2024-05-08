@@ -13,15 +13,6 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE patients (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
-  date_of_birth DATE,
-  gender VARCHAR(10),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE clinics (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -41,6 +32,16 @@ CREATE TABLE doctors (
   description TEXT NOT NULL,
   photo_url VARCHAR(255) NOT NULL,
   number_of_patients INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE patients (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  date_of_birth DATE,
+  gender VARCHAR(10),
+  doctor_id INTEGER DEFAULT NULL REFERENCES doctors(id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
