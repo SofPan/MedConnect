@@ -5,11 +5,6 @@ import { useReducer, useEffect } from "react";
 
 export default function useApplicationData() {
 
-    const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      });
-    
-
   const initialState = {
     userLoggedIn: false,
     userInfo: {},
@@ -17,6 +12,7 @@ export default function useApplicationData() {
     events:[{ title: 'Event 1', start: new Date('2024-05-01T10:00:00') }],
     newUser: null,
     clinics:[],
+    displayedClinics:[],
     doctors:[]
   }
 
@@ -43,6 +39,8 @@ export default function useApplicationData() {
         return {...userState, clinics: action.payload }
     case "SET_DOCTORS":
         return {...userState, doctors: action.payload }
+    case "SET_DISPLAYED_CLINICS":
+        return {...userState, displayedClinics: action.payload } 
       default:
         return userState;
     }
@@ -86,11 +84,9 @@ export default function useApplicationData() {
 
 
 useEffect(() => {
-    if (isLoaded) {
-        fetchClinics();
-        fetchDoctors();
-    }
-}, [isLoaded]);
+    fetchClinics();
+    fetchDoctors();
+}, []);
 
 
 const fetchClinics = async () => {
@@ -109,6 +105,7 @@ const fetchClinics = async () => {
         const data = await response.json();
         
         dispatch({ type: "SET_CLINICS", payload: data});
+        dispatch({ type: "SET_DISPLAYED_CLINICS", payload: data});
 
     } catch (error) {
         console.error('Error:', error);

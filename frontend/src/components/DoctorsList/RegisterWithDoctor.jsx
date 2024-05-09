@@ -6,14 +6,12 @@ const RegisterWithDoctor = (props) => {
   const {clinicInfo} = props;
   const { userState } = useContext(UserSignedIn);
   
-
   const filteredDoctors = userState.doctors.filter(doctor => {
     // Only show the Clinic's doctors that are accepting patients
     return doctor.clinic_id === clinicInfo.clinic_id && doctor.number_of_patients
   })
 
   const handleRegister = (id) => {
-
   }
 
   return (

@@ -5,8 +5,6 @@ import { UserSignedIn } from '../App';
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-
-
   const handleSearchByAddress = (e) => {
     e.preventDefault();
   
