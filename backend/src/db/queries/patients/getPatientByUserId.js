@@ -15,4 +15,6 @@ const getPatientByUserId = (id) => {
     .catch(error => console.log("getPatientByUserId error", error));
 };
 
+
+
 module.exports = { getPatientByUserId }

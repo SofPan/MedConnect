@@ -12,6 +12,7 @@ import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 import AvailableDoctors from './components/AvailableDoctors';
 import ClinicProfile from './components/UserProfile/ClinicProfile';
 import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
+import PatientAppointments from '../../frontend/src/components/Scheduling/PatientAppointments'
 import {
   Routes,
   Route,
@@ -27,8 +28,8 @@ function App() {
   const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
 
-  const getUserInfoForSession = async (userId) =>{
-   
+  const getUserInfoForSession = async (userId) => {
+
     try {
       const response = await fetch(`http://localhost:8080/profile/${userId}`, {
         method: 'GET',
@@ -41,17 +42,19 @@ function App() {
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
+
       const responseData = await response.json();
-    
-     
-      dispatch({ type: "USER_INFO", payload: responseData});
+
+
+
+      dispatch({ type: "USER_INFO", payload: responseData });
 
     } catch (error) {
       console.error('error getting user app.js:', error);
-      
+
     }
   }
-  
+
 
   useEffect(() => {
 
@@ -60,10 +63,12 @@ function App() {
     if (userId) {
 
       dispatch({ type: "USER_SESSION", payload: true })
-      
+
+
+
       getUserInfoForSession(userId);
 
-     
+
     } else {
       console.log("else statment hit");
       dispatch({ type: "USER_SESSION", payload: false })
@@ -72,13 +77,13 @@ function App() {
   }, []);
 
   console.log("userState", userState);
-  console.log("CLinics ", userState.clinics)
 
   return (
 
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
+        {/* <PatientAppointments /> */}
         {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
@@ -87,13 +92,14 @@ function App() {
         </>)}
         {LoginDisplay && <LoginForm />}
 
-         {/* <PatientScheduler /> */}
+        {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
         {/* <Route path='/' element={}> */}
           <Route path='/availabledoctors' element={<AvailableDoctorsRoute />}/>
         {/* </Route> */}
+
       </Routes>
 
           <NavLink to="/availabledoctors" >

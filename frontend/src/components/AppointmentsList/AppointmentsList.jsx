@@ -1,12 +1,14 @@
 import AppointmentsListItem from "./AppointmentsListItem"
 
 const AppointmentsList = (props) => {
+  
   const {
     appointments,
     user_id
   } = props;
   
   const mapAppointments = appointments.map(appointment => {
+
     return <AppointmentsListItem
             key={appointment.id}
             id={appointment.id}

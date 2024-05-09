@@ -31,6 +31,29 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 ('clinic9@example.com', 'hashed_password_29', TRUE, NOW()),
 ('clinic10@example.com', 'hashed_password_30', TRUE, NOW());
 
+-- Seed data for patients table
+INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, created_at) VALUES
+(1, 'John Doe', '1990-05-15', 'Male', '1234567890', NOW()),
+(2, 'Jane Smith', '1985-10-20', 'Female', '0987654321', NOW()),
+(3, 'Michael Johnson', '1978-03-08', 'Male', '5678901234', NOW()),
+(4, 'Emily Brown', '2000-12-03', 'Female', '4321098765', NOW()),
+(5, 'David Wilson', '1995-08-25', 'Male', '9876543210', NOW()),
+(6, 'Sarah Jones', '1992-06-18', 'Female', '6543210987', NOW()),
+(7, 'Matthew Davis', '1983-09-10', 'Male', '8901234567', NOW()),
+(8, 'Jennifer Garcia', '1976-04-22', 'Female', '3456789012', NOW()),
+(9, 'Daniel Martinez', '1998-11-30', 'Male', '2109876543', NOW()),
+(10, 'Jessica Rodriguez', '1991-07-12', 'Female', '7890123456', NOW()),
+(11, 'Christopher Hernandez', '1980-02-05', 'Male', '5432109876', NOW()),
+(12, 'Amanda Wilson', '1997-10-15', 'Female', '9012345678', NOW()),
+(13, 'James Lee', '1989-03-28', 'Male', '6789012345', NOW()),
+(14, 'Elizabeth Taylor', '1973-12-10', 'Female', '4567890123', NOW()),
+(15, 'Andrew Clark', '1993-05-20', 'Male', '0123456789', NOW()),
+(16, 'Lauren Martinez', '1987-08-08', 'Female', '7890123456', NOW()),
+(17, 'Kevin Thompson', '1979-01-25', 'Male', '1234567890', NOW()),
+(18, 'Megan White', '1996-07-04', 'Female', '4567890123', NOW()),
+(19, 'Ryan Adams', '1984-11-17', 'Male', '8901234567', NOW()),
+(20, 'Stephanie Harris', '1975-02-28', 'Female', '6789012345', NOW());
+
 
 -- Seed data for clinics table
 INSERT INTO clinics (name, user_id, address, latitude, longitude, created_at) VALUES

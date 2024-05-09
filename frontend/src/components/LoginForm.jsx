@@ -26,6 +26,7 @@ export default function LoginForm() {
     const { dispatch } = useContext(UserSignedIn);
 
     const submitForm = async (e) => {
+
         e.preventDefault();
     console.log("submit")
         try {
@@ -48,11 +49,19 @@ export default function LoginForm() {
     
             // Assuming response is JSON
             const user = await response.json();
-           console.log(user)
             
-            sessionStorage.setItem("user_id", user.id)
+            const userObject = user.reduce((acc, obj) => {
+              
+              if (obj) {
+                
+                Object.assign(acc, obj);
+              }
+              return acc;
+            }, {});
+            
+            sessionStorage.setItem("user_id", userObject.id)
            
-            dispatch({ type: "USER_INFO", payload: user });
+            dispatch({ type: "USER_INFO", payload: userObject });
     
             dispatch({ type: "USER_LOGIN", payload: true });
             

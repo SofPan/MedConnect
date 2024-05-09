@@ -10,7 +10,7 @@ import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, L
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import dayjs from 'dayjs';
 
 /* 
 CREATE TABLE patients (
@@ -30,22 +30,23 @@ export default function PatientInfo() {
   const { userState, dispatch } = useContext(UserSignedIn);
 
   const registerUserInfo = async (userData) => {
+    const userId = sessionStorage.getItem("user_id");
     try {
       const response = await fetch('http://localhost:8080/register/info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({...userData, user_id: userId}),
       });
       
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
       ;
-      const responseData = await response.json();
+      const responseData = await response.text();
       
-      
+      console.log(responseData, "patient info");
       // Assuming the response contains some information about the newly registered user
       // You can handle the response data as needed
       
@@ -62,7 +63,7 @@ export default function PatientInfo() {
     name: '',
     gender: '',
     health_card: '',
-    DOB: null,
+    DOB: dayjs(new Date('2024, 4, 8, 12, 0, 0, 0')),
   });
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -84,9 +85,9 @@ export default function PatientInfo() {
     
     setFormData({
       ...formData,
-      DOB: date.$d // Store the selected date
+      DOB: dayjs(date) // Store the selected date
     });
-    console.log(formData);
+   
   };
 
 
@@ -94,7 +95,7 @@ export default function PatientInfo() {
     const errors = {};
 
     for (const key in formData) {
-      console.log(key);
+      
       if (!formData[key]) {
         errors[key] = `${key} is required`
       }
@@ -111,11 +112,12 @@ export default function PatientInfo() {
   const handleSubmit = (e) => {
 
     e.preventDefault();
-
+    console.log(formData);
     
     const formErrors = validate(formData);
 
     if (Object.keys(formErrors).length === 0) {
+      registerUserInfo(formData);
       dispatch({ type: "NEW_USER_INFO", payload: formData })
     } else {
       setErrors(formErrors);
@@ -184,6 +186,7 @@ export default function PatientInfo() {
                   value={formData.DOB} // Pass the selected date value
                   onChange={handleDateChange} // Use the date change handler
                   name="DOB"
+                  renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
        
