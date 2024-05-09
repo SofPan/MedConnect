@@ -85,18 +85,19 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 
 -- Seed data for appointments table
 
-INSERT INTO appointments (patient_id, doctor_id, patient_name, start_time, end_time, clinic_id, status, created_at)
+INSERT INTO appointments (patient_id, doctor_id, patient_name, doctor_name, start_time, end_time, clinic_id, status, created_at)
 VALUES
-(1, 6, 'John Doe', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
-(2, 7, 'Jane Smith', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, TRUE, NOW()),
-(3, 8, 'Michael Johnson', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, FALSE, NOW()),
-(4, 9, 'Emily Brown', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, FALSE, NOW()),
-(5, 10, 'David Wilson', '2024-05-04 10:45:00', '2024-05-04 11:45:00', 1, TRUE, NOW()),
-(6, 6, 'Sarah Jones', '2024-05-04 14:00:00', '2024-05-04 15:00:00', 1, TRUE, NOW()),
-(7, 7, 'Matthew Davis', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, FALSE, NOW()),
-(8, 8, 'Jennifer Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, TRUE, NOW()),
-(9, 9, 'Daniel Martinez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, FALSE, NOW()),
-(10, 10, 'Jessica Rodriguez', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, TRUE, NOW());
+    (1, 6, 'John Doe', 'Dr. Martinez', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
+    (2, 7, 'Jane Smith', 'Dr. Rodriguez', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, TRUE, NOW()),
+    (3, 8, 'Michael Johnson', 'Dr. Garcia', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, FALSE, NOW()),
+    (4, 9, 'Emily Brown', 'Dr. Lopez', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, FALSE, NOW()),
+    (5, 10, 'David Wilson', 'Dr. Flores', '2024-05-04 10:45:00', '2024-05-04 11:45:00', 1, TRUE, NOW()),
+    (6, 6, 'Sarah Jones', 'Dr. Martinez', '2024-05-04 14:00:00', '2024-05-04 15:00:00', 1, TRUE, NOW()),
+    (7, 7, 'Matthew Davis', 'Dr. Rodriguez', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, FALSE, NOW()),
+    (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, TRUE, NOW()),
+    (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, FALSE, NOW()),
+    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, TRUE, NOW());
+
 
 
 

@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
-import AppointmentsList from '../AppointmentsList/AppointmentsList';
+import SingleAppointment from '../AppointmentsList/SingleAppointment';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -26,7 +26,19 @@ export default function PatientScheduler() {
   const [events, setEvents ] = useState([])
   const [singleAppointmentDisplay, setsingleAppointmentDisplay ] = useState(false);
   const [appointment_id, setappointment_id ] = useState();
-  
+  const [appointment, setappointmentInfo ] = useState( {
+    id:"",
+    patient_id: "",
+    doctor_id: "",
+    patient_name: '',
+    doctor_name: '',
+    start_time: new Date(),
+    end_time: new Date(),
+    clinic_id: '',
+    status: true,
+    created_at: new Date(),
+    address: ''
+  });
 
 
   const getAppointments = async () => {
@@ -128,21 +140,30 @@ export default function PatientScheduler() {
       
 
       if (appointment) {
-        console.log(appointment);
+        return appointment
       }
-     
+      
     };
 
-    getAppointment();
+    setappointmentInfo(getAppointment());
+
+    
     
   }, [appointment_id]);
+  useEffect(() => {
+   
+    setsingleAppointmentDisplay(!singleAppointmentDisplay)
+
+    
+    
+  }, [appointment]);
 
 
 
   const handleDateClick = async (e) =>{
-    console.log("clicked that date", e.event.extendedProps.appointmentId);
+    
     setappointment_id(e.event.extendedProps.appointmentId);
-    setsingleAppointmentDisplay(!singleAppointmentDisplay);
+    
   }
 
   function renderEventContent(eventInfo) {
@@ -158,7 +179,12 @@ export default function PatientScheduler() {
 
   return (
     <div>
-      {/* {singleAppointmentDisplay ? <AppointmentsList /> :  */}
+       {singleAppointmentDisplay ? <SingleAppointment doctor_name={appointment.doctor_name}
+    details={appointment.start_time}
+    clinic_address={appointment.address}
+    status={appointment.status}
+    appointment={"hehehehehe"}
+    user_id={1}/>  :
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <h1>Clinic Appointments</h1>
         <FullCalendar
@@ -171,7 +197,7 @@ export default function PatientScheduler() {
           slotMaxTime={"23:00:00"}
           eventClick={handleDateClick}
         />
-      </LocalizationProvider>
+      </LocalizationProvider>}
       
     </div>
   );
