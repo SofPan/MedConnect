@@ -5,7 +5,7 @@ import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
 import PatientInfo from './components/SignUp/PatientInfo';
 import UserProfile from './components/UserProfile/UserProfile';
-
+import { Grid } from '@mui/material';
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
@@ -78,10 +78,10 @@ function App() {
 
   console.log("userState", userState);
 
+
+
   return (
-
-    <div className="App" >
-
+    <div className="App">
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         {/* <PatientAppointments /> */}
         {/* <PatientInfo /> */}
@@ -98,15 +98,12 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
-          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+          <Route path='/register' element={<RegisterWithDoctor />} />
           <Route path='/profile' element={<UserProfile />} />
-          {/* </Route> */}
         </Routes>
 
       </UserSignedIn.Provider>
-
     </div>
-
   );
 }
 

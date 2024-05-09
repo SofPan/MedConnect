@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
-
+import SingleAppointment from '../AppointmentsList/SingleAppointment';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -23,53 +23,31 @@ export default function PatientScheduler() {
 
   const { userState, dispatch } = useContext(UserSignedIn);
 
-  const [events, setEvents ] = useState([])
-
-
-  const getClinicByUserId = async () => {
-
-    const userId = sessionStorage.getItem("user_id");
-
-    try {
-      const response = await fetch(`http://localhost:8080/profile/${userId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to register user');
-      }
-      
-      const responseData = await response.json();
-
-
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      
-      return responseData;
-
-    } catch (error) {
-      console.error('Error registering user:', error);
-      // Handle error
-    }
-  }
+  const [events, setEvents] = useState([])
+  const [singleAppointmentDisplay, setsingleAppointmentDisplay] = useState(false);
+  const [appointment_id, setappointment_id] = useState('');
+  const [appointmentInfo, setappointmentInfo] = useState({
+    id: "",
+    patient_id: "",
+    doctor_id: "",
+    patient_name: '',
+    doctor_name: '',
+    start_time: new Date(),
+    end_time: new Date(),
+    clinic_id: '',
+    status: true,
+    created_at: new Date(),
+    clinic_address: ''
+  });
 
 
   const getAppointments = async () => {
 
-   
-    
-    const clinic = await getClinicByUserId();
-    
-    
-   
-    if (userState.is_clinic) {
 
+    if (userState.userInfo.is_clinic) {
+   
       try {
-        const response = await fetch(`http://localhost:8080/appointments/${clinic.id}`, {
+        const response = await fetch(`http://localhost:8080/appointments/${userState.userInfo.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -82,11 +60,11 @@ export default function PatientScheduler() {
         }
         const responseData = response.json();
 
-        
-        
 
 
-       return responseData;
+
+
+        return responseData;
 
       } catch (error) {
         console.error('Error registering user:', error);
@@ -95,25 +73,83 @@ export default function PatientScheduler() {
     }
   }
 
+
   useEffect(() => {
-   
+
     const fetchAppointments = async () => {
 
       const appointments = await getAppointments();
-      console.log(appointments);
+
+
+
       if (appointments) {
-        const dates = appointments.map((date)=>{
-          return {id:date.id,title:date.patient_name,start:date.start_time, end: date.end_time}
+        const dates = appointments.map((date) => {
+          return {
+            extendedProps: {
+              appointmentId: 2
+            }, title: date.patient_name, start: date.start_time, end: date.end_time
+          }
         })
 
         setEvents(dates);
       }
-     
+
     };
 
     fetchAppointments();
+
+  }, [userState.userInfo]);
+
+  useEffect(() => {
     
-  }, []);
+
+    if (appointment_id) {
+      
+      const getAppointment = async () => {
+        
+        if (appointment_id) {
+
+          console.log("yo dawg this is getting a single appointments", appointment_id);
+    
+          try {
+            const response = await fetch(`http://localhost:8080/appointments/single/${appointment_id}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+    
+            });
+    
+            if (!response.ok) {
+              throw new Error('Failed to register user');
+            }
+            const responseData = await response.json();
+            console.log("response data", responseData);
+            setappointmentInfo(responseData);
+            setsingleAppointmentDisplay(!singleAppointmentDisplay)
+          } catch (error) {
+            console.error('Error registering user:', error);
+            // Handle error
+          }
+        }
+      };
+
+      getAppointment();
+  }
+
+
+
+  }, [appointment_id]);
+
+ 
+
+
+
+  const handleDateClick =  (e) => {
+
+    setappointment_id(e.event.extendedProps.appointmentId);
+
+  }
 
   function renderEventContent(eventInfo) {
     return (
@@ -124,23 +160,30 @@ export default function PatientScheduler() {
     )
   }
 
-console.log(events);
+
 
   return (
-    <div className="App">
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <h1>Clinic Appointments</h1>
-        <FullCalendar
-          plugins={[timeGridPlugin, interactionPlugin]}
-          initialView='timeGridWeek'
-          weekends={false}
-          events={events}
-          eventContent={renderEventContent}
-          slotMinTime={"10:00:00"}
-          slotMaxTime={"20:00:00"}
+    <div>
+      {singleAppointmentDisplay ? <SingleAppointment doctor_name={appointmentInfo.doctor_name}
+        details={appointmentInfo.start_time}
+        clinic_address={appointmentInfo.address}
+        status={appointmentInfo.status}
+        appointment={"hehehehehe"}
+        user_id={1} /> :
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <h1>Clinic Appointments</h1>
+          <FullCalendar
+            plugins={[timeGridPlugin, interactionPlugin]}
+            initialView='timeGridWeek'
+            weekends={false}
+            events={events}
+            eventContent={renderEventContent}
+            slotMinTime={"00:00:00"}
+            slotMaxTime={"23:00:00"}
+            eventClick={handleDateClick}
+          />
+        </LocalizationProvider>}
 
-        />
-      </LocalizationProvider>
     </div>
   );
 }
