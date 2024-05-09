@@ -3,6 +3,7 @@ import PatientAppointments from "../Scheduling/PatientAppointments";
 import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
 import ProfileDoctors from "../DoctorsList/ProfileDoctors";
+import Notifications from "../Notifications/Notifications";
 import {
   Tabs,
   Tab,
@@ -17,6 +18,7 @@ const RenderProfile = (props) => {
 
   useEffect(() => {
     if(isClinic){
+      setLeftComponent(<Notifications userProfile={userProfile}/>)
       setRightComponent(<ProfileDoctors userProfile={userProfile}/>
     )
     } else {
@@ -35,12 +37,14 @@ const RenderProfile = (props) => {
           </Tabs>
         </Box>
       }
-      <ProfileBody
-        isClinic={isClinic}
-        userProfile={userProfile}
-        profileComponentLeft={leftComponent}
-        profileComponentRight={rightComponent}
-      />
+      <Box width="60vw" display={'inline-block'} >
+        <ProfileBody
+          isClinic={isClinic}
+          userProfile={userProfile}
+          profileComponentLeft={leftComponent}
+          profileComponentRight={rightComponent}
+        />
+      </Box>
     </>
   )
 }
