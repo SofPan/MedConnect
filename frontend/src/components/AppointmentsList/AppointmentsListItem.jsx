@@ -25,7 +25,7 @@ const AppointmentsListItem = (props) => {
 
   const [editing, setEditing] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
-  
+
   const [requesting, setRequesting] = useState(false);
   const [requestDetails, setRequestDetails] = useState({});
 

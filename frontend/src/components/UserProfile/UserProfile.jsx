@@ -5,6 +5,7 @@ import RenderProfile from './RenderProfile';
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const userContext = useContext(UserSignedIn) ;
   
   const user = userContext.userState.userInfo;
@@ -14,12 +15,19 @@ const UserProfile = () => {
     const fetchUserProfile = async () => {
       const userData = await fetchUser(user.user_id ? user.user_id : user.id);
       setUserProfile(() => userData);
+      setLoaded(true);
     };
-    fetchUserProfile();
+    if (!loaded){
+      fetchUserProfile();
+    }
+
   },[userContext]);
 
   return(
-    <RenderProfile userProfile={userProfile} isClinic={isClinic} />
+    <>
+      {loaded && <RenderProfile userProfile={userProfile} isClinic={isClinic} />}
+    </>
+    
   )
 }
 
