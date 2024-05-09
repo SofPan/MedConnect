@@ -23,18 +23,10 @@ const useStyles = makeStyles({
     },
   });
 
-const SingleAppointment = (props) => {
+const SingleAppointment = (appointment) => {
 
-    const {
-        doctor_name,
-        details,
-        clinic_address,
-        status,
-        appointment,
-        user_id
-      } = props;
+   
  
-console.log(props);
 //   const [editing, setEditing] = useState(false);
 //   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
 

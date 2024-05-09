@@ -13,12 +13,11 @@ const { getAllAppointmentsByPatient } = require('../src/db/queries/appointments/
 const { editAppointment } = require('../src/db/queries/appointments/editAppointment');
 const { getCalendarByClinicId} = require("../src/db/queries/calendar/getCalendarByClinicId");
 const { getAppointmentById } = require("../src/db/queries/appointments/getAppointmentById");
+
 router.get('/single/:id', (req, res) => {
 
-  
-  
   const appointment_id = req.params.id;
-  
+  console.log("this is appoihtment id", appointment_id);
   getAppointmentById(appointment_id)
       .then(appointment => {
 
