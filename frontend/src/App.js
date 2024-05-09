@@ -98,9 +98,8 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
-          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+          <Route path='/register' element={<RegisterWithDoctor />} />
           <Route path='/profile' element={<UserProfile />} />
-          {/* </Route> */}
         </Routes>
 
       </UserSignedIn.Provider>
