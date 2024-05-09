@@ -41,7 +41,7 @@ CREATE TABLE patients (
   name VARCHAR(255) NOT NULL,
   date_of_birth DATE,
   gender VARCHAR(10),
-  doctor_id INTEGER DEFAULT NULL REFERENCES doctors(id),
+  doctor_id INTEGER DEFAULT NULL REFERENCES doctors(id) ON DELETE SET NULL,
   health_card VARCHAR(20), -- New column for health card
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
