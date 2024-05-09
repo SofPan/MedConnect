@@ -7,7 +7,6 @@ const PatientAppointments = (props) => {
   const {patient_id } = props;
   const [appointments, setAppointments] = useState([]);
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
-  const [viewed, setViewed] = useState(false);
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -27,7 +26,6 @@ const PatientAppointments = (props) => {
     if (!unbookedAppointments.length){
       fetchUnbookedAppointments();
     }
-    console.log("unbookedAppointments", unbookedAppointments);
   }, [patient_id]);
 
   return(
