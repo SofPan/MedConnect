@@ -2,6 +2,7 @@
 const db = require('../../connection');
 
 const addNewDoctor = (doctor) => {
+  console.log("4 inside addNewDoctor query")
   const value = [
     doctor.clinic_id, // $1
     doctor.name, // $2

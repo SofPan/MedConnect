@@ -1,6 +1,11 @@
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/"
+const POST_HEADER = {
+  headers: {
+    "Content-type": "application/x-www-form-urlencoded"
+  }
+}
 
 export const fetchUser = async (id) => {
   try {
@@ -35,6 +40,7 @@ export const fetchDocuments = async () => {
 export const fetchPatientAppointments = async (patientId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
+    console.log("fetchPatientAppointments response", response);
     return response.data;
   } catch (error) {
     console.error("Error fetching patient's appointments", error);
@@ -44,7 +50,9 @@ export const fetchPatientAppointments = async (patientId) => {
 
 export const postDoctor = async (doctor) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}doctors`, doctor);
+    console.log("2 tempUseAPI post")
+    const response = await axios.post(`${API_BASE_URL}doctors`, doctor, POST_HEADER);
+    console.log("? tempUseAPI after post")
     return response;
   } catch (error) {
     console.error("Error posting new doctor", error);

@@ -7,22 +7,22 @@ const { getUserById } = require('../src/db/queries/users/getUserById');
 const { getUserByEmail } = require('../src/db/queries/users/getUserByEmail');
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 
 
 
 router.post('/login', async (req, res) => {
 
-  
+
 
   const { email, password } = req.body;
-  
-  
+
+
   try {
 
     const user = await getUserByEmail(email);
-    
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -34,16 +34,16 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
     //set cookie in browser on login
-  
+
     // Password is correct, send user information as JSON data to the frontend
-   const filteredUser = Object.keys(user).map(key=>{
-    if(key !== "password_hash"){
-      return {
-        [key]: user[key]
+    const filteredUser = Object.keys(user).map(key => {
+      if (key !== "password_hash") {
+        return {
+          [key]: user[key]
+        }
       }
-    }
-   
-   })
+
+    })
 
     res.json(filteredUser);
 
@@ -54,22 +54,22 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/login/:id', (req, res) => {
-  
+
   const userId = req.session.user_id;
 
   getUserById(userId)
-      .then(user => {
-        // Send the user information as JSON data to the frontend
-        res.json(user);
-      })
-      .catch(error => {
-        console.error('Error fetching user information:', error);
-        res.status(500).json({ error: 'Internal server error' });
-      });
+    .then(user => {
+      // Send the user information as JSON data to the frontend
+      res.json(user);
+    })
+    .catch(error => {
+      console.error('Error fetching user information:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
 });
 
 router.get('/logout', (req, res) => {
-  
+
   console.log("logout")
 });
 

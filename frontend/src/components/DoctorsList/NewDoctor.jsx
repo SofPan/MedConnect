@@ -22,7 +22,9 @@ const NewDoctorForm = (props) => {
 
   useEffect(() => {
     const createDoctor = async () => {
+      console.log("1 NewDoctorForm");
       await postDoctor(doctor);
+      console.log("? NewDoctorForm");
     }
 
     if (doctor.name){

@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
-import ClinicProfile from "./ClinicProfile";
-import PatientProfile from './PatientProfile';
 import { fetchUser } from '../../hooks/tempUseAPI';
 import { UserSignedIn } from '../../App';
+import RenderProfile from './RenderProfile';
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
@@ -13,32 +12,14 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userData = await fetchUser(user.id);
-      setUserProfile(userData);
+      const userData = await fetchUser(user.user_id ? user.user_id : user.id);
+      setUserProfile(() => userData);
     };
     fetchUserProfile();
   },[userContext]);
 
-  const checkUserLoggedIn = () => {
-    if (userContext.userState.userLoggedIn) {
-      if (isClinic ) {
-        return <ClinicProfile userProfile={userProfile}/>
-      } else {
-        return <PatientProfile userProfile={userProfile} />
-      }
-    } else {
-      // Replace this with an error component
-      return <span>You must be logged in to view this page</span>
-    }
-  }
-
   return(
-    <section>
-      {
-        checkUserLoggedIn()
-      }
-      
-    </section>
+    <RenderProfile userProfile={userProfile} isClinic={isClinic} />
   )
 }
 
