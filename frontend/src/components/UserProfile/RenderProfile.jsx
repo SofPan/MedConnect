@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PatientAppointments from "../Scheduling/PatientAppointments";
 import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
+import ProfileDoctors from "../DoctorsList/ProfileDoctors";
 import {
   Tabs,
   Tab,
@@ -16,7 +17,8 @@ const RenderProfile = (props) => {
 
   useEffect(() => {
     if(isClinic){
-      console.log("a clinic")
+      setRightComponent(<ProfileDoctors userProfile={userProfile}/>
+    )
     } else {
       setLeftComponent(<Documents userProfile={userProfile} />)
       setRightComponent(<PatientAppointments patient_id={userProfile.id}/>)
