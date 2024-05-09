@@ -7,21 +7,22 @@ import {
     CardContent,
     Typography
   } from '@mui/material';
-import { makeStyles } from '@material-ui/material/styles';
+// import { makeStyles } from '@material-ui/core/styles';
+
 import { putAppointment } from "../../hooks/tempUseAPI";
 
-const useStyles = makeStyles({
-    root: {
-      minWidth: 275,
-      margin: '20px',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  });
+// const useStyles = makeStyles({
+//     root: {
+//       minWidth: 275,
+//       margin: '20px',
+//     },
+//     title: {
+//       fontSize: 14,
+//     },
+//     pos: {
+//       marginBottom: 12,
+//     },
+//   });
 
 const SingleAppointment = (appointment) => {
 
