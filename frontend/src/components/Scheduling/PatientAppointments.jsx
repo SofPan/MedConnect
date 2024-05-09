@@ -47,6 +47,7 @@ const PatientAppointments = (props) => {
 
   return(
     <>
+      <h2>Appointments</h2>
       <AccordionWrapper title="Request">
         <div className="appointments-open" >
           <AppointmentsList patient_id={null} appointments={DUMMY_OPEN_APPOINTMENTS} user_id={patient_id} />
