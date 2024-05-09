@@ -17,6 +17,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 
 export const UserSignedIn = createContext();
 
@@ -96,7 +97,8 @@ function App() {
 
         <Routes>
         {/* <Route path='/' element={<Layout/>}> */}
-          <Route path='/availabledoctors' element={<AvailableDoctorsRoute />}/>
+          <Route path='/availabledoctors' element={<AvailableDoctors />}/>
+          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />}/>
         {/* </Route> */}
         </Routes> 
 

@@ -13,7 +13,8 @@ export default function useApplicationData() {
     newUser: null,
     clinics:[],
     displayedClinics:[],
-    doctors:[]
+    doctors:[],
+    clinicInfo:{}
   }
 
 
@@ -41,6 +42,8 @@ export default function useApplicationData() {
         return {...userState, doctors: action.payload }
     case "SET_DISPLAYED_CLINICS":
         return {...userState, displayedClinics: action.payload } 
+    case "SET_CLINIC_INFO":
+        return {...userState, clinicInfo: action.payload } 
       default:
         return userState;
     }

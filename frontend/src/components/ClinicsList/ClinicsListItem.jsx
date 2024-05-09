@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
+import { useNavigate } from "react-router-dom";
+import { UserSignedIn } from "../../App";
 
 const ClinicListItem = (props) => {
-  const {name, address, id, distance, handleRequestToRegister} = props;
+  const {name, address, id, distance} = props;
+  const { dispatch } = useContext(UserSignedIn);
+  let navigate = useNavigate();
+
   const clinicInfo = {
     clinic_id: id,
     clinic_name: name,
@@ -20,6 +25,12 @@ const ClinicListItem = (props) => {
   const [alterDoctors, setAlterDoctors] = useState(0);
   const triggerDoctorStateUpdate = () => {
     setAlterDoctors(alterDoctors + 1);
+
+  }
+
+  const handleRequest = (info) => {
+    dispatch({ type: "SET_CLINIC_INFO", payload: info});
+    navigate("/register");
   }
 
   return(
@@ -39,7 +50,7 @@ const ClinicListItem = (props) => {
           />
         </div>
         <div>
-            <button onClick={() => handleRequestToRegister(clinicInfo)}>Request to Register</button>
+            <button onClick={() => handleRequest(clinicInfo)}>Request to Register</button>
         </div>
       </li>
     }
