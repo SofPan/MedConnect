@@ -40,7 +40,6 @@ export const fetchDocuments = async () => {
 export const fetchPatientAppointments = async (patientId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
-    console.log("fetchPatientAppointments response", response);
     return response.data;
   } catch (error) {
     console.error("Error fetching patient's appointments", error);
