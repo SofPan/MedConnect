@@ -50,8 +50,8 @@ router.get("/patients/:id", (req, res) => {
 
 // Get open appointments by clinic id
 router.get("/open/:id", (req, res) => {
-  const clinicId = req.params.id;
-  getClinicsOpenAppointments(clinicId)
+  const doctorId = req.params.id;
+  getClinicsOpenAppointments(doctorId)
     .then(appointmentData => res.json(appointmentData))
     .catch(error => {
       console.error("Error fetching clinics's open appointments: ", error);
