@@ -35,6 +35,7 @@ const appointmentsRoutes = require('./routes/appointment');
 const documentsRoutes = require('./routes/document');
 const calendarRoutes = require('./routes/calendar');
 const patientsRoutes = require('./routes/patient');
+const requestRoutes = require('./routes/request');
 
 app.use('/', indexRoutes);
 app.use('/', loginRoutes);
@@ -46,6 +47,7 @@ app.use('/appointments', appointmentsRoutes);
 app.use('/documents', documentsRoutes);
 app.use('/calendar', calendarRoutes);
 app.use('/patients', patientsRoutes);
+app.use('/requests', requestRoutes);
 
 
 
