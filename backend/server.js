@@ -34,6 +34,7 @@ const doctorsRoutes = require('./routes/doctor');
 const appointmentsRoutes = require('./routes/appointment');
 const documentsRoutes = require('./routes/document');
 const calendarRoutes = require('./routes/calendar');
+const patientsRoutes = require('./routes/patient');
 
 app.use('/', indexRoutes);
 app.use('/', loginRoutes);
@@ -44,6 +45,7 @@ app.use('/doctors', doctorsRoutes);
 app.use('/appointments', appointmentsRoutes);
 app.use('/documents', documentsRoutes);
 app.use('/calendar', calendarRoutes);
+app.use('/patients', patientsRoutes);
 
 
 
