@@ -2,9 +2,10 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
 
-const RegisterWithDoctor = (props) => {
-  const {clinicInfo} = props;
+const RegisterWithDoctor = () => {
   const { userState } = useContext(UserSignedIn);
+
+  const clinicInfo = userState.clinicInfo;
   
   const filteredDoctors = userState.doctors.filter(doctor => {
     // Only show the Clinic's doctors that are accepting patients

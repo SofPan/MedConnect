@@ -98,7 +98,7 @@ function App() {
         <Routes>
         {/* <Route path='/' element={<Layout/>}> */}
           <Route path='/availabledoctors' element={<AvailableDoctors />}/>
-          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />}/>
+          <Route path='/register' element={<RegisterWithDoctor />}/>
         {/* </Route> */}
         </Routes> 
 
