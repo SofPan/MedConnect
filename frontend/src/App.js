@@ -20,12 +20,7 @@ import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 
 export const UserSignedIn = createContext();
 
-{/* <Routes>
-          {/* <Route path='/' element={<Layout/>}> */}
-// <Route path='/availabledoctors' element={<AvailableDoctors />} />
-// <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
-{/* </Route> */ }
-// </Routes> */}
+
 function App() {
 
   const { userState, dispatch } = useApplicationData();
@@ -99,7 +94,13 @@ function App() {
         {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
 
-        {/* Put routes back here */}
+        <Routes>
+          {/* <Route path='/' element={<Layout/>}> */}
+          <Route path='/availabledoctors' element={<AvailableDoctors />} />
+          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+          {/* </Route> */}
+        </Routes>
+
         {userState.userInfo.id && <UserProfile />}
 
       </UserSignedIn.Provider>
