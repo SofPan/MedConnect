@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
-
+import AppointmentsList from '../AppointmentsList/AppointmentsList';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -24,52 +24,52 @@ export default function PatientScheduler() {
   const { userState, dispatch } = useContext(UserSignedIn);
 
   const [events, setEvents ] = useState([])
-
-
-  const getClinicByUserId = async () => {
-
-    const userId = sessionStorage.getItem("user_id");
-
-    try {
-      const response = await fetch(`http://localhost:8080/profile/${userId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to register user');
-      }
-      
-      const responseData = await response.json();
-
-
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      
-      return responseData;
-
-    } catch (error) {
-      console.error('Error registering user:', error);
-      // Handle error
-    }
-  }
+  const [singleAppointmentDisplay, setsingleAppointmentDisplay ] = useState(false);
+  const [appointment_id, setappointment_id ] = useState();
+  
 
 
   const getAppointments = async () => {
 
    
-    
-    const clinic = await getClinicByUserId();
-    
-    
+    if (userState.userInfo.is_clinic) {
+      console.log("yo dawg this is getting some appointments");
+      try {
+        const response = await fetch(`http://localhost:8080/appointments/${userState.userInfo.id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to register user');
+        }
+        const responseData = response.json();
+
+        
+        
+
+
+       return responseData;
+
+      } catch (error) {
+        console.error('Error registering user:', error);
+        // Handle error
+      }
+    }
+  }
+
+  const getAppointmentbyId = async (appointment_id) => {
+
    
-    if (userState.is_clinic) {
+    if (userState.userInfo.is_clinic) {
+
+      console.log("yo dawg this is getting a single appointments");
 
       try {
-        const response = await fetch(`http://localhost:8080/appointments/${clinic.id}`, {
+        const response = await fetch(`http://localhost:8080/appointments/single/${appointment_id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -100,10 +100,14 @@ export default function PatientScheduler() {
     const fetchAppointments = async () => {
 
       const appointments = await getAppointments();
-      console.log(appointments);
+
+      
+
       if (appointments) {
         const dates = appointments.map((date)=>{
-          return {id:date.id,title:date.patient_name,start:date.start_time, end: date.end_time}
+          return {extendedProps: {
+            appointmentId: 2 
+          },title:date.patient_name,start:date.start_time, end: date.end_time}
         })
 
         setEvents(dates);
@@ -113,7 +117,33 @@ export default function PatientScheduler() {
 
     fetchAppointments();
     
-  }, []);
+  }, [userState.userInfo]);
+
+  useEffect(() => {
+   
+    const getAppointment = async () => {
+
+      const appointment = await getAppointmentbyId(appointment_id);
+
+      
+
+      if (appointment) {
+        console.log(appointment);
+      }
+     
+    };
+
+    getAppointment();
+    
+  }, [appointment_id]);
+
+
+
+  const handleDateClick = async (e) =>{
+    console.log("clicked that date", e.event.extendedProps.appointmentId);
+    setappointment_id(e.event.extendedProps.appointmentId);
+    setsingleAppointmentDisplay(!singleAppointmentDisplay);
+  }
 
   function renderEventContent(eventInfo) {
     return (
@@ -124,10 +154,11 @@ export default function PatientScheduler() {
     )
   }
 
-console.log(events);
+
 
   return (
-    <div className="App">
+    <div>
+      {/* {singleAppointmentDisplay ? <AppointmentsList /> :  */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <h1>Clinic Appointments</h1>
         <FullCalendar
@@ -136,11 +167,12 @@ console.log(events);
           weekends={false}
           events={events}
           eventContent={renderEventContent}
-          slotMinTime={"10:00:00"}
-          slotMaxTime={"20:00:00"}
-
+          slotMinTime={"00:00:00"}
+          slotMaxTime={"23:00:00"}
+          eventClick={handleDateClick}
         />
       </LocalizationProvider>
+      
     </div>
   );
 }

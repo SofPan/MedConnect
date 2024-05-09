@@ -5,7 +5,7 @@ import PatientScheduler from './components/Scheduling/PatientScheduler';
 import useApplicationData from './hooks/useApplicationData';
 import PatientInfo from './components/SignUp/PatientInfo';
 import UserProfile from './components/UserProfile/UserProfile';
-
+import { Grid } from '@mui/material';
 import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
@@ -36,7 +36,7 @@ function App() {
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
-      
+
       const responseData = await response.json();
       
 
@@ -72,30 +72,52 @@ function App() {
 
   console.log("userState", userState);
 
+
+
   return (
-
-    <div className="App" >
-
+    <div className="App">
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-      <PatientAppointments />
-        <PatientInfo />
-        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
-        {SignInDisplay && (<>
-          < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
-          
-        </>)}
-        {LoginDisplay && <LoginForm />}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
+          </Grid>
+          <Grid item xs={12}>
+            <PatientAppointments />
+          </Grid>
+          <Grid item xs={12}>
+            <PatientInfo />
+          </Grid>
+          {SignInDisplay && (
+            <Grid item xs={12}>
+              <SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
+            </Grid>
+          )}
+          {LoginDisplay && (
+            <Grid item xs={12}>
+              <LoginForm />
+            </Grid>
+          )}
 
+          {/* Centering PatientScheduler within a Material-UI grid */}
+          <Grid
+            item
+            xs={12}
+            container
+            justifyContent="center"
+            alignItems="center"
+            style={{ height: 'auto' }} // Optional: Set height to center vertically
+          >
+            <Grid item xs={10}  >
+              <PatientScheduler  />
+            </Grid>
+          </Grid>
+        </Grid>
 
-
-
-         <PatientScheduler />
-        {/* <ClinicSignUpInfo />  */}
+        {/* Your other components */}
+        {/* <ClinicSignUpInfo /> */}
         {/* <AvailableDoctorsRoute /> */}
       </UserSignedIn.Provider>
-
     </div>
-
   );
 }
 
