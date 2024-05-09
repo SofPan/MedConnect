@@ -101,8 +101,6 @@ function App() {
           {/* </Route> */}
         </Routes>
 
-        {userState.userInfo.id && <UserProfile />}
-
       </UserSignedIn.Provider>
 
     </div>
