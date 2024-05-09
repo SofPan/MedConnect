@@ -8,30 +8,18 @@ const UserProfile = () => {
   const userContext = useContext(UserSignedIn) ;
   
   const user = userContext.userState.userInfo;
+  const isClinic = user.is_clinic;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userData = await fetchUser(user.id);
-      setUserProfile(userData);
+      const userData = await fetchUser(user.user_id ? user.user_id : user.id);
+      setUserProfile(() => userData);
     };
     fetchUserProfile();
   },[userContext]);
 
-  const checkUserLoggedIn = () => {
-    if (userContext.userState.userLoggedIn) {
-      return <RenderProfile userProfile={userProfile}/>
-    } else {
-      // Replace this with an error component
-      return <span>You must be logged in to view this page</span>
-    }
-  }
-
   return(
-    <section>
-      {
-        checkUserLoggedIn()
-      }
-    </section>
+    <RenderProfile userProfile={userProfile} isClinic={isClinic} />
   )
 }
 

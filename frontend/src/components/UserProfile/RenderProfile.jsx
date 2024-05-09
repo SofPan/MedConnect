@@ -8,10 +8,9 @@ import { Box } from '@mui/material';
 import ClinicTabs from "./ClinicTabs";
 
 const RenderProfile = (props) => {
-  const {userProfile} = props;
+  const {userProfile, isClinic} = props;
   const [leftComponent, setLeftComponent] = useState(null);
   const [rightComponent, setRightComponent] = useState(null);
-  const [isClinic, setIsClinic] = useState(userProfile.is_clinic);
 
   useEffect(() => {
     if(isClinic){
@@ -22,7 +21,7 @@ const RenderProfile = (props) => {
       setLeftComponent(<Documents userProfile={userProfile} />)
       setRightComponent(<PatientAppointments patient_id={userProfile.id}/>)
     }
-  }, [isClinic])
+  }, [userProfile])
 
   return(
     <>

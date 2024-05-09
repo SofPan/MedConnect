@@ -1,6 +1,6 @@
 const UserInformation = (props) => {
   const {userProfile} = props;
-
+  console.log("UserInformation", userProfile);
   const formatBirthDate = (date) => {
     return date.split("T").shift();
   }
