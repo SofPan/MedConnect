@@ -132,8 +132,16 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
 
                         {userState.userLoggedIn ?  (
                             <>
-                                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                <MenuItem onClick={handleProfileClick}>
+                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/profile">
+                                    Profile
+                                  </NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={handleLogout}>
+                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                                    Logout
+                                  </NavLink>
+                                </MenuItem>
                             </>
                         ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
                         <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>

@@ -10,7 +10,6 @@ import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 import AvailableDoctors from './components/AvailableDoctors';
-import ClinicProfile from './components/UserProfile/ClinicProfile';
 import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
 import PatientAppointments from '../../frontend/src/components/Scheduling/PatientAppointments'
 import {
@@ -18,6 +17,7 @@ import {
   Route,
 } from "react-router-dom";
 import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
+import LandingPage from './components/LandingPage';
 
 export const UserSignedIn = createContext();
 
@@ -96,11 +96,12 @@ function App() {
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
-        {/* <Route path='/' element={<Layout/>}> */}
-          <Route path='/availabledoctors' element={<AvailableDoctors />}/>
-          <Route path='/register' element={<RegisterWithDoctor />}/>
-        {/* </Route> */}
-        </Routes> 
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/availabledoctors' element={<AvailableDoctors />} />
+          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+          <Route path='/profile' element={<UserProfile />} />
+          {/* </Route> */}
+        </Routes>
 
       </UserSignedIn.Provider>
 
