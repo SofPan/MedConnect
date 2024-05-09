@@ -52,6 +52,7 @@ CREATE TABLE appointments (
     patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
     doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
     patient_name VARCHAR(255),
+    doctor_name VARCHAR(255), -- Added doctor's name column
     start_time TIMESTAMP,
     end_time TIMESTAMP,
     clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
