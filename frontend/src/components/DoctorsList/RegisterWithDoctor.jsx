@@ -3,20 +3,17 @@ import { useContext } from "react";
 import { UserSignedIn } from "../../App";
 
 const RegisterWithDoctor = (props) => {
-  const {clinicInfo, doctors} = props;
-  const { userState, dispatch } = useContext(UserSignedIn);
+  const {clinicInfo} = props;
+  const { userState } = useContext(UserSignedIn);
+  
 
-  const filteredDoctors = doctors.filter(doctor => {
+  const filteredDoctors = userState.doctors.filter(doctor => {
     // Only show the Clinic's doctors that are accepting patients
     return doctor.clinic_id === clinicInfo.clinic_id && doctor.number_of_patients
   })
 
   const handleRegister = (id) => {
-    const userId = sessionStorage.getItem('user_id');
-  
 
-   console.log("userID", userId)
-   console.log("userState", userState)
   }
 
   return (

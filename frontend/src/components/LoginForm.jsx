@@ -27,9 +27,10 @@ export default function LoginForm() {
 
     const submitForm = async (e) => {
         e.preventDefault();
-    
+    console.log("submit")
         try {
             // Make POST request to your backend
+            console.log("inside try")
             const response = await fetch('http://localhost:8080/login', {
                 method: 'POST',
                 headers: {
@@ -37,14 +38,17 @@ export default function LoginForm() {
                 },
                 body: JSON.stringify(formData),
             });
+            console.log("response",response)
+            console.log("formData ", formData)
     
             if (!response.ok) {
                 throw new Error('Failed to log in');
+
             }
     
             // Assuming response is JSON
             const user = await response.json();
-           
+           console.log(user)
             
             sessionStorage.setItem("user_id", user.id)
            
@@ -55,6 +59,7 @@ export default function LoginForm() {
         } catch (error) {
             console.error('Error:', error);
             // Handle error
+            console.log(error)
         }
     }
 

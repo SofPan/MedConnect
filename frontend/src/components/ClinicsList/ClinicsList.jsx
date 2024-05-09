@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import ClinicListItem from "./ClinicsListItem";
 import { calcRoute } from "../../helpers/calcRoute";
 
-const ClinicList = ({ searchCoordinates, clinics, doctors, handleRequestToRegister }) => {
+const ClinicList = ({ searchCoordinates, displayedClinics, handleRequestToRegister }) => {
   const [clinicsList, setClinicsList] = useState([]);
 
   useEffect(() => {
-    if (searchCoordinates && clinics && doctors) {
-      const clinicPromises = clinics.map(clinic => {
+    if (searchCoordinates && displayedClinics) {
+      const clinicPromises = displayedClinics.map(clinic => {
         const location = {
           lat: parseFloat(clinic.latitude),
           lng: parseFloat(clinic.longitude),
@@ -29,7 +29,7 @@ const ClinicList = ({ searchCoordinates, clinics, doctors, handleRequestToRegist
           console.error('Error calculating distances:', error);
         });
     }
-  }, [searchCoordinates, clinics, doctors]);
+  }, [searchCoordinates, displayedClinics]);
 
   const mapClinics = clinicsList.map(clinic => (
     <ClinicListItem 
@@ -38,7 +38,6 @@ const ClinicList = ({ searchCoordinates, clinics, doctors, handleRequestToRegist
       name={clinic.name}
       address={clinic.address}
       distance={clinic.distance}
-      doctors={doctors} 
       handleRequestToRegister={handleRequestToRegister}
     />
   ));

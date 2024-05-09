@@ -12,6 +12,11 @@ import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 import AvailableDoctors from './components/AvailableDoctors';
 import ClinicProfile from './components/UserProfile/ClinicProfile';
 import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
+import {
+  Routes,
+  Route,
+  NavLink
+} from "react-router-dom";
 
 export const UserSignedIn = createContext();
 
@@ -66,14 +71,15 @@ function App() {
     }
   }, []);
 
-  // console.log("userState", userState);
+  console.log("userState", userState);
+  console.log("CLinics ", userState.clinics)
 
   return (
 
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-        <PatientInfo />
+        {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
@@ -81,12 +87,18 @@ function App() {
         </>)}
         {LoginDisplay && <LoginForm />}
 
-
-
-
-         <PatientScheduler />
+         {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
-        {/* <AvailableDoctorsRoute /> */}
+
+        <Routes>
+        {/* <Route path='/' element={}> */}
+          <Route path='/availabledoctors' element={<AvailableDoctorsRoute />}/>
+        {/* </Route> */}
+      </Routes>
+
+          <NavLink to="/availabledoctors" >
+            AVAILABLE DOCTORS
+          </NavLink>  
       </UserSignedIn.Provider>
 
     </div>

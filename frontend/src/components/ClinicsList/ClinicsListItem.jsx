@@ -2,7 +2,7 @@ import { useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 
 const ClinicListItem = (props) => {
-  const {name, address, id, distance, doctors, handleRequestToRegister} = props;
+  const {name, address, id, distance, handleRequestToRegister} = props;
   const clinicInfo = {
     clinic_id: id,
     clinic_name: name,
@@ -34,7 +34,6 @@ const ClinicListItem = (props) => {
           </p>
           <DoctorsList 
             clinic_id={id} 
-            doctors={doctors}
             // renderClinic={checkIfRenderClinic}
             changeDoctorState={triggerDoctorStateUpdate}
           />

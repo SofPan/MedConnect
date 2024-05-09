@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 
@@ -13,7 +13,7 @@ const customMarkerIcon = `
   </svg>
 `;
 
-const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
+const MapComponent = ({displayedClinics, coordinates, searchTermMarker}) => {
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
@@ -28,7 +28,7 @@ const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
           />
         }
 
-        {clinics.map((clinic, index) => {
+        {displayedClinics.map((clinic, index) => {
           const clinicCoordinates = {
             lat: parseFloat(clinic.latitude), 
             lng: parseFloat(clinic.longitude), 
