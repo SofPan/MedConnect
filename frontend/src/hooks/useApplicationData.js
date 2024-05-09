@@ -86,8 +86,10 @@ export default function useApplicationData() {
 
 
 useEffect(() => {
-    fetchClinics();
-    fetchDoctors();
+    if (isLoaded) {
+        fetchClinics();
+        fetchDoctors();
+    }
 }, [isLoaded]);
 
 
