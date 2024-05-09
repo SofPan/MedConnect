@@ -49,9 +49,9 @@ CREATE TABLE patients (
 
 CREATE TABLE appointments (
     id SERIAL PRIMARY KEY,
-    patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
+    patient_id INTEGER DEFAULT NULL REFERENCES patients(id) ON DELETE CASCADE,
     doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
-    patient_name VARCHAR(255),
+    patient_name VARCHAR(255) DEFAULT NULL,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
     clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
