@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import DoctorsListItem from "./DoctorsListItem";
+import { UserSignedIn } from "../../App";
 
 const DoctorsList = (props) => {
-  const {clinic_id, doctors, changeDoctorState} = props;
+  const {clinic_id, changeDoctorState} = props;
+  const { userState } = useContext(UserSignedIn);
 
-  const mapAndFilterDoctors = doctors.filter(doctor => {
+  const mapAndFilterDoctors = userState.doctors.filter(doctor => {
       // Only show the Clinic's doctors that are accepting patients
       return doctor.clinic_id === clinic_id && doctor.number_of_patients
     })

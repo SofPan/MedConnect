@@ -28,7 +28,6 @@ export default function LoginForm() {
     const submitForm = async (e) => {
 
         e.preventDefault();
-    
         try {
             // Make POST request to your backend
             const response = await fetch('http://localhost:8080/login', {
@@ -38,9 +37,12 @@ export default function LoginForm() {
                 },
                 body: JSON.stringify(formData),
             });
+            console.log("response",response)
+            console.log("formData ", formData)
     
             if (!response.ok) {
                 throw new Error('Failed to log in');
+
             }
     
             // Assuming response is JSON
@@ -64,6 +66,7 @@ export default function LoginForm() {
         } catch (error) {
             console.error('Error:', error);
             // Handle error
+            console.log(error)
         }
     }
 

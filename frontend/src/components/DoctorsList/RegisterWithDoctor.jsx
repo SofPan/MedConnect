@@ -1,12 +1,17 @@
+import axios from "axios";
+import { useContext } from "react";
+import { UserSignedIn } from "../../App";
+
 const RegisterWithDoctor = (props) => {
-  const {clinicInfo, doctors} = props;
-  const filteredDoctors = doctors.filter(doctor => {
+  const {clinicInfo} = props;
+  const { userState } = useContext(UserSignedIn);
+  
+  const filteredDoctors = userState.doctors.filter(doctor => {
     // Only show the Clinic's doctors that are accepting patients
     return doctor.clinic_id === clinicInfo.clinic_id && doctor.number_of_patients
   })
 
-  const handleRegister = () => {
-    
+  const handleRegister = (id) => {
   }
 
   return (
@@ -20,7 +25,7 @@ const RegisterWithDoctor = (props) => {
             <p>{doctor.name}</p>
             <p>{doctor.qualifications}</p>
             <img src={`./assets/images/${doctor.photo_url}`} alt={doctor.name}/>
-            <button onClick={handleRegister}>Register</button>
+            <button onClick={() => handleRegister(doctor.id)}>Register</button>
           </div>
         )
       })}
