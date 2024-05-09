@@ -7,12 +7,17 @@ import {
   } from '@mui/material';
 import { putAppointment } from "../../hooks/tempUseAPI";
 
+const formatDateAndTime = (date) => {
+  return date.replace(":00.000Z", "").split("T");
+}
+
 const AppointmentsListItem = (props) => {
   
   const {
     doctor_name,
-    details,
     clinic_address,
+    start_time,
+    end_time,
     status,
     appointment,
     user_id
@@ -20,9 +25,6 @@ const AppointmentsListItem = (props) => {
 
   const [editing, setEditing] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
-
-  const splitDate = details.replace(":00.000Z", "").split("T");
-  const formattedDate = `${splitDate[0]} at ${splitDate[1]}`
 
   useEffect(() => {
     // PUT instead of DELETE because the Clinic should retain the appointment slot
@@ -45,16 +47,18 @@ const AppointmentsListItem = (props) => {
     setEditing(true);
   }
 
+  const dateString = `${formatDateAndTime(start_time)[0]} from ${formatDateAndTime(start_time)[1]} - ${formatDateAndTime(end_time)[1]}`
+
   return(
     <Box marginBottom={"24px"}>
       <Card className="unbooked-appointments">
-        <p>Appointment available on {formattedDate}</p>
+        <p>Appointment available on {dateString}</p>
         <Button onClick={handleClick}>Request</Button>
       </Card>
       <Card className="patient-appointments">
         <Box padding={"20px"}>
           <p>{status ? "Approved" : "Pending"}</p>
-          <p>You have an appointment {!status && "requested"} on {formattedDate} with {doctor_name}.</p> 
+          <p>You have an appointment {!status && "requested"} on {dateString} with {doctor_name}.</p> 
           <p>Clinic address: {clinic_address}</p>
           <Button onClick={handleClick}>Cancel</Button>
         </Box>

@@ -13,7 +13,8 @@ const AppointmentsList = (props) => {
             key={appointment.id}
             id={appointment.id}
             doctor_name={appointment.doctor_name}
-            details={appointment.details}
+            start_time={appointment.start_time}
+            end_time={appointment.end_time}
             clinic_address={appointment.clinic_address}
             status={appointment.status}
             appointment={appointment}
