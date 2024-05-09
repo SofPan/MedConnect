@@ -2,17 +2,23 @@ import ClinicsList from './ClinicsList/ClinicsList';
 import SearchClinicsByAddressForm from './SearchClinicsByAddressForm';
 import MapComponent from './MapComponent';
 import SearchClinicsByDoctorForm from './SearchClinicsByDoctorForm';
+import { useState } from 'react';
 
+const defaultCenter = {
+  lat: 43.642567, // default latitude
+  lng: -79.387054, // default longitude
+};
 
-const AvailableDoctors = (props) => {
-  const { searchTermMarker, setSearchTermMarker, clinics, doctors, coordinates, setCoordinates, displayedClinics, setDisplayedClinics, defaultCenter, handleRequestToRegister } = props;
+const AvailableDoctors = () => {
+  const [searchTermMarker, setSearchTermMarker] = useState(false)
+  const [coordinates, setCoordinates] = useState(defaultCenter);
 
   return (
     <div>
-      <SearchClinicsByDoctorForm clinics={clinics} doctors={doctors} setDisplayedClinics={setDisplayedClinics} setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
+      <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
       <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker}/>
-      {/* <MapComponent clinics={displayedClinics} coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
-      <ClinicsList clinics={displayedClinics} doctors={doctors} searchCoordinates={coordinates} handleRequestToRegister={handleRequestToRegister}/>
+      {/* <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
+      <ClinicsList searchCoordinates={coordinates}/> 
     </div>
   );
 };

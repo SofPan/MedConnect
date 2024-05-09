@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { UserSignedIn } from '../App';
 
 
 const mapContainerStyle = {
@@ -13,13 +14,23 @@ const customMarkerIcon = `
   </svg>
 `;
 
-const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
+const MapComponent = ({coordinates, searchTermMarker}) => {
+  const { userState } = useContext(UserSignedIn);
+  console.log("displayed clinics", userState.displayedClinics)
+  
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={15}
+      zoom={13}
       center={coordinates}
       >
         { searchTermMarker && 
@@ -28,7 +39,7 @@ const MapComponent = ({clinics, coordinates, searchTermMarker}) => {
           />
         }
 
-        {clinics.map((clinic, index) => {
+        {userState.displayedClinics.map((clinic, index) => {
           const clinicCoordinates = {
             lat: parseFloat(clinic.latitude), 
             lng: parseFloat(clinic.longitude), 

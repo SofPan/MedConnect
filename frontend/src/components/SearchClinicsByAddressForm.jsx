@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { UserSignedIn } from '../App';
 
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');

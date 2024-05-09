@@ -13,6 +13,12 @@ import AvailableDoctors from './components/AvailableDoctors';
 import ClinicProfile from './components/UserProfile/ClinicProfile';
 import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
 import PatientAppointments from '../../frontend/src/components/Scheduling/PatientAppointments'
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
+
 export const UserSignedIn = createContext();
 
 
@@ -88,7 +94,13 @@ function App() {
 
         {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
-        {/* <AvailableDoctorsRoute /> */}
+
+        <Routes>
+          {/* <Route path='/' element={<Layout/>}> */}
+          <Route path='/availabledoctors' element={<AvailableDoctors />} />
+          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+          {/* </Route> */}
+        </Routes>
         {userState.userInfo.id && <UserProfile />}
 
       </UserSignedIn.Provider>
