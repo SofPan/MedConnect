@@ -6,6 +6,7 @@ import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
 import { Box } from "@mui/material";
 import PatientAppointments from "../Scheduling/PatientAppointments";
+import BoxWrapper from "../GeneralComponents/BoxWrapper";
 
 const PatientProfile = (props) => {
   const {userProfile} = props;
@@ -29,7 +30,7 @@ const PatientProfile = (props) => {
   return(
     <div className="patient-profile">
       <article className="profile-main">
-        <Box className="profile-left" width="30%" display={'inline-block'}>
+        <BoxWrapper type="profileLeft">
           <UserInformation userProfile={userProfile} />
           <h2>Documents</h2>
             <AccordionWrapper title="Add">
@@ -43,11 +44,11 @@ const PatientProfile = (props) => {
               documents={documents}
               changeDocumentState={triggerDocumentStateUpdate}
             />
-        </Box>
-        <Box className="profile-right" width="60%" height="100%" display={'inline-flex'} flexDirection={"column"} justifyContent={"flex-start"} marginLeft={"50px"}>
+        </BoxWrapper>
+        <BoxWrapper type="profileRight">
           <h2>Appointments</h2>
           <PatientAppointments patient_id={userProfile.id}/>
-        </Box>
+        </BoxWrapper>
       </article>
     </div>
   )

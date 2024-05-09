@@ -89,6 +89,7 @@ function App() {
         {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
         {/* <AvailableDoctorsRoute /> */}
+        {userState.userInfo.id && <UserProfile />}
 
       </UserSignedIn.Provider>
 
