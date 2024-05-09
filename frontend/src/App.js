@@ -17,6 +17,7 @@ import {
   Route,
 } from "react-router-dom";
 import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
+import LandingPage from './components/LandingPage';
 
 export const UserSignedIn = createContext();
 
@@ -95,7 +96,7 @@ function App() {
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
-          {/* <Route path='/' element={<Layout/>}> */}
+          <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
           <Route path='/profile' element={<UserProfile />} />
