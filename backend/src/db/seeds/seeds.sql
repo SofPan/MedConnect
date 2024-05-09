@@ -86,7 +86,7 @@ INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_
 
 INSERT INTO appointments (patient_id, doctor_id, patient_name, start_time, end_time, clinic_id, status, created_at)
 VALUES
-(1, 6, 'John Doe', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
+(1, 1, 'John Doe', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
 (2, 7, 'Jane Smith', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, TRUE, NOW()),
 (3, 8, 'Michael Johnson', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, FALSE, NOW()),
 (4, 9, 'Emily Brown', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, FALSE, NOW()),
@@ -109,3 +109,9 @@ INSERT INTO documents (patient_id, document_name, document_url, created_at) VALU
 (3, 'Lab Report', 'lab_report.pdf', NOW()),
 (4, 'X-Ray Image', 'xray.jpg', NOW()),
 (5, 'Insurance Card', 'insurance_card.pdf', NOW());
+
+-- Seed data for pending_requests table
+INSERT INTO pending_requests (request_type, patient_id, clinic_id, doctor_id, appointment_id, created_at) VALUES
+('register', 1, 1, 1, null, NOW()),
+('change_doctor', 1, 2, 2, null, NOW()),
+('appointment', 1, 1, 1, 1, NOW());

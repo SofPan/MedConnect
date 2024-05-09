@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS pending_requests CASCADE;
 DROP TABLE IF EXISTS documents CASCADE;
 DROP TABLE IF EXISTS appointments CASCADE;
 DROP TABLE IF EXISTS doctors CASCADE;
@@ -63,5 +64,15 @@ CREATE TABLE documents (
   patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
   document_name VARCHAR(255) NOT NULL,
   document_url VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE pending_requests (
+  id SERIAL PRIMARY KEY,
+  request_type VARCHAR(15) NOT NULL,
+  patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
+  clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
+  doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
+  appointment_id INTEGER DEFAULT NULL REFERENCES appointments(id) ON DELETE CASCADE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
