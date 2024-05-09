@@ -8,8 +8,6 @@ const RegisterWithDoctor = () => {
 
   const userInfo = userState.userInfo;
 
-  console.log(userInfo)
-
   const clinicInfo = userState.clinicInfo;
   
   const filteredDoctors = userState.doctors.filter(doctor => {
@@ -19,17 +17,29 @@ const RegisterWithDoctor = () => {
 
   const handleRegister = (doctor_id) => {
     if (userInfo.id && !userInfo.is_clinic) {
-      axios.put(`http://localhost:8080/patients/${userInfo.id}`, { doctor_id: doctor_id })
+      axios.get(`http://localhost:8080/patients/${userInfo.id}`,)
         .then(response => {
-          
+         const patient = response.data;
+          if (patient.doctor_id) {
+            setErrorMessage("You are already registered with a doctor.Do you want to change doctors?");
+          } else {
+            axios.post(`http://localhost:8080/requests`, {
+              request_type: "register",
+              patient_id: patient.id,
+              clinic_id: clinicInfo.clinic_id,
+              doctor_id: doctor_id,
+              appointment_id: null
+            })
+            .then(response => {
+              if (response.data.message) {
+                setErrorMessage(response.data.message)
+              }
+            })
+          }
         })
         .catch(error => {
-          if (error.response && error.response.status === 409) {
-            setErrorMessage("You are already registered with a doctor.");
-          } else {
-            console.error("Error registering with doctor:", error);
-            setErrorMessage("An error occurred. Please try again later.");
-          }
+          console.error("Error registering with doctor:", error);
+          setErrorMessage("An error occurred. Please try again later.");
         });
     } else if (!userInfo.id) {
       setErrorMessage("Please login or sign up to register with a doctor");
@@ -52,6 +62,7 @@ const RegisterWithDoctor = () => {
             <p>{doctor.qualifications}</p>
             <img src={`./assets/images/${doctor.photo_url}`} alt={doctor.name}/>
             <button onClick={() => handleRegister(doctor.id)}>Register</button>
+            <h2>{errorMessage}</h2>
           </div>
         )
       })}
