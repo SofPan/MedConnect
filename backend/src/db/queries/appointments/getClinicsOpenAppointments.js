@@ -1,15 +1,16 @@
 // Show all unbooked appointments by clinic id
 const db = require('../../connection');
 
-const getClinicsOpenAppointments = (clinic_id) => {
+const getClinicsOpenAppointments = (doctor_id) => {
   console.log("query reached")
-  const values = [clinic_id];
+  const values = [doctor_id];
 
   const query = `
-    SELECT *
+    SELECT appointments.*
     FROM appointments
-    WHERE clinic_id = $1
-    AND patient_id IS NULL;
+    JOIN clinics ON appointments.clinic_id = clinics.id
+    WHERE appointments.patient_id IS NULL
+    AND appointments.doctor_id = $1;
   `
 
   return db.query(query, values)
