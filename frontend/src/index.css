@@ -18,3 +18,10 @@ ul {
   height: 50px;
   border-radius: 50%;
 }
+
+.flex-temp{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 75px;
+}
