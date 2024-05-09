@@ -4,17 +4,14 @@ import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
 import ProfileDoctors from "../DoctorsList/ProfileDoctors";
 import Notifications from "../Notifications/Notifications";
-import {
-  Tabs,
-  Tab,
-  Box
-} from '@mui/material';
+import { Box } from '@mui/material';
+import ClinicTabs from "./ClinicTabs";
 
 const RenderProfile = (props) => {
   const {userProfile} = props;
   const [leftComponent, setLeftComponent] = useState(null);
   const [rightComponent, setRightComponent] = useState(null);
-  const [isClinic, setIsClinic] = useState(true);
+  const [isClinic, setIsClinic] = useState(userProfile.is_clinic);
 
   useEffect(() => {
     if(isClinic){
@@ -30,12 +27,7 @@ const RenderProfile = (props) => {
   return(
     <>
       {isClinic &&
-        <Box marginRight={"50px"} width="20vw" display={'inline-block'} borderRight={'1px solid lightgrey'}>
-          <Tabs value={0} orientation='vertical'>
-            <Tab label="Clinic Profile" tabIndex={0} value={0}/>
-            <Tab label="Scheduling" tabIndex={1} value={1}/>
-          </Tabs>
-        </Box>
+        <ClinicTabs />
       }
       <Box width="60vw" display={'inline-block'} >
         <ProfileBody

@@ -10,7 +10,6 @@ import SignUp from './components/SignUp/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 import AvailableDoctors from './components/AvailableDoctors';
-import ClinicProfile from './components/UserProfile/ClinicProfile';
 import AvailableDoctorsRoute from './routes/AvailableDoctorsRoute';
 import PatientAppointments from '../../frontend/src/components/Scheduling/PatientAppointments'
 import {
@@ -21,7 +20,12 @@ import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 
 export const UserSignedIn = createContext();
 
-
+{/* <Routes>
+          {/* <Route path='/' element={<Layout/>}> */}
+// <Route path='/availabledoctors' element={<AvailableDoctors />} />
+// <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
+{/* </Route> */ }
+// </Routes> */}
 function App() {
 
   const { userState, dispatch } = useApplicationData();
@@ -95,12 +99,7 @@ function App() {
         {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
 
-        <Routes>
-          {/* <Route path='/' element={<Layout/>}> */}
-          <Route path='/availabledoctors' element={<AvailableDoctors />} />
-          <Route path='/register' element={<RegisterWithDoctor clinicInfo={userState.clinicInfo} />} />
-          {/* </Route> */}
-        </Routes>
+        {/* Put routes back here */}
         {userState.userInfo.id && <UserProfile />}
 
       </UserSignedIn.Provider>
