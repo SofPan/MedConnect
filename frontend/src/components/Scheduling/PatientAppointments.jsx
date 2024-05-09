@@ -6,7 +6,7 @@ import AppointmentsList from "../AppointmentsList/AppointmentsList";
 const PatientAppointments = (props) => {
   const {patient_id } = props;
   const [appointments, setAppointments] = useState([]);
-  const [unbookedAppointments, setUnbookedAppointments] = useState([]);
+  const [unbookedAppointments, setUnbookedAppointments] = useState(["test"]);
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -15,13 +15,14 @@ const PatientAppointments = (props) => {
     }
 
     const fetchUnbookedAppointments = async () => {
-      console.log("fetching unbooked appointments...");
+      const openAppointmentData = await console.log("needs something");
+      console.log("openAppointmentData", openAppointmentData);
     }
 
     
     if (patient_id){
       fetchAppointments();
-      // fetchUnbookedAppointments();
+      fetchUnbookedAppointments();
     }
   }, [patient_id]);
 
@@ -30,6 +31,7 @@ const PatientAppointments = (props) => {
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
         <div className="appointments-open" >
+          {unbookedAppointments}
           {/* <AppointmentsList patient_id={null} appointments={DUMMY_OPEN_APPOINTMENTS} user_id={patient_id} /> */}
         </div>
       </AccordionWrapper>                

@@ -47,6 +47,16 @@ export const fetchPatientAppointments = async (patientId) => {
   }
 }
 
+export const fetchClinicsOpenAppointments = async (clinicId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}appointments/open/${clinicId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching patient's appointments", error);
+    throw error;
+  }
+}
+
 export const postDoctor = async (doctor) => {
   try {
     console.log("2 tempUseAPI post")
