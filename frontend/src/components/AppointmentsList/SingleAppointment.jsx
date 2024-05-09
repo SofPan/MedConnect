@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 const SingleAppointment = (appointment) => {
 
    
- 
+ console.log(appointment);
 //   const [editing, setEditing] = useState(false);
 //   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
 
@@ -75,7 +75,7 @@ const SingleAppointment = (appointment) => {
           End Time: {new Date(appointment.end_time).toLocaleString()}
         </Typography>
         <Typography  color="textSecondary">
-          Address: {appointment.address}
+          Address: {appointment.clinic_address}
         </Typography>
       </CardContent>
     </Card>

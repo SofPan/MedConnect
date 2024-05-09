@@ -124,9 +124,11 @@ export default function PatientScheduler() {
               throw new Error('Failed to register user');
             }
             const responseData = await response.json();
-            console.log("response data", responseData);
-            setappointmentInfo(responseData);
-            setsingleAppointmentDisplay(!singleAppointmentDisplay)
+            
+            setappointmentInfo(responseData)
+          setsingleAppointmentDisplay(!singleAppointmentDisplay)
+            
+            
           } catch (error) {
             console.error('Error registering user:', error);
             // Handle error
@@ -169,7 +171,10 @@ export default function PatientScheduler() {
         clinic_address={appointmentInfo.address}
         status={appointmentInfo.status}
         appointment={"hehehehehe"}
-        user_id={1} /> :
+        user_id={1} 
+        patient_name={appointmentInfo.patient_name}
+        start_time={appointmentInfo.start_time}
+        end_time={appointmentInfo.end_time}/> :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <h1>Clinic Appointments</h1>
           <FullCalendar
