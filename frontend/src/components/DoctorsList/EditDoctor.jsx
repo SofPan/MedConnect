@@ -6,6 +6,7 @@ const EditDoctorForm = (props) => {
   const {doctor, changeDoctorState} = props;
 
   const [editDoctor, setEditDoctor] = useState(doctor);
+  const [editing, setEditing] = useState(false);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,15 +18,18 @@ const EditDoctorForm = (props) => {
       description: target.description.value && target.description.value,
       number_of_patients: target.num_patients.value
     }));
+    setEditing(true);
   }
 
   useEffect(() => {
     const editDoctorRequest = async () => {
       await putDoctor(editDoctor);
     }
-    editDoctorRequest();
-    changeDoctorState();
-  }, [editDoctor])
+    if (editing){
+      editDoctorRequest();
+      changeDoctorState();
+    }
+  }, [editing])
 
   return(
     <>

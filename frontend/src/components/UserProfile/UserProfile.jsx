@@ -13,7 +13,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userData = await fetchUser(user.id);
+      const userData = await fetchUser(user.user_id);
       setUserProfile(userData);
     };
     fetchUserProfile();

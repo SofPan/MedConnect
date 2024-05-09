@@ -22,8 +22,8 @@ function App() {
   const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
 
-  const getUserInfoForSession = async (userId) =>{
-   
+  const getUserInfoForSession = async (userId) => {
+
     try {
       const response = await fetch(`http://localhost:8080/profile/${userId}`, {
         method: 'GET',
@@ -36,33 +36,33 @@ function App() {
       if (!response.ok) {
         throw new Error('Failed to register user');
       }
-      
-      const responseData = await response.json();
-      
 
-     
-      dispatch({ type: "USER_INFO", payload: responseData});
+      const responseData = await response.json();
+
+
+
+      dispatch({ type: "USER_INFO", payload: responseData });
 
     } catch (error) {
       console.error('error getting user app.js:', error);
-      
+
     }
   }
-  
+
 
   useEffect(() => {
 
     const userId = sessionStorage.getItem('user_id');
-    
+
     if (userId) {
-      
+
       dispatch({ type: "USER_SESSION", payload: true })
 
-      
+
 
       getUserInfoForSession(userId);
 
-     
+
     } else {
       console.log("else statment hit");
       dispatch({ type: "USER_SESSION", payload: false })
@@ -77,21 +77,19 @@ function App() {
     <div className="App" >
 
       <UserSignedIn.Provider value={{ userState, dispatch }}>
-      <PatientAppointments />
-        <PatientInfo />
+        {/* <PatientAppointments /> */}
+        {/* <PatientInfo /> */}
         <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
         {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
-          
+
         </>)}
         {LoginDisplay && <LoginForm />}
 
-
-
-
-         <PatientScheduler />
+        {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
         {/* <AvailableDoctorsRoute /> */}
+
       </UserSignedIn.Provider>
 
     </div>

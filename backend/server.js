@@ -25,24 +25,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
-const appointmentsRoutes = require('./routes/appointment');
-const doctorsRoutes = require('./routes/doctor');
-const documentsRoutes = require('./routes/document');
-const profileRoutes = require('./routes/profile');
-const registerRoutes = require('./routes/register');
-const loginRoutes = require('./routes/login');
 const indexRoutes = require('./routes/index');
+const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
+const profileRoutes = require('./routes/profile');
 const clinicsRoutes = require('./routes/clinic');
+const doctorsRoutes = require('./routes/doctor');
+const appointmentsRoutes = require('./routes/appointment');
+const documentsRoutes = require('./routes/document');
 const calendarRoutes = require('./routes/calendar');
 
-app.use('/appointments', appointmentsRoutes);
-app.use('/doctors', doctorsRoutes);
-app.use('/documents', documentsRoutes);
-app.use('/profile', profileRoutes);
-app.use('/register', registerRoutes);
-app.use('/', loginRoutes);
 app.use('/', indexRoutes);
+app.use('/', loginRoutes);
+app.use('/register', registerRoutes);
+app.use('/profile', profileRoutes);
 app.use('/clinics', clinicsRoutes);
+app.use('/doctors', doctorsRoutes);
+app.use('/appointments', appointmentsRoutes);
+app.use('/documents', documentsRoutes);
 app.use('/calendar', calendarRoutes);
 
 
