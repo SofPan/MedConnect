@@ -12,11 +12,7 @@ const defaultCenter = {
 
 const AvailableDoctorsRoute = () => {
   const { userState } = useContext(UserSignedIn);
-  console.log(userState)
-
   const [searchTermMarker, setSearchTermMarker] = useState(false)
-  // const [clinics, setClinics] = useState([]);
-  // const [doctors, setDoctors] = useState([]);
   const [coordinates, setCoordinates] = useState(defaultCenter);
   const [displayedClinics, setDisplayedClinics] = useState(userState.clinics);
   const [displayOneClinic, setDisplayOneClinic] = useState({
@@ -24,9 +20,15 @@ const AvailableDoctorsRoute = () => {
     clinicInfo: {}
   });
 
+  
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+
   useEffect (() => {
     setDisplayedClinics(userState.clinics)
-  }, [userState.clinics])
+  }, [userState.clinics, isLoaded])
 
   const handleRequestToRegister = (info) => {
     setDisplayOneClinic({
@@ -34,29 +36,6 @@ const AvailableDoctorsRoute = () => {
       clinicInfo: info
     })
   }
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-
-  // useEffect(() => {
-  //     axios.get('http://localhost:8080/clinics')
-  //       .then(response => {
-  //         setClinics(response.data);
-  //         setDisplayedClinics(response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error fetching clinics:', error);
-  //       });
-  //     axios.get('http://localhost:8080/doctors')
-  //       .then(response => {
-  //         setDoctors(response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error fetching doctors:', error);
-  //       });
-    
-  // }, []);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -66,16 +45,11 @@ const AvailableDoctorsRoute = () => {
     <div>
       {displayOneClinic.display ? 
         <RegisterWithDoctor 
-          // doctors={userState.doctors} 
           clinicInfo={displayOneClinic.clinicInfo}
         /> : 
         <AvailableDoctors 
           searchTermMarker={searchTermMarker} 
           setSearchTermMarker={setSearchTermMarker} 
-          // clinics={userState.clinics} 
-          // doctors={userState.doctors} 
-          // clinics={clinics} 
-          // doctors={doctors} 
           coordinates={coordinates} 
           setCoordinates={setCoordinates} 
           displayedClinics={displayedClinics} 

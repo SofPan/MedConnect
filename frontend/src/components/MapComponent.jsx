@@ -14,7 +14,7 @@ const customMarkerIcon = `
 `;
 
 const MapComponent = ({displayedClinics, coordinates, searchTermMarker}) => {
-
+console.log("displayed clinics", displayedClinics)
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <GoogleMap

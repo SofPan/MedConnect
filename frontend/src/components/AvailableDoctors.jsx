@@ -8,13 +8,13 @@ import { UserSignedIn } from '../App';
 
 const AvailableDoctors = (props) => {
   const { searchTermMarker, setSearchTermMarker, coordinates, setCoordinates, displayedClinics, setDisplayedClinics, defaultCenter, handleRequestToRegister } = props;
-
+  const { userState } = useContext(UserSignedIn);
 
   return (
     <div>
       <SearchClinicsByDoctorForm setDisplayedClinics={setDisplayedClinics} setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
       <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker}/>
-      {/* <MapComponent displayedClinics={displayedClinics} coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
+      {displayedClinics.length > 0 && <MapComponent displayedClinics={displayedClinics} coordinates={coordinates} searchTermMarker={searchTermMarker}/>}
       <ClinicsList displayedClinics={displayedClinics} searchCoordinates={coordinates} handleRequestToRegister={handleRequestToRegister}/> 
     </div>
   );
