@@ -16,7 +16,6 @@ import PatientAppointments from '../../frontend/src/components/Scheduling/Patien
 import {
   Routes,
   Route,
-  NavLink
 } from "react-router-dom";
 
 export const UserSignedIn = createContext();
@@ -96,15 +95,11 @@ function App() {
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
-        {/* <Route path='/' element={}> */}
+        {/* <Route path='/' element={<Layout/>}> */}
           <Route path='/availabledoctors' element={<AvailableDoctorsRoute />}/>
         {/* </Route> */}
+        </Routes> 
 
-      </Routes>
-
-          <NavLink to="/availabledoctors" >
-            AVAILABLE DOCTORS
-          </NavLink>  
       </UserSignedIn.Provider>
 
     </div>

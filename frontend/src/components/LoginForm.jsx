@@ -28,10 +28,8 @@ export default function LoginForm() {
     const submitForm = async (e) => {
 
         e.preventDefault();
-    console.log("submit")
         try {
             // Make POST request to your backend
-            console.log("inside try")
             const response = await fetch('http://localhost:8080/login', {
                 method: 'POST',
                 headers: {

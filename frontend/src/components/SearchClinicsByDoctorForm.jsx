@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { calculateCenter } from '../helpers/calcCenter';
 import { UserSignedIn } from '../App';
 
-const SearchClinicsByDoctorForm = ({clinics, doctors, setDisplayedClinics, setCoordinates, defaultCenter}) => {
+const SearchClinicsByDoctorForm = ({setDisplayedClinics, setCoordinates, defaultCenter}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const { userState } = useContext(UserSignedIn);
   console.log(userState)
@@ -12,7 +12,7 @@ const SearchClinicsByDoctorForm = ({clinics, doctors, setDisplayedClinics, setCo
       e.preventDefault();
       if (searchTerm) {
       const filteredClinics = userState.clinics.filter(clinic => {
-        const doctor = doctors.find(doc => doc.clinic_id === clinic.id);
+        const doctor = userState.doctors.find(doc => doc.clinic_id === clinic.id);
         return doctor && doctor.name.toLowerCase().includes(searchTerm);
       });
       setDisplayedClinics(filteredClinics);
