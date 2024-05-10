@@ -79,6 +79,16 @@ export const postDocument = async (document) => {
   }
 }
 
+export const postRequest = async (request) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}requests`, request);
+    return response;
+  } catch (error) {
+    console.error("Error posting new pending request", error);
+    throw error;
+  }
+}
+
 export const putDoctor = async (doctor) => {
   try {
     const response = await axios.put(`${API_BASE_URL}doctors/${doctor.id}`, doctor);

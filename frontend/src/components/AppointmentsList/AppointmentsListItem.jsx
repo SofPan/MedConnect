@@ -5,7 +5,7 @@ import {
     Button,
     Card,
   } from '@mui/material';
-import { putAppointment } from "../../hooks/tempUseAPI";
+import { postRequest, putAppointment } from "../../hooks/tempUseAPI";
 
 const formatDateAndTime = (date) => {
   return date.replace(":00.000Z", "").split("T");
@@ -45,7 +45,8 @@ const AppointmentsListItem = (props) => {
   useEffect(() => {
     // Send request as a notification to the clinic side
     const requestAppointment = async () => {
-      
+      console.log("sending details", requestDetails);
+      await postRequest(requestDetails);
     };
 
     if (requesting){
