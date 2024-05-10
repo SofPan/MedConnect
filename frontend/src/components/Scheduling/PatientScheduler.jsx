@@ -37,7 +37,8 @@ export default function PatientScheduler() {
     clinic_id: '',
     status: true,
     created_at: new Date(),
-    clinic_address: ''
+    clinic_address: '',
+    clinic_name:''
   });
 
 
@@ -80,6 +81,7 @@ export default function PatientScheduler() {
 
       const appointments = await getAppointments();
 
+      console.log("does this have clinic name included???", appointments);
 
 
       if (appointments) {
@@ -126,7 +128,7 @@ export default function PatientScheduler() {
             const responseData = await response.json();
             
             setappointmentInfo(responseData)
-          setsingleAppointmentDisplay(!singleAppointmentDisplay)
+            setsingleAppointmentDisplay(!singleAppointmentDisplay)
             
             
           } catch (error) {
@@ -174,7 +176,10 @@ export default function PatientScheduler() {
         user_id={1} 
         patient_name={appointmentInfo.patient_name}
         start_time={appointmentInfo.start_time}
-        end_time={appointmentInfo.end_time}/> :
+        end_time={appointmentInfo.end_time}
+        clinic_id={appointmentInfo.clinic_id}
+        clinic_name={appointmentInfo.clinic_name}/>
+         :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <h1>Clinic Appointments</h1>
           <FullCalendar

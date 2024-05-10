@@ -48,6 +48,17 @@ INSERT INTO clinics (name, user_id, address, latitude, longitude, created_at) VA
 -- Seed data for doctors table
 INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, photo_url, number_of_patients, created_at) VALUES
 (1, 'Dr. Smith', 'General Medicine', 'MD, MBBS', 'Experienced general practitioner.', 'smith.jpg', 20, NOW()),
+(1, 'Dr. Johnson', 'Pediatrics', 'MD, DNB', 'Specializes in pediatric care.', 'johnson.jpg', 15, NOW()),
+(1, 'Dr. Brown', 'Cardiology', 'MD, PhD', 'Expert in cardiology.', 'brown.jpg', 25, NOW()),
+(1, 'Dr. Wilson', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'wilson.jpg', 10, NOW()),
+(1, 'Dr. Davis', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'davis.jpg', 30, NOW()),
+(1, 'Dr. Davidson', 'General Medicine', 'MD, DNB', 'General practitioner.', 'davidson.jpg', 5, NOW()),
+(1, 'Dr. Martinez', 'Obstetrics & Gynecology', 'MD, MBBS', 'Experienced in womens health.', 'martinez.jpg', 18, NOW()),
+(1, 'Dr. Rodriguez', 'Ophthalmology', 'MD, DNB', 'Specializes in eye care.', 'rodriguez.jpg', 22, NOW()),
+(1, 'Dr. Garcia', 'Neurology', 'MD, PhD', 'Expert in neurological disorders.', 'garcia.jpg', 12, NOW()),
+(1, 'Dr. Lopez', 'Psychiatry', 'MD, DNB', 'Specializes in mental health.', 'lopez.jpg', 28, NOW()),
+(1, 'Dr. Flores', 'Endocrinology', 'MD, MBBS', 'Expert in hormonal disorders.', 'flores.jpg', 15, NOW()),
+(1, 'Dr. Smith', 'General Medicine', 'MD, MBBS', 'Experienced general practitioner.', 'smith.jpg', 20, NOW()),
 (2, 'Dr. Johnson', 'Pediatrics', 'MD, DNB', 'Specializes in pediatric care.', 'johnson.jpg', 15, NOW()),
 (3, 'Dr. Brown', 'Cardiology', 'MD, PhD', 'Expert in cardiology.', 'brown.jpg', 25, NOW()),
 (4, 'Dr. Wilson', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'wilson.jpg', 10, NOW()),
@@ -84,18 +95,19 @@ INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_
 
 -- Seed data for appointments table
 
-INSERT INTO appointments (patient_id, doctor_id, patient_name, doctor_name, start_time, end_time, clinic_id, status, created_at)
+INSERT INTO appointments (patient_id, doctor_id, patient_name, doctor_name, start_time, end_time, clinic_id, clinic_name, status, created_at)
 VALUES
-    (1, 6, 'John Doe', 'Dr. Martinez', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
-    (2, 7, 'Jane Smith', 'Dr. Rodriguez', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, TRUE, NOW()),
-    (3, 8, 'Michael Johnson', 'Dr. Garcia', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, FALSE, NOW()),
-    (4, 9, 'Emily Brown', 'Dr. Lopez', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, FALSE, NOW()),
-    (5, 10, 'David Wilson', 'Dr. Flores', '2024-05-04 10:45:00', '2024-05-04 11:45:00', 1, TRUE, NOW()),
-    (6, 6, 'Sarah Jones', 'Dr. Martinez', '2024-05-04 14:00:00', '2024-05-04 15:00:00', 1, TRUE, NOW()),
-    (7, 7, 'Matthew Davis', 'Dr. Rodriguez', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, FALSE, NOW()),
-    (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, TRUE, NOW()),
-    (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, FALSE, NOW()),
-    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, TRUE, NOW());
+    (1, 6, 'John Doe', 'Dr. Martinez', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (2, 7, 'Jane Smith', 'Dr. Rodriguez', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, 'City Medical Center', TRUE, NOW()),
+    (3, 8, 'Michael Johnson', 'Dr. Garcia', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, 'City Medical Center', FALSE, NOW()),
+    (4, 9, 'Emily Brown', 'Dr. Lopez', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, 'City Medical Center', FALSE, NOW()),
+    (5, 10, 'David Wilson', 'Dr. Flores', '2024-05-04 10:45:00', '2024-05-04 11:45:00', 1, 'City Medical Center', TRUE, NOW()),
+    (6, 6, 'Sarah Jones', 'Dr. Martinez', '2024-05-04 14:00:00', '2024-05-04 15:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (7, 7, 'Matthew Davis', 'Dr. Rodriguez', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, 'City Medical Center', FALSE, NOW()),
+    (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, 'City Medical Center', TRUE, NOW()),
+    (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, 'City Medical Center', FALSE, NOW()),
+    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, 'City Medical Center', TRUE, NOW());
+
 
 
 

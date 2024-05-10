@@ -57,7 +57,8 @@ CREATE TABLE appointments (
     end_time TIMESTAMP,
     clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
     status BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    clinic_name VARCHAR(255)
 );
 
 CREATE TABLE documents (
