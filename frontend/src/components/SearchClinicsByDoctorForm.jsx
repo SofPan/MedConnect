@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { calculateCenter } from '../helpers/calcCenter';
 import { UserSignedIn } from '../App';
+import { Button, Input } from '@mui/material';
 
 const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter}) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,13 +30,13 @@ const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter}) => {
 
   return (
     <form onSubmit={handleSearchByName}>
-      <input
+      <Input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Enter doctor's name"
       />
-      <button type='submit'>Search</button>
+      <Button type='submit'>Search</Button>
    </form>
   );
 };
