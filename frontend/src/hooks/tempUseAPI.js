@@ -150,6 +150,16 @@ export const putAppointment = async (appointment) => {
   }
 }
 
+export const putPatient = async (patient) => {
+  try {
+    const response = await axios.put(`${API_BASE_URL}patients/${patient.id}`, patient);
+    return response;
+  } catch (error) {
+    console.error("Error editing patient", error);
+    throw error;
+  }
+}
+
 export const deleteDoctor = async (doctorId) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}doctors/${doctorId}/delete`);

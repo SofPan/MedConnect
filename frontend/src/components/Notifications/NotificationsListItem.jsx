@@ -12,27 +12,28 @@ const NotificationsListItem = (props) => {
     appointment_id
   } = props;
 
-  const [notificationType, setNotificationtype] = useState(null);
-  const [patientName, setPatientName] = useState("");
+  const [notificationType, setNotificationType] = useState(null);
+  const [patient, setPatient] = useState("");
   
   useEffect(() => {
-    const getPatientName = async () => {
+    const getPatient = async () => {
       const patientData = await fetchOnePatient(patient_id);
-      setPatientName(patientData.name);
+      console.log("patientData", patientData);
+      setPatient(patientData);
     }
 
-    getPatientName();
+    getPatient();
 
     (type === "register" || type === "change") 
-      && setNotificationtype(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} />);
+      && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} />);
 
     type === "appointment" 
-      && setNotificationtype(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
+      && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
   }, [])
 
   return(
     <li>
-      <span>New request from {patientName}: {notificationType}</span>
+      <span>New request from {patient.name}: {notificationType}</span>
     </li>
   )
 }
