@@ -86,7 +86,7 @@ INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_
 
 INSERT INTO appointments (patient_id, doctor_id, patient_name, doctor_name, start_time, end_time, clinic_id, status, created_at)
 VALUES
-    (1, 6, 'John Doe', 'Dr. Martinez', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
+    (1, 1, 'John Doe', 'Dr. Smith', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, TRUE, NOW()),
     (2, 7, 'Jane Smith', 'Dr. Rodriguez', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, TRUE, NOW()),
     (3, 8, 'Michael Johnson', 'Dr. Garcia', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, FALSE, NOW()),
     (4, 9, 'Emily Brown', 'Dr. Lopez', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, FALSE, NOW()),
@@ -95,7 +95,11 @@ VALUES
     (7, 7, 'Matthew Davis', 'Dr. Rodriguez', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, FALSE, NOW()),
     (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, TRUE, NOW()),
     (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, FALSE, NOW()),
-    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, TRUE, NOW());
+    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, TRUE, NOW()),
+    -- Unbooked appointments
+    (null, 1, null, 'Dr. Smith', '2024-05-12 09:00:00', '2024-05-12 10:00:00', 1, FALSE, NOW()),
+    (null, 1, null, 'Dr. Smith', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, FALSE, NOW()),
+    (null, 1, null, 'Dr. Smith', '2024-05-15 13:00:00', '2024-05-15 14:00:00', 1, FALSE, NOW());
 
 
 
@@ -112,4 +116,4 @@ INSERT INTO documents (patient_id, document_name, document_url, created_at) VALU
 INSERT INTO pending_requests (request_type, patient_id, clinic_id, doctor_id, appointment_id, created_at) VALUES
 ('register', 1, 1, 1, null, NOW()),
 ('change_doctor', 1, 2, 2, null, NOW()),
-('appointment', 1, 1, 1, 1, NOW());
+('appointment', 2, 1, 1, 1, NOW());

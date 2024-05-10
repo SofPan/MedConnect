@@ -19,7 +19,7 @@ const RenderProfile = (props) => {
     )
     } else {
       setLeftComponent(<Documents userProfile={userProfile} />)
-      setRightComponent(<PatientAppointments patient_id={userProfile.id}/>)
+      setRightComponent(<PatientAppointments userProfile={userProfile}/>)
     }
   }, [userProfile])
 
