@@ -92,6 +92,8 @@ const RegisterWithDoctor = () => {
     <div>
       <h3>{clinicInfo.clinic_name}</h3>
       <p>{clinicInfo.clinic_address}</p>
+      <h2>{errorMessage}</h2>
+      {changeDoctor && <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>}
       {filteredDoctors.map(doctor => {
         return (
           <div key={doctor.id}>
@@ -103,9 +105,6 @@ const RegisterWithDoctor = () => {
           </div>
         )
       })}
-      <h2>{errorMessage}</h2>
-      {changeDoctor && <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>}
-      
     </div>
   )
 }
