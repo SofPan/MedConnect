@@ -1,4 +1,20 @@
+import { useState, useEffect } from "react";
+
 const Notifications = (props) => {
+  const {userProfile} = props;
+
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      setNotifications(["test"])
+    }
+
+    if (!notifications.length) {
+      fetchNotifications();
+    }
+    console.log(notifications)
+  }, [notifications]);
 
   return(
     <div className='profile-notifications'>
