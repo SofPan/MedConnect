@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllDoctors } = require('../src/db/queries/doctors/getAllDoctors');
+const { getOneDoctor } = require('../src/db/queries/doctors/getOneDoctor');
 const { addNewDoctor } = require('../src/db/queries/doctors/addNewDoctor');
 const { deleteDoctor } = require('../src/db/queries/doctors/deleteDoctor');
 const { editDoctor } = require('../src/db/queries/doctors/editDoctor');
