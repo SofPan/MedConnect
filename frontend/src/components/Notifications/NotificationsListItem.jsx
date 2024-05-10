@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RegisterNotification from "./RegisterNotification";
 import AppointmentNotification from "./AppointmentNotification";
 import NotificationActions from "./NotificationActions";
+import { fetchOnePatient } from "../../hooks/tempUseAPI";
 
 const NotificationsListItem = (props) => {
   const {
@@ -13,8 +14,16 @@ const NotificationsListItem = (props) => {
   } = props;
 
   const [notificationType, setNotificationtype] = useState(null);
+  const [patientName, setPatientName] = useState("");
   
   useEffect(() => {
+    const getPatientName = async () => {
+      const patientData = await fetchOnePatient(patient_id);
+      setPatientName(patientData.name);
+    }
+
+    getPatientName();
+
     (type === "register" || type === "change") 
       && setNotificationtype(<RegisterNotification doctor_id={doctor_id} type={type}/>);
 
@@ -24,7 +33,7 @@ const NotificationsListItem = (props) => {
 
   return(
     <li>
-      <span>{patient_id} is requesting {notificationType}</span>
+      <span>{patientName} is requesting {notificationType}</span>
       <NotificationActions />
     </li>
   )
