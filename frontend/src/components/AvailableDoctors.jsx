@@ -3,6 +3,7 @@ import SearchClinicsByAddressForm from './SearchClinicsByAddressForm';
 import MapComponent from './MapComponent';
 import SearchClinicsByDoctorForm from './SearchClinicsByDoctorForm';
 import { useState } from 'react';
+import AccordionWrapper from './GeneralComponents/AccordionWrapper';
 
 const defaultCenter = {
   lat: 43.642567, // default latitude
@@ -15,9 +16,11 @@ const AvailableDoctors = () => {
 
   return (
     <div>
-      <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
+      <AccordionWrapper title={"Search by doctor's name"}>
+        <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
+      </AccordionWrapper>
       <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker}/>
-      {/* <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
+      <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker}/>
       <ClinicsList searchCoordinates={coordinates}/> 
     </div>
   );

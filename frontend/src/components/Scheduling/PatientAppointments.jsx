@@ -1,38 +1,48 @@
 import { useState, useEffect } from "react";
-import { fetchPatientAppointments } from '../../hooks/tempUseAPI';
+import { fetchClinicsOpenAppointments, fetchPatientAppointments } from '../../hooks/tempUseAPI';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
 
 const PatientAppointments = (props) => {
-  const {patient_id } = props;
+  const { userProfile } = props;
   const [appointments, setAppointments] = useState([]);
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
+
+  const patient_id = userProfile.id;
 
   useEffect(() => {
     const fetchAppointments = async () => {
       const appointmentData = await fetchPatientAppointments(patient_id);
-      console.log("PatientAppointments Component", appointmentData);
       setAppointments(appointmentData);
     }
 
     const fetchUnbookedAppointments = async () => {
-      console.log("fetching unbooked appointments...");
+      const openAppointmentData = await fetchClinicsOpenAppointments(userProfile.doctor_id);
+      setUnbookedAppointments(openAppointmentData);
     }
 
     
     if (patient_id){
       fetchAppointments();
-      // fetchUnbookedAppointments();
     }
-  }, [patient_id]);
+    if (!unbookedAppointments.length){
+      fetchUnbookedAppointments();
+    }
+  }, [patient_id, userProfile.doctor_id]);
 
   return(
     <>
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
-        <div className="appointments-open" >
-          {/* <AppointmentsList patient_id={null} appointments={DUMMY_OPEN_APPOINTMENTS} user_id={patient_id} /> */}
-        </div>
+        {
+          !unbookedAppointments.length 
+          ? 
+          <span>There are no appointments available to request</span>
+          :
+          <div className="appointments-open" >
+            <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={patient_id} />
+          </div>
+        }
       </AccordionWrapper>                
       {!appointments.length 
         ? 

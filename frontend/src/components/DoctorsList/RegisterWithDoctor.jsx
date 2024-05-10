@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { UserSignedIn } from "../../App";
+import { Button } from "@mui/material";
+import ChangeDoctor from "./ChangeDoctor";
 
 const RegisterWithDoctor = () => {
   const { userState } = useContext(UserSignedIn);
   const [errorMessage, setErrorMessage] = useState('');
+  const [changeDoctor, setChangeDoctor] = useState(false);
+  const [doctorId, setDoctorId] = useState();
 
   const userInfo = userState.userInfo;
-
-  console.log(userInfo)
 
   const clinicInfo = userState.clinicInfo;
   
@@ -18,18 +20,32 @@ const RegisterWithDoctor = () => {
   })
 
   const handleRegister = (doctor_id) => {
+    setDoctorId(doctor_id);
     if (userInfo.id && !userInfo.is_clinic) {
-      axios.put(`http://localhost:8080/patients/${userInfo.id}`, { doctor_id: doctor_id })
+      axios.get(`http://localhost:8080/patients/${userInfo.id}`)
         .then(response => {
-          
+         const patient = response.data;
+          if (patient.doctor_id) {
+            setChangeDoctor(true);
+            setErrorMessage("YOU ARE REGISTERED WITH A DOCTOR. CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS??");
+          } else {
+            axios.post(`http://localhost:8080/requests`, {
+              request_type: "register",
+              patient_id: patient.id,
+              clinic_id: clinicInfo.clinic_id,
+              doctor_id: doctor_id,
+              appointment_id: null
+            })
+            .then(response => {
+              if (response.data.message) {
+                setErrorMessage(response.data.message)
+              }
+            })
+          }
         })
         .catch(error => {
-          if (error.response && error.response.status === 409) {
-            setErrorMessage("You are already registered with a doctor.");
-          } else {
-            console.error("Error registering with doctor:", error);
-            setErrorMessage("An error occurred. Please try again later.");
-          }
+          console.error("Error registering with doctor:", error);
+          setErrorMessage("An error occurred. Please try again later.");
         });
     } else if (!userInfo.id) {
       setErrorMessage("Please login or sign up to register with a doctor");
@@ -40,10 +56,44 @@ const RegisterWithDoctor = () => {
 
   console.log("err msg", errorMessage)
 
+  const handleCancel = () => {
+    setChangeDoctor(false);
+    setErrorMessage('')
+  }
+
+  const handleChangeDoctorRequest = (doctorId) => {
+    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+      .then(response => {
+        const patient = response.data;
+        axios.post(`http://localhost:8080/requests`, {
+          request_type: "change_doctor",
+          patient_id: patient.id,
+          clinic_id: clinicInfo.clinic_id,
+          doctor_id: doctorId,
+          appointment_id: null
+        })
+        .then((response) => {
+          if (response.data.message) {
+            setErrorMessage(response.data.message)
+          } else {
+          setErrorMessage("The request to change your doctor was sent");
+          setChangeDoctor(false);
+          }
+        })
+      })
+      .catch(error => {
+        console.error("Error requesting to change doctor:", error);
+        setErrorMessage("An error occurred. Please try again later.");
+      });
+  }
+  
+
   return (
     <div>
       <h3>{clinicInfo.clinic_name}</h3>
       <p>{clinicInfo.clinic_address}</p>
+      <h2>{errorMessage}</h2>
+      {changeDoctor && <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>}
       {filteredDoctors.map(doctor => {
         return (
           <div key={doctor.id}>
@@ -51,7 +101,7 @@ const RegisterWithDoctor = () => {
             <p>{doctor.name}</p>
             <p>{doctor.qualifications}</p>
             <img src={`./assets/images/${doctor.photo_url}`} alt={doctor.name}/>
-            <button onClick={() => handleRegister(doctor.id)}>Register</button>
+            <Button onClick={() => handleRegister(doctor.id)}>Register</Button>
           </div>
         )
       })}

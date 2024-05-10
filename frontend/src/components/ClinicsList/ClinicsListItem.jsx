@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 import { useNavigate } from "react-router-dom";
 import { UserSignedIn } from "../../App";
+import { Button } from "@mui/material";
 
 const ClinicListItem = (props) => {
   const {name, address, id, distance} = props;
@@ -41,7 +42,7 @@ const ClinicListItem = (props) => {
           <p>
             {name} <br />
             {address} <br />
-            distance: {distance/1000} km
+            distance: {distance} km
           </p>
           <DoctorsList 
             clinic_id={id} 
@@ -50,7 +51,7 @@ const ClinicListItem = (props) => {
           />
         </div>
         <div>
-            <button onClick={() => handleRequest(clinicInfo)}>Request to Register</button>
+            <Button onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
         </div>
       </li>
     }

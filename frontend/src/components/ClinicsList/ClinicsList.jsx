@@ -9,29 +9,20 @@ const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
 
   useEffect(() => {
     if (searchCoordinates && userState.displayedClinics) {
-      const clinicPromises = userState.displayedClinics.map(clinic => {
-        const location = {
-          lat: parseFloat(clinic.latitude),
-          lng: parseFloat(clinic.longitude),
-        } 
-        return calcRoute(searchCoordinates, location)
-          .then(distance => ({ ...clinic, distance }))
-          .catch(error => {
-            console.error('Error calculating distance:', error);
-          });
-      });
-
-      // Wait for all distance calculations to complete
-      Promise.all(clinicPromises)
-        .then(clinicsWithDistances => {
-          const sortedClinics = clinicsWithDistances.sort((a, b) => a.distance - b.distance);
-          setClinicsList(sortedClinics);
-        })
-        .catch(error => {
-          console.error('Error calculating distances:', error);
+        const clinicDistances = userState.displayedClinics.map((clinic) => {
+            const location = {
+                lat: parseFloat(clinic.latitude),
+                lng: parseFloat(clinic.longitude),
+            };
+            const distance = calcRoute(searchCoordinates, location);
+            return { ...clinic, distance };
         });
+
+        const sortedClinics = clinicDistances.sort((a, b) => a.distance - b.distance);
+        setClinicsList(sortedClinics);
     }
-  }, [searchCoordinates, userState.displayedClinics]);
+}, [searchCoordinates, userState.displayedClinics]);
+
 
   const mapClinics = clinicsList.map(clinic => (
     <ClinicListItem 

@@ -40,7 +40,16 @@ export const fetchDocuments = async () => {
 export const fetchPatientAppointments = async (patientId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
-    console.log("fetchPatientAppointments response", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching patient's appointments", error);
+    throw error;
+  }
+}
+
+export const fetchClinicsOpenAppointments = async (doctorId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}appointments/open/${doctorId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching patient's appointments", error);
@@ -66,6 +75,16 @@ export const postDocument = async (document) => {
     return response;
   } catch (error) {
     console.error("Error posting new document", error);
+    throw error;
+  }
+}
+
+export const postRequest = async (request) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}requests`, request);
+    return response;
+  } catch (error) {
+    console.error("Error posting new pending request", error);
     throw error;
   }
 }
