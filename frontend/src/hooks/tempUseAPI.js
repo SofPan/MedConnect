@@ -27,6 +27,7 @@ export const fetchDoctors = async () => {
   }
 }
 
+
 export const fetchDocuments = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}documents`);
@@ -37,6 +38,15 @@ export const fetchDocuments = async () => {
   }
 }
 
+export const fetchOneDoctor = async (doctorId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}doctors/${doctorId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching doctor's details", error);
+    throw error;
+  }
+}
 export const fetchPatientAppointments = async (patientId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
