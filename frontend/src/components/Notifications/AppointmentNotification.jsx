@@ -17,14 +17,13 @@ const AppointmentNotification = (props) => {
     }
 
     getAppointmentDetails();
-  }, [])
+  }, [appointment_id])
 
-  const dateString = `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}`
-
+  const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";
 
   return(
     <span>
-      <p>to book an appointment with {appointment.doctor_name} on {dateString}.</p>
+      <p>Book an appointment with {appointment.doctor_name} on {dateString}.</p>
     </span>
   )
 }

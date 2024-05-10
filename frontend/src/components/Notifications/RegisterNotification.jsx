@@ -16,7 +16,7 @@ const RegisterNotification = (props) => {
   }, [])
   return(
     <span>
-      <p>to {type === "register" ? "register with" : "change to"} {doctorName}</p>
+      <p>{type === "register" ? "Register with" : "Change doctors to"} {doctorName}</p>
     </span>
   )
 }
