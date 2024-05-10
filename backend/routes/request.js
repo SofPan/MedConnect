@@ -12,10 +12,10 @@ const router  = express.Router();
       appointment_id: req.body.appointment_id
     }
 
-    getRequest(requestData.request_type, requestData.patient_id, requestData.doctor_id)
+    getRequest(requestData.request_type, requestData.patient_id)
       .then(request => {
         if(request) {
-          res.json({message: "Your request exists"});
+          res.json({message: "The request has already been sent"});
         } else {
           addRequest(requestData)
           .then(request => {
