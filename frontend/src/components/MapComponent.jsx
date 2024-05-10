@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React, { useContext, useState } from 'react';
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 import { UserSignedIn } from '../App';
 
 
@@ -16,6 +16,9 @@ const customMarkerIcon = `
 
 const MapComponent = ({coordinates, searchTermMarker}) => {
   const { userState } = useContext(UserSignedIn);
+  const [selectedClinicId, setSelectedClinicId] = useState(null);
+  const [infoWindowShown, setInfoWindowShown] = useState(false);
+
   console.log("displayed clinics", userState.displayedClinics)
   
   const { isLoaded } = useJsApiLoader({
@@ -26,13 +29,24 @@ const MapComponent = ({coordinates, searchTermMarker}) => {
     return <div>Loading...</div>;
   }
 
+  const handleMarkerClick = (id) => {
+    setInfoWindowShown(isShown => !isShown)
+    setSelectedClinicId(id);
+  };
+
+  const handleCloseInfoWindow = () => {
+    setInfoWindowShown(false);
+    setSelectedClinicId(null);
+  }
+
+
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={13}
       center={coordinates}
-      >
+     >
         { searchTermMarker && 
           <Marker 
             position={coordinates} 
@@ -59,7 +73,18 @@ const MapComponent = ({coordinates, searchTermMarker}) => {
                 fontSize: '18px',
                 color: 'white',
               }}
-            />
+              onClick={() => handleMarkerClick(clinic.id)}
+            >
+            {infoWindowShown && selectedClinicId === clinic.id && (
+              <InfoWindow onCloseClick={handleCloseInfoWindow}>
+                <div>
+                  <h3>{clinic.name}</h3>
+                  <p>Address: {clinic.address}</p>
+                  <p>Available spots: {clinic.number_of_spots} </p>
+                </div>
+              </InfoWindow>
+            )}
+            </Marker>
           );
         })}
       </GoogleMap>
