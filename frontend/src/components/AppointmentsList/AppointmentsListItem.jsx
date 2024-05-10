@@ -16,6 +16,8 @@ const AppointmentsListItem = (props) => {
   const {
     doctor_name,
     clinic_address,
+    clinic_id,
+    doctor_id,
     start_time,
     end_time,
     status,
@@ -43,7 +45,7 @@ const AppointmentsListItem = (props) => {
   useEffect(() => {
     // Send request as a notification to the clinic side
     const requestAppointment = async () => {
-      console.log("requesting...");
+      
     };
 
     if (requesting){
@@ -62,7 +64,14 @@ const AppointmentsListItem = (props) => {
   }
 
   const handleClickRequest = (e) => {
-
+    const requestObject = {
+      request_type: "appointment",
+      patient_id: user_id,
+      clinic_id,
+      doctor_id,
+      appointment_id: appointment.id
+    }
+    setRequestDetails(requestObject);
     setRequesting(true);
   }
   const dateString = `${formatDateAndTime(start_time)[0]} from ${formatDateAndTime(start_time)[1]} - ${formatDateAndTime(end_time)[1]}`
