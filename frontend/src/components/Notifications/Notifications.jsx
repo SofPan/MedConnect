@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { fetchRequestNotifications } from "../../hooks/tempUseAPI";
+import NotificationsList from "./NotificationsList";
 
 const Notifications = (props) => {
   const {userProfile} = props;
@@ -7,22 +9,19 @@ const Notifications = (props) => {
 
   useEffect(() => {
     const fetchNotifications = async () => {
-      setNotifications(["test"])
+      const notificationsData = await fetchRequestNotifications(userProfile.id);
+      setNotifications(notificationsData);
     }
 
     if (!notifications.length) {
       fetchNotifications();
     }
-    console.log(notifications)
-  }, [notifications]);
+  }, [userProfile]);
 
   return(
     <div className='profile-notifications'>
       <h2>Notifications</h2>
-      <ul>
-        <li>Patient XYZ has requested an appointment</li>
-        <li>Patient ABC wants to change doctors</li>
-      </ul>
+      <NotificationsList notifications={notifications}/>
     </div>
   )
 }

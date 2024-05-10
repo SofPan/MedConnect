@@ -17,9 +17,8 @@ const UserProfile = () => {
       setUserProfile(() => userData);
       setLoaded(true);
     };
-    if (!loaded){
-      fetchUserProfile();
-    }
+    
+    fetchUserProfile();
 
   },[userContext]);
 

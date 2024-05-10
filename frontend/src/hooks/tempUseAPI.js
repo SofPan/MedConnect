@@ -57,9 +57,9 @@ export const fetchClinicsOpenAppointments = async (doctorId) => {
   }
 }
 
-export const fetchRequestNotifications = async () => {
+export const fetchRequestNotifications = async (clinicId) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}requests`);
+    const response = await axios.get(`${API_BASE_URL}requests/${clinicId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching requests", error);
