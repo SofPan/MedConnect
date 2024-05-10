@@ -18,6 +18,19 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET one doctor /doctors/:id
+router.get('/:id', (req, res) => {
+  const doctorId = req.params.id;
+  getOneDoctor(doctorId)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      console.error('Error fetching doctors:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
 // POST create a new doctor entry /doctors
 router.post('/', (req, res) => {
   console.log("3 router post")
