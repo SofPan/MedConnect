@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchOneDoctor } from "../../hooks/tempUseAPI";
 
 const RegisterNotification = (props) => {
   const {doctor_id} = props;
@@ -7,14 +8,15 @@ const RegisterNotification = (props) => {
 
   useEffect(() => {
     const getDoctorName = async () => {
-      console.log("fetching doctor", doctor_id);
+      const doctorData = await fetchOneDoctor(doctor_id);
+      setDoctorName(doctorData.name);
     }
 
     getDoctorName();
   }, [])
   return(
     <span>
-      <p>to register with ${doctor_id}</p>
+      <p>to register with {doctorName}</p>
     </span>
   )
 }
