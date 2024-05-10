@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, act } from "react";
 import PatientAppointments from "../Scheduling/PatientAppointments";
 import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
@@ -11,6 +11,11 @@ const RenderProfile = (props) => {
   const {userProfile, isClinic} = props;
   const [leftComponent, setLeftComponent] = useState(null);
   const [rightComponent, setRightComponent] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
+
+   const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
 
   useEffect(() => {
     if(isClinic){
@@ -26,7 +31,7 @@ const RenderProfile = (props) => {
   return(
     <>
       {isClinic &&
-        <ClinicTabs />
+        <ClinicTabs activeTab={activeTab} handleTabChange={handleTabChange}/>
       }
       <Box width="60vw" display={'inline-block'} >
         <ProfileBody
@@ -34,6 +39,7 @@ const RenderProfile = (props) => {
           userProfile={userProfile}
           profileComponentLeft={leftComponent}
           profileComponentRight={rightComponent}
+          activeTab={activeTab}
         />
       </Box>
     </>
