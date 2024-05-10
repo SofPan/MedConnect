@@ -91,7 +91,7 @@ function App() {
         </>)}
         {LoginDisplay && <LoginForm />}
 
-        {/* <PatientScheduler /> */}
+        <PatientScheduler />
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>

@@ -3,6 +3,8 @@ const { getAllDoctors } = require('../src/db/queries/doctors/getAllDoctors');
 const { addNewDoctor } = require('../src/db/queries/doctors/addNewDoctor');
 const { deleteDoctor } = require('../src/db/queries/doctors/deleteDoctor');
 const { editDoctor } = require('../src/db/queries/doctors/editDoctor');
+const { getAllDoctorsByClinicID } = require('../src/db/queries/doctors/getAllDoctorsByClinicID');
+
 const router = express.Router();
 
 // GET all doctors /doctors
@@ -10,6 +12,20 @@ const router = express.Router();
 router.get('/', (req, res) => {
   getAllDoctors()
     .then(data => {
+      res.json(data);
+    })
+    .catch(error => {
+      console.error('Error fetching doctors:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+router.get('/:id', (req, res) => {
+  
+  const clinicId = req.params.id;
+  getAllDoctorsByClinicID(clinicId)
+    .then(data => {
+     
       res.json(data);
     })
     .catch(error => {

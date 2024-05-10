@@ -32,6 +32,20 @@ const router  = express.Router();
       });
   });
 
+  router.get('/clinicName/:name', (req, res) => {
+
+    const name= req.params.name;
+
+    getClinicIdbyName(name)
+      .then(clinic => {
+        res.json(clinic);
+      })
+      .catch(error => {
+        console.error('Error fetching clinics:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+  });
+
 
 
   router.post('/', (req, res) => {
