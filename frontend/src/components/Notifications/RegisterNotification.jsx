@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchOneDoctor } from "../../hooks/tempUseAPI";
 
 const RegisterNotification = (props) => {
-  const {doctor_id} = props;
+  const {doctor_id, type} = props;
 
   const [doctorName, setDoctorName] = useState("");
 
@@ -16,7 +16,7 @@ const RegisterNotification = (props) => {
   }, [])
   return(
     <span>
-      <p>to register with {doctorName}</p>
+      <p>to {type === "register" ? "register with" : "change to"} {doctorName}</p>
     </span>
   )
 }

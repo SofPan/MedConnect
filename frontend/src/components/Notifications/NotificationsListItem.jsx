@@ -16,7 +16,7 @@ const NotificationsListItem = (props) => {
   
   useEffect(() => {
     (type === "register" || type === "change") 
-      && setNotificationtype(<RegisterNotification doctor_id={doctor_id}/>);
+      && setNotificationtype(<RegisterNotification doctor_id={doctor_id} type={type}/>);
 
     type === "appointment" 
       && setNotificationtype(<AppointmentNotification />);
