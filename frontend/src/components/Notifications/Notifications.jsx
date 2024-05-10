@@ -21,7 +21,12 @@ const Notifications = (props) => {
   return(
     <div className='profile-notifications'>
       <h2>Notifications</h2>
-      <NotificationsList notifications={notifications}/>
+      {!notifications.length
+        ?
+        <span>No pending requests.</span>
+        :
+        <NotificationsList notifications={notifications}/>
+      }
     </div>
   )
 }
