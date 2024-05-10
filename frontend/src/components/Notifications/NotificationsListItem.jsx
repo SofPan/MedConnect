@@ -18,18 +18,22 @@ const NotificationsListItem = (props) => {
   useEffect(() => {
     const getPatient = async () => {
       const patientData = await fetchOnePatient(patient_id);
-      console.log("patientData", patientData);
       setPatient(patientData);
     }
 
     getPatient();
+  }, [])
 
-    (type === "register" || type === "change") 
+  useEffect(() => {
+    if (patient.name){
+      (type === "register" || type === "change") 
       && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} />);
 
-    type === "appointment" 
-      && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
-  }, [])
+      type === "appointment" 
+        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
+    }
+
+  }, [patient])
 
   return(
     <li>

@@ -28,6 +28,7 @@ const RegisterNotification = (props) => {
   }, [accepting]);
 
   const handleAccept = () => {
+    console.log("before editing", editPatient);
     setEditPatient(prev => ({
       ...prev,
       doctor_id
