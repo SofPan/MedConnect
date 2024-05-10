@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import RegisterNotification from "./RegisterNotification";
 import AppointmentNotification from "./AppointmentNotification";
-import NotificationActions from "./NotificationActions";
 import { fetchOnePatient } from "../../hooks/tempUseAPI";
 
 const NotificationsListItem = (props) => {
@@ -25,16 +24,15 @@ const NotificationsListItem = (props) => {
     getPatientName();
 
     (type === "register" || type === "change") 
-      && setNotificationtype(<RegisterNotification doctor_id={doctor_id} type={type}/>);
+      && setNotificationtype(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} />);
 
     type === "appointment" 
-      && setNotificationtype(<AppointmentNotification appointment_id={appointment_id} />);
+      && setNotificationtype(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
   }, [])
 
   return(
     <li>
       <span>New request from {patientName}: {notificationType}</span>
-      <NotificationActions />
     </li>
   )
 }
