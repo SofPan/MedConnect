@@ -60,7 +60,7 @@ export const fetchOnePatient = async (patientId) => {
 
 export const fetchOneAppointment = async (appointmentId) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}appointments/${appointmentId}`);
+    const response = await axios.get(`${API_BASE_URL}appointments/single/${appointmentId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching appointment details", error);

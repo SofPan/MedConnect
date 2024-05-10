@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchOneAppointment } from "../../hooks/tempUseAPI";
 
+const formatDateAndTime = (date) => {
+  return date.replace(":00.000Z", "").split("T");
+}
+
 const AppointmentNotification = (props) => {
   const {appointment_id} = props;
 
@@ -15,9 +19,12 @@ const AppointmentNotification = (props) => {
     getAppointmentDetails();
   }, [])
 
+  const dateString = `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}`
+
+
   return(
     <span>
-      <p>to book an appointment with {appointment.doctor_name} on DATE from START to END.</p>
+      <p>to book an appointment with {appointment.doctor_name} on {dateString}.</p>
     </span>
   )
 }
