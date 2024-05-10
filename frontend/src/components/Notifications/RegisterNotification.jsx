@@ -1,9 +1,9 @@
 const RegisterNotification = (props) => {
-
+  const {doctor_id} = props;
   return(
-    <>
-      <p>A registration!</p>
-    </>
+    <span>
+      <p>to register with ${doctor_id}</p>
+    </span>
   )
 }
 

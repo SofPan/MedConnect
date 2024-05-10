@@ -1,9 +1,9 @@
 const AppointmentNotification = (props) => {
 
   return(
-    <>
+    <span>
     <p>An appointment!</p>
-    </>
+    </span>
   )
 }
 

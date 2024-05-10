@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import RegisterNotification from "./RegisterNotification";
+import AppointmentNotification from "./AppointmentNotification";
+import NotificationActions from "./NotificationActions";
+
 const NotificationsListItem = (props) => {
   const {
     id,
@@ -7,20 +12,21 @@ const NotificationsListItem = (props) => {
     appointment_id
   } = props;
 
-  const requestType = (requestType) => {
-    let message = "";
-    if (requestType === "register") {
-      message = `to register with ${doctor_id}.`
-    } else if (requestType === "appointment") {
-      message = `to book ${appointment_id} with ${doctor_id}.`
-    } else {
-      message = `to change doctors to ${doctor_id}.`
-    }
+  const [notificationType, setNotificationtype] = useState(null);
+  
+  useEffect(() => {
+    (type === "register" || type === "change") 
+      && setNotificationtype(<RegisterNotification doctor_id={doctor_id}/>);
 
-    return message;
-  }
+    type === "appointment" 
+      && setNotificationtype(<AppointmentNotification />);
+  }, [])
+
   return(
-    <li>{patient_id} is requesting {requestType(type)}</li>
+    <li>
+      <span>{patient_id} is requesting {notificationType}</span>
+      <NotificationActions />
+    </li>
   )
 }
 
