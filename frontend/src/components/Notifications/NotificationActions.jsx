@@ -1,5 +1,6 @@
 import {Button} from "@mui/material"
 import { useEffect, useState } from "react";
+import { deleteRequest } from "../../hooks/tempUseAPI";
 
 const NotificationActions = (props) => {
   const {notification_id, onAccept} = props;
@@ -8,7 +9,7 @@ const NotificationActions = (props) => {
 
   useEffect(() => {
     const declineNotification = async () => {
-      console.log("declining...", notification_id);
+      await deleteRequest(notification_id);
     }
 
     declining && declineNotification();
@@ -17,7 +18,7 @@ const NotificationActions = (props) => {
   const handleDecline = () => {
     setDeclining(true);
   };
-  
+
   return(
     <div>
       <Button onClick={onAccept}>Accept</Button>

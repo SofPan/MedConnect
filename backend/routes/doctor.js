@@ -9,7 +9,6 @@ const { getAllDoctorsByClinicID } = require('../src/db/queries/doctors/getAllDoc
 const router = express.Router();
 
 // GET all doctors /doctors
-// Filter query to relate doctors to the current clinic
 router.get('/', (req, res) => {
   getAllDoctors()
     .then(data => {
@@ -63,7 +62,6 @@ router.post('/', (req, res) => {
         .json({ error: error.message });
     });
 })
-// GET one doctor /doctors/:id
 
 // PUT Edit existing doctor /doctors/:id
 router.put('/:id', (req, res) => {

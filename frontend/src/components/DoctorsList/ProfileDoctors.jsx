@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchDoctors } from '../../hooks/tempUseAPI';
+import { fetchDoctorsByClinicId } from '../../hooks/tempUseAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
@@ -11,8 +11,8 @@ const ProfileDoctors = (props) => {
 
   useEffect(() => {
     const fetchClinicsDoctors = async () => {
-      const doctorData = await fetchDoctors();
-      setDoctors(doctorData);
+      const doctorData = await fetchDoctorsByClinicId(userProfile.id);
+      setDoctors(doctorData.slice(0, 5));
     }
 
     fetchClinicsDoctors();
