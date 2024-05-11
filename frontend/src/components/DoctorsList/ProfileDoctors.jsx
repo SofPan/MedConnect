@@ -12,7 +12,7 @@ const ProfileDoctors = (props) => {
   useEffect(() => {
     const fetchClinicsDoctors = async () => {
       const doctorData = await fetchDoctorsByClinicId(userProfile.id);
-      setDoctors(doctorData.slice(0, 5));
+      setDoctors(doctorData);
     }
 
     fetchClinicsDoctors();

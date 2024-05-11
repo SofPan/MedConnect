@@ -191,7 +191,7 @@ export const deleteDocument = async (documentId) => {
 
 export const deleteRequest = async (requestId) => {
   try {
-    const response = await axios.delete(`${API_BASE_URL}doctors/${requestId}/delete`);
+    const response = await axios.delete(`${API_BASE_URL}requests/${requestId}/delete`);
     return response;
   } catch (error) {
     console.error("Error deleting request", error);

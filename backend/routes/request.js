@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id/delete', (req, res) => {
   const requestId = req.params.id;
   deleteRequest(requestId)
     .then(result => {
