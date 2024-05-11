@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllDoctors } = require('../src/db/queries/doctors/getAllDoctors');
+const { getOneDoctor } = require('../src/db/queries/doctors/getOneDoctor');
 const { addNewDoctor } = require('../src/db/queries/doctors/addNewDoctor');
 const { deleteDoctor } = require('../src/db/queries/doctors/deleteDoctor');
 const { editDoctor } = require('../src/db/queries/doctors/editDoctor');
@@ -8,7 +9,6 @@ const { getAllDoctorsByClinicID } = require('../src/db/queries/doctors/getAllDoc
 const router = express.Router();
 
 // GET all doctors /doctors
-// Filter query to relate doctors to the current clinic
 router.get('/', (req, res) => {
   getAllDoctors()
     .then(data => {
@@ -20,12 +20,27 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET all doctors by clinic id
+
 router.get('/:id', (req, res) => {
-  
+
   const clinicId = req.params.id;
   getAllDoctorsByClinicID(clinicId)
     .then(data => {
-     
+
+      res.json(data);
+    })
+    .catch(error => {
+      console.error('Error fetching doctors:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+// GET one doctor /doctors/:id
+router.get('/single/:id', (req, res) => {
+  const doctorId = req.params.id;
+  getOneDoctor(doctorId)
+    .then(data => {
       res.json(data);
     })
     .catch(error => {
@@ -47,7 +62,6 @@ router.post('/', (req, res) => {
         .json({ error: error.message });
     });
 })
-// GET one doctor /doctors/:id
 
 // PUT Edit existing doctor /doctors/:id
 router.put('/:id', (req, res) => {

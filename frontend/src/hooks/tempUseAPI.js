@@ -37,6 +37,46 @@ export const fetchDocuments = async () => {
   }
 }
 
+export const fetchOneDoctor = async (doctorId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}doctors/single/${doctorId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching doctor's details", error);
+    throw error;
+  }
+}
+
+export const fetchOnePatient = async (patientId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}patients/${patientId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching patient's details", error);
+    throw error;
+  }
+}
+
+export const fetchOneAppointment = async (appointmentId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}appointments/single/${appointmentId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching appointment details", error);
+    throw error;
+  }
+}
+
+export const fetchDoctorsByClinicId = async (clinicId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}doctors/${clinicId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching requests", error);
+    throw error;
+  }
+}
+
 export const fetchPatientAppointments = async (patientId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
@@ -53,6 +93,16 @@ export const fetchClinicsOpenAppointments = async (doctorId) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching patient's appointments", error);
+    throw error;
+  }
+}
+
+export const fetchRequestNotifications = async (clinicId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}requests/${clinicId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching requests", error);
     throw error;
   }
 }
@@ -109,6 +159,16 @@ export const putAppointment = async (appointment) => {
   }
 }
 
+export const putPatient = async (patient) => {
+  try {
+    const response = await axios.put(`${API_BASE_URL}patients/${patient.id}`, patient);
+    return response;
+  } catch (error) {
+    console.error("Error editing patient", error);
+    throw error;
+  }
+}
+
 export const deleteDoctor = async (doctorId) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}doctors/${doctorId}/delete`);
@@ -125,6 +185,16 @@ export const deleteDocument = async (documentId) => {
     return response;
   } catch (error) {
     console.error("Error deleting document", error);
+    throw error;
+  }
+}
+
+export const deleteRequest = async (requestId) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}requests/${requestId}/delete`);
+    return response;
+  } catch (error) {
+    console.error("Error deleting request", error);
     throw error;
   }
 }

@@ -18,7 +18,6 @@ const UserProfile = () => {
   }, [userContext]);
   
   useEffect(() => {
-    console.log("user", user);
     const fetchUserProfile = async () => {
       const userData = await fetchUser(user.user_id ? user.user_id : user.id);
       setUserProfile(() => userData);

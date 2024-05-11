@@ -17,7 +17,6 @@ const { getAppointmentById } = require("../src/db/queries/appointments/getAppoin
 router.get('/single/:id', (req, res) => {
 
   const appointment_id = req.params.id;
-  console.log("this is appoihtment id", appointment_id);
   getAppointmentById(appointment_id)
     .then(appointment => {
 
