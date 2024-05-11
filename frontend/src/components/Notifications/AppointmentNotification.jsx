@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchOneAppointment } from "../../hooks/tempUseAPI";
+import { fetchOneAppointment, deleteRequest, putAppointment } from "../../hooks/tempUseAPI";
 import NotificationActions from "./NotificationActions";
 
 const formatDateAndTime = (date) => {
@@ -7,7 +7,7 @@ const formatDateAndTime = (date) => {
 }
 
 const AppointmentNotification = (props) => {
-  const {appointment_id, notification_id} = props;
+  const {appointment_id, notification_id, patient} = props;
 
   const [appointment, setAppointment] = useState({});
   const [accepting, setAccepting] = useState(false);
@@ -25,13 +25,26 @@ const AppointmentNotification = (props) => {
 
   useEffect(() => {
     const updateAppointmentDetails = async () => {
-      console.log("accepting appointment...", appointment_id)
+      await putAppointment(appointment);
+    }
+    
+    const clearRequest = async () => {
+      await deleteRequest(notification_id);
     }
 
-    accepting && updateAppointmentDetails();
+    if (accepting){
+      updateAppointmentDetails();
+      clearRequest();
+    }
   }, [accepting])
 
   const handleAccept = () => {
+    setAppointment(prev => ({
+        ...prev,
+        patient_id: patient.id,
+        patient_name: patient.name,
+        status: true
+      }))
     setAccepting(true);
   }
   return(

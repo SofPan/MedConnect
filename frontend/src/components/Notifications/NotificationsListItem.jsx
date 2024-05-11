@@ -30,7 +30,7 @@ const NotificationsListItem = (props) => {
       && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} />);
 
       type === "appointment" 
-        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} />);
+        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} patient={patient}/>);
     }
 
   }, [patient])

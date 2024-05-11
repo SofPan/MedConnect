@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchOneDoctor, putPatient } from "../../hooks/tempUseAPI";
+import { fetchOneDoctor, putPatient, deleteRequest } from "../../hooks/tempUseAPI";
 import NotificationActions from "./NotificationActions";
 
 
@@ -22,6 +22,7 @@ const RegisterNotification = (props) => {
   useEffect(() => {
     const updatePatientRecord = async () => {
       await putPatient(editPatient);
+      await deleteRequest(notification_id);
     }
     
     accepting && updatePatientRecord();

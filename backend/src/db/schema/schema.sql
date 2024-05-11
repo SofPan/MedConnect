@@ -72,9 +72,9 @@ CREATE TABLE documents (
 CREATE TABLE pending_requests (
   id SERIAL PRIMARY KEY,
   request_type VARCHAR(15) NOT NULL,
-  patient_id INTEGER REFERENCES patients(id),
-  clinic_id INTEGER REFERENCES clinics(id),
-  doctor_id INTEGER REFERENCES doctors(id),
-  appointment_id INTEGER DEFAULT NULL REFERENCES appointments(id),
+  patient_id INTEGER REFERENCES patients(id) ON DELETE CASCADE,
+  clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
+  doctor_id INTEGER REFERENCES doctors(id) ON DELETE CASCADE,
+  appointment_id INTEGER DEFAULT NULL REFERENCES appointments(id) ON DELETE CASCADE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
