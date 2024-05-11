@@ -1,4 +1,3 @@
-
 import {Button} from "@mui/material"
 import { useEffect, useState } from "react";
 
@@ -13,10 +12,12 @@ const NotificationActions = (props) => {
     }
 
     declining && declineNotification();
-  }, [declining])
+  }, [declining]);
+
   const handleDecline = () => {
     setDeclining(true);
-  }
+  };
+  
   return(
     <div>
       <Button onClick={onAccept}>Accept</Button>
