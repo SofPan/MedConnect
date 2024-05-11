@@ -4,24 +4,32 @@ import { UserSignedIn } from '../../App';
 import RenderProfile from './RenderProfile';
 
 const UserProfile = () => {
+  const [user, setUser] = useState(null);
+  const [isClinic, setIsClinic] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [loaded, setLoaded] = useState(false);
   const userContext = useContext(UserSignedIn) ;
-  
-  const user = userContext.userState.userInfo;
-  const isClinic = user.is_clinic;
 
   useEffect(() => {
+    if (userContext.userState.userInfo.id){
+      setUser(userContext.userState.userInfo);
+    }
+    
+  }, [userContext]);
+  
+  useEffect(() => {
+    console.log("user", user);
     const fetchUserProfile = async () => {
       const userData = await fetchUser(user.user_id ? user.user_id : user.id);
       setUserProfile(() => userData);
       setLoaded(true);
     };
-    if (!loaded){
+    if (user){
+      setIsClinic(user.is_clinic);
       fetchUserProfile();
     }
 
-  },[userContext]);
+  },[user]);
 
   return(
     <>
