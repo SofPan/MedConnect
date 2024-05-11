@@ -2,6 +2,7 @@ const express = require('express');
 const { addRequest } = require('../src/db/queries/clinics/addRequest');
 const { getRequest } = require('../src/db/queries/clinics/getRequestByData');
 const { getRequestByClinic } = require('../src/db/queries/clinics/getRequestByClinic');
+const { deleteRequest } = require('../src/db/queries/clinics/deleteRequest');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
@@ -37,6 +38,19 @@ router.post('/', (req, res) => {
     .catch(error => {
       console.error('Error adding request:', error);
       res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  const requestId = req.params.id;
+  deleteRequest(requestId)
+    .then(result => {
+      return result;
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ error: error.message });
     });
 });
 
