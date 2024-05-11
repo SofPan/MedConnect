@@ -22,14 +22,20 @@ const RegisterNotification = (props) => {
   useEffect(() => {
     const updatePatientRecord = async () => {
       await putPatient(editPatient);
+    }
+    
+    const clearRequest = async () => {
       await deleteRequest(notification_id);
     }
     
-    accepting && updatePatientRecord();
+    if(accepting){
+      updatePatientRecord();
+      clearRequest();
+    } 
+      
   }, [accepting]);
 
   const handleAccept = () => {
-    console.log("before editing", editPatient);
     setEditPatient(prev => ({
       ...prev,
       doctor_id

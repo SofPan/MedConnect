@@ -26,7 +26,7 @@ const NotificationsListItem = (props) => {
 
   useEffect(() => {
     if (patient.name){
-      (type === "register" || type === "change") 
+      (type === "register" || type === "change_doctor") 
       && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} />);
 
       type === "appointment" 
