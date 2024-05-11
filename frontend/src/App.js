@@ -89,9 +89,9 @@ function App() {
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
         </>)}
-      
 
-        <PatientScheduler />
+
+        {/* <PatientScheduler /> */}
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
