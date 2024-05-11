@@ -91,7 +91,7 @@ function App() {
         </>)}
       
 
-        {/* <PatientScheduler /> */}
+        <PatientScheduler />
         {/* <ClinicSignUpInfo />  */}
 
         <Routes>
