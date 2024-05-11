@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { UserSignedIn } from '../App';
 
-export default function LoginForm() {
+export default function LoginForm({ setLoginDisplay }) {
 
     const [formData, setFormData] = useState({
         email: '',
@@ -62,6 +62,8 @@ export default function LoginForm() {
             dispatch({ type: "USER_INFO", payload: userObject });
     
             dispatch({ type: "USER_LOGIN", payload: true });
+
+            setLoginDisplay(false);
             
         } catch (error) {
             console.error('Error:', error);
@@ -101,7 +103,7 @@ export default function LoginForm() {
           name="password"
           onChange={handleChange}
         />
-       <Button type="submit"variant="contained" >Submit</Button>
+       <Button type="submit"variant="contained" sx={{ mt: 2 }}>Submit</Button>
        
       </div>
     </Box>

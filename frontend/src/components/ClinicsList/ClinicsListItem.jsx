@@ -42,7 +42,7 @@ const ClinicListItem = (props) => {
           <p>
             {name} <br />
             {address} <br />
-            distance: {distance/1000} km
+            distance: {distance} km
           </p>
           <DoctorsList 
             clinic_id={id} 

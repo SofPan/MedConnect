@@ -20,7 +20,7 @@ const AvailableDoctors = () => {
         <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter}/>
       </AccordionWrapper>
       <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker}/>
-      {/* <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker}/> */}
+      <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker}/>
       <ClinicsList searchCoordinates={coordinates}/> 
     </div>
   );
