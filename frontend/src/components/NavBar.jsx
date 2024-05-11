@@ -95,7 +95,7 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
+                    {/* <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
@@ -103,14 +103,16 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
                         sx={{ mr: 2 }}
                     >
                         <MenuIcon />
-                    </IconButton>
+                    </IconButton> */}
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        MEDCONNECT
+                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                            MEDCONNECT
+                        </NavLink>
                     </Typography>
                     {/* <Search>
                         <SearchIconWrapper>
@@ -129,6 +131,8 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
 
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
+                            {LoginDisplay && <LoginForm setLoginDisplay={setLoginDisplay}/>}
 
                         {userState.userLoggedIn ?  (
                             <>
