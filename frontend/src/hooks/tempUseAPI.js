@@ -179,3 +179,13 @@ export const deleteDocument = async (documentId) => {
     throw error;
   }
 }
+
+export const deleteRequest = async (requestId) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}doctors/${requestId}/delete`);
+    return response;
+  } catch (error) {
+    console.error("Error deleting request", error);
+    throw error;
+  }
+}
