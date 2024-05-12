@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { postDoctor } from '../../hooks/tempUseAPI';
 import DoctorForm from '../Forms/DoctorForm';
+import { usePost } from '../../hooks/useAPI';
 
 const NewDoctorForm = (props) => {
-  const {clinic_id, addDoctor} = props;
+  const {clinic_id} = props;
   const [doctor, setDoctor] = useState({});
 
   const handleSubmit = (e) => {
@@ -20,17 +21,14 @@ const NewDoctorForm = (props) => {
     });
   }
 
-  useEffect(() => {
-    const createDoctor = async () => {
-      console.log("1 NewDoctorForm");
-      await postDoctor(doctor);
-      console.log("? NewDoctorForm");
-    }
+  const {responseLoading, responseData, post} = usePost();
 
-    if (doctor.name){
-      createDoctor();
-      addDoctor();
-    } 
+  useEffect(() => {
+    doctor.name && 
+      post(
+        'doctors',
+        doctor
+      );
   }, [doctor]);
 
 

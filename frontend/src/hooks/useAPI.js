@@ -31,29 +31,26 @@ export const useGet = (query, id) => {
   return { loading, data };
 }
 
-export const usePost = (query, payload) => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
+export const usePost = () => {
+  const [postLoading, setPostLoading] = useState(false);
+  const [responseData, setResponseData] = useState(null);
 
-  useEffect(() => {
-    const postData = async () => {
-      try {
-        setLoading(true);
+  const post = async (query, payload) => {
+    try {
+      setPostLoading(true);
 
-        const response = await axios.post(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
+      const response = await axios.post(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
 
-        setData(response.data);
+      setResponseData(response.data);
 
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user", error);
-        throw error;
-      }
-
+      setPostLoading(false);
+    } catch (error) {
+      console.error("Error fetching user", error);
+      throw error;
     }
 
-    postData();
-  }, [query, payload]);
+  }
 
-  return { loading, data };
+
+  return { postLoading, responseData, post };
 }

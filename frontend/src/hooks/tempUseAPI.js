@@ -7,16 +7,6 @@ const POST_HEADER = {
   }
 }
 
-export const fetchDoctors = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}doctors`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching doctors", error);
-    throw error;
-  }
-}
-
 export const postDoctor = async (doctor) => {
   try {
     console.log("2 tempUseAPI post")
