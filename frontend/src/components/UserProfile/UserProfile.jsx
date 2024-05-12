@@ -8,7 +8,7 @@ const UserProfile = () => {
   const userContext = useContext(UserSignedIn) ;
 
   const {loading, data} = useGet(
-    "profile/",
+    "profile",
     userContext.userState.userInfo.user_id
   );
 
