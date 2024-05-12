@@ -13,7 +13,7 @@ export const useGet = (query, id) => {
       try {
         setLoading(true);
 
-        const response = await axios.get(`${API_BASE_URL}${query}/${id && id}`);
+        const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
 
         setData(response.data);
 

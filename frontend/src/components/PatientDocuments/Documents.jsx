@@ -4,22 +4,22 @@ import { fetchDocuments } from "../../hooks/tempUseAPI";
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
+import { useGet } from "../../hooks/useAPI";
 
 
 const Documents = (props) => {
   const {userProfile} = props;
+  // TODO: replace filtering in child component by calling the request by patient_id
+  const {loading, data} = useGet(
+    'documents'
+  )
 
   const [documents, setDocuments] = useState([]);
   const [alterDocuments, setAlterDocuments] = useState(0);
 
   useEffect(() => {
-    const fetchPatientDocuments = async () => {
-      const documentData = await fetchDocuments();
-      setDocuments(documentData);
-    }
-
-    fetchPatientDocuments();
-  }, [alterDocuments]);
+    data && setDocuments(data);
+  }, [data]);
 
   const triggerDocumentStateUpdate = () => {
     setAlterDocuments(alterDocuments + 1);

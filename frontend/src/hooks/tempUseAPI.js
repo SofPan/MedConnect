@@ -17,16 +17,6 @@ export const fetchDoctors = async () => {
   }
 }
 
-export const fetchDocuments = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}documents`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching documents", error);
-    throw error;
-  }
-}
-
 export const postDoctor = async (doctor) => {
   try {
     console.log("2 tempUseAPI post")
