@@ -77,7 +77,6 @@ router.put('/:id', (req, res) => {
 
 // DELETE Delete existing doctor /doctors/:id/delete
 router.delete('/:id/delete', (req, res) => {
-  console.log("inside delete request", req.params.id)
   deleteDoctor(req.params.id)
     .then(result => {
       return result;
