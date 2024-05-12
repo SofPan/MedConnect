@@ -145,7 +145,7 @@ export const useDelete = () => {
     try {
       setDeleteLoading(true);
 
-      const response = await axios.get(`${API_BASE_URL}${query}/${id}`);
+      const response = await axios.get(`${API_BASE_URL}${query}/${id}/delete`);
 
       setDeleteData(response.deleteData);
 

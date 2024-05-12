@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGet, usePut } from "../../hooks/useAPI";
-import { fetchOneAppointment, deleteRequest, putAppointment } from "../../hooks/tempUseAPI";
+import { useDelete, useGet, usePut } from "../../hooks/useAPI";
 import NotificationActions from "./NotificationActions";
 
 const formatDateAndTime = (date) => {
@@ -16,6 +15,7 @@ const AppointmentNotification = (props) => {
   )
 
   const {putLoading, putData, put} = usePut();
+  const {deleteLoading, deleteData, deleteRecord} = useDelete();
   
   const [appointment, setAppointment] = useState({});
   const [accepting, setAccepting] = useState(false);
@@ -27,16 +27,15 @@ const AppointmentNotification = (props) => {
   const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";
 
   useEffect(() => {
-    const clearRequest = async () => {
-      await deleteRequest(notification_id);
-    }
-
     if (accepting){
       put(
         'appointments',
         appointment
       );
-      clearRequest();
+      deleteRecord(
+        'notifications',
+        notification_id
+      );
     }
   }, [accepting])
 
