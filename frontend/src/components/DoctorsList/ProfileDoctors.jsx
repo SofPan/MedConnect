@@ -7,7 +7,7 @@ import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
-  const {loading, doctorData} = useGet(
+  const {loading, data} = useGet(
     "doctors/",
     userProfile.id
   )
@@ -17,10 +17,10 @@ const ProfileDoctors = (props) => {
 
   useEffect(() => {
     
-    if(doctorData){
-      setDoctors(doctorData);
+    if(data){
+      setDoctors(data);
     }
-  }, [doctorData]);
+  }, [data]);
 
   const triggerDoctorStateUpdate = () => {
     setAlterDoctors(alterDoctors + 1);

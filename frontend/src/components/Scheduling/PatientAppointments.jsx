@@ -8,6 +8,7 @@ const PatientAppointments = (props) => {
   const [appointments, setAppointments] = useState([]);
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
+  // TODO: these need to become two separate components
   const {loadingAppointments, appointmentData} = useGet(
     'appointments/patients/',
     userProfile.id
