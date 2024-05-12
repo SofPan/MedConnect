@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import DoctorForm from '../Forms/DoctorForm';
-import { putDoctor } from '../../hooks/tempUseAPI';
+import { usePut } from '../../hooks/useAPI';
 
 const EditDoctorForm = (props) => {
-  const {doctor, changeDoctorState} = props;
+  const {doctor} = props;
 
   const [editDoctor, setEditDoctor] = useState(doctor);
   const [editing, setEditing] = useState(false);
@@ -21,14 +21,14 @@ const EditDoctorForm = (props) => {
     setEditing(true);
   }
 
+  const {putLoading, putData, put} = usePut();
+
+
   useEffect(() => {
-    const editDoctorRequest = async () => {
-      await putDoctor(editDoctor);
-    }
-    if (editing){
-      editDoctorRequest();
-      changeDoctorState();
-    }
+    editing && put(
+      'doctors',
+      editDoctor
+    )
   }, [editing])
 
   return(

@@ -54,3 +54,27 @@ export const usePost = () => {
 
   return { postLoading, postData, post };
 }
+
+export const usePut = () => {
+  const [putLoading, setPutLoading] = useState(false);
+  const [putData, setPutData] = useState(null);
+
+  const put = async (query, payload) => {
+    try {
+      setPutLoading(true);
+
+      const response = await axios.put(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
+
+      setPutData(response.data);
+
+      setPutLoading(false);
+    } catch (error) {
+      console.error("Error fetching user", error);
+      throw error;
+    }
+
+  }
+
+
+  return { putLoading, putData, put };
+}

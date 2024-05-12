@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePost } from "../../hooks/useAPI";
+import { usePost, usePut } from "../../hooks/useAPI";
 import {putAppointment } from "../../hooks/tempUseAPI";
 
 import {
@@ -33,16 +33,13 @@ const AppointmentsListItem = (props) => {
   const [requestDetails, setRequestDetails] = useState({});
 
   const {postLoading, postData, post} = usePost();
+  const {putLoading, putData, put} = usePut();
 
   useEffect(() => {
-    // PUT instead of DELETE because the Clinic should retain the appointment slot
-    const editAppointment = async () => {
-      await putAppointment(appointmentDetails);
-    };
-
-    if (editing){
-      editAppointment();
-    }
+    editing && put(
+      'appointments',
+      appointmentDetails
+    )
   }, [editing]);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchOneDoctor, putPatient, deleteRequest } from "../../hooks/tempUseAPI";
 import NotificationActions from "./NotificationActions";
-import { useGet } from "../../hooks/useAPI";
+import { useGet, usePut } from "../../hooks/useAPI";
 
 
 const RegisterNotification = (props) => {
@@ -12,6 +12,9 @@ const RegisterNotification = (props) => {
     doctor_id
   );
 
+  const {putLoading, putData, put} = usePut();
+
+
   const [doctorName, setDoctorName] = useState("");
   const [editPatient, setEditPatient] = useState(patient);
   const [accepting, setAccepting] = useState(false);
@@ -21,16 +24,15 @@ const RegisterNotification = (props) => {
   }, [data])
 
   useEffect(() => {
-    const updatePatientRecord = async () => {
-      await putPatient(editPatient);
-    }
-    
     const clearRequest = async () => {
       await deleteRequest(notification_id);
     }
     
     if(accepting){
-      updatePatientRecord();
+      put(
+        'patients',
+        editPatient
+      )
       clearRequest();
     } 
       

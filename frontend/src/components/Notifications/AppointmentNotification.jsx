@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useGet, usePut } from "../../hooks/useAPI";
 import { fetchOneAppointment, deleteRequest, putAppointment } from "../../hooks/tempUseAPI";
 import NotificationActions from "./NotificationActions";
-import { useGet } from "../../hooks/useAPI";
 
 const formatDateAndTime = (date) => {
   return date.replace(":00.000Z", "").split("T");
@@ -14,6 +14,8 @@ const AppointmentNotification = (props) => {
     'appointments/single',
     appointment_id
   )
+
+  const {putLoading, putData, put} = usePut();
   
   const [appointment, setAppointment] = useState({});
   const [accepting, setAccepting] = useState(false);
@@ -25,16 +27,15 @@ const AppointmentNotification = (props) => {
   const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";
 
   useEffect(() => {
-    const updateAppointmentDetails = async () => {
-      await putAppointment(appointment);
-    }
-    
     const clearRequest = async () => {
       await deleteRequest(notification_id);
     }
 
     if (accepting){
-      updateAppointmentDetails();
+      put(
+        'appointments',
+        appointment
+      );
       clearRequest();
     }
   }, [accepting])
