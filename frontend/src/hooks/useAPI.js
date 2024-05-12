@@ -5,7 +5,6 @@ const API_BASE_URL = "http://localhost:8080/";
 
 // accepts a request url (required) and id (optional)
 export const useGet = (query, id) => {
-  console.log("id", id);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
