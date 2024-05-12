@@ -7,16 +7,6 @@ const POST_HEADER = {
   }
 }
 
-export const fetchUser = async (id) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}profile/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching user", error);
-    throw error;
-  }
-}
-
 export const fetchDoctors = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}doctors`);
