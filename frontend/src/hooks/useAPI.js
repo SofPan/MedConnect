@@ -33,7 +33,7 @@ export const useGet = (query, id) => {
 
 export const usePost = () => {
   const [postLoading, setPostLoading] = useState(false);
-  const [responseData, setResponseData] = useState(null);
+  const [postData, setPostData] = useState(null);
 
   const post = async (query, payload) => {
     try {
@@ -41,7 +41,7 @@ export const usePost = () => {
 
       const response = await axios.post(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
 
-      setResponseData(response.data);
+      setPostData(response.data);
 
       setPostLoading(false);
     } catch (error) {
@@ -52,5 +52,5 @@ export const usePost = () => {
   }
 
 
-  return { postLoading, responseData, post };
+  return { postLoading, postData, post };
 }

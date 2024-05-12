@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import DocumentForm from '../Forms/DocumentForm';
 import { usePost } from '../../hooks/useAPI';
+import DocumentForm from '../Forms/DocumentForm';
 
 const NewDocument = (props) => {
   const {patient_id} = props;
@@ -16,7 +16,7 @@ const NewDocument = (props) => {
     });
   }
 
-  const {responseLoading, responseData, post} = usePost();
+  const {postLoading, postData, post} = usePost();
 
   useEffect(() => {
     document.document_name && post(

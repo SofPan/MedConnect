@@ -1,21 +1,6 @@
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/"
-const POST_HEADER = {
-  headers: {
-    "Content-type": "application/x-www-form-urlencoded"
-  }
-}
-
-export const postRequest = async (request) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}requests`, request);
-    return response;
-  } catch (error) {
-    console.error("Error posting new pending request", error);
-    throw error;
-  }
-}
 
 export const putDoctor = async (doctor) => {
   try {

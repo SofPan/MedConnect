@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-
-import { postDoctor } from '../../hooks/tempUseAPI';
-import DoctorForm from '../Forms/DoctorForm';
 import { usePost } from '../../hooks/useAPI';
+import DoctorForm from '../Forms/DoctorForm';
 
 const NewDoctorForm = (props) => {
   const {clinic_id} = props;
@@ -21,7 +19,7 @@ const NewDoctorForm = (props) => {
     });
   }
 
-  const {responseLoading, responseData, post} = usePost();
+  const {postLoading, postData, post} = usePost();
 
   useEffect(() => {
     doctor.name && 
