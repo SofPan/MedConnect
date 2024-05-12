@@ -51,7 +51,6 @@ router.get('/single/:id', (req, res) => {
 
 // POST create a new doctor entry /doctors
 router.post('/', (req, res) => {
-  console.log("3 router post")
   addNewDoctor(req.body)
     .then(result => {
       return result;
@@ -78,6 +77,7 @@ router.put('/:id', (req, res) => {
 
 // DELETE Delete existing doctor /doctors/:id/delete
 router.delete('/:id/delete', (req, res) => {
+  console.log("inside delete request", req.params.id)
   deleteDoctor(req.params.id)
     .then(result => {
       return result;

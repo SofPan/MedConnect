@@ -7,7 +7,7 @@ const Notifications = (props) => {
   const {userProfile} = props;
 
   const {loading, data} = useGet(
-    'requests/',
+    'requests',
     userProfile.id
   );
 

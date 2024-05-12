@@ -14,7 +14,7 @@ const NotificationsListItem = (props) => {
   } = props;
 
   const {loading, data} = useGet(
-    'patients/',
+    'patients',
     patient_id
   )
 

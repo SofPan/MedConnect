@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { usePost, usePut } from "../../hooks/useAPI";
-import {putAppointment } from "../../hooks/tempUseAPI";
 
 import {
     Box,

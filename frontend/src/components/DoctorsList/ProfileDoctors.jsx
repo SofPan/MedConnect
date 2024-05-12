@@ -8,7 +8,7 @@ const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
   const {loading, data} = useGet(
-    "doctors/",
+    "doctors",
     userProfile.id
   )
 

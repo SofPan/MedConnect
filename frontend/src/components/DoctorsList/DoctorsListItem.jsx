@@ -26,11 +26,12 @@ const DoctorsListItem = (props) => {
   useEffect(() => {
     deleting && deleteRecord(
       'doctors',
-      id
+      doctor.id
     )
   }, [deleting]);
 
   const handleClickDelete = () => {
+    console.log("attempting to delete doctor", doctor);
     setDeleting(true);
   }
 
