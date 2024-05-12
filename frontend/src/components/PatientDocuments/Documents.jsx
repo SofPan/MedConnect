@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { fetchDocuments } from "../../hooks/tempUseAPI";
+import { useGet } from "../../hooks/useAPI";
 
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
-import { useGet } from "../../hooks/useAPI";
 
 
 const Documents = (props) => {

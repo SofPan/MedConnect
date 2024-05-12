@@ -11,7 +11,6 @@ import {
     MenuItem
   } from '@mui/material';
   import { styled } from '@mui/system';
-import { putAppointment } from "../../hooks/tempUseAPI";
 
 const StyledCard = styled(Card)({
   minWidth: 275,

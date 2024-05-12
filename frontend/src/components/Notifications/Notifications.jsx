@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { fetchRequestNotifications } from "../../hooks/tempUseAPI";
 import NotificationsList from "./NotificationsList";
 import { useGet } from "../../hooks/useAPI";
 
