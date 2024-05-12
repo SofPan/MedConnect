@@ -19,9 +19,7 @@ const AppointmentNotification = (props) => {
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    if(data){
-      setAppointment(data);
-    }
+    data && setAppointment(data);
   }, [data])
 
   const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";

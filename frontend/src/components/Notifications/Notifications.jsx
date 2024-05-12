@@ -14,9 +14,7 @@ const Notifications = (props) => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    if (data) {
-      setNotifications(data)
-    }
+    data && setNotifications(data)
   }, [data]);
 
   return(

@@ -17,9 +17,7 @@ const RegisterNotification = (props) => {
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    if(data){
-      setDoctorName(data.name);
-    }
+    data && setDoctorName(data.name);
   }, [data])
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RegisterNotification from "./RegisterNotification";
 import AppointmentNotification from "./AppointmentNotification";
 import { fetchOnePatient } from "../../hooks/tempUseAPI";
+import { useGet } from "../../hooks/useAPI";
 
 const NotificationsListItem = (props) => {
   const {
@@ -12,17 +13,17 @@ const NotificationsListItem = (props) => {
     appointment_id
   } = props;
 
+  const {loading, data} = useGet(
+    'patients/',
+    patient_id
+  )
+
   const [notificationType, setNotificationType] = useState(null);
   const [patient, setPatient] = useState("");
   
   useEffect(() => {
-    const getPatient = async () => {
-      const patientData = await fetchOnePatient(patient_id);
-      setPatient(patientData);
-    }
-
-    getPatient();
-  }, [])
+    data && setPatient(data);
+  }, [data])
 
   useEffect(() => {
     if (patient.name){
