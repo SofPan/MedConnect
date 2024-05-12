@@ -57,26 +57,6 @@ export const fetchOneAppointment = async (appointmentId) => {
   }
 }
 
-export const fetchPatientAppointments = async (patientId) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}appointments/patients/${patientId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching patient's appointments", error);
-    throw error;
-  }
-}
-
-export const fetchClinicsOpenAppointments = async (doctorId) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}appointments/open/${doctorId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching patient's appointments", error);
-    throw error;
-  }
-}
-
 export const fetchRequestNotifications = async (clinicId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}requests/${clinicId}`);

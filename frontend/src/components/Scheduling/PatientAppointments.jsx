@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { useGet } from "../../hooks/useAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
-import { useGet } from "../../hooks/useAPI";
 
 const PatientAppointments = (props) => {
   const { userProfile } = props;
