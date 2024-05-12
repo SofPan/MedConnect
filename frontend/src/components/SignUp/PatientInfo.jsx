@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { useNavigate } from "react-router-dom";
 
 /* 
 CREATE TABLE patients (
@@ -28,6 +29,7 @@ CREATE TABLE patients (
 export default function PatientInfo() {
 
   const { userState, dispatch } = useContext(UserSignedIn);
+  const navigate = useNavigate();
 
   const registerUserInfo = async (userData) => {
     const userId = sessionStorage.getItem("user_id");
@@ -49,7 +51,9 @@ export default function PatientInfo() {
       console.log(responseData, "patient info");
       // Assuming the response contains some information about the newly registered user
       // You can handle the response data as needed
-      
+
+      navigate("/profile");
+
       return responseData;
 
     } catch (error) {
@@ -138,7 +142,7 @@ export default function PatientInfo() {
         <div >
 
           <Typography component="h1" variant="h5">
-            Patient Info
+            Required information
           </Typography>
           <form noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -198,7 +202,7 @@ export default function PatientInfo() {
               variant="contained"
               color="primary"
             >
-              Submit Info
+              Confirm
             </Button>
             </Grid>
             </Grid>
