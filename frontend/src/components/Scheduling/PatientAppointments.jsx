@@ -1,34 +1,31 @@
 import { useState, useEffect } from "react";
-import { fetchClinicsOpenAppointments, fetchPatientAppointments } from '../../hooks/tempUseAPI';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
+import { useGet } from "../../hooks/useAPI";
 
 const PatientAppointments = (props) => {
   const { userProfile } = props;
   const [appointments, setAppointments] = useState([]);
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
-  const patient_id = userProfile.id;
+  const {loadingAppointments, appointmentData} = useGet(
+    'appointments/patients/',
+    userProfile.id
+  )
+
+  const {loadingOpen, openAppointmentData} = useGet(
+    'appointments/open/',
+    userProfile.doctor_id
+  )
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      const appointmentData = await fetchPatientAppointments(patient_id);
+    if (appointmentData){
       setAppointments(appointmentData);
     }
-
-    const fetchUnbookedAppointments = async () => {
-      const openAppointmentData = await fetchClinicsOpenAppointments(userProfile.doctor_id);
-      setUnbookedAppointments(openAppointmentData);
+    if (openAppointmentData){
+      setUnbookedAppointments(openAppointmentData)
     }
-
-    
-    if (patient_id){
-      fetchAppointments();
-    }
-    if (!unbookedAppointments.length){
-      fetchUnbookedAppointments();
-    }
-  }, [patient_id, userProfile.doctor_id]);
+  }, [appointmentData, openAppointmentData]);
 
   return(
     <>
@@ -40,7 +37,7 @@ const PatientAppointments = (props) => {
           <span>There are no appointments available to request</span>
           :
           <div className="appointments-open" >
-            <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={patient_id} />
+            <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={userProfile.id} />
           </div>
         }
       </AccordionWrapper>                
@@ -49,7 +46,7 @@ const PatientAppointments = (props) => {
         <span>You do not have any appointments booked</span>
         :
         <div className="appointments-booked">
-          <AppointmentsList patient_id={patient_id} appointments={appointments}/>
+          <AppointmentsList patient_id={userProfile.id} appointments={appointments}/>
         </div>
         }
     </>
