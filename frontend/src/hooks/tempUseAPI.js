@@ -7,28 +7,6 @@ const POST_HEADER = {
   }
 }
 
-export const postDoctor = async (doctor) => {
-  try {
-    console.log("2 tempUseAPI post")
-    const response = await axios.post(`${API_BASE_URL}doctors`, doctor, POST_HEADER);
-    console.log("? tempUseAPI after post")
-    return response;
-  } catch (error) {
-    console.error("Error posting new doctor", error);
-    throw error;
-  }
-}
-
-export const postDocument = async (document) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}documents`, document);
-    return response;
-  } catch (error) {
-    console.error("Error posting new document", error);
-    throw error;
-  }
-}
-
 export const postRequest = async (request) => {
   try {
     const response = await axios.post(`${API_BASE_URL}requests`, request);

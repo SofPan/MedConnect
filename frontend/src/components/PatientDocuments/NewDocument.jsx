@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import DocumentForm from '../Forms/DocumentForm';
-import { postDocument } from '../../hooks/tempUseAPI';
+import { usePost } from '../../hooks/useAPI';
 
 const NewDocument = (props) => {
-  const {patient_id, addDocument} = props;
+  const {patient_id} = props;
   const [document, setDocument] = useState({});
 
   const handleSubmit = (e) => {
@@ -16,15 +16,13 @@ const NewDocument = (props) => {
     });
   }
 
-  useEffect(() => {
-    const createDocument = async () => {
-      await postDocument(document);
-    }
+  const {responseLoading, responseData, post} = usePost();
 
-    if (document.document_name){
-      createDocument();
-      addDocument();
-    } 
+  useEffect(() => {
+    document.document_name && post(
+      'documents',
+      document
+    );
   }, [document]);
 
 
