@@ -1,25 +1,39 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// Domain URL, pull from .env when not local
 const API_BASE_URL = "http://localhost:8080/";
 
-// accepts a request url (required) and id (optional)
+/**
+ * Usage:
+ * 
+ * const {getLoading, getData} = useGet(
+ *  @param query a string, do not use slashes at beginning or end
+ *  @param id dynamically pass in the id of record you want to get
+ * );
+ * 
+ * EXAMPLE:
+ * const {getLoading, getData} = useGet(
+ *  'clinics',
+ *  clinic_id
+ * );
+ */
 export const useGet = (query, id) => {
-  const [loading, setLoading] = useState(false);
+  const [getLoading, setGetLoading] = useState(false);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
+        setGetLoading(true);
 
         const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
 
         setData(response.data);
 
-        setLoading(false);
+        setGetLoading(false);
       } catch (error) {
-        console.error("Error fetching user", error);
+        console.error("Error getting", error);
         throw error;
       }
 
@@ -28,9 +42,24 @@ export const useGet = (query, id) => {
     fetchData();
   }, [query, id]);
 
-  return { loading, data };
+  return { getLoading, data };
 }
 
+/**
+ * Usage:
+ * 
+ * @post is a callback that accepts two arguments
+ *  @param query a string, do not use slashes at beginning or end
+ *  @param payload an object that correlates to the record you want to post
+ * 
+ * EXAMPLE:
+ * const {postLoading, postData, post} = usePost();
+ * ...some code
+ * post(
+ *  'doctors',
+ *  doctor_object
+ * );
+ */
 export const usePost = () => {
   const [postLoading, setPostLoading] = useState(false);
   const [postData, setPostData] = useState(null);
@@ -45,16 +74,30 @@ export const usePost = () => {
 
       setPostLoading(false);
     } catch (error) {
-      console.error("Error fetching user", error);
+      console.error("Error posting", error);
       throw error;
     }
 
   }
 
-
   return { postLoading, postData, post };
 }
 
+/**
+ * Usage:
+ * 
+ * @put is a callback that accepts two arguments
+ *  @param query a string, do not use slashes at beginning or end
+ *  @param payload an object that correlates to the record you want to put
+ * 
+ * EXAMPLE:
+ * const {putLoading, putData, put} = usePut();
+ * ...some code
+ * put(
+ *  'doctors',
+ *  doctor_object
+ * );
+ */
 export const usePut = () => {
   const [putLoading, setPutLoading] = useState(false);
   const [putData, setPutData] = useState(null);
@@ -69,7 +112,7 @@ export const usePut = () => {
 
       setPutLoading(false);
     } catch (error) {
-      console.error("Error fetching user", error);
+      console.error("Error editing", error);
       throw error;
     }
 
@@ -77,4 +120,41 @@ export const usePut = () => {
 
 
   return { putLoading, putData, put };
+}
+
+/**
+ * Usage:
+ * 
+ * @deleteRecord is a callback that accepts two arguments
+ *  @param query a string, do not use slashes at beginning or end
+ *  @param id dynamically pass in the id of record you want to delete
+ * 
+ * EXAMPLE:
+ * const {deleteLoading, deleteData, deleteRecord} = usedelete();
+ * ...some code
+ * deleteRecord(
+ *  'doctors',
+ *  doctor_id
+ * );
+ */
+export const useDelete = () => {
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteData, setDeleteData] = useState(null);
+
+  const deleteRecord = async (query, id) => {
+    try {
+      setDeleteLoading(true);
+
+      const response = await axios.get(`${API_BASE_URL}${query}/${id}`);
+
+      setDeleteData(response.deleteData);
+
+      setDeleteLoading(false);
+    } catch (error) {
+      console.error("Error deleting", error);
+      throw error;
+    }
+  }
+
+  return { deleteLoading, deleteData, deleteRecord };
 }
