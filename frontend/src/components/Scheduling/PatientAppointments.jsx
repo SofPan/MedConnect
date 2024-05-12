@@ -2,45 +2,26 @@ import { useState, useEffect } from "react";
 import { useGet } from "../../hooks/useAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
+import UnbookedAppointments from "./UnbookedAppointments";
 
 const PatientAppointments = (props) => {
   const { userProfile } = props;
   const [appointments, setAppointments] = useState([]);
-  const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
-  // TODO: these need to become two separate components
-  const {loadingAppointments, appointmentData} = useGet(
-    'appointments/patients/',
+  const {loading, data} = useGet(
+    'appointments/patients',
     userProfile.id
   )
 
-  const {loadingOpen, openAppointmentData} = useGet(
-    'appointments/open/',
-    userProfile.doctor_id
-  )
-
   useEffect(() => {
-    if (appointmentData){
-      setAppointments(appointmentData);
-    }
-    if (openAppointmentData){
-      setUnbookedAppointments(openAppointmentData)
-    }
-  }, [appointmentData, openAppointmentData]);
+    data && setAppointments(data);
+  }, [data]);
 
   return(
     <>
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
-        {
-          !unbookedAppointments.length 
-          ? 
-          <span>There are no appointments available to request</span>
-          :
-          <div className="appointments-open" >
-            <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={userProfile.id} />
-          </div>
-        }
+        <UnbookedAppointments userProfile={userProfile}/>
       </AccordionWrapper>                
       {!appointments.length 
         ? 
