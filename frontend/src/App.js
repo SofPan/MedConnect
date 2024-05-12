@@ -26,10 +26,12 @@ function App() {
   const { userState, dispatch } = useApplicationData();
   const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getUserInfoForSession = async (userId) => {
 
     try {
+
       const response = await fetch(`http://localhost:8080/profile/${userId}`, {
         method: 'GET',
         headers: {
@@ -48,9 +50,9 @@ function App() {
 
       dispatch({ type: "USER_INFO", payload: responseData });
 
+      return responseData;
     } catch (error) {
       console.error('error getting user app.js:', error);
-
     }
   }
 
@@ -68,15 +70,15 @@ function App() {
       getUserInfoForSession(userId);
 
 
+
+
     } else {
       console.log("else statment hit");
       dispatch({ type: "USER_SESSION", payload: false })
-
     }
   }, []);
 
-  console.log("userState", userState);
-
+  (userState.userInfo.id && loading) && setLoading(false);
 
 
   return (
@@ -98,7 +100,7 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
-          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/profile' element={!loading && <UserProfile />} />
         </Routes>
 
       </UserSignedIn.Provider>

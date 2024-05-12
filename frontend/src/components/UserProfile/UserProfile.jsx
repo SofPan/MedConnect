@@ -1,38 +1,30 @@
 import { useContext, useEffect, useState } from 'react'
-import { fetchUser } from '../../hooks/tempUseAPI';
 import { UserSignedIn } from '../../App';
 import RenderProfile from './RenderProfile';
+import { useGet } from '../../hooks/useAPI';
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
-  const [isClinic, setIsClinic] = useState(false);
-  const [userProfile, setUserProfile] = useState({});
-  const [loaded, setLoaded] = useState(false);
+
   const userContext = useContext(UserSignedIn) ;
 
-  useEffect(() => {
-    if (userContext.userState.userInfo.id){
-      setUser(userContext.userState.userInfo);
-    }
-    
-  }, [userContext]);
-  
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      const userData = await fetchUser(user.user_id ? user.user_id : user.id);
-      setUserProfile(() => userData);
-      setLoaded(true);
-    };
-    if (user){
-      setIsClinic(user.is_clinic);
-      fetchUserProfile();
-    }
+  const {loading, data} = useGet(
+    "profile",
+    userContext.userState.userInfo.user_id
+  );
 
-  },[user]);
+  const [isClinic, setIsClinic] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (data){
+      setIsClinic(data.is_clinic);
+      setLoaded(!loading);
+    }
+  }, [data, loading]);
 
   return(
     <>
-      {loaded && <RenderProfile userProfile={userProfile} isClinic={isClinic} />}
+      {loaded && <RenderProfile userProfile={data} isClinic={isClinic} />}
     </>
     
   )

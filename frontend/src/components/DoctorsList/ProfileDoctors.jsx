@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
-import { fetchDoctorsByClinicId } from '../../hooks/tempUseAPI';
+import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
+
+  const {loading, data} = useGet(
+    "doctors",
+    userProfile.id
+  )
+
   const [doctors, setDoctors] = useState([]);
   const [alterDoctors, setAlterDoctors] = useState(0);
 
   useEffect(() => {
-    const fetchClinicsDoctors = async () => {
-      const doctorData = await fetchDoctorsByClinicId(userProfile.id);
-      setDoctors(doctorData);
+    
+    if(data){
+      setDoctors(data);
     }
-
-    fetchClinicsDoctors();
-  }, [alterDoctors]);
+  }, [data]);
 
   const triggerDoctorStateUpdate = () => {
     setAlterDoctors(alterDoctors + 1);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteDoctor } from "../../hooks/tempUseAPI";
+import { useDelete } from "../../hooks/useAPI";
 import EditDoctorForm from "./EditDoctor";
 import {
   Box,
@@ -20,18 +20,18 @@ const DoctorsListItem = (props) => {
         } = props;
 
   const [deleting, setDeleting] = useState(false);
+  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+
 
   useEffect(() => {
-    const deleteDoctorFromList = async () => {
-      await deleteDoctor(id);
-    }
-    if (deleting){
-      deleteDoctorFromList();
-      changeDoctorState();
-    }
+    deleting && deleteRecord(
+      'doctors',
+      doctor.id
+    )
   }, [deleting]);
 
   const handleClickDelete = () => {
+    console.log("attempting to delete doctor", doctor);
     setDeleting(true);
   }
 
