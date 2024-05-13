@@ -100,7 +100,7 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
-          <Route path='/profile' element={!loading && <UserProfile />} />
+          <Route path={`/profile`} element={!loading && <UserProfile />} />
         </Routes>
 
       </UserSignedIn.Provider>

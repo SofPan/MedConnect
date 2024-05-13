@@ -137,7 +137,7 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
                         {userState.userLoggedIn ?  (
                             <>
                                 <MenuItem onClick={handleProfileClick}>
-                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/profile">
+                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to={`/profile`}>
                                     Profile
                                   </NavLink>
                                 </MenuItem>

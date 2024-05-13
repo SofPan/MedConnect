@@ -5,11 +5,11 @@ import { useGet } from '../../hooks/useAPI';
 
 const UserProfile = () => {
 
-  const userContext = useContext(UserSignedIn) ;
+  const userContext = useContext(UserSignedIn);
 
   const {loading, data} = useGet(
     "profile",
-    userContext.userState.userInfo.user_id
+    userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
   );
 
   const [isClinic, setIsClinic] = useState(false);
