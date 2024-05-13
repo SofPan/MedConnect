@@ -76,18 +76,18 @@ export default function PatientScheduler() {
 
 
   useEffect(() => {
-    console.log(userState);
+    
     if(userState.userInfo.is_clinic){
       const fetchAppointments = async () => {
 
         const appointments = await getAppointments();
-  
+        console.log("does this contain an id", appointments);
        
         if (appointments) {
           const dates = appointments.map((date) => {
             return {
               extendedProps: {
-                appointmentId: 2
+                appointmentId: date.id
               }, title: date.patient_name, start: date.start_time, end: date.end_time
             }
           })
@@ -109,7 +109,7 @@ export default function PatientScheduler() {
 
   useEffect(() => {
     
-
+    console.log("appointment id", appointment_id);
     if (appointment_id) {
       
       const getAppointment = async () => {
@@ -154,7 +154,7 @@ export default function PatientScheduler() {
 
 
   const handleDateClick =  (e) => {
-
+    
     setappointment_id(e.event.extendedProps.appointmentId);
 
   }
