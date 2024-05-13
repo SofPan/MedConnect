@@ -38,7 +38,7 @@ const ProfileDoctors = (props) => {
         />
       </AccordionWrapper>
     </div>
-    <DoctorsList clinic_id={userProfile.id} />
+    <DoctorsList clinic_id={userProfile.id} handleChange={handleChange} />
     </>
 
   )

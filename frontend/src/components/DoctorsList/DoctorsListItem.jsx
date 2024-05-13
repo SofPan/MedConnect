@@ -16,7 +16,8 @@ const DoctorsListItem = (props) => {
           patients, 
           id,
           changeDoctorState,
-          doctor
+          doctor,
+          handleChange
         } = props;
 
   const [deleting, setDeleting] = useState(false);
@@ -28,10 +29,10 @@ const DoctorsListItem = (props) => {
       'doctors',
       doctor.id
     )
+    handleChange();
   }, [deleting]);
 
   const handleClickDelete = () => {
-    console.log("attempting to delete doctor", doctor);
     setDeleting(true);
   }
 
