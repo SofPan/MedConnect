@@ -94,8 +94,10 @@ router.get("/open/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
+  console.log('yoo');
   editAppointment(req.body)
     .then(result => {
+      console.log("edited appointment", result);
       return result;
     })
     .catch(error => {

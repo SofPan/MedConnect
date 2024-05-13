@@ -19,7 +19,7 @@ const editAppointment = (appointment) => {
     appointment.patient_name //$8
 
   ]
-
+  console.log(values);
   const query = `
     UPDATE appointments
     SET patient_id = $2, 
@@ -29,11 +29,13 @@ const editAppointment = (appointment) => {
       end_time = $6,
       status = $7,
       patient_name = $8
-    WHERE appointments.id = $1;
+    WHERE appointments.id = $1
+    RETURNING *;
   `
 
   return db.query(query, values)
     .then(data => {
+      console.log("data",data);
       return data.rows[0];
     })
     .catch(error => console.error('editAppointment query error:', error));
