@@ -34,36 +34,12 @@ const SingleAppointment = (appointment) => {
   const [editedAppointment, setEditedAppointment] = useState(appointment);
   const [selectedDoctor, setSelectedDoctor] = useState(appointment.doctor_name);
   const [doctors, setDoctors ] = useState([]);
-  const [clinicName, setClinicName] = useState([]);
-  const [selectedClinic, setSelectedClinic] = useState(appointment.clinic_name);
+  const [clinics, setClinics] = useState([]);
+  const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
 
   
 
-  const getClinicIdByName = async (clinic_name) =>{
-    try {
-      const response = await fetch(`http://localhost:8080/clinicName/${clinic_name}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to register user');
-      }
-      ;
-      const responseData = await response.json();
-      
-      return responseData;
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      
-      
-
-    } catch (error) {
-      // Handle error
-    }
-  }
+  
 
   const getDoctors = async (clinic_id) =>{
     try {
@@ -108,11 +84,13 @@ const SingleAppointment = (appointment) => {
       ;
       const responseData = await response.json();
       
+      
       const filtererdData = responseData.map((clinic)=>{
         return(
           {
             name:clinic.name,
-            address: clinic.address
+            address: clinic.address,
+            id: clinic.id
           }
         )
       })
@@ -127,19 +105,25 @@ const SingleAppointment = (appointment) => {
   }
 
   useEffect(()=>{
+
     const fetchDoctors = async () => {
+
       const response = await getDoctors(editedAppointment.clinic_id);
+      console.log("response from get dovtos of a clinic", response);
       setDoctors(response);
+      
     };
+   
     fetchDoctors();
 
     
-  },[editedAppointment.clinic_name]);
+  },[editedAppointment.clinic_id]);
 
   useEffect(()=>{
+    console.log("fetch clinic name fired");
     const fetchClinicName = async () => {
-      const response = await getClinicName(appointment.clinic_id);
-      setClinicName(response);
+      const response = await getClinicName();
+      setClinics(response);
     };
     fetchClinicName();
   },[]);
@@ -152,6 +136,7 @@ const SingleAppointment = (appointment) => {
     // Save edited appointment here
     setIsEditing(false);
     // You can perform any action, like sending data to backend
+    console.log(editedAppointment);
   };
 
   const handleCancel = () => {
@@ -167,17 +152,26 @@ const SingleAppointment = (appointment) => {
 
   
   const handleClinicChange = async (e) => {
-
-    setSelectedClinic(e.target.value);
-    setEditedAppointment({ ...editedAppointment, clinic_name: e.target.value });
-
+    const selectedClinicName = e.target.innerText;
+    
+    setEditedAppointment(prevState => ({ ...prevState, clinic_name: selectedClinicName }));
     try {
-      const clinicIdResponse = await getClinicIdByName(e.target.value);
-      const clinicId = clinicIdResponse[0].id; // Assuming the response returns an array with the clinic ID at index 0
-      setEditedAppointment({ ...editedAppointment, clinic_id: clinicId });
+        const clinicIdResponse = clinics.find((clinic)=> clinic.name === selectedClinicName);
+        const clinic_id = clinicIdResponse.id; 
+        setEditedAppointment(prevState => ({ ...prevState, clinic_id: clinic_id }));
     } catch (error) {
+        console.log("clinic id response error", error);
     }
-  };
+    try {
+      const clinicAddressResponse = clinics.find((clinic)=> clinic.name === selectedClinicName);
+      const clinic_address = clinicAddressResponse.address; 
+      setEditedAppointment(prevState => ({ ...prevState, clinic_address: clinic_address}));
+  } catch (error) {
+      console.log("clinic id response error", error);
+  }
+    console.log("handle clinic change", editedAppointment);
+};
+
 
   const handleDoctorChange = (e) => {
     setSelectedDoctor(e.target.value);
@@ -235,19 +229,19 @@ const SingleAppointment = (appointment) => {
         fullWidth
         margin="normal"
       />
-      {clinicName && clinicName.length > 0 && (
+      {clinics && clinics.length > 0 && (
         <TextField
           select
           name="clinic_name"
           label="Clinic"
           value={editedAppointment.clinic_name}
-          onChange={handleClinicChange}
+          onClick={handleClinicChange}
           disabled={!isEditing}
           fullWidth
           margin="normal"
         >
-          {clinicName.map((address, index) => (
-            <MenuItem key={index} value={address.name}>
+          {clinics.map((address, index) => (
+            <MenuItem key={index} value={address.name} >
               {address.name}
             </MenuItem>
           ))}
