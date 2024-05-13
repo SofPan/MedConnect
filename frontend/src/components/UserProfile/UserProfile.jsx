@@ -9,7 +9,7 @@ const UserProfile = () => {
 
   const {loading, data} = useGet(
     "profile",
-    userContext.userState.userInfo.user_id
+    userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
   );
 
   const [isClinic, setIsClinic] = useState(false);
