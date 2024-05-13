@@ -51,7 +51,6 @@ router.get('/single/:id', (req, res) => {
 
 // POST create a new doctor entry /doctors
 router.post('/', (req, res) => {
-  console.log("3 router post")
   addNewDoctor(req.body)
     .then(result => {
       return result;

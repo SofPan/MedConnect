@@ -1,36 +1,37 @@
 import { useEffect, useState } from "react";
-import { fetchOneDoctor, putPatient, deleteRequest } from "../../hooks/tempUseAPI";
+import { useGet, usePut, useDelete } from "../../hooks/useAPI";
 import NotificationActions from "./NotificationActions";
 
 
 const RegisterNotification = (props) => {
   const {doctor_id, type, notification_id, patient} = props;
 
+  const {loading, data} = useGet(
+    'doctors/single',
+    doctor_id
+  );
+
+  const {putLoading, putData, put} = usePut();
+  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+
   const [doctorName, setDoctorName] = useState("");
   const [editPatient, setEditPatient] = useState(patient);
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    const getDoctorName = async () => {
-      const doctorData = await fetchOneDoctor(doctor_id);
-      setDoctorName(doctorData.name);
-    }
-
-    getDoctorName();
-  }, [])
+    data && setDoctorName(data.name);
+  }, [data])
 
   useEffect(() => {
-    const updatePatientRecord = async () => {
-      await putPatient(editPatient);
-    }
-    
-    const clearRequest = async () => {
-      await deleteRequest(notification_id);
-    }
-    
     if(accepting){
-      updatePatientRecord();
-      clearRequest();
+      put(
+        'patients',
+        editPatient
+      )
+      deleteRecord(
+        'notifications',
+        notification_id
+      );
     } 
       
   }, [accepting]);

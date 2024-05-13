@@ -1,18 +1,19 @@
+import { useDelete } from "../../hooks/useAPI";
 import {Button} from "@mui/material"
 import { useEffect, useState } from "react";
-import { deleteRequest } from "../../hooks/tempUseAPI";
 
 const NotificationActions = (props) => {
   const {notification_id, onAccept} = props;
 
   const [declining, setDeclining] = useState(false);
+  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+
 
   useEffect(() => {
-    const declineNotification = async () => {
-      await deleteRequest(notification_id);
-    }
-
-    declining && declineNotification();
+    declining && deleteRecord(
+      'notifications',
+      notification_id
+    );
   }, [declining]);
 
   const handleDecline = () => {

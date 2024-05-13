@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
-import { fetchRequestNotifications } from "../../hooks/tempUseAPI";
 import NotificationsList from "./NotificationsList";
+import { useGet } from "../../hooks/useAPI";
 
 const Notifications = (props) => {
   const {userProfile} = props;
 
+  const {loading, data} = useGet(
+    'requests',
+    userProfile.id
+  );
+
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      const notificationsData = await fetchRequestNotifications(userProfile.id);
-      setNotifications(notificationsData);
-    }
-
-    if (!notifications.length) {
-      fetchNotifications();
-    }
-  }, [userProfile]);
+    data && setNotifications(data)
+  }, [data]);
 
   return(
     <div className='profile-notifications'>

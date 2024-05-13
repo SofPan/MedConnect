@@ -1,27 +1,24 @@
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import { Button } from '@mui/material';
-import { deleteDocument } from '../../hooks/tempUseAPI';
 import { useEffect, useState } from 'react';
+import { useDelete } from '../../hooks/useAPI';
+import { Button } from '@mui/material';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 const DocumentsListItem = (props) => {
   const {
     id,
     name,
-    changeDocumentState
   } = props;
 
   const [deleting, setDeleting] = useState(false);
+  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+
 
   useEffect(() => {
-    const deleteDocumentFromList = async () => {
-      await deleteDocument(id);
-    }
-
-    if(deleting){
-      deleteDocumentFromList();
-      changeDocumentState();
-    }
-  }, [deleting, id, changeDocumentState])
+    deleting && deleteRecord(
+      'documents',
+      id
+    )
+  }, [deleting])
 
   return(
     <li>
