@@ -52,18 +52,11 @@ export default function LoginForm({ setLoginDisplay }) {
             // Assuming response is JSON
             const user = await response.json();
             
-            const userObject = user.reduce((acc, obj) => {
-              
-              if (obj) {
-                
-                Object.assign(acc, obj);
-              }
-              return acc;
-            }, {});
             
-            sessionStorage.setItem("user_id", userObject.id)
+            
+            sessionStorage.setItem("user_id", user.user_id)
            
-            dispatch({ type: "USER_INFO", payload: userObject });
+            dispatch({ type: "USER_INFO", payload: user });
     
             dispatch({ type: "USER_LOGIN", payload: true });
 

@@ -5,6 +5,8 @@
 // POST logout /logout
 const { getUserById } = require('../src/db/queries/users/getUserById');
 const { getUserByEmail } = require('../src/db/queries/users/getUserByEmail');
+const {getClinicByUserId} = require('../src/db/queries/clinics/getClinicByUserId')
+const {getPatientByUserId }= require('../src/db/queries/patients/getPatientByUserId')
 
 const express = require('express');
 const router = express.Router();
@@ -17,7 +19,6 @@ router.post('/login', async (req, res) => {
 
 
   const { email, password } = req.body;
-
 
   try {
 
@@ -36,16 +37,27 @@ router.post('/login', async (req, res) => {
     //set cookie in browser on login
 
     // Password is correct, send user information as JSON data to the frontend
-    const filteredUser = Object.keys(user).map(key => {
-      if (key !== "password_hash") {
-        return {
-          [key]: user[key]
-        }
-      }
+    // const filteredUser = Object.keys(user).map(key => {
+    //   if (key !== "password_hash") {
+    //     return {
+    //       [key]: user[key]
+    //     }
+    //   }
 
-    })
+    // });
+    
+  
+    if(user.is_clinic){
+     
+      const userInfo = await getClinicByUserId(user.id);
+      
+      return res.json(userInfo);
+    }else{
+      const userInfo = await getPatientByUserId(user.id);
+      return res.json(userInfo);
+    }
 
-    res.json(filteredUser);
+    
 
   } catch (error) {
     console.error('Error fetching user information:', error);
