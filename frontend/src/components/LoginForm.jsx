@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { UserSignedIn } from '../App';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setLoginDisplay }) {
 
@@ -23,7 +25,9 @@ export default function LoginForm({ setLoginDisplay }) {
     };
     
 
-    const { dispatch } = useContext(UserSignedIn);
+    const { userState, dispatch } = useContext(UserSignedIn);
+
+    const navigate = useNavigate();
 
     const submitForm = async (e) => {
 
@@ -64,6 +68,28 @@ export default function LoginForm({ setLoginDisplay }) {
             dispatch({ type: "USER_LOGIN", payload: true });
 
             setLoginDisplay(false);
+
+            if (userState.userInfo.is_clinic) {
+              axios.get(`http://localhost:8080/clinics/${userState.userInfo.id}`)
+                  .then((res) => {
+                      if(!res.data) {
+                          navigate("/required_information")
+                      }
+                  })
+                  .catch(error => {
+                      console.error("Error fetching clinic:", error);
+                    });
+             } else {
+              axios.get(`http://localhost:8080/patients/${userState.userInfo.id}`)
+              .then((res) => {
+                  if(!res.data) {
+                      navigate("/required_information")
+                  }
+              })
+                  .catch(error => {
+                      console.error("Error fetching patient:", error);
+                    });
+             }
             
         } catch (error) {
             console.error('Error:', error);

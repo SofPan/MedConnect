@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 import LandingPage from './components/LandingPage';
+import RequiredInformation from './components/SignUp/RequiredInformation';
 
 export const UserSignedIn = createContext();
 
@@ -24,7 +25,7 @@ export const UserSignedIn = createContext();
 function App() {
 
   const { userState, dispatch } = useApplicationData();
-  const [SignInDisplay, setSignInDisplay] = useState(false);
+  // const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -86,11 +87,11 @@ function App() {
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         {/* <PatientAppointments /> */}
         {/* <PatientInfo /> */}
-        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
-        {SignInDisplay && (<>
+        <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
+        {/* {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
-        </>)}
+        </>)} */}
 
 
         {/* <PatientScheduler /> */}
@@ -101,6 +102,8 @@ function App() {
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
           <Route path='/profile' element={!loading && <UserProfile />} />
+          <Route path='/signup' element={<SignUp setLoginDisplay={setLoginDisplay}/>} />
+          <Route path='/required_information' element={<RequiredInformation />} />
         </Routes>
 
       </UserSignedIn.Provider>

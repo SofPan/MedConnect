@@ -9,6 +9,7 @@ const RegisterWithDoctor = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [changeDoctor, setChangeDoctor] = useState(false);
   const [doctorId, setDoctorId] = useState();
+  const [requestSent, setRequestSent] = useState(false);
 
   const userInfo = userState.userInfo;
 
@@ -21,40 +22,35 @@ const RegisterWithDoctor = () => {
 
   const handleRegister = (doctor_id) => {
     setDoctorId(doctor_id);
-    if (userInfo.id && !userInfo.is_clinic) {
-      axios.get(`http://localhost:8080/patients/${userInfo.id}`)
-        .then(response => {
-         const patient = response.data;
-          if (patient.doctor_id) {
-            setChangeDoctor(true);
-            setErrorMessage("YOU ARE REGISTERED WITH A DOCTOR. CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS??");
-          } else {
-            axios.post(`http://localhost:8080/requests`, {
-              request_type: "register",
-              patient_id: patient.id,
-              clinic_id: clinicInfo.clinic_id,
-              doctor_id: doctor_id,
-              appointment_id: null
-            })
-            .then(response => {
-              if (response.data.message) {
-                setErrorMessage(response.data.message)
-              }
-            })
-          }
-        })
-        .catch(error => {
-          console.error("Error registering with doctor:", error);
-          setErrorMessage("An error occurred. Please try again later.");
-        });
-    } else if (!userInfo.id) {
-      setErrorMessage("Please login or sign up to register with a doctor");
-    } else {
-      setErrorMessage("You cannot register with a doctor. Please, login or sign up as a patient");
-    }
+    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+      .then(response => {
+        const patient = response.data;
+        if (patient.doctor_id) {
+          setChangeDoctor(true);
+          setErrorMessage("YOU ARE REGISTERED WITH A DOCTOR. CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS??");
+        } else {
+          axios.post(`http://localhost:8080/requests`, {
+            request_type: "register",
+            patient_id: patient.id,
+            clinic_id: clinicInfo.clinic_id,
+            doctor_id: doctor_id,
+            appointment_id: null
+          })
+          .then(response => {
+            if (response.data.message) {
+              setErrorMessage(response.data.message)
+            } else {
+              setRequestSent(true);
+              setErrorMessage("Thank you! Your request to register with the doctor was sent successfully.")
+            }
+          })
+        }
+      })
+      .catch(error => {
+        console.error("Error registering with doctor:", error);
+        setErrorMessage("An error occurred. Please try again later.");
+      });
   }
-
-  console.log("err msg", errorMessage)
 
   const handleCancel = () => {
     setChangeDoctor(false);
@@ -101,7 +97,7 @@ const RegisterWithDoctor = () => {
             <p>{doctor.name}</p>
             <p>{doctor.qualifications}</p>
             <img src={`./assets/images/${doctor.photo_url}`} alt={doctor.name}/>
-            <Button onClick={() => handleRegister(doctor.id)}>Register</Button>
+            <Button disabled={requestSent} onClick={() => handleRegister(doctor.id)}>Register</Button>
           </div>
         )
       })}

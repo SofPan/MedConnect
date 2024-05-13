@@ -7,13 +7,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { UserSignedIn } from '../../App';
+import { useNavigate } from "react-router-dom";
 
 
 const defaultTheme = createTheme();
 
 export default function ClinicSignUpInfo() {
+  
+  const { userState } = React.useContext(UserSignedIn);
 
-  const userId = sessionStorage.getItem('user_id');
+  const navigate = useNavigate();
+
+  // const userId = sessionStorage.getItem('user_id');
+  const userId = userState.userInfo.id;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +29,10 @@ export default function ClinicSignUpInfo() {
     axios.post(`http://localhost:8080/clinics`, {
       clinic_name: data.get('clinic_name'),
       address: data.get('address'),
-      user_id: sessionStorage.getItem('user_id')
+      user_id: userId
+    })
+    .then(() => {
+      navigate("/profile")
     })
     .catch(error => {
       console.error('Error:', error);
@@ -43,10 +53,11 @@ export default function ClinicSignUpInfo() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Required information
+            Please, fill in the required information to use the App
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
+            variant="outlined"
             margin="normal"
             required
             fullWidth
@@ -59,6 +70,7 @@ export default function ClinicSignUpInfo() {
           />
 
           <TextField
+            variant="outlined"
             margin="normal"
             required
             fullWidth
