@@ -33,8 +33,8 @@ const router  = express.Router();
   });
 
   router.get('/clinicName/:name', (req, res) => {
-
-    const name= req.params.name;
+  
+    const name = decodeURIComponent(req.params.name);
 
     getClinicIdbyName(name)
       .then(clinic => {
