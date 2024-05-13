@@ -9,10 +9,7 @@ const formatDateAndTime = (date) => {
 const AppointmentNotification = (props) => {
   const {appointment_id, notification_id, patient} = props;
 
-  const {loading, data} = useGet(
-    'appointments/single',
-    appointment_id
-  )
+  const {getData, get} = useGet();
 
   const {putLoading, putData, put} = usePut();
   const {deleteLoading, deleteData, deleteRecord} = useDelete();
@@ -21,8 +18,12 @@ const AppointmentNotification = (props) => {
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    data && setAppointment(data);
-  }, [data])
+    get(
+      'appointments/single',
+      appointment_id
+    )
+    getData && setAppointment(getData);
+  }, [getData])
 
   const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";
 

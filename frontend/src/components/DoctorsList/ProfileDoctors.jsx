@@ -7,18 +7,18 @@ import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
-  const {data} = useGet(
-    "doctors",
-    userProfile.id
-  )
+  const {getData, get} = useGet();
 
   const [doctors, setDoctors] = useState([]);
   const [changeDoctors, setChangeDoctors] = useState(0);
 
   useEffect(() => {
     console.log("doctors changed?", changeDoctors);
-    data && setDoctors(data);
-  }, [data, changeDoctors]);
+    getData && get(
+    "doctors",
+    userProfile.id
+    );
+  }, [getData, changeDoctors]);
 
   const handleChange = () => {
     setChangeDoctors(changeDoctors + 1);

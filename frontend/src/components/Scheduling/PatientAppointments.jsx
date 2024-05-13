@@ -8,14 +8,15 @@ const PatientAppointments = (props) => {
   const { userProfile } = props;
   const [appointments, setAppointments] = useState([]);
 
-  const {loading, data} = useGet(
-    'appointments/patients',
-    userProfile.id
-  )
+  const {getData, get} = useGet()
 
   useEffect(() => {
-    data && setAppointments(data);
-  }, [data]);
+    get(
+      'appointments/patients',
+      userProfile.id
+    )
+    getData && setAppointments(getData);
+  }, [getData]);
 
   return(
     <>

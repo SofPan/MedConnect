@@ -9,16 +9,17 @@ import NewDocument from "../PatientDocuments/NewDocument";
 const Documents = (props) => {
   const {userProfile} = props;
   // TODO: replace filtering in child component by calling the request by patient_id
-  const {loading, data} = useGet(
-    'documents'
-  )
+  const {getData, get} = useGet()
 
   const [documents, setDocuments] = useState([]);
   const [alterDocuments, setAlterDocuments] = useState(0);
 
   useEffect(() => {
-    data && setDocuments(data);
-  }, [data]);
+    get(
+      'documents'
+    )
+    getData && setDocuments(getData);
+  }, [getData]);
 
   const triggerDocumentStateUpdate = () => {
     setAlterDocuments(alterDocuments + 1);

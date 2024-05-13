@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
-import NotificationsList from "./NotificationsList";
 import { useGet } from "../../hooks/useAPI";
+import NotificationsList from "./NotificationsList";
 
 const Notifications = (props) => {
   const {userProfile} = props;
 
-  const {loading, data} = useGet(
-    'requests',
-    userProfile.id
-  );
+  const {getData, get} = useGet();
 
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    data && setNotifications(data)
-  }, [data]);
+    get(
+      'requests',
+      userProfile.id
+    );
+    getData && setNotifications(getData);
+  }, [getData]);
 
   return(
     <div className='profile-notifications'>

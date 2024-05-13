@@ -6,10 +6,7 @@ import NotificationActions from "./NotificationActions";
 const RegisterNotification = (props) => {
   const {doctor_id, type, notification_id, patient} = props;
 
-  const {loading, data} = useGet(
-    'doctors/single',
-    doctor_id
-  );
+  const {getData, get} = useGet();
 
   const {putLoading, putData, put} = usePut();
   const {deleteLoading, deleteData, deleteRecord} = useDelete();
@@ -19,8 +16,12 @@ const RegisterNotification = (props) => {
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    data && setDoctorName(data.name);
-  }, [data])
+    get(
+      'doctors/single',
+      doctor_id
+    );
+    getData && setDoctorName(getData.name);
+  }, [getData])
 
   useEffect(() => {
     if(accepting){

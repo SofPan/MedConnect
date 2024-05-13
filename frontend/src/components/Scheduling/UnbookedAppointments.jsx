@@ -6,15 +6,16 @@ import AppointmentsList from "../AppointmentsList/AppointmentsList";
 const UnbookedAppointments = (props) => {
     const {userProfile} = props;
     
-  const {loading, data} = useGet(
-    'appointments/open',
-    userProfile.doctor_id
-  );
+  const {getData, get} = useGet();
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
   useEffect(() => {
-    data && setUnbookedAppointments(data);
-  }, [data]);
+    get(
+      'appointments/open',
+      userProfile.doctor_id
+    )
+    getData && setUnbookedAppointments(getData);
+  }, [getData]);
   
   return(
     <>

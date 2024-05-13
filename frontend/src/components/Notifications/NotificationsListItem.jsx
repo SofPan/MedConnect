@@ -12,17 +12,18 @@ const NotificationsListItem = (props) => {
     appointment_id
   } = props;
 
-  const {loading, data} = useGet(
-    'patients',
-    patient_id
-  )
+  const {getData, get} = useGet();
 
   const [notificationType, setNotificationType] = useState(null);
   const [patient, setPatient] = useState("");
   
   useEffect(() => {
-    data && setPatient(data);
-  }, [data])
+    get(
+      'patients',
+      patient_id
+    );
+    getData && setPatient(getData);
+  }, [getData])
 
   useEffect(() => {
     if (patient.name){
