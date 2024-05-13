@@ -5,7 +5,7 @@ import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 
 const ProfileDoctors = (props) => {
-  const {userProfile} = props;
+  const {userProfile, setLoading} = props;
 
   const {loading, data} = useGet(
     "doctors",
@@ -13,19 +13,11 @@ const ProfileDoctors = (props) => {
   )
 
   const [doctors, setDoctors] = useState([]);
-  const [alterDoctors, setAlterDoctors] = useState(0);
 
   useEffect(() => {
-    
-    if(data){
-      setDoctors(data);
-    }
+    data && setDoctors(data);
   }, [data]);
 
-  const triggerDoctorStateUpdate = () => {
-    setAlterDoctors(alterDoctors + 1);
-  }
-  
   return(
     <>
     <div>
@@ -33,12 +25,12 @@ const ProfileDoctors = (props) => {
       <AccordionWrapper title="New">
         <NewDoctorForm 
         clinic_id={userProfile.id}
-        addDoctor={triggerDoctorStateUpdate}
+        setLoading={setLoading}
         />
       </AccordionWrapper>
     </div>
     {!doctors.length && <span>You do not have any doctors listed</span>}
-    <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} />
+    <DoctorsList clinic_id={userProfile.id} doctors={doctors} setLoading={setLoading} />
     </>
 
   )
