@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
+import { UserSignedIn } from '../../App';
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
   const {getData, get} = useGet();
 
-  const [doctors, setDoctors] = useState([]);
+  const {dispatch} = useContext(UserSignedIn);
   const [changeDoctors, setChangeDoctors] = useState(0);
 
   useEffect(() => {
-    console.log("doctors changed?", changeDoctors);
-    getData && get(
-    "doctors",
-    userProfile.id
-    );
-  }, [getData, changeDoctors]);
+    get(
+      "doctors"
+      );
+  }, [changeDoctors]);
+
+  useEffect(() => {
+    getData && dispatch({type: "SET_DOCTORS", payload: getData});
+  }, [getData]);
 
   const handleChange = () => {
     setChangeDoctors(changeDoctors + 1);
@@ -35,8 +38,7 @@ const ProfileDoctors = (props) => {
         />
       </AccordionWrapper>
     </div>
-    {!doctors.length && <span>You do not have any doctors listed</span>}
-    <DoctorsList clinic_id={userProfile.id} doctors={doctors} />
+    <DoctorsList clinic_id={userProfile.id} />
     </>
 
   )
