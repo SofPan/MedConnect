@@ -11,6 +11,11 @@ import {
     MenuItem
   } from '@mui/material';
   import { styled } from '@mui/system';
+  import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+  import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+  import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+  import dayjs from 'dayjs';
+
 
 const StyledCard = styled(Card)({
   minWidth: 275,
@@ -29,16 +34,29 @@ const SingleAppointment = (appointment) => {
   const handleDelete = () => {
     // Implement delete functionality here
   };
-
+  console.log(appointment.start_time);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedAppointment, setEditedAppointment] = useState(appointment);
+  const [editedAppointment, setEditedAppointment] = useState({
+    id: appointment.id,
+    patient_id: appointment.patient_id,
+    doctor_id: appointment.doctor_id,
+    patient_name: appointment.patient_name,
+    doctor_name: appointment.doctor_name,
+    start_time: dayjs(appointment.start_time),
+    end_time: dayjs(appointment.end_time),
+    clinic_id: appointment.clinic_id,
+    status: true,
+    created_at: new Date(appointment.created_at),
+    clinic_address: appointment.clinic_address,
+    clinic_name:appointment.clinic_name
+  });
   const [selectedDoctor, setSelectedDoctor] = useState(appointment.doctor_name);
   const [doctors, setDoctors ] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
 
   
-
+  console.log(typeof editedAppointment.start_time);
   
 
   const getDoctors = async (clinic_id) =>{
@@ -104,6 +122,29 @@ const SingleAppointment = (appointment) => {
     }
   }
 
+  const updateAppointment = async (editedAppointment) =>{
+    try {
+      const response = await fetch(`http://localhost:8080/appointments/:id`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:
+          JSON.stringify(editedAppointment)
+        
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update appointment');
+      }
+      ;
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
+
   useEffect(()=>{
 
     const fetchDoctors = async () => {
@@ -132,11 +173,13 @@ const SingleAppointment = (appointment) => {
     setIsEditing(!isEditing);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // Save edited appointment here
     setIsEditing(false);
     // You can perform any action, like sending data to backend
-    console.log(editedAppointment);
+    console.log("edited appoijtment", editedAppointment);
+    const user = await updateAppointment(editedAppointment);
+    console.log("return from update app", user);
   };
 
   const handleCancel = () => {
@@ -177,6 +220,12 @@ const SingleAppointment = (appointment) => {
     setSelectedDoctor(e.target.value);
     setEditedAppointment({ ...editedAppointment, doctor_name: e.target.value });
   };
+  const handleDateTimeChange = (field, newValue) => {
+    setEditedAppointment(prevState => ({
+        ...prevState,
+        [field]: newValue
+    }));
+  };
 
   return (
   <StyledCard variant="outlined">
@@ -211,24 +260,48 @@ const SingleAppointment = (appointment) => {
           ))}
         </TextField>
       )}
-      <TextField
-        name="start_time"
-        label="Start Time"
-        value={editedAppointment.start_time}
-        onChange={handleChange}
-        disabled={!isEditing}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="end_time"
-        label="End Time"
-        value={editedAppointment.end_time}
-        onChange={handleChange}
-        disabled={!isEditing}
-        fullWidth
-        margin="normal"
-      />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+    label="Start Date"
+    value={editedAppointment.start_time}
+    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<TimePicker
+    label="Start Time"
+    value={editedAppointment.start_time}
+    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<DatePicker
+    label="End Date"
+    value={editedAppointment.end_time}
+    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<TimePicker
+    label="End Time"
+    value={editedAppointment.end_time}
+    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+</LocalizationProvider>
+
       {clinics && clinics.length > 0 && (
         <TextField
           select
