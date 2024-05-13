@@ -100,7 +100,7 @@ function App() {
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
           <Route path='/profile' element={<UserProfile />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signup' element={<SignUp setLoginDisplay={setLoginDisplay}/>} />
           <Route path='/required_information' element={<RequiredInformation />} />
         </Routes>
 

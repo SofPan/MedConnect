@@ -53,7 +53,7 @@ export default function ClinicSignUpInfo() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Required information
+            Please, fill in the required information to use the App
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField

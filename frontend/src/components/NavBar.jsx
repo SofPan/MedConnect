@@ -33,16 +33,24 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
        if (userState.userInfo.is_clinic) {
         axios.get(`http://localhost:8080/clinics/${userState.userInfo.id}`)
             .then((res) => {
-                if(res.data) navigate("/profile")
+                if(res.data) {
+                    navigate("/profile") 
+                } else {
+                    navigate("/required_information")
+                }
             })
             .catch(error => {
                 console.error("Error fetching clinic:", error);
               });
        } else {
         axios.get(`http://localhost:8080/patients/${userState.userInfo.id}`)
-            .then((res) => {
-                if(res.data) navigate("/profile")
-            })
+        .then((res) => {
+            if(res.data) {
+                navigate("/profile") 
+            } else {
+                navigate("/required_information")
+            }
+        })
             .catch(error => {
                 console.error("Error fetching patient:", error);
               });
@@ -56,7 +64,7 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
         sessionStorage.user_id = '';
         dispatch({type:"USER_INFO_LOGOUT", payload:{}})
         dispatch({type:"USER_STATE_LOGOUT", payload:false})
-       
+        dispatch({type:"SET_CLINIC_INFO", payload:{}})
     };
 
 

@@ -3,10 +3,11 @@ import DoctorsList from "../DoctorsList/DoctorsList";
 import { useNavigate } from "react-router-dom";
 import { UserSignedIn } from "../../App";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 const ClinicListItem = (props) => {
-  const {name, address, id, distance} = props;
-  const { dispatch } = useContext(UserSignedIn);
+  const {name, address, id, distance, setErrorMessage} = props;
+  const { userState, dispatch } = useContext(UserSignedIn);
   let navigate = useNavigate();
 
   const clinicInfo = {
@@ -16,6 +17,7 @@ const ClinicListItem = (props) => {
   }
 
   const [visible, setVisible] = useState(true);
+
  
 
   // If there are no doctors to display, hide clinic from list
@@ -30,8 +32,26 @@ const ClinicListItem = (props) => {
   }
 
   const handleRequest = (info) => {
-    dispatch({ type: "SET_CLINIC_INFO", payload: info});
-    navigate("/register");
+    if (userState.userInfo.id && !userState.userInfo.is_clinic) {
+      dispatch({ type: "SET_CLINIC_INFO", payload: info});
+      axios.get(`http://localhost:8080/patients/${userState.userInfo.id}`)
+      .then((res) => {
+          if(res.data) {
+            navigate("/register");
+          } else {
+            setErrorMessage("Please, submit the required information to register with a doctor")
+            navigate("/required_information");
+          }
+      })
+      .catch(error => {
+          console.error("Error fetching patient:", error);
+        });
+    
+    }  else if (!userState.userInfo.id) {
+      setErrorMessage("Please login or sign up to register with a doctor");
+    } else {
+      setErrorMessage("You cannot register with a doctor. Please, login or sign up as a patient");
+    }
   }
 
   return(

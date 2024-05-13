@@ -13,7 +13,7 @@ import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, L
 
 
 
-export default function SignUp() {
+export default function SignUp({setLoginDisplay}) {
   const navigate = useNavigate();
   const { dispatch } = useContext(UserSignedIn);
 
@@ -101,7 +101,9 @@ export default function SignUp() {
     
           dispatch({ type: "USER_LOGIN", payload: true });
 
-          navigate("/required_information")
+          navigate("/required_information");
+
+          setLoginDisplay(false);
                     
         } catch (error) {
           console.error('Registration failed', error);

@@ -51,8 +51,11 @@ export default function PatientInfo() {
       console.log(responseData, "patient info");
       // Assuming the response contains some information about the newly registered user
       // You can handle the response data as needed
-
-      navigate("/profile");
+      if (userState.clinicInfo.clinic_id) {
+        navigate("/register")
+      } else {
+        navigate("/profile");
+      }
 
       return responseData;
 
@@ -142,7 +145,7 @@ export default function PatientInfo() {
         <div >
 
           <Typography component="h1" variant="h5">
-            Required information
+            Please, fill in the required information to use the App
           </Typography>
           <form noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
