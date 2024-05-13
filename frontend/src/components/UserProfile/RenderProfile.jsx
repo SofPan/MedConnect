@@ -6,7 +6,6 @@ import ProfileDoctors from "../DoctorsList/ProfileDoctors";
 import Notifications from "../Notifications/Notifications";
 import { Box } from '@mui/material';
 import ClinicTabs from "./ClinicTabs";
-import { useLoading } from "../../hooks/useProfileData";
 
 const RenderProfile = (props) => {
   const {userProfile, isClinic} = props;
@@ -14,22 +13,20 @@ const RenderProfile = (props) => {
   const [rightComponent, setRightComponent] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
 
-  const {loading, isLoading} = useLoading();
-
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
   useEffect(() => {
     if(isClinic){
-      setLeftComponent(<Notifications setLoading={isLoading} userProfile={userProfile}/>)
-      setRightComponent(<ProfileDoctors setLoading={isLoading} userProfile={userProfile}/>
+      setLeftComponent(<Notifications userProfile={userProfile}/>)
+      setRightComponent(<ProfileDoctors userProfile={userProfile}/>
     )
     } else {
-      setLeftComponent(<Documents setLoading={isLoading} userProfile={userProfile} />)
-      setRightComponent(<PatientAppointments setLoading={isLoading}  userProfile={userProfile}/>)
+      setLeftComponent(<Documents userProfile={userProfile} />)
+      setRightComponent(<PatientAppointments  userProfile={userProfile}/>)
     }
-  }, [loading]);
+  }, []);
 
   return(
     <>

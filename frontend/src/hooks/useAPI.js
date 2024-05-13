@@ -20,7 +20,7 @@ const API_BASE_URL = "http://localhost:8080/";
  */
 export const useGet = (query, id) => {
   const [getLoading, setGetLoading] = useState(false);
-  const [data, setData] = useState(null);
+  const [getData, setGetData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ export const useGet = (query, id) => {
 
         const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
 
-        setData(response.data);
+        setGetData(response.data);
 
         setGetLoading(false);
       } catch (error) {
@@ -42,7 +42,7 @@ export const useGet = (query, id) => {
     fetchData();
   }, [query, id]);
 
-  return { getLoading, data };
+  return { getLoading, getData };
 }
 
 /**

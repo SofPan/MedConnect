@@ -7,7 +7,7 @@ const UserProfile = () => {
 
   const userContext = useContext(UserSignedIn);
 
-  const {loading, data} = useGet(
+  const {getLoading, getData} = useGet(
     "profile",
     userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
   );
@@ -16,15 +16,15 @@ const UserProfile = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (data){
-      setIsClinic(data.is_clinic);
-      setLoaded(!loading);
+    if (getData){
+      setIsClinic(getData.is_clinic);
+      setLoaded(true);
     }
-  }, [data, loading]);
+  }, [getData, getLoading]);
 
   return(
     <>
-      {loaded && <RenderProfile userProfile={data} isClinic={isClinic} />}
+      {loaded && <RenderProfile userProfile={getData} isClinic={isClinic} />}
     </>
     
   )

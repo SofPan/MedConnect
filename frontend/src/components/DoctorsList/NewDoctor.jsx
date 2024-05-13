@@ -3,7 +3,7 @@ import { usePost } from '../../hooks/useAPI';
 import DoctorForm from '../Forms/DoctorForm';
 
 const NewDoctorForm = (props) => {
-  const {clinic_id, setLoading} = props;
+  const {clinic_id, handleChange} = props;
   const [doctor, setDoctor] = useState({});
 
   const handleSubmit = (e) => {
@@ -22,13 +22,12 @@ const NewDoctorForm = (props) => {
   const {postLoading, postData, post} = usePost();
 
   useEffect(() => {
-    setLoading(true);
     doctor.name && 
       post(
         'doctors',
         doctor
       );
-    setLoading(postLoading);
+      handleChange();
   }, [doctor]);
 
 
