@@ -6,6 +6,7 @@ import { UserSignedIn } from "../../App";
 const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
   const { userState } = useContext(UserSignedIn);
   const [clinicsList, setClinicsList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (searchCoordinates && userState.displayedClinics) {
@@ -32,12 +33,16 @@ const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
       address={clinic.address}
       distance={clinic.distance}
       handleRequestToRegister={handleRequestToRegister}
+      setErrorMessage={setErrorMessage}
     />
   ));
   return (
-    <ul className="available-clinics">
-      {mapClinics}
-    </ul>
+    <div>
+      <h2>{errorMessage}</h2>
+      <ul className="available-clinics">
+        {mapClinics}
+     </ul>
+    </div>
   );
 };
 

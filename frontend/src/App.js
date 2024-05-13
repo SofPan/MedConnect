@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 import LandingPage from './components/LandingPage';
+import RequiredInformation from './components/SignUp/RequiredInformation';
 
 export const UserSignedIn = createContext();
 
@@ -24,12 +25,14 @@ export const UserSignedIn = createContext();
 function App() {
 
   const { userState, dispatch } = useApplicationData();
-  const [SignInDisplay, setSignInDisplay] = useState(false);
+  // const [SignInDisplay, setSignInDisplay] = useState(false);
   const [LoginDisplay, setLoginDisplay] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getUserInfoForSession = async (userId) => {
 
     try {
+
       const response = await fetch(`http://localhost:8080/profile/${userId}`, {
         method: 'GET',
         headers: {
@@ -48,9 +51,9 @@ function App() {
 
       dispatch({ type: "USER_INFO", payload: responseData });
 
+      return responseData;
     } catch (error) {
       console.error('error getting user app.js:', error);
-
     }
   }
 
@@ -68,15 +71,15 @@ function App() {
       getUserInfoForSession(userId);
 
 
+
+
     } else {
       console.log("else statment hit");
       dispatch({ type: "USER_SESSION", payload: false })
-
     }
   }, []);
 
-  console.log("userState", userState);
-
+  (userState.userInfo.id && loading) && setLoading(false);
 
 
   return (
@@ -84,11 +87,11 @@ function App() {
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         {/* <PatientAppointments /> */}
         {/* <PatientInfo /> */}
-        <NavBar setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
-        {SignInDisplay && (<>
+        <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} />
+        {/* {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
-        </>)}
+        </>)} */}
 
 
         <PatientScheduler />
@@ -98,7 +101,9 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
-          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/profile' element={!loading && <UserProfile />} />
+          <Route path='/signup' element={<SignUp setLoginDisplay={setLoginDisplay}/>} />
+          <Route path='/required_information' element={<RequiredInformation />} />
         </Routes>
 
       </UserSignedIn.Provider>

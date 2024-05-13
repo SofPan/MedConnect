@@ -18,75 +18,53 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { UserSignedIn } from "../App"
 import LoginForm from './LoginForm';
-import { NavLink } from "react-router-dom";
-
-// const Search = styled('div')(({ theme }) => ({
-//     position: 'relative',
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: alpha(theme.palette.common.white, 0.15),
-//     '&:hover': {
-//         backgroundColor: alpha(theme.palette.common.white, 0.25),
-//     },
-//     marginRight: theme.spacing(2),
-//     marginLeft: 0,
-//     width: '100%',
-//     [theme.breakpoints.up('sm')]: {
-//         marginLeft: theme.spacing(3),
-//         width: 'auto',
-//     },
-// }));
-
-// const SearchIconWrapper = styled('div')(({ theme }) => ({
-//     padding: theme.spacing(0, 2),
-//     height: '100%',
-//     position: 'absolute',
-//     pointerEvents: 'none',
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//     color: 'inherit',
-//     '& .MuiInputBase-input': {
-//         padding: theme.spacing(1, 1, 1, 0),
-//         // vertical padding + font size from searchIcon
-//         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//         transition: theme.transitions.create('width'),
-//         width: '100%',
-//         [theme.breakpoints.up('md')]: {
-//             width: '20ch',
-//         },
-//     },
-// }));
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
-
-export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay, LoginDisplay}) {
+export default function NavBar({setLoginDisplay, LoginDisplay}) {
 
     const { userState, dispatch } = useContext(UserSignedIn);
-  
+    
+    const navigate = useNavigate();
     
     const handleProfileClick = () => {
-       
+       console.log("Profile click", userState.useInfo)
+       if (userState.userInfo.is_clinic) {
+        axios.get(`http://localhost:8080/clinics/${userState.userInfo.id}`)
+            .then((res) => {
+                if(res.data) {
+                    navigate("/profile") 
+                } else {
+                    navigate("/required_information")
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching clinic:", error);
+              });
+       } else {
+        axios.get(`http://localhost:8080/patients/${userState.userInfo.id}`)
+        .then((res) => {
+            if(res.data) {
+                navigate("/profile") 
+            } else {
+                navigate("/required_information")
+            }
+        })
+            .catch(error => {
+                console.error("Error fetching patient:", error);
+              });
+       }
     };
-    const handleSignUp = () =>{
-        if(LoginDisplay){
-            setLoginDisplay(!LoginDisplay)
-        }
-        setSignInDisplay(!SignInDisplay)
-    }
+
     const handleLogin = () =>{
-        if(SignInDisplay){
-            setSignInDisplay(!SignInDisplay)
-        }
         setLoginDisplay(!LoginDisplay)
     }
     const handleLogout = () => {
         sessionStorage.user_id = '';
         dispatch({type:"USER_INFO_LOGOUT", payload:{}})
         dispatch({type:"USER_STATE_LOGOUT", payload:false})
-       
+        dispatch({type:"SET_CLINIC_INFO", payload:{}})
     };
 
 
@@ -95,15 +73,6 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    {/* <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -114,15 +83,6 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
                             MEDCONNECT
                         </NavLink>
                     </Typography>
-                    {/* <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search> */}
                     <MenuItem>
                         <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/availabledoctors">
                             AVAILABLE DOCTORS
@@ -137,9 +97,7 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
                         {userState.userLoggedIn ?  (
                             <>
                                 <MenuItem onClick={handleProfileClick}>
-                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/profile">
                                     Profile
-                                  </NavLink>
                                 </MenuItem>
                                 <MenuItem onClick={handleLogout}>
                                   <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
@@ -148,7 +106,11 @@ export default function NavBar({setSignInDisplay, SignInDisplay, setLoginDisplay
                                 </MenuItem>
                             </>
                         ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
-                        <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
+                        <MenuItem>
+                            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
+                              Sign Up
+                            </NavLink>
+                        </MenuItem>
                         </>)}
                     </Box>
                    

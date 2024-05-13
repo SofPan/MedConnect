@@ -1,12 +1,30 @@
+import { useState, useEffect } from "react";
+import NotificationsList from "./NotificationsList";
+import { useGet } from "../../hooks/useAPI";
+
 const Notifications = (props) => {
+  const {userProfile} = props;
+
+  const {loading, data} = useGet(
+    'requests',
+    userProfile.id
+  );
+
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    data && setNotifications(data)
+  }, [data]);
 
   return(
     <div className='profile-notifications'>
       <h2>Notifications</h2>
-      <ul>
-        <li>Patient XYZ has requested an appointment</li>
-        <li>Patient ABC wants to change doctors</li>
-      </ul>
+      {!notifications.length
+        ?
+        <span>No pending requests.</span>
+        :
+        <NotificationsList notifications={notifications}/>
+      }
     </div>
   )
 }
