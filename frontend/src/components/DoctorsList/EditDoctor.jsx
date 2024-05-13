@@ -3,7 +3,7 @@ import DoctorForm from '../Forms/DoctorForm';
 import { usePut } from '../../hooks/useAPI';
 
 const EditDoctorForm = (props) => {
-  const {doctor} = props;
+  const {doctor, handleChange} = props;
 
   const [editDoctor, setEditDoctor] = useState(doctor);
   const [editing, setEditing] = useState(false);
@@ -29,6 +29,7 @@ const EditDoctorForm = (props) => {
       'doctors',
       editDoctor
     )
+    handleChange();
   }, [editing])
 
   return(

@@ -27,6 +27,7 @@ const DoctorForm = (props) => {
       </div>
       <div>
         <Button type="submit">Submit</Button>
+        <Button>Cancel</Button>
       </div>
 
     </form>

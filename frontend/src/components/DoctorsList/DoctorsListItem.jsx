@@ -15,7 +15,6 @@ const DoctorsListItem = (props) => {
           photo, 
           patients, 
           id,
-          changeDoctorState,
           doctor,
           handleChange
         } = props;
@@ -55,7 +54,7 @@ const DoctorsListItem = (props) => {
         </div>
         <div>
           <AccordionWrapper title={"Edit"}>
-            <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+            <EditDoctorForm doctor={doctor} handleChange={handleChange}/>
           </AccordionWrapper>
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>
