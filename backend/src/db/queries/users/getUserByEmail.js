@@ -2,6 +2,7 @@
 
 const db = require('../../connection');
 
+
 const getUserByEmail = (email) => {
   const values = [email];
   const query = `
@@ -11,7 +12,6 @@ const getUserByEmail = (email) => {
   `;
   return db.query(query, values)
     .then(results => {
-      console.log(results.rows[0])
       return results.rows[0];
     })
     .catch(error => console.log("getUserByEmail error", error));
