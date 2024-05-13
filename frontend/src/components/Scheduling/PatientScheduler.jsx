@@ -76,19 +76,19 @@ export default function PatientScheduler() {
 
 
   useEffect(() => {
-    console.log(userState);
+    
     if(userState.userInfo.is_clinic){
       const fetchAppointments = async () => {
 
         const appointments = await getAppointments();
-  
+        console.log("does this contain an id", appointments);
        
         if (appointments) {
           const dates = appointments.map((date) => {
             return {
               extendedProps: {
-                appointmentId: 2
-              }, title: date.patient_name, start: date.start_time, end: date.end_time
+                appointmentId: date.id
+              }, title: date.patient_name, start: date.start_time, end: date.end_time, 
             }
           })
           console.log(dates);
@@ -109,7 +109,7 @@ export default function PatientScheduler() {
 
   useEffect(() => {
     
-
+    console.log("appointment id", appointment_id);
     if (appointment_id) {
       
       const getAppointment = async () => {
@@ -154,7 +154,7 @@ export default function PatientScheduler() {
 
 
   const handleDateClick =  (e) => {
-
+    
     setappointment_id(e.event.extendedProps.appointmentId);
 
   }
@@ -168,7 +168,7 @@ export default function PatientScheduler() {
     )
   }
 
-  console.log(events);
+  console.log("appointInfo", appointmentInfo);
 
   return (
     <div>
@@ -176,13 +176,14 @@ export default function PatientScheduler() {
         details={appointmentInfo.start_time}
         clinic_address={appointmentInfo.address}
         status={appointmentInfo.status}
-        appointment={"hehehehehe"}
-        user_id={1} 
+        id={appointmentInfo.id} 
         patient_name={appointmentInfo.patient_name}
         start_time={appointmentInfo.start_time}
         end_time={appointmentInfo.end_time}
         clinic_id={appointmentInfo.clinic_id}
-        clinic_name={appointmentInfo.clinic_name}/>
+        clinic_name={appointmentInfo.clinic_name}
+        patient_id={appointmentInfo.patient_id}
+        doctor_id={appointmentInfo.doctor_id}/>
          :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <h1>Clinic Appointments</h1>
