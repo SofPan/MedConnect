@@ -32,10 +32,7 @@ const SingleAppointment = (appointment) => {
 
   const {singleAppointmentDisplay, setsingleAppointmentDisplay} = appointment;
 
-  const handleDelete = () => {
-    // Implement delete functionality here
-  };
-  console.log(appointment.start_time);
+  
   const [isEditing, setIsEditing] = useState(false);
   const [editedAppointment, setEditedAppointment] = useState({
     id: appointment.id,
@@ -55,11 +52,11 @@ const SingleAppointment = (appointment) => {
   const [doctors, setDoctors ] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
-
+  
   
   console.log(typeof editedAppointment.start_time);
   
-
+  
   const getDoctors = async (clinic_id) =>{
     try {
       const response = await fetch(`http://localhost:8080/doctors/${clinic_id}`, {
@@ -82,12 +79,12 @@ const SingleAppointment = (appointment) => {
       // You can handle the response data as needed
       
       return filtererdData;
-
+      
     } catch (error) {
       // Handle error
     }
   }
-
+  
   const getClinicName = async () =>{
     try {
       const response = await fetch(`http://localhost:8080/clinics/`, {
@@ -117,13 +114,34 @@ const SingleAppointment = (appointment) => {
       // You can handle the response data as needed
       
       return filtererdData;
-
+      
     } catch (error) {
       // Handle error
     }
   }
 
+  const deleteAppointment = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/appointments/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete appointment');
+      }
+  
+      // Handle successful deletion
+    } catch (error) {
+      // Handle error
+      console.error('Error deleting appointment:', error);
+    }
+  };
+
   const updateAppointment = async (editedAppointment) =>{
+    
     try {
       const response = await fetch(`http://localhost:8080/appointments/:id`, {
         method: 'PUT',
@@ -162,7 +180,7 @@ const SingleAppointment = (appointment) => {
   },[editedAppointment.clinic_id]);
 
   useEffect(()=>{
-    console.log("fetch clinic name fired");
+    
     const fetchClinicName = async () => {
       const response = await getClinicName();
       setClinics(response);
@@ -172,6 +190,14 @@ const SingleAppointment = (appointment) => {
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
+  };
+  
+  const handleDelete = async () => {
+    const success = await deleteAppointment(appointment.id);
+    console.log(success);
+    if(success){
+      setsingleAppointmentDisplay(!singleAppointmentDisplay);
+    }
   };
 
   const handleSave = async () => {
