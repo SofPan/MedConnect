@@ -10,22 +10,24 @@ const ProfileDoctors = (props) => {
 
   const {getData, get} = useGet();
 
-  const {dispatch} = useContext(UserSignedIn);
-  const [changeDoctors, setChangeDoctors] = useState(0);
+  const {userState, dispatch} = useContext(UserSignedIn);
+  const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
+    doctors.length !== userState.doctors.length &&
     get(
       "doctors"
       );
-  }, [changeDoctors]);
+  }, [userState.doctors]);
 
   useEffect(() => {
     getData && dispatch({type: "SET_DOCTORS", payload: getData});
+    setDoctors(getData);
   }, [getData]);
 
-  const handleChange = () => {
-    setChangeDoctors(changeDoctors + 1);
-  }
+  // const handleChange = () => {
+  //   setChangeDoctors(changeDoctors + 1);
+  // }
 
   return(
     <>
@@ -34,11 +36,10 @@ const ProfileDoctors = (props) => {
       <AccordionWrapper title="New">
         <NewDoctorForm 
         clinic_id={userProfile.id}
-        handleChange={handleChange}
         />
       </AccordionWrapper>
     </div>
-    <DoctorsList clinic_id={userProfile.id} handleChange={handleChange} />
+    <DoctorsList clinic_id={userProfile.id} />
     </>
 
   )

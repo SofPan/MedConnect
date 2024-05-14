@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DoctorForm from '../Forms/DoctorForm';
 import { usePut } from '../../hooks/useAPI';
+import { UserSignedIn } from '../../App';
 
 const EditDoctorForm = (props) => {
-  const {doctor, handleChange} = props;
+  const {doctor} = props;
 
   const [editDoctor, setEditDoctor] = useState(doctor);
   const [editing, setEditing] = useState(false);
+  const {dispatch} = useContext(UserSignedIn);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,15 +23,17 @@ const EditDoctorForm = (props) => {
     setEditing(true);
   }
 
-  const {putLoading, putData, put} = usePut();
+  const {put} = usePut();
 
 
   useEffect(() => {
-    editing && put(
-      'doctors',
-      editDoctor
-    )
-    handleChange();
+    if(editing){
+      put(
+        'doctors',
+        editDoctor
+      );
+      dispatch({type: "EDIT_DOCTOR", payload: editDoctor});
+    }
   }, [editing])
 
   return(

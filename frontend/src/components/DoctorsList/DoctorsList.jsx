@@ -3,7 +3,7 @@ import DoctorsListItem from "./DoctorsListItem";
 import { UserSignedIn } from "../../App";
 
 const DoctorsList = (props) => {
-  const {clinic_id, handleChange} = props;
+  const {clinic_id} = props;
   const { userState } = useContext(UserSignedIn);
 
   const mapAndFilterDoctors = userState.doctors.filter(doctor => {
@@ -19,7 +19,6 @@ const DoctorsList = (props) => {
               photo={`./assets/images/${doctor.photo_url}`}
               patients={doctor.number_of_patients}
               doctor={doctor}
-              handleChange={handleChange}
             />
     });
 
