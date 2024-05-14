@@ -13,7 +13,6 @@ const PatientAppointments = (props) => {
   const {appointmentState, appointmentDispatch} = useAppointments();
 
   useEffect(() => {
-    console.log("appointments changed", appointments.length, appointmentState.appointments.length);
     appointments.length !== appointmentState.appointments.length &&
     get(
       'appointments/patients',
@@ -32,7 +31,7 @@ const PatientAppointments = (props) => {
     <>
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
-        <UnbookedAppointments userProfile={userProfile}/>
+        <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState}/>
       </AccordionWrapper>                
       {!appointments.length 
         ? 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePost, usePut } from "../../hooks/useAPI";
 
 import {
@@ -7,6 +7,7 @@ import {
     Card,
   } from '@mui/material';
 import { useAppointments } from "../../hooks/useAppointments";
+import { UserSignedIn } from "../../App";
 
 const formatDateAndTime = (date) => {
   return date.replace(":00.000Z", "").split("T");
@@ -36,6 +37,8 @@ const AppointmentsListItem = (props) => {
   const {post} = usePost();
   const {put} = usePut();
 
+  const {dispatch} = useContext(UserSignedIn);
+
   useEffect(() => {
     if (editing){
       console.log("edited appointment details", appointmentDetails);
@@ -48,10 +51,15 @@ const AppointmentsListItem = (props) => {
   }, [editing]);
 
   useEffect(() => {
-    requesting && post(
+    if(requesting){
+    post(
       'requests',
       requestDetails
-    )
+    );
+    dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
+    appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
+    appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
+  }
   }, [requesting]);
 
 

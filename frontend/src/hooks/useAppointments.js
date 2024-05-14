@@ -3,7 +3,7 @@ import { useReducer } from "react";
 export const useAppointments = () => {
   const initialState = {
     appointments: [""],
-    open_appointments: []
+    open_appointments: [""]
   }
 
   const [appointmentState, appointmentDispatch] = useReducer((appointmentState, action) => {
