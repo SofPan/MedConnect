@@ -1,5 +1,6 @@
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useReducer, useEffect } from "react";
+import { useGet } from "./useAPI";
 
 
 
@@ -15,7 +16,8 @@ export default function useApplicationData() {
     displayedClinics: [],
     doctors: [],
     clinicInfo: {},
-    notifications: [""]
+    notifications: [""],
+    documents: [""]
   }
 
 
@@ -45,12 +47,16 @@ export default function useApplicationData() {
         return { ...userState, displayedClinics: action.payload }
       case "SET_NOTIFICATIONS":
         return { ...userState, notifications: action.payload }
+      case "SET_DOCUMENTS":
+        return { ...userState, documents: action.payload }
       case "SET_CLINIC_INFO":
         return { ...userState, clinicInfo: action.payload }
       case "ADD_DOCTOR":
         return { ...userState, doctors: [...userState.doctors, action.payload] }
       case "ADD_NOTIFICATION":
         return { ...userState, notifications: [...userState.notifications, action.payload] }
+      case "ADD_DOCUMENT":
+        return { ...userState, documents: [...userState.documents, action.payload] }
       case "EDIT_DOCTOR":
         return {
           ...userState, doctors: userState.doctors.map(doctor => {
@@ -64,6 +70,8 @@ export default function useApplicationData() {
         return { ...userState, doctors: userState.doctors.filter(doctor => doctor.id !== action.payload.id) }
       case "DELETE_NOTIFICATION":
         return { ...userState, notifications: userState.notifications.filter(notification => notification.id !== action.payload.id) }
+      case "DELETE_DOCUMENT":
+        return { ...userState, documents: userState.documents.filter(document => document.id !== action.payload.id) }
       default:
         return userState;
     }
