@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGet, usePut, useDelete } from "../../hooks/useAPI";
 import NotificationActions from "./NotificationActions";
+import { UserSignedIn } from "../../App";
 
 
 const RegisterNotification = (props) => {
-  const {doctor_id, type, notification_id, patient, handleChange} = props;
+  const {doctor_id, type, notification_id, patient} = props;
 
   const {getData, get} = useGet();
 
-  const {putLoading, putData, put} = usePut();
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {put} = usePut();
+  const {deleteRecord} = useDelete();
+  const {dispatch} = useContext(UserSignedIn);
+
 
   const [doctorName, setDoctorName] = useState("");
   const [editPatient, setEditPatient] = useState(patient);
@@ -36,7 +39,7 @@ const RegisterNotification = (props) => {
         'requests',
         notification_id
       );
-      handleChange();
+      dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
     } 
       
   }, [accepting]);
@@ -51,7 +54,7 @@ const RegisterNotification = (props) => {
   return(
     <span>
       <p>{type === "register" ? "Register with" : "Change doctors to"} {doctorName}</p>
-      <NotificationActions notification_id={notification_id} onAccept={handleAccept} handleChange={handleChange} />
+      <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
     </span>
   )
 }

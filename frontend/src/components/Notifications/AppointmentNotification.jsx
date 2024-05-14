@@ -8,7 +8,7 @@ const formatDateAndTime = (date) => {
 }
 
 const AppointmentNotification = (props) => {
-  const {appointment_id, notification_id, patient, handleChange} = props;
+  const {appointment_id, notification_id, patient} = props;
 
   const {getData, get} = useGet();
 
@@ -28,7 +28,6 @@ const AppointmentNotification = (props) => {
   }, []);
 
   useEffect(() => {
-    
     getData && setAppointment(getData);
   }, [getData])
 
@@ -60,7 +59,7 @@ const AppointmentNotification = (props) => {
   return(
     <span>
       <p>Book an appointment with {appointment.doctor_name} on {dateString}.</p>
-      <NotificationActions notification_id={notification_id} onAccept={handleAccept} handleChange={handleChange}/>
+      <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
     </span>
   )
 }
