@@ -23,6 +23,8 @@ export default function PatientScheduler() {
 
   const { userState, dispatch } = useContext(UserSignedIn);
 
+  console.log("SCHEDULER HIT");
+
   const [events, setEvents] = useState([])
   const [singleAppointmentDisplay, setsingleAppointmentDisplay] = useState(false);
   const [appointment_id, setappointment_id] = useState('');
@@ -40,7 +42,7 @@ export default function PatientScheduler() {
     clinic_address: '',
     clinic_name:''
   });
-
+  console.log("events", events);
 
   const getAppointments = async () => {
 
@@ -168,7 +170,7 @@ export default function PatientScheduler() {
     )
   }
 
-  console.log("appointInfo", appointmentInfo);
+
 
   return (
     <div>
@@ -183,7 +185,9 @@ export default function PatientScheduler() {
         clinic_id={appointmentInfo.clinic_id}
         clinic_name={appointmentInfo.clinic_name}
         patient_id={appointmentInfo.patient_id}
-        doctor_id={appointmentInfo.doctor_id}/>
+        doctor_id={appointmentInfo.doctor_id}
+        setsingleAppointmentDisplay={setsingleAppointmentDisplay}
+        singleAppointmentDisplay={singleAppointmentDisplay}/>
          :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <h1>Clinic Appointments</h1>
