@@ -4,7 +4,8 @@ const AppointmentsList = (props) => {
   
   const {
     appointments,
-    user_id
+    user_id,
+    appointmentDispatch
   } = props;
   
   const mapAppointments = appointments.map(appointment => {
@@ -21,6 +22,7 @@ const AppointmentsList = (props) => {
             status={appointment.status}
             appointment={appointment}
             user_id={user_id}
+            appointmentDispatch={appointmentDispatch}
           />
   });
 

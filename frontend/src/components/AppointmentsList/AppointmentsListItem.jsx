@@ -6,6 +6,7 @@ import {
     Button,
     Card,
   } from '@mui/material';
+import { useAppointments } from "../../hooks/useAppointments";
 
 const formatDateAndTime = (date) => {
   return date.replace(":00.000Z", "").split("T");
@@ -22,7 +23,8 @@ const AppointmentsListItem = (props) => {
     end_time,
     status,
     appointment,
-    user_id
+    user_id,
+    appointmentDispatch
   } = props;
 
   const [editing, setEditing] = useState(false);
@@ -35,10 +37,14 @@ const AppointmentsListItem = (props) => {
   const {put} = usePut();
 
   useEffect(() => {
-    editing && put(
-      'appointments',
-      appointmentDetails
-    )
+    if (editing){
+      console.log("edited appointment details", appointmentDetails);
+      put(
+        'appointments',
+        appointmentDetails
+      );
+      appointmentDispatch({type: "DELETE_APPOINTMENT", payload: appointmentDetails});
+    }
   }, [editing]);
 
   useEffect(() => {

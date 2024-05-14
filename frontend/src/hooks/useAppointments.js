@@ -3,10 +3,10 @@ import { useReducer } from "react";
 export const useAppointments = () => {
   const initialState = {
     appointments: [""],
-    open_appointments: [""]
+    open_appointments: []
   }
 
-  const [appointmentState, dispatch] = useReducer((appointmentState, action) => {
+  const [appointmentState, appointmentDispatch] = useReducer((appointmentState, action) => {
     switch (action.type) {
       case "SET_APPOINTMENTS":
         return { ...appointmentState, appointments: action.payload }
@@ -35,7 +35,13 @@ export const useAppointments = () => {
           })
         }
       case "DELETE_APPOINTMENT":
-        return { ...appointmentState, appointments: appointmentState.appointments.filter(appointment => appointment.id !== action.payload.id) }
+        return {
+          ...appointmentState, appointments: appointmentState.appointments.filter(appointment => {
+            console.log("ids", appointment.id, action.payload.id);
+            return appointment.id !== action.payload.id
+          }
+          )
+        }
       case "DELETE_OPEN_APPOINTMENT":
         return { ...appointmentState, open_appointments: appointmentState.open_appointments.filter(appointment => appointment.id !== action.payload.id) }
       default:
@@ -43,5 +49,5 @@ export const useAppointments = () => {
     }
   }, { ...initialState });
 
-  return { appointmentState, dispatch };
+  return { appointmentState, appointmentDispatch };
 }
