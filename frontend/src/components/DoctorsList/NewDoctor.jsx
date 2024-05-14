@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { usePost } from '../../hooks/useAPI';
 import DoctorForm from '../Forms/DoctorForm';
+import { UserSignedIn } from '../../App';
 
 const NewDoctorForm = (props) => {
   const {clinic_id} = props;
   const [doctor, setDoctor] = useState({});
+  const {dispatch} = useContext(UserSignedIn);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,11 +24,13 @@ const NewDoctorForm = (props) => {
   const {post} = usePost();
 
   useEffect(() => {
-    doctor.name && 
+    if(doctor.name){
       post(
         'doctors',
         doctor
       );
+      dispatch({type: "ADD_DOCTOR", payload: doctor});
+    } 
   }, [doctor]);
 
 
