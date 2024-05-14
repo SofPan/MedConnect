@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import ClinicListItem from "./ClinicsListItem";
 import { calcRoute } from "../../helpers/calcRoute";
 import { UserSignedIn } from "../../App";
+import BasicModal from "../GeneralComponents/BasicModal";
 
 const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
   const { userState } = useContext(UserSignedIn);
@@ -38,7 +39,7 @@ const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
   ));
   return (
     <div>
-      <h2>{errorMessage}</h2>
+      <BasicModal title="Error" message={errorMessage}/>
       <ul className="available-clinics">
         {mapClinics}
      </ul>
