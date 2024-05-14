@@ -17,11 +17,14 @@ const UserProfile = () => {
       "profile",
       userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
     );
+  }, [])
+
+  useEffect(() => {
     if (getData){
       setIsClinic(getData.is_clinic);
       setLoaded(true);
     }
-  }, [getData, getLoading]);
+  }, [getData]);
 
   return(
     <>

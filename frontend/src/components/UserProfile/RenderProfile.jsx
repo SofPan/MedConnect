@@ -1,4 +1,4 @@
-import { useState, useEffect, act } from "react";
+import { useState, useEffect } from "react";
 import PatientAppointments from "../Scheduling/PatientAppointments";
 import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";

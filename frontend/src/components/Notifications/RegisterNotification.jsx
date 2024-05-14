@@ -20,8 +20,11 @@ const RegisterNotification = (props) => {
       'doctors/single',
       doctor_id
     );
+  }, []);
+
+  useEffect(() => {
     getData && setDoctorName(getData.name);
-  }, [getData])
+  }, [getData]);
 
   useEffect(() => {
     if(accepting){

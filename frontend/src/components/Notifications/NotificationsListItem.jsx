@@ -22,6 +22,8 @@ const NotificationsListItem = (props) => {
       'patients',
       patient_id
     );
+  }, []);
+  useEffect(() => {
     getData && setPatient(getData);
   }, [getData])
 

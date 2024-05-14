@@ -18,6 +18,9 @@ const Documents = (props) => {
     get(
       'documents'
     )
+  }, []);
+
+  useEffect(() => {
     getData && setDocuments(getData);
   }, [getData]);
 

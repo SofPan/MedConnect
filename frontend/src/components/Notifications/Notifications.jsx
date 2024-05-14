@@ -14,6 +14,9 @@ const Notifications = (props) => {
       'requests',
       userProfile.id
     );
+  }, []);
+
+  useEffect(() => {
     getData && setNotifications(getData);
   }, [getData]);
 

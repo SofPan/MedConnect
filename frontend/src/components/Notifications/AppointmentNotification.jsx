@@ -22,6 +22,10 @@ const AppointmentNotification = (props) => {
       'appointments/single',
       appointment_id
     )
+  }, []);
+  
+  useEffect(() => {
+    
     getData && setAppointment(getData);
   }, [getData])
 
