@@ -49,8 +49,10 @@ const ClinicListItem = (props) => {
     
     }  else if (!userState.userInfo.id) {
       setErrorMessage("Please login or sign up to register with a doctor");
+      dispatch({ type: "SET_MODAL", payload: true})
     } else {
       setErrorMessage("You cannot register with a doctor. Please, login or sign up as a patient");
+      dispatch({ type: "SET_MODAL", payload: true})
     }
   }
 
