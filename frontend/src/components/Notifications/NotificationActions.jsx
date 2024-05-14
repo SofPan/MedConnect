@@ -12,10 +12,9 @@ const NotificationActions = (props) => {
   useEffect(() => {
     if(declining){
       deleteRecord(
-      'requests',
-      notification_id
-    );
-      handleChange();
+        'requests',
+        notification_id
+      ).then(handleChange());
     }
   }, [declining]);
 

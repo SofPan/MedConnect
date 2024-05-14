@@ -57,7 +57,7 @@ const AppointmentNotification = (props) => {
   return(
     <span>
       <p>Book an appointment with {appointment.doctor_name} on {dateString}.</p>
-      <NotificationActions notification_id={notification_id} onAccept={handleAccept}/>
+      <NotificationActions notification_id={notification_id} onAccept={handleAccept} handleChange={handleChange}/>
     </span>
   )
 }

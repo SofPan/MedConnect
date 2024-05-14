@@ -11,16 +11,18 @@ const Notifications = (props) => {
   const [changeNotifications, setChangeNotifications] = useState(0);
 
   useEffect(() => {
-    console.log("changeNotifications", changeNotifications);
+    console.log("get will run", changeNotifications);
     get(
       'requests',
       userProfile.id
     );
+    console.log("get did run");
   }, [changeNotifications]);
 
   useEffect(() => {
-    console.log("new getData")
+    console.log("new data");
     getData && setNotifications(getData);
+    console.log("notifications set");
   }, [getData]);
 
   const handleChange = () => {
