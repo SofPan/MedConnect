@@ -72,7 +72,7 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 
 -- Seed data for patients table
 INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_id, created_at) VALUES
-(1, 'John Doe', '1990-05-15', 'Male', '1234567890', 1, NOW()),
+(1, 'John Doe', '1990-05-15', 'Male', '1234567890', 6, NOW()),
 (2, 'Jane Smith', '1985-10-20', 'Female', '0987654321', 1, NOW()),
 (3, 'Michael Johnson', '1978-03-08', 'Male', '5678901234', 2, NOW()),
 (4, 'Emily Brown', '2000-12-03', 'Female', '4321098765', 2, NOW()),
@@ -106,7 +106,10 @@ VALUES
     (7, 7, 'Matthew Davis', 'Dr. Rodriguez', '2024-05-05 08:30:00', '2024-05-05 09:30:00', 1, 'City Medical Center', FALSE, NOW()),
     (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, 'City Medical Center', TRUE, NOW()),
     (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, 'City Medical Center', FALSE, NOW()),
-    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, 'City Medical Center', TRUE, NOW());
+    (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (null, 6, null, 'Dr. Martinez', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (null, 6, null, 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (null, 6, null, 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW());
 
 
 

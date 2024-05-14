@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGet, usePut, useDelete } from "../../hooks/useAPI";
 import NotificationActions from "./NotificationActions";
+import { UserSignedIn } from "../../App";
 
 
 const RegisterNotification = (props) => {
   const {doctor_id, type, notification_id, patient} = props;
 
-  const {loading, data} = useGet(
-    'doctors/single',
-    doctor_id
-  );
+  const {getData, get} = useGet();
 
-  const {putLoading, putData, put} = usePut();
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {put} = usePut();
+  const {deleteRecord} = useDelete();
+  const {dispatch} = useContext(UserSignedIn);
+
 
   const [doctorName, setDoctorName] = useState("");
   const [editPatient, setEditPatient] = useState(patient);
   const [accepting, setAccepting] = useState(false);
 
   useEffect(() => {
-    data && setDoctorName(data.name);
-  }, [data])
+    get(
+      'doctors/single',
+      doctor_id
+    );
+  }, []);
+
+  useEffect(() => {
+    getData && setDoctorName(getData.name);
+  }, [getData]);
 
   useEffect(() => {
     if(accepting){
@@ -29,9 +36,10 @@ const RegisterNotification = (props) => {
         editPatient
       )
       deleteRecord(
-        'notifications',
+        'requests',
         notification_id
       );
+      dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
     } 
       
   }, [accepting]);

@@ -8,8 +8,6 @@ import {
 const ClinicTabs = (props) => {
   const {activeTab, handleTabChange} = props;
 
-
-  console.log(activeTab)
   
   return (
     <Box marginRight={"50px"} width="20vw" display={'inline-block'} borderRight={'1px solid lightgrey'}>

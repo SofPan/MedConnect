@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
+import { UserSignedIn } from "../../App";
 
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
@@ -8,35 +9,38 @@ import NewDocument from "../PatientDocuments/NewDocument";
 
 const Documents = (props) => {
   const {userProfile} = props;
-  // TODO: replace filtering in child component by calling the request by patient_id
-  const {loading, data} = useGet(
-    'documents'
-  )
+
+  const {getData, get} = useGet()
+
+  const {userState, dispatch} = useContext(UserSignedIn);
 
   const [documents, setDocuments] = useState([]);
-  const [alterDocuments, setAlterDocuments] = useState(0);
 
   useEffect(() => {
-    data && setDocuments(data);
-  }, [data]);
+    documents.length !== userState.documents.length &&
+    get(
+      'documents'
+    )
+  }, [userState.documents]);
 
-  const triggerDocumentStateUpdate = () => {
-    setAlterDocuments(alterDocuments + 1);
-  }
+  useEffect(() => {
+    if(getData){
+      dispatch({ type: "SET_DOCUMENTS", payload: getData });
+      setDocuments(getData);
+    }
+  }, [getData]);
 
   return(
     <>
       <h2>Documents</h2>
       <AccordionWrapper title="Add">
         <NewDocument 
-          patient_id={userProfile.id} 
-          addDocument={triggerDocumentStateUpdate}  
+          patient_id={userProfile.id}  
         />
       </AccordionWrapper>
       <DocumentsList 
         patient_id={userProfile.id} 
         documents={documents}
-        changeDocumentState={triggerDocumentStateUpdate}
       />
     </>
   )

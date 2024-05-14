@@ -1,31 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
+import { UserSignedIn } from '../../App';
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
-  const {loading, data} = useGet(
-    "doctors",
-    userProfile.id
-  )
+  const {getData, get} = useGet();
 
+  const {userState, dispatch} = useContext(UserSignedIn);
   const [doctors, setDoctors] = useState([]);
-  const [alterDoctors, setAlterDoctors] = useState(0);
 
   useEffect(() => {
-    
-    if(data){
-      setDoctors(data);
-    }
-  }, [data]);
+    doctors.length !== userState.doctors.length &&
+    get(
+      "doctors"
+      );
+  }, [userState.doctors]);
 
-  const triggerDoctorStateUpdate = () => {
-    setAlterDoctors(alterDoctors + 1);
-  }
-  
+  useEffect(() => {
+    getData && dispatch({type: "SET_DOCTORS", payload: getData});
+    setDoctors(getData);
+  }, [getData]);
+
   return(
     <>
     <div>
@@ -33,12 +32,10 @@ const ProfileDoctors = (props) => {
       <AccordionWrapper title="New">
         <NewDoctorForm 
         clinic_id={userProfile.id}
-        addDoctor={triggerDoctorStateUpdate}
         />
       </AccordionWrapper>
     </div>
-    {!doctors.length && <span>You do not have any doctors listed</span>}
-    <DoctorsList clinic_id={userProfile.id} doctors={doctors} changeDoctorState={triggerDoctorStateUpdate} />
+    <DoctorsList clinic_id={userProfile.id} />
     </>
 
   )

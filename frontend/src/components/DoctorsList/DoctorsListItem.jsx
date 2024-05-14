@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDelete } from "../../hooks/useAPI";
 import EditDoctorForm from "./EditDoctor";
 import {
@@ -7,6 +7,7 @@ import {
     Card,
   } from '@mui/material';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
+import { UserSignedIn } from "../../App";
 
 const DoctorsListItem = (props) => {
   const {
@@ -15,23 +16,26 @@ const DoctorsListItem = (props) => {
           photo, 
           patients, 
           id,
-          changeDoctorState,
-          doctor
+          doctor,
         } = props;
 
   const [deleting, setDeleting] = useState(false);
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {deleteRecord} = useDelete();
+  const {dispatch} = useContext(UserSignedIn)
 
 
   useEffect(() => {
-    deleting && deleteRecord(
-      'doctors',
-      doctor.id
-    )
+    if (deleting) {
+      deleteRecord(
+        'doctors',
+        doctor.id
+      )
+      dispatch({type: "DELETE_DOCTOR", payload: doctor});
+    }
+    
   }, [deleting]);
 
   const handleClickDelete = () => {
-    console.log("attempting to delete doctor", doctor);
     setDeleting(true);
   }
 
@@ -54,7 +58,7 @@ const DoctorsListItem = (props) => {
         </div>
         <div>
           <AccordionWrapper title={"Edit"}>
-            <EditDoctorForm doctor={doctor} changeDoctorState={changeDoctorState}/>
+            <EditDoctorForm doctor={doctor}/>
           </AccordionWrapper>
           <Button onClick={handleClickDelete}>Delete</Button>
         </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, act } from "react";
+import { useState, useEffect } from "react";
 import PatientAppointments from "../Scheduling/PatientAppointments";
 import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
@@ -13,7 +13,7 @@ const RenderProfile = (props) => {
   const [rightComponent, setRightComponent] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
 
-   const handleTabChange = (event, newValue) => {
+  const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
@@ -24,9 +24,9 @@ const RenderProfile = (props) => {
     )
     } else {
       setLeftComponent(<Documents userProfile={userProfile} />)
-      setRightComponent(<PatientAppointments userProfile={userProfile}/>)
+      setRightComponent(<PatientAppointments  userProfile={userProfile}/>)
     }
-  }, [userProfile])
+  }, []);
 
   return(
     <>
