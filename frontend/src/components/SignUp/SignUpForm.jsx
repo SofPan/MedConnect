@@ -102,6 +102,7 @@ export default function SignUp({setLoginDisplay}) {
           dispatch({ type: "USER_LOGIN", payload: true });
 
           navigate("/required_information");
+          console.log("use sign up ",user)
 
           setLoginDisplay(false);
                     

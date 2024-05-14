@@ -5,17 +5,18 @@ import { useReducer, useEffect } from "react";
 
 export default function useApplicationData() {
 
-  const initialState = {
-    userLoggedIn: false,
-    userInfo: {},
-    selectedClinicId: 0,
-    events:[{ title: 'Event 1', start: new Date('2024-05-01T10:00:00') }],
-    newUser: null,
-    clinics:[],
-    displayedClinics:[],
-    doctors:[],
-    clinicInfo:{}
-  }
+    const initialState = {
+        userLoggedIn: false,
+        userInfo: {},
+        selectedClinicId: 0,
+        events:[{ title: 'Event 1', start: new Date('2024-05-01T10:00:00') }],
+        newUser: null,
+        clinics:[],
+        displayedClinics:[],
+        doctors:[],
+        clinicInfo:{},
+        displayModal: false
+    }
 
 
   const [userState, dispatch] = useReducer((userState, action) => {
@@ -44,6 +45,8 @@ export default function useApplicationData() {
         return {...userState, displayedClinics: action.payload } 
     case "SET_CLINIC_INFO":
         return {...userState, clinicInfo: action.payload } 
+    case "SET_MODAL":
+        return {...userState, displayModal: action.payload } 
       default:
         return userState;
     }

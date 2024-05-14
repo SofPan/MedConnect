@@ -29,14 +29,15 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
     const navigate = useNavigate();
     
     const handleProfileClick = () => {
-       console.log("Profile click", userState.useInfo)
+       console.log("Profile click", userState.userInfo)
        if (userState.userInfo.is_clinic) {
         axios.get(`http://localhost:8080/clinics/${userState.userInfo.id}`)
             .then((res) => {
                 if(res.data) {
-                    navigate("/profile") 
+                    console.log("re data",res)
+                  navigate("/profile") 
                 } else {
-                    navigate("/required_information")
+                  navigate("/required_information")
                 }
             })
             .catch(error => {
@@ -61,6 +62,7 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
         setLoginDisplay(!LoginDisplay)
     }
     const handleLogout = () => {
+        console.log("Log out", userState.userInfo)
         sessionStorage.user_id = '';
         dispatch({type:"USER_INFO_LOGOUT", payload:{}})
         dispatch({type:"USER_STATE_LOGOUT", payload:false})

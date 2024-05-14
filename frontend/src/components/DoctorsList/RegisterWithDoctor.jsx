@@ -3,13 +3,16 @@ import { useContext, useState } from "react";
 import { UserSignedIn } from "../../App";
 import { Button } from "@mui/material";
 import ChangeDoctor from "./ChangeDoctor";
+import BasicModal from "../GeneralComponents/BasicModal";
+import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
 
 const RegisterWithDoctor = () => {
-  const { userState } = useContext(UserSignedIn);
+  const { userState, dispatch } = useContext(UserSignedIn);
   const [errorMessage, setErrorMessage] = useState('');
   const [changeDoctor, setChangeDoctor] = useState(false);
   const [doctorId, setDoctorId] = useState();
   const [requestSent, setRequestSent] = useState(false);
+  const [modalTitle, setModalTitle] = useState("")
 
   const userInfo = userState.userInfo;
 
@@ -27,7 +30,9 @@ const RegisterWithDoctor = () => {
         const patient = response.data;
         if (patient.doctor_id) {
           setChangeDoctor(true);
-          setErrorMessage("YOU ARE REGISTERED WITH A DOCTOR. CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS??");
+          setErrorMessage("CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS?");
+          setModalTitle("YOU ARE REGISTERED WITH A DOCTOR")
+          dispatch({ type: "SET_MODAL", payload: true})
         } else {
           axios.post(`http://localhost:8080/requests`, {
             request_type: "register",
@@ -38,23 +43,31 @@ const RegisterWithDoctor = () => {
           })
           .then(response => {
             if (response.data.message) {
+              setModalTitle("Error")
               setErrorMessage(response.data.message)
+              dispatch({ type: "SET_MODAL", payload: true})
             } else {
               setRequestSent(true);
-              setErrorMessage("Thank you! Your request to register with the doctor was sent successfully.")
+              setModalTitle("Thank you!")
+              setErrorMessage("Your request to register with the doctor was sent successfully.")
+              dispatch({ type: "SET_MODAL", payload: true})
             }
           })
         }
       })
       .catch(error => {
         console.error("Error registering with doctor:", error);
+        setModalTitle("Error")
         setErrorMessage("An error occurred. Please try again later.");
+        dispatch({ type: "SET_MODAL", payload: true})
       });
   }
 
   const handleCancel = () => {
     setChangeDoctor(false);
-    setErrorMessage('')
+    setErrorMessage('');
+    setModalTitle('');
+    dispatch({ type: "SET_MODAL", payload: false})
   }
 
   const handleChangeDoctorRequest = (doctorId) => {
@@ -71,8 +84,12 @@ const RegisterWithDoctor = () => {
         .then((response) => {
           if (response.data.message) {
             setErrorMessage(response.data.message)
+            setModalTitle("Error")
+            dispatch({ type: "SET_MODAL", payload: true})
           } else {
+          setModalTitle("Error")
           setErrorMessage("The request to change your doctor was sent");
+          dispatch({ type: "SET_MODAL", payload: true})
           setChangeDoctor(false);
           }
         })
@@ -80,16 +97,21 @@ const RegisterWithDoctor = () => {
       .catch(error => {
         console.error("Error requesting to change doctor:", error);
         setErrorMessage("An error occurred. Please try again later.");
+        setModalTitle("Error")
       });
   }
   
 
   return (
     <div>
+      {changeDoctor ? 
+        <ChangeDoctorModal title={modalTitle} message={errorMessage} handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctorId={doctorId}/> 
+        : 
+        <BasicModal title={modalTitle} message={errorMessage}/>
+      }
       <h3>{clinicInfo.clinic_name}</h3>
       <p>{clinicInfo.clinic_address}</p>
       <h2>{errorMessage}</h2>
-      {changeDoctor && <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>}
       {filteredDoctors.map(doctor => {
         return (
           <div key={doctor.id}>
