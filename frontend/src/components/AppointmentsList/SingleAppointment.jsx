@@ -11,6 +11,11 @@ import {
     MenuItem
   } from '@mui/material';
   import { styled } from '@mui/system';
+  import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+  import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+  import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+  import dayjs from 'dayjs';
+
 
 const StyledCard = styled(Card)({
   minWidth: 275,
@@ -29,41 +34,30 @@ const SingleAppointment = (appointment) => {
   const handleDelete = () => {
     // Implement delete functionality here
   };
-
+  console.log(appointment.start_time);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedAppointment, setEditedAppointment] = useState(appointment);
+  const [editedAppointment, setEditedAppointment] = useState({
+    id: appointment.id,
+    patient_id: appointment.patient_id,
+    doctor_id: appointment.doctor_id,
+    patient_name: appointment.patient_name,
+    doctor_name: appointment.doctor_name,
+    start_time: dayjs(appointment.start_time),
+    end_time: dayjs(appointment.end_time),
+    clinic_id: appointment.clinic_id,
+    status: true,
+    created_at: new Date(appointment.created_at),
+    clinic_address: appointment.clinic_address,
+    clinic_name:appointment.clinic_name
+  });
   const [selectedDoctor, setSelectedDoctor] = useState(appointment.doctor_name);
   const [doctors, setDoctors ] = useState([]);
-  const [clinicName, setClinicName] = useState([]);
-  const [selectedClinic, setSelectedClinic] = useState(appointment.clinic_name);
+  const [clinics, setClinics] = useState([]);
+  const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
 
   
-
-  const getClinicIdByName = async (clinic_name) =>{
-    try {
-      const response = await fetch(`http://localhost:8080/clinicName/${clinic_name}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to register user');
-      }
-      ;
-      const responseData = await response.json();
-      
-      return responseData;
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      
-      
-
-    } catch (error) {
-      // Handle error
-    }
-  }
+  console.log(typeof editedAppointment.start_time);
+  
 
   const getDoctors = async (clinic_id) =>{
     try {
@@ -108,11 +102,13 @@ const SingleAppointment = (appointment) => {
       ;
       const responseData = await response.json();
       
+      
       const filtererdData = responseData.map((clinic)=>{
         return(
           {
             name:clinic.name,
-            address: clinic.address
+            address: clinic.address,
+            id: clinic.id
           }
         )
       })
@@ -126,20 +122,49 @@ const SingleAppointment = (appointment) => {
     }
   }
 
+  const updateAppointment = async (editedAppointment) =>{
+    try {
+      const response = await fetch(`http://localhost:8080/appointments/:id`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:
+          JSON.stringify(editedAppointment)
+        
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update appointment');
+      }
+      ;
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
+
   useEffect(()=>{
+
     const fetchDoctors = async () => {
+
       const response = await getDoctors(editedAppointment.clinic_id);
+      console.log("response from get dovtos of a clinic", response);
       setDoctors(response);
+      
     };
+   
     fetchDoctors();
 
     
-  },[editedAppointment.clinic_name]);
+  },[editedAppointment.clinic_id]);
 
   useEffect(()=>{
+    console.log("fetch clinic name fired");
     const fetchClinicName = async () => {
-      const response = await getClinicName(appointment.clinic_id);
-      setClinicName(response);
+      const response = await getClinicName();
+      setClinics(response);
     };
     fetchClinicName();
   },[]);
@@ -148,10 +173,13 @@ const SingleAppointment = (appointment) => {
     setIsEditing(!isEditing);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // Save edited appointment here
     setIsEditing(false);
     // You can perform any action, like sending data to backend
+    console.log("edited appoijtment", editedAppointment);
+    const user = await updateAppointment(editedAppointment);
+    console.log("return from update app", user);
   };
 
   const handleCancel = () => {
@@ -167,21 +195,36 @@ const SingleAppointment = (appointment) => {
 
   
   const handleClinicChange = async (e) => {
-
-    setSelectedClinic(e.target.value);
-    setEditedAppointment({ ...editedAppointment, clinic_name: e.target.value });
-
+    const selectedClinicName = e.target.innerText;
+    
+    setEditedAppointment(prevState => ({ ...prevState, clinic_name: selectedClinicName }));
     try {
-      const clinicIdResponse = await getClinicIdByName(e.target.value);
-      const clinicId = clinicIdResponse[0].id; // Assuming the response returns an array with the clinic ID at index 0
-      setEditedAppointment({ ...editedAppointment, clinic_id: clinicId });
+        const clinicIdResponse = clinics.find((clinic)=> clinic.name === selectedClinicName);
+        const clinic_id = clinicIdResponse.id; 
+        setEditedAppointment(prevState => ({ ...prevState, clinic_id: clinic_id }));
     } catch (error) {
+        console.log("clinic id response error", error);
     }
-  };
+    try {
+      const clinicAddressResponse = clinics.find((clinic)=> clinic.name === selectedClinicName);
+      const clinic_address = clinicAddressResponse.address; 
+      setEditedAppointment(prevState => ({ ...prevState, clinic_address: clinic_address}));
+  } catch (error) {
+      console.log("clinic id response error", error);
+  }
+    console.log("handle clinic change", editedAppointment);
+};
+
 
   const handleDoctorChange = (e) => {
     setSelectedDoctor(e.target.value);
     setEditedAppointment({ ...editedAppointment, doctor_name: e.target.value });
+  };
+  const handleDateTimeChange = (field, newValue) => {
+    setEditedAppointment(prevState => ({
+        ...prevState,
+        [field]: newValue
+    }));
   };
 
   return (
@@ -217,37 +260,61 @@ const SingleAppointment = (appointment) => {
           ))}
         </TextField>
       )}
-      <TextField
-        name="start_time"
-        label="Start Time"
-        value={editedAppointment.start_time}
-        onChange={handleChange}
-        disabled={!isEditing}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="end_time"
-        label="End Time"
-        value={editedAppointment.end_time}
-        onChange={handleChange}
-        disabled={!isEditing}
-        fullWidth
-        margin="normal"
-      />
-      {clinicName && clinicName.length > 0 && (
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+    label="Start Date"
+    value={editedAppointment.start_time}
+    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<TimePicker
+    label="Start Time"
+    value={editedAppointment.start_time}
+    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<DatePicker
+    label="End Date"
+    value={editedAppointment.end_time}
+    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+
+<TimePicker
+    label="End Time"
+    value={editedAppointment.end_time}
+    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+    disabled={!isEditing}
+    fullWidth
+    margin="normal"
+    renderInput={(params) => <TextField {...params} />}
+/>
+</LocalizationProvider>
+
+      {clinics && clinics.length > 0 && (
         <TextField
           select
           name="clinic_name"
           label="Clinic"
           value={editedAppointment.clinic_name}
-          onChange={handleClinicChange}
+          onClick={handleClinicChange}
           disabled={!isEditing}
           fullWidth
           margin="normal"
         >
-          {clinicName.map((address, index) => (
-            <MenuItem key={index} value={address.name}>
+          {clinics.map((address, index) => (
+            <MenuItem key={index} value={address.name} >
               {address.name}
             </MenuItem>
           ))}

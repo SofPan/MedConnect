@@ -1,6 +1,7 @@
 const db = require('../../connection');
 
 const getClinicIdbyName = (name) => {
+  
   const values = [name];
   const query = `
     SELECT *

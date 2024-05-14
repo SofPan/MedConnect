@@ -6,14 +6,15 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
 import { UserSignedIn } from "../../App";
+import { useNavigate } from "react-router-dom";
 import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
 // import './SignUp.scss'; // Import the specific SASS file
 
 
 
 
-export default function SignUp({setSignInDisplay, SignInDisplay}) {
-
+export default function SignUp({setLoginDisplay}) {
+  const navigate = useNavigate();
   const { dispatch } = useContext(UserSignedIn);
 
 
@@ -99,12 +100,17 @@ export default function SignUp({setSignInDisplay, SignInDisplay}) {
           dispatch({ type: "USER_INFO", payload: user });
     
           dispatch({ type: "USER_LOGIN", payload: true });
+
+          navigate("/required_information");
+          console.log("use sign up ",user)
+
+          setLoginDisplay(false);
                     
         } catch (error) {
           console.error('Registration failed', error);
           // Handle registration failure (e.g., notify the user)
         }
-      setSignInDisplay(!SignInDisplay);
+      // setSignInDisplay(!SignInDisplay);
     } else {
         setErrors(formErrors);
         setOpenSnackbar(true);

@@ -46,7 +46,7 @@ export default function PatientScheduler() {
 
 
     if (userState.userInfo.is_clinic) {
-   
+      console.log("get Apppoint triggered", userState.userInfo.id);
       try {
         const response = await fetch(`http://localhost:8080/appointments/${userState.userInfo.id}`, {
           method: 'GET',
@@ -59,10 +59,10 @@ export default function PatientScheduler() {
         if (!response.ok) {
           throw new Error('Failed to register user');
         }
-        const responseData = response.json();
+        const responseData = await response.json();
 
 
-
+        console.log("repsonse", responseData);
 
 
         return responseData;
@@ -76,42 +76,46 @@ export default function PatientScheduler() {
 
 
   useEffect(() => {
+    
+    if(userState.userInfo.is_clinic){
+      const fetchAppointments = async () => {
 
-    const fetchAppointments = async () => {
+        const appointments = await getAppointments();
+        console.log("does this contain an id", appointments);
+       
+        if (appointments) {
+          const dates = appointments.map((date) => {
+            return {
+              extendedProps: {
+                appointmentId: date.id
+              }, title: date.patient_name, start: date.start_time, end: date.end_time, 
+            }
+          })
+          console.log(dates);
+          setEvents(dates);
+          
+          
+        }
+  
+      };
+      console.log("use effect for appointments hit");
+      fetchAppointments();
+    }
 
-      const appointments = await getAppointments();
+    console.log(userState);
+    
 
-      console.log("does this have clinic name included???", appointments);
-
-
-      if (appointments) {
-        const dates = appointments.map((date) => {
-          return {
-            extendedProps: {
-              appointmentId: 2
-            }, title: date.patient_name, start: date.start_time, end: date.end_time
-          }
-        })
-
-        setEvents(dates);
-      }
-
-    };
-
-    fetchAppointments();
-
-  }, [userState.userInfo]);
+  }, [userState.userInfo.is_clinic]);
 
   useEffect(() => {
     
-
+    console.log("appointment id", appointment_id);
     if (appointment_id) {
       
       const getAppointment = async () => {
         
         if (appointment_id) {
 
-          console.log("yo dawg this is getting a single appointments", appointment_id);
     
           try {
             const response = await fetch(`http://localhost:8080/appointments/single/${appointment_id}`, {
@@ -150,7 +154,7 @@ export default function PatientScheduler() {
 
 
   const handleDateClick =  (e) => {
-
+    
     setappointment_id(e.event.extendedProps.appointmentId);
 
   }
@@ -164,7 +168,7 @@ export default function PatientScheduler() {
     )
   }
 
-
+  console.log("appointInfo", appointmentInfo);
 
   return (
     <div>
@@ -172,13 +176,14 @@ export default function PatientScheduler() {
         details={appointmentInfo.start_time}
         clinic_address={appointmentInfo.address}
         status={appointmentInfo.status}
-        appointment={"hehehehehe"}
-        user_id={1} 
+        id={appointmentInfo.id} 
         patient_name={appointmentInfo.patient_name}
         start_time={appointmentInfo.start_time}
         end_time={appointmentInfo.end_time}
         clinic_id={appointmentInfo.clinic_id}
-        clinic_name={appointmentInfo.clinic_name}/>
+        clinic_name={appointmentInfo.clinic_name}
+        patient_id={appointmentInfo.patient_id}
+        doctor_id={appointmentInfo.doctor_id}/>
          :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <h1>Clinic Appointments</h1>

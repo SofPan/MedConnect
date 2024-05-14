@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import ClinicListItem from "./ClinicsListItem";
 import { calcRoute } from "../../helpers/calcRoute";
 import { UserSignedIn } from "../../App";
+import BasicModal from "../GeneralComponents/BasicModal";
 
 const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
   const { userState } = useContext(UserSignedIn);
   const [clinicsList, setClinicsList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (searchCoordinates && userState.displayedClinics) {
@@ -32,12 +34,16 @@ const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
       address={clinic.address}
       distance={clinic.distance}
       handleRequestToRegister={handleRequestToRegister}
+      setErrorMessage={setErrorMessage}
     />
   ));
   return (
-    <ul className="available-clinics">
-      {mapClinics}
-    </ul>
+    <div>
+      <BasicModal title="Error" message={errorMessage}/>
+      <ul className="available-clinics">
+        {mapClinics}
+     </ul>
+    </div>
   );
 };
 

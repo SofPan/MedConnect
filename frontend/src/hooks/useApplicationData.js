@@ -17,7 +17,8 @@ export default function useApplicationData() {
     doctors: [],
     clinicInfo: {},
     notifications: [""],
-    documents: [""]
+    documents: [""],
+    displayModal: false
   }
 
 
@@ -72,6 +73,8 @@ export default function useApplicationData() {
         return { ...userState, notifications: userState.notifications.filter(notification => notification.id !== action.payload.id) }
       case "DELETE_DOCUMENT":
         return { ...userState, documents: userState.documents.filter(document => document.id !== action.payload.id) }
+      case "SET_MODAL":
+        return { ...userState, displayModal: action.payload }
       default:
         return userState;
     }

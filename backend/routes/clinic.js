@@ -3,6 +3,7 @@ const express = require('express');
 const { getAllClinics } = require('../src/db/queries/clinics/getAllClinics');
 const { geocodeAddress } = require('../helpers/geocodeAdress');
 const { addClinic } = require('../src/db/queries/clinics/addClinic');
+const { getClinicByUserId } = require('../src/db/queries/clinics/getClinicByUserId');
 const router = express.Router();
 
 // Route to fetch clinics with geocoded addresses
@@ -19,10 +20,9 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
 
-  req.session.user_id = req.params.id;
-  const userId = req.session.user_id;
+  const userId = req.params.id;
 
-  getClinicIdbyUserID(userId)
+  getClinicByUserId(userId)
     .then(clinic => {
       res.json(clinic);
     })
@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/clinicName/:name', (req, res) => {
 
-  const name = req.params.name;
+  const name = decodeURIComponent(req.params.name);
 
   getClinicIdbyName(name)
     .then(clinic => {

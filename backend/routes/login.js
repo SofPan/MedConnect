@@ -5,6 +5,8 @@
 // POST logout /logout
 const { getUserById } = require('../src/db/queries/users/getUserById');
 const { getUserByEmail } = require('../src/db/queries/users/getUserByEmail');
+const {getClinicByUserId} = require('../src/db/queries/clinics/getClinicByUserId')
+const {getPatientByUserId }= require('../src/db/queries/patients/getPatientByUserId')
 
 const express = require('express');
 const router = express.Router();
@@ -17,7 +19,6 @@ router.post('/login', async (req, res) => {
 
 
   const { email, password } = req.body;
-
 
   try {
 
@@ -43,9 +44,22 @@ router.post('/login', async (req, res) => {
         }
       }
 
-    })
+    });
+    
+    return res.json(filteredUser);
+  
+    // if(user.is_clinic){
+     
+    //   const userInfo = await getClinicByUserId(user.id);
+    //   if (userInfo) userInfo.is_clinic = true;
+    //   return res.json(userInfo);
+    // }else{
+    //   const userInfo = await getPatientByUserId(user.id);
+    //   if (userInfo) userInfo.is_clinic = false;
+    //   return res.json(userInfo);
+    // }
 
-    res.json(filteredUser);
+    
 
   } catch (error) {
     console.error('Error fetching user information:', error);
