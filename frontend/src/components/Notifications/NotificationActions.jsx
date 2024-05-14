@@ -11,7 +11,7 @@ const NotificationActions = (props) => {
 
   useEffect(() => {
     declining && deleteRecord(
-      'notifications',
+      'requests',
       notification_id
     );
   }, [declining]);

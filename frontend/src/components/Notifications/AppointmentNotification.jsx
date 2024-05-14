@@ -23,7 +23,7 @@ const AppointmentNotification = (props) => {
       appointment_id
     )
   }, []);
-  
+
   useEffect(() => {
     
     getData && setAppointment(getData);
@@ -38,7 +38,7 @@ const AppointmentNotification = (props) => {
         appointment
       );
       deleteRecord(
-        'notifications',
+        'requests',
         notification_id
       );
     }

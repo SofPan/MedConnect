@@ -33,7 +33,7 @@ const RegisterNotification = (props) => {
         editPatient
       )
       deleteRecord(
-        'notifications',
+        'requests',
         notification_id
       );
     } 

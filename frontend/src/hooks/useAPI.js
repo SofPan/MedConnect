@@ -145,7 +145,7 @@ export const useDelete = () => {
 
       const response = await axios.delete(`${API_BASE_URL}${query}/${id}/delete`);
 
-      setDeleteData(response.deleteData);
+      setDeleteData(response.data);
 
       setDeleteLoading(false);
     } catch (error) {
