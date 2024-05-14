@@ -8,17 +8,24 @@ const Notifications = (props) => {
   const {getData, get} = useGet();
 
   const [notifications, setNotifications] = useState([]);
+  const [changeNotifications, setChangeNotifications] = useState(0);
 
   useEffect(() => {
+    console.log("changeNotifications", changeNotifications);
     get(
       'requests',
       userProfile.id
     );
-  }, []);
+  }, [changeNotifications]);
 
   useEffect(() => {
+    console.log("new getData")
     getData && setNotifications(getData);
   }, [getData]);
+
+  const handleChange = () => {
+    setChangeNotifications(changeNotifications + 1);
+  }
 
   return(
     <div className='profile-notifications'>
@@ -27,7 +34,7 @@ const Notifications = (props) => {
         ?
         <span>No pending requests.</span>
         :
-        <NotificationsList notifications={notifications}/>
+        <NotificationsList notifications={notifications} handleChange={handleChange}/>
       }
     </div>
   )

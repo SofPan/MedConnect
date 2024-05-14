@@ -4,7 +4,7 @@ import NotificationActions from "./NotificationActions";
 
 
 const RegisterNotification = (props) => {
-  const {doctor_id, type, notification_id, patient} = props;
+  const {doctor_id, type, notification_id, patient, handleChange} = props;
 
   const {getData, get} = useGet();
 
@@ -36,6 +36,7 @@ const RegisterNotification = (props) => {
         'requests',
         notification_id
       );
+      handleChange();
     } 
       
   }, [accepting]);
@@ -50,7 +51,7 @@ const RegisterNotification = (props) => {
   return(
     <span>
       <p>{type === "register" ? "Register with" : "Change doctors to"} {doctorName}</p>
-      <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
+      <NotificationActions notification_id={notification_id} onAccept={handleAccept} handleChange={handleChange} />
     </span>
   )
 }

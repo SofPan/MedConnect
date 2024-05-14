@@ -7,7 +7,7 @@ const formatDateAndTime = (date) => {
 }
 
 const AppointmentNotification = (props) => {
-  const {appointment_id, notification_id, patient} = props;
+  const {appointment_id, notification_id, patient, handleChange} = props;
 
   const {getData, get} = useGet();
 
@@ -41,6 +41,7 @@ const AppointmentNotification = (props) => {
         'requests',
         notification_id
       );
+      handleChange();
     }
   }, [accepting])
 

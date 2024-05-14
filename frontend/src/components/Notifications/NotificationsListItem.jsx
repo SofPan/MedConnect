@@ -9,7 +9,8 @@ const NotificationsListItem = (props) => {
     patient_id,
     doctor_id,
     type,
-    appointment_id
+    appointment_id,
+    handleChange
   } = props;
 
   const {getData, get} = useGet();
@@ -23,6 +24,7 @@ const NotificationsListItem = (props) => {
       patient_id
     );
   }, []);
+
   useEffect(() => {
     getData && setPatient(getData);
   }, [getData])
@@ -30,10 +32,10 @@ const NotificationsListItem = (props) => {
   useEffect(() => {
     if (patient.name){
       (type === "register" || type === "change_doctor") 
-      && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} />);
+      && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} handleChange={handleChange} />);
 
       type === "appointment" 
-        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} patient={patient}/>);
+        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} patient={patient} handleChange={handleChange} />);
     }
 
   }, [patient])

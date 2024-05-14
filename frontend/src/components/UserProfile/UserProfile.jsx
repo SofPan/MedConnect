@@ -5,9 +5,9 @@ import { useGet } from '../../hooks/useAPI';
 
 const UserProfile = () => {
 
-  const userContext = useContext(UserSignedIn);
+  const {userState} = useContext(UserSignedIn);
 
-  const {getLoading, getData, get} = useGet();
+  const {getData, get} = useGet();
 
   const [isClinic, setIsClinic] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +15,7 @@ const UserProfile = () => {
   useEffect(() => {
     get(
       "profile",
-      userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
+      userState.userInfo.user_id ? userState.userInfo.user_id : userState.userInfo.id
     );
   }, [])
 

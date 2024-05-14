@@ -3,17 +3,20 @@ import {Button} from "@mui/material"
 import { useEffect, useState } from "react";
 
 const NotificationActions = (props) => {
-  const {notification_id, onAccept} = props;
+  const {notification_id, onAccept, handleChange} = props;
 
   const [declining, setDeclining] = useState(false);
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {deleteRecord} = useDelete();
 
 
   useEffect(() => {
-    declining && deleteRecord(
+    if(declining){
+      deleteRecord(
       'requests',
       notification_id
     );
+      handleChange();
+    }
   }, [declining]);
 
   const handleDecline = () => {
