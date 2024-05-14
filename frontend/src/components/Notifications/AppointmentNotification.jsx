@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDelete, useGet, usePut } from "../../hooks/useAPI";
+import { UserSignedIn } from '../../App';
 import NotificationActions from "./NotificationActions";
 
 const formatDateAndTime = (date) => {
@@ -11,8 +12,10 @@ const AppointmentNotification = (props) => {
 
   const {getData, get} = useGet();
 
-  const {putLoading, putData, put} = usePut();
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {put} = usePut();
+  const {deleteRecord} = useDelete();
+
+  const {dispatch} = useContext(UserSignedIn);
   
   const [appointment, setAppointment] = useState({});
   const [accepting, setAccepting] = useState(false);
@@ -41,9 +44,9 @@ const AppointmentNotification = (props) => {
         'requests',
         notification_id
       );
-      handleChange();
+      dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
     }
-  }, [accepting])
+  }, [accepting]);
 
   const handleAccept = () => {
     setAppointment(prev => ({

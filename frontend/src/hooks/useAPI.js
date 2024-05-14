@@ -16,7 +16,7 @@ const API_BASE_URL = "http://localhost:8080/";
  * const {getLoading, getData} = useGet();
  * ...some code
  * get(
- * '/profile',
+ * 'profile',
  * user_id
  * )
  */

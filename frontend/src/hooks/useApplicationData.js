@@ -15,7 +15,7 @@ export default function useApplicationData() {
     displayedClinics: [],
     doctors: [],
     clinicInfo: {},
-    notifications: []
+    notifications: [""]
   }
 
 

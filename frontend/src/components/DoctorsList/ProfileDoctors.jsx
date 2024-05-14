@@ -25,10 +25,6 @@ const ProfileDoctors = (props) => {
     setDoctors(getData);
   }, [getData]);
 
-  // const handleChange = () => {
-  //   setChangeDoctors(changeDoctors + 1);
-  // }
-
   return(
     <>
     <div>

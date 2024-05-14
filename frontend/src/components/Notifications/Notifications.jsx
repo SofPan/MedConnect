@@ -1,33 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
+import { UserSignedIn } from "../../App";
 import NotificationsList from "./NotificationsList";
 
 const Notifications = (props) => {
   const {userProfile} = props;
 
   const {getData, get} = useGet();
-
+  
+  const {userState, dispatch} = useContext(UserSignedIn);
   const [notifications, setNotifications] = useState([]);
-  const [changeNotifications, setChangeNotifications] = useState(0);
 
   useEffect(() => {
-    console.log("get will run", changeNotifications);
+    notifications.length !== userState.notifications.length &&
     get(
       'requests',
       userProfile.id
     );
-    console.log("get did run");
-  }, [changeNotifications]);
+  }, [userState.notifications]);
 
   useEffect(() => {
-    console.log("new data");
-    getData && setNotifications(getData);
-    console.log("notifications set");
+    if(getData) {
+      dispatch({type: "SET_NOTIFICATIONS", payload: getData});
+      setNotifications(getData);
+    } 
   }, [getData]);
-
-  const handleChange = () => {
-    setChangeNotifications(changeNotifications + 1);
-  }
 
   return(
     <div className='profile-notifications'>
@@ -36,7 +33,7 @@ const Notifications = (props) => {
         ?
         <span>No pending requests.</span>
         :
-        <NotificationsList notifications={notifications} handleChange={handleChange}/>
+        <NotificationsList notifications={notifications}/>
       }
     </div>
   )
