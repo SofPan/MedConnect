@@ -133,7 +133,7 @@ const SingleAppointment = (appointment) => {
         throw new Error('Failed to delete appointment');
       }
   
-      // Handle successful deletion
+      return true;
     } catch (error) {
       // Handle error
       console.error('Error deleting appointment:', error);
@@ -194,7 +194,7 @@ const SingleAppointment = (appointment) => {
   
   const handleDelete = async () => {
     const success = await deleteAppointment(appointment.id);
-    console.log(success);
+    
     if(success){
       setsingleAppointmentDisplay(!singleAppointmentDisplay);
     }
