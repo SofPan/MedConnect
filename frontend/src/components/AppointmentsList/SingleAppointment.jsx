@@ -30,6 +30,7 @@ const StyledTypography = styled(Typography)({
 
 const SingleAppointment = (appointment) => {
 
+  const {singleAppointmentDisplay, setsingleAppointmentDisplay} = appointment;
 
   const handleDelete = () => {
     // Implement delete functionality here
@@ -226,6 +227,9 @@ const SingleAppointment = (appointment) => {
         [field]: newValue
     }));
   };
+  const handleBack = () =>{
+    setsingleAppointmentDisplay(!singleAppointmentDisplay);
+  }
 
   return (
   <StyledCard variant="outlined">
@@ -260,48 +264,56 @@ const SingleAppointment = (appointment) => {
           ))}
         </TextField>
       )}
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-    label="Start Date"
-    value={editedAppointment.start_time}
-    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
-    disabled={!isEditing}
-    fullWidth
-    margin="normal"
-    renderInput={(params) => <TextField {...params} />}
-/>
-
-<TimePicker
-    label="Start Time"
-    value={editedAppointment.start_time}
-    onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
-    disabled={!isEditing}
-    fullWidth
-    margin="normal"
-    renderInput={(params) => <TextField {...params} />}
-/>
-
-<DatePicker
-    label="End Date"
-    value={editedAppointment.end_time}
-    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
-    disabled={!isEditing}
-    fullWidth
-    margin="normal"
-    renderInput={(params) => <TextField {...params} />}
-/>
-
-<TimePicker
-    label="End Time"
-    value={editedAppointment.end_time}
-    onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
-    disabled={!isEditing}
-    fullWidth
-    margin="normal"
-    renderInput={(params) => <TextField {...params} />}
-/>
-</LocalizationProvider>
-
+     <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <DatePicker
+                  label="Start Date"
+                  value={editedAppointment.start_time}
+                  onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+                  disabled={!isEditing}
+                  fullWidth
+                  margin="normal"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TimePicker
+                  label="Start Time"
+                  value={editedAppointment.start_time}
+                  onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
+                  disabled={!isEditing}
+                  fullWidth
+                  margin="normal"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <DatePicker
+                  label="End Date"
+                  value={editedAppointment.end_time}
+                  onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+                  disabled={!isEditing}
+                  fullWidth
+                  margin="normal"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TimePicker
+                  label="End Time"
+                  value={editedAppointment.end_time}
+                  onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
+                  disabled={!isEditing}
+                  fullWidth
+                  margin="normal"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </LocalizationProvider>
       {clinics && clinics.length > 0 && (
         <TextField
           select
@@ -330,6 +342,11 @@ const SingleAppointment = (appointment) => {
           <Grid item>
             <Button variant="contained" color="secondary" onClick={handleDelete}>
               Delete
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="secondary" onClick={handleBack}>
+              Back
             </Button>
           </Grid>
         </Grid>
