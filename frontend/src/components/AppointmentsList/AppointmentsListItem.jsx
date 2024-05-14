@@ -31,8 +31,8 @@ const AppointmentsListItem = (props) => {
   const [requesting, setRequesting] = useState(false);
   const [requestDetails, setRequestDetails] = useState({});
 
-  const {postLoading, postData, post} = usePost();
-  const {putLoading, putData, put} = usePut();
+  const {post} = usePost();
+  const {put} = usePut();
 
   useEffect(() => {
     editing && put(

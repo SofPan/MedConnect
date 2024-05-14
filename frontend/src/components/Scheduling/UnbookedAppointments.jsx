@@ -14,6 +14,9 @@ const UnbookedAppointments = (props) => {
       'appointments/open',
       userProfile.doctor_id
     )
+  }, []);
+
+  useEffect(() => {
     getData && setUnbookedAppointments(getData);
   }, [getData]);
   

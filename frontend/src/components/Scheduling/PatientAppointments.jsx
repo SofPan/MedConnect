@@ -15,6 +15,9 @@ const PatientAppointments = (props) => {
       'appointments/patients',
       userProfile.id
     )
+  }, []);
+  
+  useEffect(() => {
     getData && setAppointments(getData);
   }, [getData]);
 
