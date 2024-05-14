@@ -13,7 +13,6 @@ const ProfileBody = (props) => {
   } = props;
 
   return(
-   
     <article className={`profile-main ${isClinic ? "clinic-profile" : "patient-profile"}`}>
       <TabContent value={activeTab} index={0}>
         <BoxWrapper type="profileLeft">

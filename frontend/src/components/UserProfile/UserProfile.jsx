@@ -5,26 +5,30 @@ import { useGet } from '../../hooks/useAPI';
 
 const UserProfile = () => {
 
-  const userContext = useContext(UserSignedIn) ;
+  const {userState} = useContext(UserSignedIn);
 
-  const {loading, data} = useGet(
-    "profile",
-    userContext.userState.userInfo.user_id ? userContext.userState.userInfo.user_id : userContext.userState.userInfo.id
-  );
+  const {getData, get} = useGet();
 
   const [isClinic, setIsClinic] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (data){
-      setIsClinic(data.is_clinic);
-      setLoaded(!loading);
+    get(
+      "profile",
+      userState.userInfo.user_id ? userState.userInfo.user_id : userState.userInfo.id
+    );
+  }, [])
+
+  useEffect(() => {
+    if (getData){
+      setIsClinic(getData.is_clinic);
+      setLoaded(true);
     }
-  }, [data, loading]);
+  }, [getData]);
 
   return(
     <>
-      {loaded && <RenderProfile userProfile={data} isClinic={isClinic} />}
+      {loaded && <RenderProfile userProfile={getData} isClinic={isClinic} />}
     </>
     
   )

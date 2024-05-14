@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { usePost } from '../../hooks/useAPI';
 import DocumentForm from '../Forms/DocumentForm';
+import { UserSignedIn } from '../../App';
 
 const NewDocument = (props) => {
   const {patient_id} = props;
+
+  const {dispatch} = useContext(UserSignedIn);
   const [document, setDocument] = useState({});
 
   const handleSubmit = (e) => {
@@ -16,13 +19,16 @@ const NewDocument = (props) => {
     });
   }
 
-  const {postLoading, postData, post} = usePost();
+  const {post} = usePost();
 
   useEffect(() => {
-    document.document_name && post(
-      'documents',
-      document
-    );
+    if(document.document_name) {
+      post(
+        'documents',
+        document
+      );
+      dispatch({type: "ADD_DOCUMENT", payload: document})
+    }
   }, [document]);
 
 

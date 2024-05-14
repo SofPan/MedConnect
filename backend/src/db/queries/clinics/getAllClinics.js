@@ -9,7 +9,6 @@ const getAllClinics = () => {
   GROUP BY clinics.id, clinics.name, address;`;
   return db.query(query)
     .then(results => {
-      console.log(results.rows)
       return results.rows;
     })
     .catch(error => console.log("getAllClinics error", error));

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDelete } from '../../hooks/useAPI';
 import { Button } from '@mui/material';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import { UserSignedIn } from '../../App';
 
 const DocumentsListItem = (props) => {
   const {
@@ -9,15 +10,22 @@ const DocumentsListItem = (props) => {
     name,
   } = props;
 
+  const {dispatch} = useContext(UserSignedIn);
+
   const [deleting, setDeleting] = useState(false);
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {deleteRecord} = useDelete();
+
+
 
 
   useEffect(() => {
-    deleting && deleteRecord(
-      'documents',
-      id
-    )
+    if(deleting){
+      deleteRecord(
+        'documents',
+        id
+      )
+      dispatch({type: "DELETE_DOCUMENT", payload: {id}});
+    }
   }, [deleting])
 
   return(

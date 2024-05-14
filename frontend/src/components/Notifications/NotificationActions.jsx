@@ -1,19 +1,25 @@
 import { useDelete } from "../../hooks/useAPI";
+import { useContext, useEffect, useState } from "react";
+import { UserSignedIn } from "../../App";
 import {Button} from "@mui/material"
-import { useEffect, useState } from "react";
 
 const NotificationActions = (props) => {
   const {notification_id, onAccept} = props;
 
   const [declining, setDeclining] = useState(false);
-  const {deleteLoading, deleteData, deleteRecord} = useDelete();
+  const {deleteRecord} = useDelete();
+  const {dispatch} = useContext(UserSignedIn);
+
 
 
   useEffect(() => {
-    declining && deleteRecord(
-      'notifications',
-      notification_id
-    );
+    if(declining){
+      deleteRecord(
+        'requests',
+        notification_id
+      );
+      dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
+    }
   }, [declining]);
 
   const handleDecline = () => {

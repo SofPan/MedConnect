@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePost, usePut } from "../../hooks/useAPI";
 
 import {
@@ -6,6 +6,8 @@ import {
     Button,
     Card,
   } from '@mui/material';
+import { useAppointments } from "../../hooks/useAppointments";
+import { UserSignedIn } from "../../App";
 
 const formatDateAndTime = (date) => {
   return date.replace(":00.000Z", "").split("T");
@@ -22,7 +24,8 @@ const AppointmentsListItem = (props) => {
     end_time,
     status,
     appointment,
-    user_id
+    user_id,
+    appointmentDispatch
   } = props;
 
   const [editing, setEditing] = useState(false);
@@ -31,21 +34,32 @@ const AppointmentsListItem = (props) => {
   const [requesting, setRequesting] = useState(false);
   const [requestDetails, setRequestDetails] = useState({});
 
-  const {postLoading, postData, post} = usePost();
-  const {putLoading, putData, put} = usePut();
+  const {post} = usePost();
+  const {put} = usePut();
+
+  const {dispatch} = useContext(UserSignedIn);
 
   useEffect(() => {
-    editing && put(
-      'appointments',
-      appointmentDetails
-    )
+    if (editing){
+      console.log("edited appointment details", appointmentDetails);
+      put(
+        'appointments',
+        appointmentDetails
+      );
+      appointmentDispatch({type: "DELETE_APPOINTMENT", payload: appointmentDetails});
+    }
   }, [editing]);
 
   useEffect(() => {
-    requesting && post(
+    if(requesting){
+    post(
       'requests',
       requestDetails
-    )
+    );
+    dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
+    appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
+    appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
+  }
   }, [requesting]);
 
 

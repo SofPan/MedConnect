@@ -89,7 +89,7 @@ function App() {
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         {/* <PatientAppointments /> */}
         {/* <PatientInfo /> */}
-        <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} loading={loading}/>
+        <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} loading={loading} />
         {/* {SignInDisplay && (<>
           < SignUp setSignInDisplay={setSignInDisplay} SignInDisplay={SignInDisplay} />
 
@@ -105,8 +105,8 @@ function App() {
           <Route path='/' element={<LandingPage />} />
           <Route path='/availabledoctors' element={<AvailableDoctors />} />
           <Route path='/register' element={<RegisterWithDoctor />} />
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/signup' element={<SignUp setLoginDisplay={setLoginDisplay}/>} />
+          <Route path='/profile' element={!loading && <UserProfile />} />
+          <Route path='/signup' element={<SignUp setLoginDisplay={setLoginDisplay} />} />
           <Route path='/required_information' element={<RequiredInformation />} />
         </Routes>
 

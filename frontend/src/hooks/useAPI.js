@@ -7,42 +7,40 @@ const API_BASE_URL = "http://localhost:8080/";
 /**
  * Usage:
  * 
- * const {getLoading, getData} = useGet(
+ * const {getLoading, getData, get} = useGet(
  *  @param query a string, do not use slashes at beginning or end
  *  @param id dynamically pass in the id of record you want to get
  * );
  * 
  * EXAMPLE:
- * const {getLoading, getData} = useGet(
- *  'clinics',
- *  clinic_id
- * );
+ * const {getLoading, getData} = useGet();
+ * ...some code
+ * get(
+ * 'profile',
+ * user_id
+ * )
  */
-export const useGet = (query, id) => {
+export const useGet = () => {
   const [getLoading, setGetLoading] = useState(false);
-  const [data, setData] = useState(null);
+  const [getData, setGetData] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setGetLoading(true);
+  const get = async (query, id) => {
+    try {
+      setGetLoading(true);
 
-        const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
+      const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
 
-        setData(response.data);
+      setGetData(response.data);
 
-        setGetLoading(false);
-      } catch (error) {
-        console.error("Error getting", error);
-        throw error;
-      }
-
+      setGetLoading(false);
+    } catch (error) {
+      console.error("Error getting", error);
+      throw error;
     }
 
-    fetchData();
-  }, [query, id]);
+  }
 
-  return { getLoading, data };
+  return { getLoading, getData, get };
 }
 
 /**
@@ -147,7 +145,7 @@ export const useDelete = () => {
 
       const response = await axios.delete(`${API_BASE_URL}${query}/${id}/delete`);
 
-      setDeleteData(response.deleteData);
+      setDeleteData(response.data);
 
       setDeleteLoading(false);
     } catch (error) {
