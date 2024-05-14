@@ -23,7 +23,6 @@ export default function PatientScheduler() {
 
   const { userState, dispatch } = useContext(UserSignedIn);
 
-  console.log("SCHEDULER HIT");
 
   const [events, setEvents] = useState([])
   const [singleAppointmentDisplay, setsingleAppointmentDisplay] = useState(false);
@@ -107,7 +106,7 @@ export default function PatientScheduler() {
     console.log(userState);
     
 
-  }, [userState.userInfo.is_clinic]);
+  }, [userState.userInfo.is_clinic, singleAppointmentDisplay]);
 
   useEffect(() => {
     
