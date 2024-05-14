@@ -6,7 +6,6 @@ import {
     Button,
     Card,
   } from '@mui/material';
-import { useAppointments } from "../../hooks/useAppointments";
 import { UserSignedIn } from "../../App";
 
 const formatDateAndTime = (date) => {
