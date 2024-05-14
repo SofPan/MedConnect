@@ -13,6 +13,8 @@ const { getAllAppointmentsByPatient } = require('../src/db/queries/appointments/
 const { editAppointment } = require('../src/db/queries/appointments/editAppointment');
 const { getCalendarByClinicId } = require("../src/db/queries/calendar/getCalendarByClinicId");
 const { getAppointmentById } = require("../src/db/queries/appointments/getAppointmentById");
+const { deleteAppointment } = require("../src/db/queries/appointments/deleteAppointment");
+
 
 router.get('/single/:id', (req, res) => {
 
@@ -71,6 +73,25 @@ router.get('/:id', (req, res) => {
 
 });
 
+router.delete('/:id', (req, res) => {
+  const appointmentId = req.params.id;
+
+  deleteAppointment(appointmentId)
+    .then(success => {
+      if (!success) {
+        // If no appointment is found for the given ID, return a 404 response
+        return res.status(404).json({ error: 'Appointment not found' });
+      }
+
+      // If appointment is found and deleted successfully, send a success message
+      res.status(200).json({ message: 'Appointment deleted successfully' });
+    })
+    .catch(error => {
+      console.error('Error deleting appointment:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
 
 
 // Get open appointments by clinic id
@@ -94,7 +115,8 @@ router.get("/open/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  console.log('yoo');
+  console.log('EDITING THE APPOINTMENT');
+  console.log(req.body);
   editAppointment(req.body)
     .then(result => {
       console.log("edited appointment", result);

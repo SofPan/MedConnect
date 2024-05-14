@@ -16,8 +16,8 @@ const editAppointment = (appointment) => {
     appointment.start_time, //$5
     appointment.end_time, //$6
     appointment.status, //$7
-    appointment.patient_name //$8
-
+    appointment.patient_name, //$8
+    appointment.doctor_name //$9
   ]
   console.log(values);
   const query = `
@@ -28,7 +28,8 @@ const editAppointment = (appointment) => {
       start_time = $5,
       end_time = $6,
       status = $7,
-      patient_name = $8
+      patient_name = $8,
+      doctor_name = $9
     WHERE appointments.id = $1
     RETURNING *;
   `
