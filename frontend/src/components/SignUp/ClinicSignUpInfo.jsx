@@ -23,7 +23,9 @@ export default function ClinicSignUpInfo() {
   const navigate = useNavigate();
 
   // const userId = sessionStorage.getItem('user_id');
-  const userId = userState.userInfo.id;
+  const userId = userState.userInfo.user_id;
+
+  console.log("inside clinci sign up",userState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
