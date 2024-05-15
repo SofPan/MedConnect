@@ -111,7 +111,6 @@ const RegisterWithDoctor = () => {
       }
       <h3>{clinicInfo.clinic_name}</h3>
       <p>{clinicInfo.clinic_address}</p>
-      <h2>{errorMessage}</h2>
       {filteredDoctors.map(doctor => {
         return (
           <div key={doctor.id}>
