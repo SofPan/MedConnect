@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { UserSignedIn } from "../../App";
 import { Button } from "@mui/material";
-import ChangeDoctor from "./ChangeDoctor";
 import BasicModal from "../GeneralComponents/BasicModal";
 import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
 
@@ -25,7 +24,7 @@ const RegisterWithDoctor = () => {
 
   const handleRegister = (doctor_id) => {
     setDoctorId(doctor_id);
-    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+    axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
         const patient = response.data;
         if (patient.doctor_id) {
@@ -80,7 +79,7 @@ const RegisterWithDoctor = () => {
   }
 
   const handleChangeDoctorRequest = (doctorId) => {
-    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+    axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
         const patient = response.data;
         axios.post(`http://localhost:8080/requests`, {
