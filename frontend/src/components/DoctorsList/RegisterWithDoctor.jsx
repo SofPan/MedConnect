@@ -23,6 +23,7 @@ const RegisterWithDoctor = () => {
   })
 
   const handleRegister = (doctor_id) => {
+    console.log(userInfo)
     setDoctorId(doctor_id);
     axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
@@ -36,8 +37,8 @@ const RegisterWithDoctor = () => {
               dispatch({ type: "SET_MODAL", payload: true})
             } else {
               setChangeDoctor(true);
-              setErrorMessage("CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS?");
               setModalTitle("YOU ARE REGISTERED WITH A DOCTOR")
+              setErrorMessage("CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS?");
               dispatch({ type: "SET_MODAL", payload: true})
             }
           })

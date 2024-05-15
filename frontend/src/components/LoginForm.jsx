@@ -50,9 +50,9 @@ export default function LoginForm({ setLoginDisplay }) {
             }
     
             // Assuming response is JSON
-            const user = await response.json();
+            const userResponse = await response.json();
             
-            const userObject = user.reduce((acc, obj) => {
+            const userObject = userResponse.reduce((acc, obj) => {
               
               if (obj) {
                 
@@ -60,20 +60,24 @@ export default function LoginForm({ setLoginDisplay }) {
               }
               return acc;
             }, {});
+
+            const user = {...userObject, user_id: userObject.id}
+
+            console.log("user in log in ", user)
             
-            sessionStorage.setItem("user_id", userObject.id)
+            sessionStorage.setItem("user_id", user.id)
            
-            dispatch({ type: "USER_INFO", payload: userObject });
+            dispatch({ type: "USER_INFO", payload: user });
     
             dispatch({ type: "USER_LOGIN", payload: true });
 
             setLoginDisplay(false);
             
 
-            console.log("user in Login ", user)
+            console.log("userObject in Login ", userObject)
 
-            if (userObject.is_clinic) {
-              axios.get(`http://localhost:8080/clinics/${userObject.id}`)
+            if (user.is_clinic) {
+              axios.get(`http://localhost:8080/clinics/${user.user_id}`)
                   .then((res) => {
                       if(!res.data) {
                           navigate("/required_information")
@@ -83,7 +87,7 @@ export default function LoginForm({ setLoginDisplay }) {
                       console.error("Error fetching clinic:", error);
                     });
              } else {
-              axios.get(`http://localhost:8080/patients/${userObject.id}`)
+              axios.get(`http://localhost:8080/patients/${user.user_id}`)
               .then((res) => {
                   if(!res.data) {
                       navigate("/required_information")
