@@ -33,6 +33,7 @@ export default function PatientInfo() {
 
   const registerUserInfo = async (userData) => {
     const userId = sessionStorage.getItem("user_id");
+    console.log("userId", userId)
     try {
       const response = await fetch('http://localhost:8080/register/info', {
         method: 'POST',
