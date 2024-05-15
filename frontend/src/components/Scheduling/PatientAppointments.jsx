@@ -11,8 +11,6 @@ const PatientAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const userProfile = userState.userInfo;
 
-  console.log(userProfile);
-
   const {getData, get} = useGet();
   const {appointmentState, appointmentDispatch} = useAppointments();
 

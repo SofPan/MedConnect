@@ -50,8 +50,6 @@ const AppointmentNotification = (props) => {
   const handleAccept = () => {
     setAppointment(prev => ({
         ...prev,
-        patient_id: patient.id,
-        patient_name: patient.name,
         status: true
       }))
     setAccepting(true);

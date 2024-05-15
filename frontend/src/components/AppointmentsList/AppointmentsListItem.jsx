@@ -24,10 +24,11 @@ const AppointmentsListItem = (props) => {
     status,
     appointment,
     user_id,
-    appointmentDispatch
+    appointmentDispatch,
+    name
   } = props;
 
-  const [editing, setEditing] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
 
   const [requesting, setRequesting] = useState(false);
@@ -39,26 +40,29 @@ const AppointmentsListItem = (props) => {
   const {dispatch} = useContext(UserSignedIn);
 
   useEffect(() => {
-    if (editing){
-      console.log("edited appointment details", appointmentDetails);
+    if (cancelling){
       put(
         'appointments',
         appointmentDetails
       );
       appointmentDispatch({type: "DELETE_APPOINTMENT", payload: appointmentDetails});
     }
-  }, [editing]);
+  }, [cancelling]);
 
   useEffect(() => {
     if(requesting){
-    post(
-      'requests',
-      requestDetails
-    );
-    dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
-    appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
-    appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
-  }
+      post(
+        'requests',
+        requestDetails
+      );
+      put(
+        'appointments',
+        appointmentDetails
+      )
+      dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
+      appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
+      appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
+    }
   }, [requesting]);
 
 
@@ -68,7 +72,7 @@ const AppointmentsListItem = (props) => {
       patient_id: null,
       })
     );
-    setEditing(true);
+    setCancelling(true);
   }
 
   const handleClickRequest = (e) => {
@@ -80,6 +84,13 @@ const AppointmentsListItem = (props) => {
       appointment_id: appointment.id
     }
     setRequestDetails(requestObject);
+
+    setAppointmentDetails(prev => ({
+      ...prev,
+      patient_id: user_id,
+      patient_name: name
+    }));
+
     setRequesting(true);
   }
   const dateString = `${formatDateAndTime(start_time)[0]} from ${formatDateAndTime(start_time)[1]} - ${formatDateAndTime(end_time)[1]}`
