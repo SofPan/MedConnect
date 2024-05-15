@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { UserSignedIn } from "../App"
 import LoginForm from './LoginForm';
 import { NavLink, useNavigate } from "react-router-dom";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import axios from 'axios';
 
 
@@ -60,8 +61,9 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
 
 
     return (
+        
 
-        <Box sx={{ flexGrow: 1 }}>
+     
             <AppBar position="static">
                 <Toolbar>
                     <Typography
@@ -70,6 +72,7 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
+                          <LocalHospitalIcon />
                         <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
                             MEDCONNECT
                         </NavLink>
@@ -117,6 +120,6 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                    
                 </Toolbar>
             </AppBar>
-        </Box>
+        
     );
 }

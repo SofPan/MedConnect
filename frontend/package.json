@@ -11,7 +11,7 @@
     "@fullcalendar/timegrid": "^6.1.11",
     "@mui/icons-material": "^5.15.16",
     "@mui/lab": "^5.0.0-alpha.170",
-    "@mui/material": "^5.15.16",
+    "@mui/material": "^5.15.17",
     "@mui/system": "^5.15.15",
     "@mui/x-date-pickers": "^7.4.0",
     "@react-google-maps/api": "^2.19.3",
