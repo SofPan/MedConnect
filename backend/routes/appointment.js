@@ -48,12 +48,13 @@ router.get("/patients/:id", (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     });
 });
+
 const { getClinicsOpenAppointments } = require('../src/db/queries/appointments/getClinicsOpenAppointments');
 
 router.get('/:id', (req, res) => {
 
   const clinicId = req.params.id;
-
+  
   getCalendarByClinicId(clinicId)
     .then(calendar => {
 
@@ -63,7 +64,7 @@ router.get('/:id', (req, res) => {
       }
 
       // If calendar is found, return it as JSON response
-
+      console.log(calendar);
       res.json(calendar);
     })
     .catch(error => {

@@ -60,11 +60,11 @@ export default function LoginForm({ setLoginDisplay }) {
               return acc;
             }, {});
 
-            const user = {...userObject, user_id: userObject.id}
-
+            const user = {...userObject, user_id: userObject.user_id}
+            
            
             
-            sessionStorage.setItem("user_id", user.id)
+            sessionStorage.setItem("user_id", user.user_id)
            
             dispatch({ type: "USER_INFO", payload: user });
     
