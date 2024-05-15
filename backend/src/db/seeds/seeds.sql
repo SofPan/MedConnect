@@ -126,5 +126,5 @@ INSERT INTO documents (patient_id, document_name, document_url, created_at) VALU
 -- Seed data for pending_requests table
 INSERT INTO pending_requests (request_type, patient_id, clinic_id, doctor_id, appointment_id, created_at) VALUES
 ('register', 1, 1, 1, null, NOW()),
-('change_doctor', 1, 2, 2, null, NOW()),
+('change_doctor', 3, 1, 2, null, NOW()),
 ('appointment', 2, 1, 1, 1, NOW());
