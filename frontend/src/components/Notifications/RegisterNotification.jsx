@@ -14,7 +14,7 @@ const RegisterNotification = (props) => {
   const {dispatch} = useContext(UserSignedIn);
 
 
-  const [doctorName, setDoctorName] = useState("");
+  const [doctor, setDoctor] = useState({});
   const [editPatient, setEditPatient] = useState(patient);
   const [accepting, setAccepting] = useState(false);
 
@@ -26,7 +26,7 @@ const RegisterNotification = (props) => {
   }, []);
 
   useEffect(() => {
-    getData && setDoctorName(getData.name);
+    getData && setDoctor(getData);
   }, [getData]);
 
   useEffect(() => {
@@ -35,6 +35,11 @@ const RegisterNotification = (props) => {
         'patients',
         editPatient
       )
+      put(
+        'doctors',
+        doctor
+      )
+      dispatch({type: "EDIT_DOCTOR", payload: doctor});
       deleteRecord(
         'requests',
         notification_id
@@ -45,6 +50,11 @@ const RegisterNotification = (props) => {
   }, [accepting]);
 
   const handleAccept = () => {
+    const decrementPatients = doctor.number_of_patients - 1;
+    setDoctor(prev => ({
+      ...prev,
+      number_of_patients: decrementPatients
+    }))
     setEditPatient(prev => ({
       ...prev,
       doctor_id
@@ -53,7 +63,7 @@ const RegisterNotification = (props) => {
   }
   return(
     <span>
-      <p>{type === "register" ? "Register with" : "Change doctors to"} {doctorName}</p>
+      <p>{type === "register" ? "Register with" : "Change doctors to"} {doctor.name}</p>
       <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
     </span>
   )
