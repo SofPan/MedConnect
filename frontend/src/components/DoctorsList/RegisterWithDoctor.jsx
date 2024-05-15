@@ -50,10 +50,18 @@ const RegisterWithDoctor = () => {
             doctor_id: doctor_id,
             appointment_id: null
           })
-          setRequestSent(true);
-          setModalTitle("Thank you!")
-          setErrorMessage("Your request to register with the doctor was sent successfully.")
-          dispatch({ type: "SET_MODAL", payload: true})
+          .then(response => {
+            if (response.data.message) {
+              setModalTitle("Error")
+              setErrorMessage(`${response.data.message}. Please await approval or declination from the clinic.`)
+              dispatch({ type: "SET_MODAL", payload: true})
+            } else {
+              setRequestSent(true);
+              setModalTitle("Thank you!")
+              setErrorMessage("Your request to register with the doctor was sent successfully.")
+              dispatch({ type: "SET_MODAL", payload: true})
+            }
+          })
         }
       })
       .catch(error => {
