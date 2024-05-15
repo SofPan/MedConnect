@@ -4,7 +4,7 @@ import ProfileBody from "./ProfileBody";
 import Documents from "../PatientDocuments/Documents";
 import ProfileDoctors from "../DoctorsList/ProfileDoctors";
 import Notifications from "../Notifications/Notifications";
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import ClinicTabs from "./ClinicTabs";
 
 const RenderProfile = (props) => {
@@ -29,11 +29,14 @@ const RenderProfile = (props) => {
   }, []);
 
   return(
-    <>
+    <Grid container>
+      
       {isClinic &&
-        <ClinicTabs activeTab={activeTab} handleTabChange={handleTabChange}/>
+      <Grid item>
+                <ClinicTabs activeTab={activeTab} handleTabChange={handleTabChange}/>
+      </Grid>
       }
-      <Box width="60vw" display={'inline-block'} >
+      <Grid item >
         <ProfileBody
           isClinic={isClinic}
           userProfile={userProfile}
@@ -41,8 +44,8 @@ const RenderProfile = (props) => {
           profileComponentRight={rightComponent}
           activeTab={activeTab}
         />
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   )
 }
 
