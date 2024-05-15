@@ -41,8 +41,7 @@ export default function LoginForm({ setLoginDisplay }) {
                 },
                 body: JSON.stringify(formData),
             });
-            console.log("response",response)
-            console.log("formData ", formData)
+            
     
             if (!response.ok) {
                 throw new Error('Failed to log in');
@@ -63,7 +62,7 @@ export default function LoginForm({ setLoginDisplay }) {
 
             const user = {...userObject, user_id: userObject.id}
 
-            console.log("user in log in ", user)
+           
             
             sessionStorage.setItem("user_id", user.id)
            
@@ -104,6 +103,17 @@ export default function LoginForm({ setLoginDisplay }) {
             console.log(error)
         }
     }
+    const textFieldStyles = {
+      '& label': { color: '#FFFDD0' },
+      '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
+      '& .MuiInput-underline:after': { borderBottomColor: '#FFFDD0' }, // Cream color for focused underline (if using the "standard" variant)
+      '& .MuiOutlinedInput-root': {
+          '& fieldset': { borderColor: '#FFFDD0' }, // Cream color for default border
+          '&:hover fieldset': { borderColor: '#FFFDD0' }, // Cream color for hover border
+          '&.Mui-focused fieldset': { borderColor: '#FFFDD0' }, // Cream color for focused border
+      },
+      '& .MuiInputBase-input': { color: 'white' } // White text color
+  };
 
   return (
     <Box
@@ -114,6 +124,8 @@ export default function LoginForm({ setLoginDisplay }) {
       noValidate
       autoComplete="off"
       onSubmit={submitForm}
+      
+
     >
       <div >
         
@@ -125,6 +137,7 @@ export default function LoginForm({ setLoginDisplay }) {
             required
            onChange={handleChange}
             name="email"
+           sx={textFieldStyles}
           />
         <TextField
           id="standard-password-input"
@@ -135,7 +148,8 @@ export default function LoginForm({ setLoginDisplay }) {
           required
           name="password"
           onChange={handleChange}
-        />
+          sx={textFieldStyles}
+          />
        <Button type="submit"variant="contained" sx={{ mt: 2 }}>Submit</Button>
        
       </div>
