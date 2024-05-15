@@ -32,9 +32,10 @@ const ClinicListItem = (props) => {
   }
 
   const handleRequest = (info) => {
+    console.log("userInfo in req", userState.userInfo)
     if (userState.userInfo.id && !userState.userInfo.is_clinic) {
       dispatch({ type: "SET_CLINIC_INFO", payload: info});
-      axios.get(`http://localhost:8080/patients/${userState.userInfo.id}`)
+      axios.get(`http://localhost:8080/patients/${userState.userInfo.user_id}`)
       .then((res) => {
           if(res.data) {
             navigate("/register");
