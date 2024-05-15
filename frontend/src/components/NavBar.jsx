@@ -83,26 +83,36 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-                            {LoginDisplay && <LoginForm setLoginDisplay={setLoginDisplay}/>}
+                       
 
-                        {userState.userLoggedIn ?  (
-                            <>
-                                <MenuItem onClick={handleProfileClick}>
-                                    Profile
-                                </MenuItem>
-                                <MenuItem onClick={handleLogout}>
-                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
-                                    Logout
-                                  </NavLink>
-                                </MenuItem>
-                            </>
-                        ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
-                        <MenuItem>
-                            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
-                              Sign Up
-                            </NavLink>
-                        </MenuItem>
-                        </>)}
+                    {userState.userLoggedIn ? (
+    <>
+        <MenuItem onClick={handleProfileClick}>
+            Profile
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                Logout
+            </NavLink>
+        </MenuItem>
+    </>
+) : (
+    LoginDisplay ? (
+        <LoginForm setLoginDisplay={setLoginDisplay} />
+    ) : (
+        <>
+            <MenuItem onClick={handleLogin}>
+                Login
+            </MenuItem>
+            <MenuItem>
+                <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
+                    Sign Up
+                </NavLink>
+            </MenuItem>
+        </>
+    )
+)}
+
                     </Box>
                    
                 </Toolbar>

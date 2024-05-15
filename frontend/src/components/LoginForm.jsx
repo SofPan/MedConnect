@@ -103,6 +103,10 @@ export default function LoginForm({ setLoginDisplay }) {
             console.log(error)
         }
     }
+
+    const handleBack = () =>{
+      setLoginDisplay(false)
+    }
     const textFieldStyles = {
       '& label': { color: '#FFFDD0' },
       '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
@@ -127,7 +131,7 @@ export default function LoginForm({ setLoginDisplay }) {
       
 
     >
-      <div >
+      <div  >
         
       
           <TextField
@@ -151,7 +155,8 @@ export default function LoginForm({ setLoginDisplay }) {
           sx={textFieldStyles}
           />
        <Button type="submit"variant="contained" sx={{ mt: 2 }}>Submit</Button>
-       
+       <Button onClick={handleBack} variant="contained" sx={{ mt: 2 }}>Back</Button>
+
       </div>
     </Box>
   );
