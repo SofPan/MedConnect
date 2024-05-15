@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { UserSignedIn } from "../App"
 import LoginForm from './LoginForm';
 import { NavLink, useNavigate } from "react-router-dom";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import axios from 'axios';
 
 
@@ -60,8 +61,9 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
 
 
     return (
+        
 
-        <Box sx={{ flexGrow: 1 }}>
+     
             <AppBar position="static">
                 <Toolbar>
                     <Typography
@@ -70,6 +72,7 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
+                          <LocalHospitalIcon />
                         <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
                             MEDCONNECT
                         </NavLink>
@@ -83,30 +86,40 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-                            {LoginDisplay && <LoginForm setLoginDisplay={setLoginDisplay}/>}
+                       
 
-                        {userState.userLoggedIn ?  (
-                            <>
-                                <MenuItem onClick={handleProfileClick}>
-                                    Profile
-                                </MenuItem>
-                                <MenuItem onClick={handleLogout}>
-                                  <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
-                                    Logout
-                                  </NavLink>
-                                </MenuItem>
-                            </>
-                        ): (<><MenuItem onClick={handleLogin}>Login</MenuItem>
-                        <MenuItem>
-                            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
-                              Sign Up
-                            </NavLink>
-                        </MenuItem>
-                        </>)}
+                    {userState.userLoggedIn ? (
+    <>
+        <MenuItem onClick={handleProfileClick}>
+            Profile
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                Logout
+            </NavLink>
+        </MenuItem>
+    </>
+) : (
+    LoginDisplay ? (
+        <LoginForm setLoginDisplay={setLoginDisplay} />
+    ) : (
+        <>
+            <MenuItem onClick={handleLogin}>
+                Login
+            </MenuItem>
+            <MenuItem>
+                <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
+                    Sign Up
+                </NavLink>
+            </MenuItem>
+        </>
+    )
+)}
+
                     </Box>
                    
                 </Toolbar>
             </AppBar>
-        </Box>
+        
     );
 }
