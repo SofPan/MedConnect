@@ -15,6 +15,23 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.get('/request/:patientId', (req, res) => {
+  const {request_type} = req.query;
+  const patient_id = req.params.patientId;
+  getRequest(request_type, patient_id)
+  .then(request => {
+    if (request) {
+      res.json({ message: "The request has already been sent" });
+    } else {
+      res.json(request)
+    }
+  })
+    .catch(error => {
+      console.error('Error fetching requests:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    })
+});
+
 router.post('/', (req, res) => {
   const requestData = {
     request_type: req.body.request_type,

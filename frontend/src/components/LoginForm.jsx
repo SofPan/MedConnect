@@ -41,8 +41,7 @@ export default function LoginForm({ setLoginDisplay }) {
                 },
                 body: JSON.stringify(formData),
             });
-            console.log("response",response)
-            console.log("formData ", formData)
+            
     
             if (!response.ok) {
                 throw new Error('Failed to log in');
@@ -50,9 +49,9 @@ export default function LoginForm({ setLoginDisplay }) {
             }
     
             // Assuming response is JSON
-            const user = await response.json();
+            const userResponse = await response.json();
             
-            const userObject = user.reduce((acc, obj) => {
+            const userObject = userResponse.reduce((acc, obj) => {
               
               if (obj) {
                 
@@ -60,20 +59,24 @@ export default function LoginForm({ setLoginDisplay }) {
               }
               return acc;
             }, {});
+
+            const user = {...userObject, user_id: userObject.user_id}
             
-            sessionStorage.setItem("user_id", userObject.id)
            
-            dispatch({ type: "USER_INFO", payload: userObject });
+            
+            sessionStorage.setItem("user_id", user.user_id)
+           
+            dispatch({ type: "USER_INFO", payload: user });
     
             dispatch({ type: "USER_LOGIN", payload: true });
 
             setLoginDisplay(false);
             
 
-            console.log("user in Login ", user)
+            console.log("userObject in Login ", userObject)
 
-            if (userObject.is_clinic) {
-              axios.get(`http://localhost:8080/clinics/${userObject.id}`)
+            if (user.is_clinic) {
+              axios.get(`http://localhost:8080/clinics/${user.user_id}`)
                   .then((res) => {
                       if(!res.data) {
                           navigate("/required_information")
@@ -83,7 +86,7 @@ export default function LoginForm({ setLoginDisplay }) {
                       console.error("Error fetching clinic:", error);
                     });
              } else {
-              axios.get(`http://localhost:8080/patients/${userObject.id}`)
+              axios.get(`http://localhost:8080/patients/${user.user_id}`)
               .then((res) => {
                   if(!res.data) {
                       navigate("/required_information")
@@ -101,6 +104,21 @@ export default function LoginForm({ setLoginDisplay }) {
         }
     }
 
+    const handleBack = () =>{
+      setLoginDisplay(false)
+    }
+    const textFieldStyles = {
+      '& label': { color: '#FFFDD0' },
+      '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
+      '& .MuiInput-underline:after': { borderBottomColor: '#FFFDD0' }, // Cream color for focused underline (if using the "standard" variant)
+      '& .MuiOutlinedInput-root': {
+          '& fieldset': { borderColor: '#FFFDD0' }, // Cream color for default border
+          '&:hover fieldset': { borderColor: '#FFFDD0' }, // Cream color for hover border
+          '&.Mui-focused fieldset': { borderColor: '#FFFDD0' }, // Cream color for focused border
+      },
+      '& .MuiInputBase-input': { color: 'white' } // White text color
+  };
+
   return (
     <Box
       component="form"
@@ -110,8 +128,10 @@ export default function LoginForm({ setLoginDisplay }) {
       noValidate
       autoComplete="off"
       onSubmit={submitForm}
+      
+
     >
-      <div >
+      <div  >
         
       
           <TextField
@@ -121,6 +141,7 @@ export default function LoginForm({ setLoginDisplay }) {
             required
            onChange={handleChange}
             name="email"
+           sx={textFieldStyles}
           />
         <TextField
           id="standard-password-input"
@@ -131,9 +152,11 @@ export default function LoginForm({ setLoginDisplay }) {
           required
           name="password"
           onChange={handleChange}
-        />
+          sx={textFieldStyles}
+          />
        <Button type="submit"variant="contained" sx={{ mt: 2 }}>Submit</Button>
-       
+       <Button onClick={handleBack} variant="contained" sx={{ mt: 2 }}>Back</Button>
+
       </div>
     </Box>
   );

@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { UserSignedIn } from "../../App";
 import { Button } from "@mui/material";
-import ChangeDoctor from "./ChangeDoctor";
 import BasicModal from "../GeneralComponents/BasicModal";
 import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
 
@@ -24,15 +23,25 @@ const RegisterWithDoctor = () => {
   })
 
   const handleRegister = (doctor_id) => {
+    console.log(userInfo)
     setDoctorId(doctor_id);
-    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+    axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
         const patient = response.data;
         if (patient.doctor_id) {
-          setChangeDoctor(true);
-          setErrorMessage("CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS?");
-          setModalTitle("YOU ARE REGISTERED WITH A DOCTOR")
-          dispatch({ type: "SET_MODAL", payload: true})
+          axios.get(`http://localhost:8080/requests/request/${patient.id}?request_type=change_doctor`)
+          .then(response => {
+            if (response.data) {
+              setModalTitle("Error")
+              setErrorMessage("You are already registered with a doctor. A request to change your doctor has already been sent. Please await approval or declination from the clinic.")
+              dispatch({ type: "SET_MODAL", payload: true})
+            } else {
+              setChangeDoctor(true);
+              setModalTitle("YOU ARE REGISTERED WITH A DOCTOR")
+              setErrorMessage("CHANGING FAMILY DOCTORS MAY INCURR FILE TRANSFER FEES AS SET BY THE CLINIC. ARE YOU SURE YOU WANT TO REQUEST TO CHANGE FAMILY DOCTORS?");
+              dispatch({ type: "SET_MODAL", payload: true})
+            }
+          })
         } else {
           axios.post(`http://localhost:8080/requests`, {
             request_type: "register",
@@ -44,7 +53,7 @@ const RegisterWithDoctor = () => {
           .then(response => {
             if (response.data.message) {
               setModalTitle("Error")
-              setErrorMessage(response.data.message)
+              setErrorMessage(`${response.data.message}. Please await approval or declination from the clinic.`)
               dispatch({ type: "SET_MODAL", payload: true})
             } else {
               setRequestSent(true);
@@ -71,7 +80,7 @@ const RegisterWithDoctor = () => {
   }
 
   const handleChangeDoctorRequest = (doctorId) => {
-    axios.get(`http://localhost:8080/patients/${userInfo.id}`)
+    axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
         const patient = response.data;
         axios.post(`http://localhost:8080/requests`, {
@@ -87,7 +96,7 @@ const RegisterWithDoctor = () => {
             setModalTitle("Error")
             dispatch({ type: "SET_MODAL", payload: true})
           } else {
-          setModalTitle("Error")
+          setModalTitle("Thank you!")
           setErrorMessage("The request to change your doctor was sent");
           dispatch({ type: "SET_MODAL", payload: true})
           setChangeDoctor(false);

@@ -41,12 +41,13 @@ export default function PatientScheduler() {
     clinic_address: '',
     clinic_name:''
   });
-  console.log("events", events);
+ 
 
   const getAppointments = async () => {
 
 
     if (userState.userInfo.is_clinic) {
+      console.log("userState", userState);
       console.log("get Apppoint triggered", userState.userInfo.id);
       try {
         const response = await fetch(`http://localhost:8080/appointments/${userState.userInfo.id}`, {
@@ -75,14 +76,14 @@ export default function PatientScheduler() {
     }
   }
 
-
+  console.log(userState);
   useEffect(() => {
     
     if(userState.userInfo.is_clinic){
       const fetchAppointments = async () => {
 
         const appointments = await getAppointments();
-        console.log("does this contain an id", appointments);
+        console.log("userState", userState);
        
         if (appointments) {
           const dates = appointments.map((date) => {
@@ -99,6 +100,7 @@ export default function PatientScheduler() {
         }
   
       };
+  
       console.log("use effect for appointments hit");
       fetchAppointments();
     }

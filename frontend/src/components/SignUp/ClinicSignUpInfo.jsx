@@ -9,18 +9,23 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { UserSignedIn } from '../../App';
 import { useNavigate } from "react-router-dom";
+import BasicModal from '../GeneralComponents/BasicModal';
 
 
 const defaultTheme = createTheme();
 
 export default function ClinicSignUpInfo() {
-  
-  const { userState } = React.useContext(UserSignedIn);
+
+  const { userState, dispatch } = React.useContext(UserSignedIn);
+  const [modalTitle, setModalTitle] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("")
 
   const navigate = useNavigate();
 
   // const userId = sessionStorage.getItem('user_id');
-  const userId = userState.userInfo.id;
+  const userId = userState.userInfo.user_id;
+
+  console.log("inside clinci sign up",userState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +41,9 @@ export default function ClinicSignUpInfo() {
     })
     .catch(error => {
       console.error('Error:', error);
+      setModalTitle("Error")
+      setErrorMessage("Please enter the correct clinic address.");
+      dispatch({ type: "SET_MODAL", payload: true})
     });
     }
   };
@@ -43,6 +51,7 @@ export default function ClinicSignUpInfo() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+        <BasicModal title={modalTitle} message={errorMessage} />
         <CssBaseline />
         <Box
           sx={{

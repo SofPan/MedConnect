@@ -36,28 +36,29 @@ router.post('/login', async (req, res) => {
     }
     //set cookie in browser on login
 
-    // Password is correct, send user information as JSON data to the frontend
-    const filteredUser = Object.keys(user).map(key => {
-      if (key !== "password_hash") {
-        return {
-          [key]: user[key]
-        }
-      }
+    // // Password is correct, send user information as JSON data to the frontend
+    // const filteredUser = Object.keys(user).map(key => {
+    //   if (key !== "password_hash") {
+    //     return {
+    //       [key]: user[key]
+    //     }
+    //   }
 
-    });
+    // });
     
-    return res.json(filteredUser);
-  
-    // if(user.is_clinic){
+   
+    
+    if(user.is_clinic){
      
-    //   const userInfo = await getClinicByUserId(user.id);
-    //   if (userInfo) userInfo.is_clinic = true;
-    //   return res.json(userInfo);
-    // }else{
-    //   const userInfo = await getPatientByUserId(user.id);
-    //   if (userInfo) userInfo.is_clinic = false;
-    //   return res.json(userInfo);
-    // }
+      const userInfo = await getClinicByUserId(user.id);
+      if (userInfo) userInfo.is_clinic = true;
+      
+      return res.json([userInfo]);
+    }else{
+      const userInfo = await getPatientByUserId(user.id);
+      if (userInfo) userInfo.is_clinic = false;
+      return res.json([userInfo]);
+    }
 
     
 

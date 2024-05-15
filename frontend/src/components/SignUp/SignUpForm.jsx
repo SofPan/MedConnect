@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { UserSignedIn } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+import BasicModal from "../GeneralComponents/BasicModal";
 // import './SignUp.scss'; // Import the specific SASS file
 
 
@@ -16,6 +17,8 @@ import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, L
 export default function SignUp({setLoginDisplay}) {
   const navigate = useNavigate();
   const { dispatch } = useContext(UserSignedIn);
+  const [modalTitle, setModalTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
 
 
   const [formData, setFormData] = useState({
@@ -93,7 +96,11 @@ export default function SignUp({setLoginDisplay}) {
     const formErrors = validate(formData);
     if (formData.password === formData.password_check && Object.keys(formErrors).length === 0) {
         try {
-          const user = await registerUser(formData);
+          const userResponse = await registerUser(formData);
+
+          const user = {...userResponse, user_id: userResponse.id}
+
+          console.log("user", user)
           
           sessionStorage.setItem("user_id", user.id);
 
@@ -108,6 +115,9 @@ export default function SignUp({setLoginDisplay}) {
                     
         } catch (error) {
           console.error('Registration failed', error);
+          setModalTitle("Error")
+          setErrorMessage("A user with this email address has already been registered");
+          dispatch({ type: "SET_MODAL", payload: true})
           // Handle registration failure (e.g., notify the user)
         }
       // setSignInDisplay(!SignInDisplay);
@@ -124,6 +134,7 @@ export default function SignUp({setLoginDisplay}) {
 
   return (
     <Container component="main" maxWidth="xs">
+      <BasicModal title={modalTitle} message={errorMessage}/>
       <CssBaseline />
       <div >
 

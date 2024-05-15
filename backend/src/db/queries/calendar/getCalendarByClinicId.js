@@ -3,6 +3,7 @@
 const db = require('../../connection');
 
 const getCalendarByClinicId = (clinic_id) => {
+  console.log("clinci_id", clinic_id);
   const values = [clinic_id];
   const query = `
   SELECT  *
@@ -11,7 +12,7 @@ const getCalendarByClinicId = (clinic_id) => {
   `;
   return db.query(query, values)
     .then(results => {
-      console.log("results", results.rows);
+      console.log("results for calendar", results.rows);
       return results.rows;
     })
     .catch(error => console.log("getCalendarByClinicId error", error));
