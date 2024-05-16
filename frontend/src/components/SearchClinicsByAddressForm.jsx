@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, Input } from '@mui/material';
+import { Button, Input, Box } from '@mui/material';
 
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,15 +20,22 @@ const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   };
   
   return (
-    <form onSubmit={handleSearchByAddress}>
-      <Input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Enter your zip code or address" 
-      />
-      <Button type='submit'>Search</Button>
-    </form>
+    <Box width="100%">
+      <form onSubmit={handleSearchByAddress} width="100%">
+        <Box display="flex" justifyContent="space-between">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Enter your zip code or address"
+            sx={{
+              minWidth: "300px"
+            }}
+          />
+          <Button type='submit'>Search</Button>
+        </Box>
+      </form>
+    </Box>
   );
 };
 

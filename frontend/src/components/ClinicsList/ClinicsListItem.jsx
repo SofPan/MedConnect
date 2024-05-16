@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 import { useNavigate } from "react-router-dom";
 import { UserSignedIn } from "../../App";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import axios from "axios";
+import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
+import CardWrapper from "../GeneralComponents/CardWrapper";
+import { Box } from "@mui/system";
 
 const ClinicListItem = (props) => {
   const {name, address, id, distance, setErrorMessage} = props;
@@ -32,7 +35,6 @@ const ClinicListItem = (props) => {
   }
 
   const handleRequest = (info) => {
-    console.log("userInfo in req", userState.userInfo)
     if (userState.userInfo.id && !userState.userInfo.is_clinic) {
       dispatch({ type: "SET_CLINIC_INFO", payload: info});
       axios.get(`http://localhost:8080/patients/${userState.userInfo.user_id}`)
@@ -62,23 +64,34 @@ const ClinicListItem = (props) => {
   return(
     <>
     { visible &&
-      <li>
+      <Card 
+      sx={{
+        margin: "12px 0", 
+        padding: "12px", 
+        minHeight: "200px", 
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between"
+        }}>
         <div>
-          <p>
+          <p className="clinics-info">
             {name} <br />
             {address} <br />
             {distance && `distance: ${distance} km`}
           </p>
-          <DoctorsList 
-            clinic_id={id} 
-            // renderClinic={checkIfRenderClinic}
-            changeDoctorState={triggerDoctorStateUpdate}
-          />
-        </div>
-        <div>
-            <Button onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
-        </div>
-      </li>
+          <BoxWithScroll height="50px">
+            <DoctorsList 
+              clinic_id={id} 
+              // renderClinic={checkIfRenderClinic}
+              changeDoctorState={triggerDoctorStateUpdate}
+            />
+          </BoxWithScroll>
+          </div>
+          
+          <Box textAlign="right">
+              <Button onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
+          </Box>
+        </Card>
     }
     </>
   )

@@ -35,7 +35,7 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
 
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div>
       <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={13}
