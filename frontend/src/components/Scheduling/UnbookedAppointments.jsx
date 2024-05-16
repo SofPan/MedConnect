@@ -22,6 +22,7 @@ const UnbookedAppointments = (props) => {
       appointmentDispatch({type: "SET_OPEN_APPOINTMENTS", payload: getData});
       setUnbookedAppointments(getData);
     }
+    console.log(unbookedAppointments);
   }, [getData]);
   
   return(
@@ -32,7 +33,7 @@ const UnbookedAppointments = (props) => {
         <span>There are no appointments available to request</span>
         :
         <div className="appointments-open" >
-          <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={userProfile.id} appointmentDispatch={appointmentDispatch} />
+          <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={userProfile.id} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
         </div>
       }
     </>

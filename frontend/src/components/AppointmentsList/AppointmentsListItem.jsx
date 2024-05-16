@@ -8,10 +8,6 @@ import {
   } from '@mui/material';
 import { UserSignedIn } from "../../App";
 
-const formatDateAndTime = (date) => {
-  return date.replace(":00.000Z", "").split("T");
-}
-
 const AppointmentsListItem = (props) => {
   
   const {
@@ -19,15 +15,16 @@ const AppointmentsListItem = (props) => {
     clinic_address,
     clinic_id,
     doctor_id,
-    start_time,
-    end_time,
+    startTime,
+    endTime,
     status,
     appointment,
     user_id,
-    appointmentDispatch
+    appointmentDispatch,
+    name
   } = props;
 
-  const [editing, setEditing] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(appointment);
 
   const [requesting, setRequesting] = useState(false);
@@ -39,26 +36,29 @@ const AppointmentsListItem = (props) => {
   const {dispatch} = useContext(UserSignedIn);
 
   useEffect(() => {
-    if (editing){
-      console.log("edited appointment details", appointmentDetails);
+    if (cancelling){
       put(
         'appointments',
         appointmentDetails
       );
       appointmentDispatch({type: "DELETE_APPOINTMENT", payload: appointmentDetails});
     }
-  }, [editing]);
+  }, [cancelling]);
 
   useEffect(() => {
     if(requesting){
-    post(
-      'requests',
-      requestDetails
-    );
-    dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
-    appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
-    appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
-  }
+      post(
+        'requests',
+        requestDetails
+      );
+      put(
+        'appointments',
+        appointmentDetails
+      )
+      dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
+      appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
+      appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
+    }
   }, [requesting]);
 
 
@@ -68,7 +68,7 @@ const AppointmentsListItem = (props) => {
       patient_id: null,
       })
     );
-    setEditing(true);
+    setCancelling(true);
   }
 
   const handleClickRequest = (e) => {
@@ -80,20 +80,26 @@ const AppointmentsListItem = (props) => {
       appointment_id: appointment.id
     }
     setRequestDetails(requestObject);
+
+    setAppointmentDetails(prev => ({
+      ...prev,
+      patient_id: user_id,
+      patient_name: name
+    }));
+
     setRequesting(true);
   }
-  const dateString = `${formatDateAndTime(start_time)[0]} from ${formatDateAndTime(start_time)[1]} - ${formatDateAndTime(end_time)[1]}`
 
   return(
     <Box marginBottom={"24px"}>
       <Card className="unbooked-appointments">
-        <p>Appointment available on {dateString}</p>
+        <p>Appointment available on {startTime.date} from {startTime.time} - {endTime.time}</p>
         <Button onClick={handleClickRequest}>Request</Button>
       </Card>
       <Card className="patient-appointments">
         <Box padding={"20px"}>
           <p>{status ? "Approved" : "Pending"}</p>
-          <p>You have an appointment {!status && "requested"} on {dateString} with {doctor_name}.</p> 
+          <p>You have an appointment {!status && "requested"} on {startTime.date} from {startTime.time} - {endTime.time} with {doctor_name}.</p> 
           <p>Clinic address: {clinic_address}</p>
           <Button onClick={handleClickCancel}>Cancel</Button>
         </Box>
