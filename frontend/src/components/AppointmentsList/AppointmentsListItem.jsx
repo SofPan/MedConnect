@@ -97,14 +97,14 @@ const AppointmentsListItem = (props) => {
         <p>Appointment available on {startTime.date} from {startTime.time} - {endTime.time}</p>
         <Button onClick={handleClickRequest}>Request</Button>
       </CardWrapper>
-      <CardWrapper class="patient-appointments">
-        <Box padding={"20px"}>
-          <p>{status ? "Approved" : "Pending"}</p>
-          <p>You have an appointment {!status && "requested"} on {startTime.date} from {startTime.time} - {endTime.time} with {doctor_name}.</p> 
-          <p>Clinic address: {clinic_address}</p>
-          <Button onClick={handleClickCancel}>Cancel</Button>
-        </Box>
-      </CardWrapper>
+        <CardWrapper class="patient-appointments">
+          <Box padding={"20px"}>
+            <p>{status ? "Approved" : "Pending"}</p>
+            <p>You have an appointment {!status && "requested"} on {startTime.date} from {startTime.time} - {endTime.time} with {doctor_name}.</p> 
+            <p>Clinic address: {clinic_address}</p>
+            <Button onClick={handleClickCancel}>Cancel</Button>
+          </Box>
+        </CardWrapper>
     </Box>
   )
 }

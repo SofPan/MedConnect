@@ -4,8 +4,7 @@ import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
-
-import {Box} from '@mui/material'
+import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
@@ -37,9 +36,9 @@ const ProfileDoctors = (props) => {
         />
       </AccordionWrapper>
     </div>
-    <Box component="div" sx={{overflow: 'auto', height: "50vh"}} padding="36px 12px">
+    <BoxWithScroll height="50vh">
       <DoctorsList clinic_id={userProfile.id} />
-    </Box>
+    </BoxWithScroll>
     </>
 
   )

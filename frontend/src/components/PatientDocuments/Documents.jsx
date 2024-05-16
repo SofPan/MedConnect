@@ -5,6 +5,7 @@ import { UserSignedIn } from "../../App";
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
+import { Box } from "@mui/material";
 
 
 const Documents = (props) => {
@@ -31,7 +32,7 @@ const Documents = (props) => {
   }, [getData]);
 
   return(
-    <>
+    <Box type="div">
       <h2>Documents</h2>
       <AccordionWrapper title="Add">
         <NewDocument 
@@ -42,7 +43,7 @@ const Documents = (props) => {
         patient_id={userProfile.id} 
         documents={documents}
       />
-    </>
+    </Box>
   )
 }
 

@@ -5,6 +5,7 @@ import AppointmentsList from "../AppointmentsList/AppointmentsList";
 import UnbookedAppointments from "./UnbookedAppointments";
 import { UserSignedIn } from '../../App';
 import { useAppointments } from "../../hooks/useAppointments";
+import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 
 const PatientAppointments = () => {
   const { userState, dispatch } = useContext(UserSignedIn);
@@ -34,14 +35,18 @@ const PatientAppointments = () => {
     <>
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
-        <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
+        <BoxWithScroll height="25vh">
+          <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
+        </BoxWithScroll>
       </AccordionWrapper>                
       {!appointments.length 
         ? 
         <span>You do not have any appointments booked</span>
         :
         <div className="appointments-booked">
-          <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
+          <BoxWithScroll height="50vh">
+            <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
+          </BoxWithScroll>
         </div>
         }
     </>
