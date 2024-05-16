@@ -86,7 +86,7 @@ const DoctorsList = (props) => {
 
         <Grid item xs={12}>
      
-      <AccordionWrapper title={ <EditIcon />} expanded={isEditFormExpanded}>
+      <AccordionWrapper title={ <EditIcon />} >
         <EditDoctorForm doctor={mapAndFilterDoctors[activeStep].doctor} />
       </AccordionWrapper>
     </Grid>
