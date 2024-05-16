@@ -58,6 +58,20 @@ const ProfileBody = (props) => {
             </TabContent>
           </motion.div>
         )}
+        {activeTab === 2 && (
+        <motion.div
+          key="tab-2"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={tabVariants}
+          transition={{ duration: 0.3 }}
+        >
+          <TabContent value={activeTab} index={2}>
+            <PatientsList />
+          </TabContent>
+        </motion.div>
+        )}
       </AnimatePresence>
     </article>
   );

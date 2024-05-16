@@ -30,10 +30,10 @@ const PatientsList = () => {
   ));
 
   return (
-    <ul>
+    <div>
       {!mapAndFilterPatients.length && <span>You do not have any patients listed</span>}
       {mapAndFilterPatients}
-    </ul>
+    </div>
   );
 }
 
