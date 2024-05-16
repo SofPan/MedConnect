@@ -13,7 +13,9 @@ const PatientAppointments = () => {
 
   const {getData, get} = useGet();
   const {appointmentState, appointmentDispatch} = useAppointments();
-
+  console.log("appointmentstate", appointmentState);
+  console.log("appointments (state???)", appointments);
+  
   useEffect(() => {
     appointments.length !== appointmentState.appointments.length &&
     get(
@@ -29,7 +31,8 @@ const PatientAppointments = () => {
     }
   }, [getData]);
 
-  console.log("appointments", appointments);
+  
+
   return(
     <>
       <h2>Appointments</h2>

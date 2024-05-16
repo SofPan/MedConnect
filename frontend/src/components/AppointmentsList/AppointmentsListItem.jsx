@@ -55,10 +55,12 @@ const AppointmentsListItem = (props) => {
         'appointments',
         appointmentDetails
       )
+      console.log("appointment details in useEffect when requesting", appointmentDetails);
       dispatch({type: "ADD_NOTIFICATION", payload: requestDetails});
       appointmentDispatch({type: "DELETE_OPEN_APPOINTMENT", payload: appointmentDetails});
       appointmentDispatch({type:"ADD_APPOINTMENT", payload: appointmentDetails});
     }
+    
   }, [requesting]);
 
 
@@ -86,7 +88,7 @@ const AppointmentsListItem = (props) => {
       patient_id: user_id,
       patient_name: name
     }));
-
+   
     setRequesting(true);
   }
 

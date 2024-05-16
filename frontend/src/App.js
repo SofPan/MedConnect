@@ -17,6 +17,8 @@ import LandingPage from './components/LandingPage';
 import RequiredInformation from './components/SignUp/RequiredInformation';
 import BasicModal from './components/GeneralComponents/BasicModal';
 
+
+
 export const UserSignedIn = createContext();
 
 function App() {
@@ -60,6 +62,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} loading={loading} />
         <BasicModal />
@@ -74,6 +77,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </UserSignedIn.Provider>
+      
     </div>
   );
 }

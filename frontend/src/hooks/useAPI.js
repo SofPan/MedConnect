@@ -29,7 +29,7 @@ export const useGet = () => {
       setGetLoading(true);
 
       const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
-
+      
       setGetData(response.data);
 
       setGetLoading(false);
