@@ -34,7 +34,7 @@ function LandingPage() {
         <HeroContent>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Welcome to Our Clinic
+              Welcome to MedConnect
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Providing compassionate and comprehensive healthcare to the community.
@@ -57,7 +57,7 @@ function LandingPage() {
         </HeroContent>
 
         <Container maxWidth="md" component="main">
-          <Grid container spacing={5} alignItems="flex-end">
+          <Grid container spacing={5} alignItems="flex-end" padding="36px 0">
             <Grid item xs={12} sm={6} md={4}>
               <Box textAlign="center">
                 <FeatureIcon>
@@ -67,7 +67,7 @@ function LandingPage() {
                   Our Services
                 </Typography>
                 <Typography variant="subtitle1">
-                  Comprehensive medical services for all ages.
+                  Connecting patients with local health care providers.
                 </Typography>
               </Box>
             </Grid>
@@ -103,8 +103,8 @@ function LandingPage() {
 
       <Footer>
         <Container maxWidth="lg">
-          <Typography variant="h6" align="center" gutterBottom>
-            Medical Clinic
+          <Typography variant="h6" align="center">
+            MedConnect
           </Typography>
           <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
             Delivering Excellence in Healthcare.
