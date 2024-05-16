@@ -12,7 +12,6 @@ const StyledAccordion = styled(Accordion)({
   color: theme.palette.primary.main,
   fontFamily: "sans-serif",
   padding: "0 15px",
-  maxHeight: "36px",
   minHeight: "unset"
 });
 
