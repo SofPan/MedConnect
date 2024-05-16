@@ -10,6 +10,13 @@ export const theme = createTheme({
       main: '#243B4A',
       contrastText: '#fff'
     }
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        variant: 'outlined',
+      }
+    },
   }
 });
 
