@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
-import { UserSignedIn } from '../App';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import MapModal from './GeneralComponents/MapModal';
 
 
@@ -17,7 +15,6 @@ const customMarkerIcon = `
 `;
 
 const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => {
-  const { dispatch } = useContext(UserSignedIn);
   const [selectedClinicId, setSelectedClinicId] = useState(null);
   const [selectedClinic, setSelectedClinic] = useState(null);
   const [showModal, setShowModal] = React.useState(false)

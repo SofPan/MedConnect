@@ -3,8 +3,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { UserSignedIn } from '../../App';
-import axios from 'axios';
 import ClinicListItem from '../ClinicsList/ClinicsListItem';
 
 const style = {
@@ -23,8 +21,6 @@ export default function MapModal({ clinic, showModal, setShowModal }) {
 
   const [errorMessage, setErrorMessage] = React.useState('');
   
-
-  const { userState, dispatch } = React.useContext(UserSignedIn);
   const handleClose = () => {
     setErrorMessage('');
     setShowModal(false)
