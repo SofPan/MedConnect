@@ -8,6 +8,7 @@ import { UserSignedIn } from '../App';
 import { useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
 import { Grid } from '@mui/material';
+import BoxWithScroll from './GeneralComponents/BoxWithScroll';
 
 const defaultCenter = {
   lat: 43.642567, // default latitude
@@ -44,15 +45,17 @@ useEffect(() => {
 
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={4}>
+    <Grid container spacing={2} maxWidth={"85vw"} margin="0 auto" height="80vh">
+      <Grid item xs={4} display="inline-flex" flexDirection="column">
         <AccordionWrapper title={"Search by doctor's name"}>
           <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter} setMapClinics={setMapClinics}/>
         </AccordionWrapper>
-        <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker} />
-        <ClinicsList searchCoordinates={coordinates} clinics={mapClinics} />
+          <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker} />
+        <BoxWithScroll height="60vh">
+          <ClinicsList searchCoordinates={coordinates} clinics={mapClinics} />
+        </BoxWithScroll>
       </Grid> 
-      <Grid item xs={8}>
+      <Grid item xs={8} display="inline-flex" alignItems="center" justifyContent="center" height="100%">
         <MapComponent coordinates={coordinates} searchTermMarker={searchTermMarker} isLoaded={isLoaded} mapClinics={mapClinics} setMapClinics={setMapClinics}/>
       </Grid>
     </Grid>
