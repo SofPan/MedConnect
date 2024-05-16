@@ -4,14 +4,13 @@ import { calcRoute } from "../../helpers/calcRoute";
 import { UserSignedIn } from "../../App";
 import BasicModal from "../GeneralComponents/BasicModal";
 
-const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
-  const { userState } = useContext(UserSignedIn);
+const ClinicList = ({ searchCoordinates, handleRequestToRegister, clinics }) => {
   const [clinicsList, setClinicsList] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    if (searchCoordinates && userState.displayedClinics) {
-        const clinicDistances = userState.displayedClinics.map((clinic) => {
+    if (searchCoordinates && clinics) {
+        const clinicDistances = clinics.map((clinic) => {
             const location = {
                 lat: parseFloat(clinic.latitude),
                 lng: parseFloat(clinic.longitude),
@@ -22,8 +21,8 @@ const ClinicList = ({ searchCoordinates, handleRequestToRegister }) => {
 
         const sortedClinics = clinicDistances.sort((a, b) => a.distance - b.distance);
         setClinicsList(sortedClinics);
-    }
-}, [searchCoordinates, userState.displayedClinics]);
+      }
+}, [searchCoordinates, clinics]);
 
 
   const mapClinics = clinicsList.map(clinic => (

@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 import { UserSignedIn } from '../App';
+import axios from 'axios';
+import MapModal from './GeneralComponents/MapModal';
 
 
 const mapContainerStyle = {
@@ -14,30 +16,22 @@ const customMarkerIcon = `
   </svg>
 `;
 
-const MapComponent = ({coordinates, searchTermMarker}) => {
-  const { userState } = useContext(UserSignedIn);
+const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => {
+  const { dispatch } = useContext(UserSignedIn);
   const [selectedClinicId, setSelectedClinicId] = useState(null);
-  const [infoWindowShown, setInfoWindowShown] = useState(false);
-
-  console.log("displayed clinics", userState.displayedClinics)
-  
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
+  const [selectedClinic, setSelectedClinic] = useState(null)
 
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
 
   const handleMarkerClick = (id) => {
-    setInfoWindowShown(isShown => !isShown)
-    setSelectedClinicId(id);
+      setSelectedClinicId(id);
+      const clinic = mapClinics.find(clinic => clinic.id === id);
+      console.log(clinic)
+      setSelectedClinic(clinic);
+      dispatch({ type: "SET_MODAL", payload: true})
   };
-
-  const handleCloseInfoWindow = () => {
-    setInfoWindowShown(false);
-    setSelectedClinicId(null);
-  }
 
 
   return (
@@ -53,7 +47,7 @@ const MapComponent = ({coordinates, searchTermMarker}) => {
           />
         }
 
-        {userState.displayedClinics.map((clinic, index) => {
+        {mapClinics.map((clinic, index) => {
           const clinicCoordinates = {
             lat: parseFloat(clinic.latitude), 
             lng: parseFloat(clinic.longitude), 
@@ -75,14 +69,8 @@ const MapComponent = ({coordinates, searchTermMarker}) => {
               }}
               onClick={() => handleMarkerClick(clinic.id)}
             >
-            {infoWindowShown && selectedClinicId === clinic.id && (
-              <InfoWindow onCloseClick={handleCloseInfoWindow}>
-                <div>
-                  <h3>{clinic.name}</h3>
-                  <p>Address: {clinic.address}</p>
-                  <p>Available spots: {clinic.number_of_spots} </p>
-                </div>
-              </InfoWindow>
+            {selectedClinicId === clinic.id && (
+              <MapModal clinic={selectedClinic}/>
             )}
             </Marker>
           );
