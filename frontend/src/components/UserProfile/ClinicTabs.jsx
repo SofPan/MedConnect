@@ -22,6 +22,7 @@ const ClinicTabs = (props) => {
       <Tabs value={activeTab} onChange={handleTabChange} orientation='vertical' height="100%">
         <Tab label="Clinic Profile"/>
         <Tab label="Scheduling"/>
+        <Tab label="Patients" />
       </Tabs>
     </Box>
   )

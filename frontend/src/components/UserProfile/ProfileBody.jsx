@@ -1,3 +1,4 @@
+import PatientsList from "../PatientsList/PatientsList";
 import BoxWrapper from "../GeneralComponents/BoxWrapper";
 import PatientScheduler from "../Scheduling/PatientScheduler";
 import TabContent from "./TabContent";
@@ -25,6 +26,9 @@ const ProfileBody = (props) => {
       </TabContent>
       <TabContent value={activeTab} index={1}>
         <PatientScheduler />
+      </TabContent>
+      <TabContent value={activeTab} index={2}>
+        <PatientsList />
       </TabContent>
     </article>
   )
