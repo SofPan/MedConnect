@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
+import { UserSignedIn } from "../../App";
 import { useDelete } from "../../hooks/useAPI";
 import EditDoctorForm from "./EditDoctor";
 import {
   Box,
     Button,
-    Card,
   } from '@mui/material';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
-import { UserSignedIn } from "../../App";
+import CardWrapper from "../GeneralComponents/CardWrapper";
 
 const DoctorsListItem = (props) => {
   const {
@@ -47,7 +47,7 @@ const DoctorsListItem = (props) => {
       </span>
       {/* For Clinic Profile Page */}
       <Box type="div" margin="24px auto" >
-        <Card className="roster" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-around', minHeight: "150px"}} >
+        <CardWrapper class="roster" >
             <Box type="div" maxWidth={"15%"}>
               <img src={photo} alt={name}/>
             </Box>
@@ -63,7 +63,7 @@ const DoctorsListItem = (props) => {
               </AccordionWrapper>
               <Button onClick={handleClickDelete} sx={{marginTop: "12px"}}>Delete</Button>
             </Box>
-        </Card>
+        </CardWrapper>
       </Box>
     </li>
   )
