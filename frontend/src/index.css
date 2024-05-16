@@ -1,4 +1,7 @@
 /* TEMPORARY STYLES -- CONVERT TO TAILWIND */
+p{
+  margin: unset;
+}
 
 .available-clinics .roster,
 .clinic-profile .available-doctors,
@@ -43,4 +46,8 @@ ul {
 .patient-profile{
   margin: 0 auto;
   width: 85vw;
+}
+
+.clinics-info{
+  line-height: 18px;
 }
