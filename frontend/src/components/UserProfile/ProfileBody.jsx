@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PatientsList from "../PatientsList/PatientsList";
 import BoxWrapper from "../GeneralComponents/BoxWrapper";
 import PatientScheduler from "../Scheduling/PatientScheduler";
 import TabContent from "./TabContent";
@@ -56,6 +57,20 @@ const ProfileBody = (props) => {
               <PatientScheduler />
             </TabContent>
           </motion.div>
+        )}
+        {activeTab === 2 && (
+        <motion.div
+          key="tab-2"
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={tabVariants}
+          transition={{ duration: 0.3 }}
+        >
+          <TabContent value={activeTab} index={2}>
+            <PatientsList />
+          </TabContent>
+        </motion.div>
         )}
       </AnimatePresence>
     </article>
