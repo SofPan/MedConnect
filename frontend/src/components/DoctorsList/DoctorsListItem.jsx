@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
+import { UserSignedIn } from "../../App";
 import { useDelete } from "../../hooks/useAPI";
 import EditDoctorForm from "./EditDoctor";
 import {
   Box,
     Button,
-    Card,
   } from '@mui/material';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
-import { UserSignedIn } from "../../App";
+import CardWrapper from "../GeneralComponents/CardWrapper";
 
 const DoctorsListItem = (props) => {
   const {
@@ -46,23 +46,25 @@ const DoctorsListItem = (props) => {
         <p>{name} accepting {patients} patients </p>
       </span>
       {/* For Clinic Profile Page */}
-      <Card className="roster">
-        <Box width="50px" height="50px" borderRadius={'50%'}>
-          <img src={photo} alt={name}/>
-        </Box>
-        <div>    
-          <p>{name} <br />
-              Can accept {patients} more patients
-          </p>
-          <p> {qualifications} </p>
-        </div>
-        <div>
-          <AccordionWrapper title={"Edit"}>
-            <EditDoctorForm doctor={doctor}/>
-          </AccordionWrapper>
-          <Button onClick={handleClickDelete}>Delete</Button>
-        </div>
-      </Card>
+      <Box type="div" margin="24px auto" >
+        <CardWrapper class="roster" >
+            <Box type="div" maxWidth={"15%"}>
+              <img src={photo} alt={name}/>
+            </Box>
+            <Box type="div" width="40%">    
+              <p>{name} <br />
+                  Can accept {patients} more patients
+              </p>
+              <p> {qualifications} </p>
+            </Box>
+            <Box type='div' sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', width: "40%"}} >
+              <AccordionWrapper title={"Edit"}>
+                <EditDoctorForm doctor={doctor}/>
+              </AccordionWrapper>
+              <Button onClick={handleClickDelete} sx={{marginTop: "12px"}}>Delete</Button>
+            </Box>
+        </CardWrapper>
+      </Box>
     </li>
   )
 }

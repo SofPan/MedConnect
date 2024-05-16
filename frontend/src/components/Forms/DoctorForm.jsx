@@ -1,34 +1,40 @@
 import {
   Input,
   InputLabel,
-  Button
+  Button,
+  Box
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const StyledBox = styled(Box)({
+  margin: "12px 0"
+});
 
 const DoctorForm = (props) => {
   const {handleSubmit} = props;
   
   return(
     <form onSubmit={handleSubmit}>
-      <div>
+      <StyledBox type="div">
         <InputLabel>Name</InputLabel>
         <Input id="name" type="text" />
-      </div>
-      <div>
+      </StyledBox>
+      <StyledBox type="div">
         <InputLabel>Qualifications</InputLabel>
         <Input id="qualifications" type="text" />
-      </div>
-      <div>
+      </StyledBox>
+      <StyledBox type="div">
         <InputLabel>Description</InputLabel>
         <Input id="description" type="text" />
-      </div>
-      <div>
+      </StyledBox>
+      <StyledBox type="div">
         <InputLabel>Number of Patients</InputLabel>
         <Input id="num_patients" type="number" />
-      </div>
-      <div>
+      </StyledBox>
+      <StyledBox type="div" sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Button type="submit">Submit</Button>
-        <Button>Cancel</Button>
-      </div>
+        <Button >Cancel</Button>
+      </StyledBox>
 
     </form>
   )

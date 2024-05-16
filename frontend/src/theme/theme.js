@@ -9,10 +9,24 @@ export const theme = createTheme({
     secondary: {
       main: '#243B4A',
       contrastText: '#fff'
+    }
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        variant: 'outlined',
+        style: {
+          margin: "5px",
+        }
+      },
     },
-    neutrals: {
-      main: '#b2b1be',
-      light: '#fffeeb'
+    MuiAccordion: {
+      defaultProps: {
+        variant: 'outlined',
+        style: {
+          margin: "5px",
+        }
+      },
     }
   }
 });

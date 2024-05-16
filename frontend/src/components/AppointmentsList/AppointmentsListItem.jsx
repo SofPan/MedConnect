@@ -7,6 +7,7 @@ import {
     Card,
   } from '@mui/material';
 import { UserSignedIn } from "../../App";
+import CardWrapper from "../GeneralComponents/CardWrapper";
 
 const AppointmentsListItem = (props) => {
   
@@ -92,18 +93,18 @@ const AppointmentsListItem = (props) => {
 
   return(
     <Box marginBottom={"24px"}>
-      <Card className="unbooked-appointments">
+      <CardWrapper class="unbooked-appointments">
         <p>Appointment available on {startTime.date} from {startTime.time} - {endTime.time}</p>
         <Button onClick={handleClickRequest}>Request</Button>
-      </Card>
-      <Card className="patient-appointments">
-        <Box padding={"20px"}>
-          <p>{status ? "Approved" : "Pending"}</p>
-          <p>You have an appointment {!status && "requested"} on {startTime.date} from {startTime.time} - {endTime.time} with {doctor_name}.</p> 
-          <p>Clinic address: {clinic_address}</p>
-          <Button onClick={handleClickCancel}>Cancel</Button>
-        </Box>
-      </Card>
+      </CardWrapper>
+        <CardWrapper class="patient-appointments">
+          <Box padding={"20px"}>
+            <p>{status ? "Approved" : "Pending"}</p>
+            <p>You have an appointment {!status && "requested"} on {startTime.date} from {startTime.time} - {endTime.time} with {doctor_name}.</p> 
+            <p>Clinic address: {clinic_address}</p>
+            <Button onClick={handleClickCancel}>Cancel</Button>
+          </Box>
+        </CardWrapper>
     </Box>
   )
 }

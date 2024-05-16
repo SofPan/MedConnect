@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
+import { UserSignedIn } from '../../App';
 import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
-import { UserSignedIn } from '../../App';
+import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
@@ -35,7 +36,9 @@ const ProfileDoctors = (props) => {
         />
       </AccordionWrapper>
     </div>
-    <DoctorsList clinic_id={userProfile.id} />
+    <BoxWithScroll height="50vh">
+      <DoctorsList clinic_id={userProfile.id} />
+    </BoxWithScroll>
     </>
 
   )
