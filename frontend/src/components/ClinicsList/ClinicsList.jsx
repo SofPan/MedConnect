@@ -6,7 +6,7 @@ import BasicModal from "../GeneralComponents/BasicModal";
 
 const ClinicList = ({ searchCoordinates, handleRequestToRegister, clinics }) => {
   const [clinicsList, setClinicsList] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('Please, login or sign up as a patient');
 
   useEffect(() => {
     if (searchCoordinates && clinics) {

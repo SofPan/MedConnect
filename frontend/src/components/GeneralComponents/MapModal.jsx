@@ -19,17 +19,21 @@ const style = {
   p: 4,
 };
 
-export default function MapModal({ clinic }) {
+export default function MapModal({ clinic, showModal, setShowModal }) {
 
   const [errorMessage, setErrorMessage] = React.useState('');
+  
 
   const { userState, dispatch } = React.useContext(UserSignedIn);
-  const handleClose = () => dispatch({ type: "SET_MODAL", payload: false});
+  const handleClose = () => {
+    setErrorMessage('');
+    setShowModal(false)
+  };
 
   return (
     <div>
       <Modal
-        open={userState.displayModal}
+        open={showModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

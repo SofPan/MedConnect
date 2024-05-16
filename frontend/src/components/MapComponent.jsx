@@ -19,7 +19,8 @@ const customMarkerIcon = `
 const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => {
   const { dispatch } = useContext(UserSignedIn);
   const [selectedClinicId, setSelectedClinicId] = useState(null);
-  const [selectedClinic, setSelectedClinic] = useState(null)
+  const [selectedClinic, setSelectedClinic] = useState(null);
+  const [showModal, setShowModal] = React.useState(false)
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -30,7 +31,7 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
       const clinic = mapClinics.find(clinic => clinic.id === id);
       console.log(clinic)
       setSelectedClinic(clinic);
-      dispatch({ type: "SET_MODAL", payload: true})
+      setShowModal(true);
   };
 
 
@@ -70,7 +71,7 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
               onClick={() => handleMarkerClick(clinic.id)}
             >
             {selectedClinicId === clinic.id && (
-              <MapModal clinic={selectedClinic}/>
+              <MapModal clinic={selectedClinic} showModal={showModal} setShowModal={setShowModal}/>
             )}
             </Marker>
           );
