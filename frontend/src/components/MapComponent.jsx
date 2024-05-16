@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
-import { UserSignedIn } from '../App';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import MapModal from './GeneralComponents/MapModal';
 
 
@@ -12,14 +10,14 @@ const mapContainerStyle = {
 
 const customMarkerIcon = `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-    <path d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z" fill="red"/>
+    <path d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z" fill="#800020"/>
   </svg>
 `;
 
 const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => {
-  const { dispatch } = useContext(UserSignedIn);
   const [selectedClinicId, setSelectedClinicId] = useState(null);
-  const [selectedClinic, setSelectedClinic] = useState(null)
+  const [selectedClinic, setSelectedClinic] = useState(null);
+  const [showModal, setShowModal] = React.useState(false)
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -30,7 +28,7 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
       const clinic = mapClinics.find(clinic => clinic.id === id);
       console.log(clinic)
       setSelectedClinic(clinic);
-      dispatch({ type: "SET_MODAL", payload: true})
+      setShowModal(true);
   };
 
 
@@ -70,7 +68,7 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
               onClick={() => handleMarkerClick(clinic.id)}
             >
             {selectedClinicId === clinic.id && (
-              <MapModal clinic={selectedClinic}/>
+              <MapModal clinic={selectedClinic} showModal={showModal} setShowModal={setShowModal}/>
             )}
             </Marker>
           );
