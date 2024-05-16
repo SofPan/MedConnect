@@ -43,6 +43,7 @@ const ClinicListItem = (props) => {
           } else {
             setErrorMessage("Please, submit the required information to register with a doctor")
             navigate("/required_information");
+            dispatch({ type: "SET_MODAL", payload: false})
           }
       })
       .catch(error => {

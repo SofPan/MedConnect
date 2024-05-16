@@ -21,6 +21,8 @@ const style = {
 
 export default function MapModal({ clinic }) {
 
+  const [errorMessage, setErrorMessage] = React.useState('');
+
   const { userState, dispatch } = React.useContext(UserSignedIn);
   const handleClose = () => dispatch({ type: "SET_MODAL", payload: false});
 
@@ -34,7 +36,10 @@ export default function MapModal({ clinic }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <ClinicListItem name={clinic.name} address={clinic.address} id={clinic.id} distance={null} setErrorMessage="" />
+            <ClinicListItem name={clinic.name} address={clinic.address} id={clinic.id} distance={null} setErrorMessage={setErrorMessage} />
+            <Typography>
+              {errorMessage}
+            </Typography>
             <Button onClick={handleClose}>Back to the list</Button>
           </Typography>
         </Box>
