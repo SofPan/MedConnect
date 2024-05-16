@@ -11,10 +11,14 @@ const StyledAccordion = styled(Accordion)({
   borderColor: theme.palette.primary.main,
   color: theme.palette.primary.main,
   fontFamily: "sans-serif",
+  padding: "0 15px",
+  maxHeight: "36px",
+  minHeight: "unset"
 });
 
 const StyledAccordionSummary = styled(AccordionSummary)({
   textTransform: "uppercase",
+  minHeight: "unset"
 });
 
 const AccordionWrapper = (props) => {
