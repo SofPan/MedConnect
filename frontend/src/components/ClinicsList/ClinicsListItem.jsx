@@ -39,6 +39,7 @@ const ClinicListItem = (props) => {
       .then((res) => {
           if(res.data) {
             navigate("/register");
+            dispatch({ type: "SET_MODAL", payload: false})
           } else {
             setErrorMessage("Please, submit the required information to register with a doctor")
             navigate("/required_information");
@@ -65,7 +66,7 @@ const ClinicListItem = (props) => {
           <p>
             {name} <br />
             {address} <br />
-            distance: {distance} km
+            {distance && `distance: ${distance} km`}
           </p>
           <DoctorsList 
             clinic_id={id} 

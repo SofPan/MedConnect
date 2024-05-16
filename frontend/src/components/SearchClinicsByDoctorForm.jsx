@@ -3,9 +3,9 @@ import { calculateCenter } from '../helpers/calcCenter';
 import { UserSignedIn } from '../App';
 import { Button, Input } from '@mui/material';
 
-const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter}) => {
+const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter, setMapClinics}) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { userState, dispatch } = useContext(UserSignedIn);
+  const { userState } = useContext(UserSignedIn);
   console.log(userState)
 
 
@@ -17,13 +17,13 @@ const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter}) => {
         return doctor && doctor.name.toLowerCase().includes(searchTerm);
       });
       
-      dispatch({ type: "SET_DISPLAYED_CLINICS", payload: filteredClinics});
+      setMapClinics(filteredClinics);
 
       // Calculate the center of filtered clinics
       const filteredClinicsCenter = calculateCenter(filteredClinics, defaultCenter);
       setCoordinates(filteredClinicsCenter);
     } else {
-      dispatch({ type: "SET_DISPLAYED_CLINICS", payload: userState.clinics});
+      setMapClinics(userState.clinics);
       setCoordinates(defaultCenter);
     }
   }
