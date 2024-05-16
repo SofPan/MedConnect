@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { borderColor } from '@mui/system';
 
 export const theme = createTheme({
   palette: {
@@ -17,6 +18,11 @@ export const theme = createTheme({
         variant: 'outlined',
       }
     },
+    MuiAccordion: {
+      defaultProps: {
+        variant: 'outlined',
+      },
+    }
   }
 });
 
