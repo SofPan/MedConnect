@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 const profileLeft = {
   className: "profile-left",
   width: "40%",
-  display: "inline-block"
 }
 
 const profileRight = {
   className: "profile-right",
   width: "50%",
-  display: "inline-block",
   marginLeft: "50px"
 }
 
@@ -27,7 +25,14 @@ const BoxWrapper = (props) => {
     type draws the constant down from above
   */ 
   return(
-    <Box {...boxType}>
+    <Box 
+    height="100%" 
+    {...boxType} 
+    sx={{
+      display: 'inline-flex',
+      flexDirection: 'column',
+      justifyContent: 'space-evenly',
+    }}>
       {props.children}
     </Box>
   )

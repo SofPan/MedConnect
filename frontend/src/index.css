@@ -33,3 +33,9 @@ ul {
   align-items: center;
   margin-top: 75px;
 }
+
+.profile-main,
+.profile-main > div,
+.profile-main > div > div{
+  height: 100%;
+}

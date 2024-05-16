@@ -33,7 +33,7 @@ const RenderProfile = (props) => {
       {isClinic &&
         <ClinicTabs activeTab={activeTab} handleTabChange={handleTabChange}/>
       }
-      <Box width="60vw" display={'inline-block'} >
+      <Box height="80vh" width="60vw" display={'inline-block'} >
         <ProfileBody
           isClinic={isClinic}
           userProfile={userProfile}
