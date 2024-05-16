@@ -46,23 +46,25 @@ const DoctorsListItem = (props) => {
         <p>{name} accepting {patients} patients </p>
       </span>
       {/* For Clinic Profile Page */}
-      <Card className="roster">
-        <Box width="50px" height="50px" borderRadius={'50%'}>
-          <img src={photo} alt={name}/>
-        </Box>
-        <div>    
-          <p>{name} <br />
-              Can accept {patients} more patients
-          </p>
-          <p> {qualifications} </p>
-        </div>
-        <div>
-          <AccordionWrapper title={"Edit"}>
-            <EditDoctorForm doctor={doctor}/>
-          </AccordionWrapper>
-          <Button onClick={handleClickDelete}>Delete</Button>
-        </div>
-      </Card>
+      <Box type="div" margin="24px 0">
+        <Card className="roster" sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}} >
+            <div>
+              <img src={photo} alt={name}/>
+            </div>
+            <div>    
+              <p>{name} <br />
+                  Can accept {patients} more patients
+              </p>
+              <p> {qualifications} </p>
+            </div>
+            <div>
+              <AccordionWrapper title={"Edit"}>
+                <EditDoctorForm doctor={doctor}/>
+              </AccordionWrapper>
+              <Button onClick={handleClickDelete}>Delete</Button>
+            </div>
+        </Card>
+      </Box>
     </li>
   )
 }

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 const profileLeft = {
   className: "profile-left",
-  width: "30%",
+  width: "40%",
   display: "inline-block"
 }
 
 const profileRight = {
   className: "profile-right",
-  width: "60%",
+  width: "50%",
   display: "inline-block",
   marginLeft: "50px"
 }
