@@ -1,14 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useDelete, useGet, usePut } from "../../hooks/useAPI";
 import { UserSignedIn } from '../../App';
+import {formatDateAndTime} from '../../helpers/formatDateAndTime';
 import NotificationActions from "./NotificationActions";
 
-const formatDateAndTime = (date) => {
-  return date.replace(":00.000Z", "").split("T");
-}
-
 const AppointmentNotification = (props) => {
-  const {appointment_id, notification_id, patient} = props;
+  const {appointment_id, notification_id} = props;
 
   const {getData, get} = useGet();
 
@@ -19,6 +16,8 @@ const AppointmentNotification = (props) => {
   
   const [appointment, setAppointment] = useState({});
   const [accepting, setAccepting] = useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
   useEffect(() => {
     get(
@@ -28,10 +27,12 @@ const AppointmentNotification = (props) => {
   }, []);
 
   useEffect(() => {
-    getData && setAppointment(getData);
-  }, [getData])
-
-  const dateString = appointment.start_time ? `${formatDateAndTime(appointment.start_time)[0]} from ${formatDateAndTime(appointment.start_time)[1]} - ${formatDateAndTime(appointment.end_time)[1]}` : "";
+    if(getData){
+      setAppointment(getData);
+      setStartTime(formatDateAndTime(getData.start_time));
+      setEndTime(formatDateAndTime(getData.end_time));
+    } 
+  }, [getData]);
 
   useEffect(() => {
     if (accepting){
@@ -56,7 +57,7 @@ const AppointmentNotification = (props) => {
   }
   return(
     <span>
-      <p>Book an appointment with {appointment.doctor_name} on {dateString}.</p>
+      <p>Book an appointment with {appointment.doctor_name} on {startTime.date} from {startTime.time} - {endTime.time}.</p>
       <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
     </span>
   )

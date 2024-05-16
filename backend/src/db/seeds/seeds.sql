@@ -97,7 +97,7 @@ INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_
 
 INSERT INTO appointments (patient_id, doctor_id, patient_name, doctor_name, start_time, end_time, clinic_id, clinic_name, status, created_at)
 VALUES
-    (1, 6, 'John Doe', 'Dr. Martinez', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (1, 6, 'John Doe', 'Dr. Davidson', '2024-05-02 09:00:00', '2024-05-02 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
     (2, 7, 'Jane Smith', 'Dr. Rodriguez', '2024-05-02 11:30:00', '2024-05-02 12:30:00', 1, 'City Medical Center', TRUE, NOW()),
     (3, 8, 'Michael Johnson', 'Dr. Garcia', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, 'City Medical Center', FALSE, NOW()),
     (4, 9, 'Emily Brown', 'Dr. Lopez', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, 'City Medical Center', FALSE, NOW()),
@@ -109,7 +109,7 @@ VALUES
     (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, 'City Medical Center', TRUE, NOW()),
     (null, 6, null, 'Dr. Martinez', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
     (null, 6, null, 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 6, null, 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW());
+    (null, 6, null, 'Dr. Martinez', '2024-05-16 12:00:00', '2024-05-16 13:00:00', 1, 'City Medical Center', TRUE, NOW());
 
 
 

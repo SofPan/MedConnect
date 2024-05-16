@@ -29,18 +29,19 @@ const PatientAppointments = () => {
     }
   }, [getData]);
 
+  console.log("appointments", appointments);
   return(
     <>
       <h2>Appointments</h2>
       <AccordionWrapper title="Request">
-        <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState}/>
+        <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
       </AccordionWrapper>                
       {!appointments.length 
         ? 
         <span>You do not have any appointments booked</span>
         :
         <div className="appointments-booked">
-          <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch}/>
+          <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
         </div>
         }
     </>
