@@ -93,7 +93,7 @@ export default function PatientScheduler() {
               }, title: date.patient_name, start: date.start_time, end: date.end_time, 
             }
           })
-          console.log('these are the dates from get appointments', dates);
+         
           setEvents(dates);
           
           
@@ -101,7 +101,7 @@ export default function PatientScheduler() {
   
       };
   
-      console.log("use effect for appointments hit");
+      
       fetchAppointments();
     }
 
