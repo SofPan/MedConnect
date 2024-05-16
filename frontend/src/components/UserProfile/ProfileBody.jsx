@@ -1,3 +1,5 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import PatientsList from "../PatientsList/PatientsList";
 import BoxWrapper from "../GeneralComponents/BoxWrapper";
 import PatientScheduler from "../Scheduling/PatientScheduler";
@@ -13,25 +15,52 @@ const ProfileBody = (props) => {
     activeTab,
   } = props;
 
-  return(
+  const tabVariants = {
+    initial: { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 20 }
+  };
+
+  return (
     <article className={`profile-main ${isClinic ? "clinic-profile" : "patient-profile"}`}>
-      <TabContent value={activeTab} index={0}>
-        <BoxWrapper type="profileLeft">
-          <UserInformation userProfile={userProfile}/>
-          {profileComponentLeft}
-        </BoxWrapper>
-        <BoxWrapper type="profileRight">
-          {profileComponentRight}
-        </BoxWrapper>
-      </TabContent>
-      <TabContent value={activeTab} index={1}>
-        <PatientScheduler />
-      </TabContent>
-      <TabContent value={activeTab} index={2}>
-        <PatientsList />
-      </TabContent>
+      <AnimatePresence mode="wait">
+        {activeTab === 0 && (
+          <motion.div
+            key="tab-0"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={tabVariants}
+            transition={{ duration: 0.3 }}
+          >
+            <TabContent value={activeTab} index={0}>
+              <BoxWrapper type="profileLeft">
+                <UserInformation userProfile={userProfile} />
+                {profileComponentLeft}
+              </BoxWrapper>
+              <BoxWrapper type="profileRight">
+                {profileComponentRight}
+              </BoxWrapper>
+            </TabContent>
+          </motion.div>
+        )}
+        {activeTab === 1 && (
+          <motion.div
+            key="tab-1"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={tabVariants}
+            transition={{ duration: 0.3 }}
+          >
+            <TabContent value={activeTab} index={1}>
+              <PatientScheduler />
+            </TabContent>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </article>
-  )
+  );
 }
 
 export default ProfileBody;

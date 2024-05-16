@@ -54,7 +54,7 @@ const SingleAppointment = (appointment) => {
   const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
   
   
-  console.log(typeof editedAppointment.start_time);
+  console.log("where is this appointment coming from",appointment);
   
   
   const getDoctors = async (clinic_id) =>{

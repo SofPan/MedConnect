@@ -83,7 +83,7 @@ export default function PatientScheduler() {
       const fetchAppointments = async () => {
 
         const appointments = await getAppointments();
-        console.log("userState", userState);
+        
        
         if (appointments) {
           const dates = appointments.map((date) => {
@@ -93,7 +93,7 @@ export default function PatientScheduler() {
               }, title: date.patient_name, start: date.start_time, end: date.end_time, 
             }
           })
-          console.log(dates);
+          console.log('these are the dates from get appointments', dates);
           setEvents(dates);
           
           
@@ -105,7 +105,7 @@ export default function PatientScheduler() {
       fetchAppointments();
     }
 
-    console.log(userState);
+    
     
 
   }, [userState.userInfo.is_clinic, singleAppointmentDisplay]);
@@ -174,7 +174,7 @@ export default function PatientScheduler() {
 
 
   return (
-    <div>
+    <Box sx={{width:'90vh'}}>
       {singleAppointmentDisplay ? <SingleAppointment doctor_name={appointmentInfo.doctor_name}
         details={appointmentInfo.start_time}
         clinic_address={appointmentInfo.address}
@@ -198,13 +198,14 @@ export default function PatientScheduler() {
             weekends={false}
             events={events}
             eventContent={renderEventContent}
-            slotMinTime={"00:00:00"}
-            slotMaxTime={"23:00:00"}
+            slotMinTime={"09:00:00"}
+            slotMaxTime={"22:00:00"}
             eventClick={handleDateClick}
+            eventColor='#800020'
           />
         </LocalizationProvider>}
 
-    </div>
+    </Box>
   );
 }
 

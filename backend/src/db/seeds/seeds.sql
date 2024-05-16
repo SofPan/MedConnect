@@ -107,9 +107,9 @@ VALUES
     (8, 8, 'Jennifer Garcia', 'Dr. Garcia', '2024-05-05 12:15:00', '2024-05-05 13:15:00', 1, 'City Medical Center', TRUE, NOW()),
     (9, 9, 'Daniel Martinez', 'Dr. Lopez', '2024-05-06 09:45:00', '2024-05-06 10:45:00', 1, 'City Medical Center', FALSE, NOW()),
     (10, 10, 'Jessica Rodriguez', 'Dr. Flores', '2024-05-06 15:00:00', '2024-05-06 16:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 6, null, 'Dr. Martinez', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 6, null, 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 6, null, 'Dr. Martinez', '2024-05-16 12:00:00', '2024-05-16 13:00:00', 1, 'City Medical Center', TRUE, NOW());
+    (null, 6, 'Christopher Hernandez', 'Dr. Martinez', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (null, 6, 'Amanda Wilson', 'Dr. Martinez', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
+    (null, 6, 'James Lee', 'Dr. Martinez', '2024-05-16 12:00:00', '2024-05-16 13:00:00', 1, 'City Medical Center', TRUE, NOW());
 
 
 
