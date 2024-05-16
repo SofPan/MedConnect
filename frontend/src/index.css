@@ -39,3 +39,8 @@ ul {
 .profile-main > div > div{
   height: 100%;
 }
+
+.patient-profile{
+  margin: 0 auto;
+  width: 85vw;
+}
