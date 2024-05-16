@@ -7,6 +7,14 @@
   display: none;
 }
 
+#modal-modal-description .roster {
+  display: none;
+}
+
+#modal-modal-description {
+  list-style: none;
+}
+
 ul {
   list-style: none;
   padding-left: 0;
