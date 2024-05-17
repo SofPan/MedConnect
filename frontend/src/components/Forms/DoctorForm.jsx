@@ -7,8 +7,16 @@ import {
 import { styled } from '@mui/material/styles';
 
 const StyledBox = styled(Box)({
-  margin: "12px 0"
+  margin: "12px 0",
 });
+
+const StyledLabel = styled(InputLabel)({
+  fontSize: '14px',
+})
+
+const StyledInput = styled(Input)({
+  width: "90%",
+})
 
 const DoctorForm = (props) => {
   const {handleSubmit} = props;
@@ -16,24 +24,24 @@ const DoctorForm = (props) => {
   return(
     <form onSubmit={handleSubmit}>
       <StyledBox type="div">
-        <InputLabel>Name</InputLabel>
-        <Input id="name" type="text" onClick={e => e.stopPropagation()}/>
+        <StyledLabel>Name</StyledLabel>
+        <StyledInput id="name" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
-        <InputLabel>Qualifications</InputLabel>
-        <Input id="qualifications" type="text" onClick={e => e.stopPropagation()}/>
+        <StyledLabel>Qualifications</StyledLabel>
+        <StyledInput id="qualifications" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
-        <InputLabel>Description</InputLabel>
-        <Input id="description" type="text" onClick={e => e.stopPropagation()}/>
+        <StyledLabel>Description</StyledLabel>
+        <StyledInput id="description" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
-        <InputLabel>Number of Patients</InputLabel>
-        <Input id="num_patients" type="number" onClick={e => e.stopPropagation()}/>
+        <StyledLabel>Number of Patients</StyledLabel>
+        <StyledInput id="num_patients" type="number" onClick={e => e.stopPropagation()}/>
       </StyledBox>
-      <StyledBox type="div" sx={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <Button type="submit">Submit</Button>
-        <Button >Cancel</Button>
+      <StyledBox type="div" sx={{display: 'flex', justifyContent: 'space-between', width: "90%"}}>
+        <Button variant="small" type="submit">Submit</Button>
+        <Button variant="small" >Cancel</Button>
       </StyledBox>
 
     </form>

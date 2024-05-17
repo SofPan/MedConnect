@@ -45,7 +45,8 @@ export const theme = createTheme({
             color: "#800020",
             border: "1px solid #800020",
             padding: "2px 5px",
-            fontSize: "12px"
+            fontSize: "12px",
+            margin: "5px 5px 5px 0"
           }
         }
       ]
