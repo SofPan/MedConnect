@@ -14,7 +14,8 @@ const { editAppointment } = require('../src/db/queries/appointments/editAppointm
 const { getCalendarByClinicId } = require("../src/db/queries/calendar/getCalendarByClinicId");
 const { getAppointmentById } = require("../src/db/queries/appointments/getAppointmentById");
 const { deleteAppointment } = require("../src/db/queries/appointments/deleteAppointment");
-
+const { getClinicsOpenAppointments } = require('../src/db/queries/appointments/getClinicsOpenAppointments');
+const { fixTimeStamp } = require('../helpers/fixTimeStamp');
 
 router.get('/single/:id', (req, res) => {
 
@@ -42,19 +43,25 @@ router.get('/single/:id', (req, res) => {
 router.get("/patients/:id", (req, res) => {
   const patientId = req.params.id;
   getAllAppointmentsByPatient(patientId)
-    .then(appointmentData => res.json(appointmentData))
+    .then(appointmentData => {
+      appointmentData.map(appointment => {
+        appointment.start_time = fixTimeStamp(appointment.start_time);
+        appointment.end_time = fixTimeStamp(appointment.end_time);
+        return appointment;
+      });
+      res.json(appointmentData);
+    })
     .catch(error => {
       console.error("Error fetching patient's appointments: ", error);
       res.status(500).json({ error: 'Internal server error' });
     });
 });
 
-const { getClinicsOpenAppointments } = require('../src/db/queries/appointments/getClinicsOpenAppointments');
 
 router.get('/:id', (req, res) => {
 
   const clinicId = req.params.id;
-  
+
   getCalendarByClinicId(clinicId)
     .then(calendar => {
 
@@ -99,7 +106,14 @@ router.delete('/:id', (req, res) => {
 router.get("/open/:id", (req, res) => {
   const doctorId = req.params.id;
   getClinicsOpenAppointments(doctorId)
-    .then(appointmentData => res.json(appointmentData))
+    .then(appointmentData => {
+      appointmentData.map(appointment => {
+        appointment.start_time = fixTimeStamp(appointment.start_time);
+        appointment.end_time = fixTimeStamp(appointment.end_time);
+        return appointment;
+      });
+      res.json(appointmentData);
+    })
     .catch(error => {
       console.error("Error fetching clinics's open appointments: ", error);
       res.status(500).json({ error: 'Internal server error' });
@@ -116,8 +130,6 @@ router.get("/open/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  console.log('EDITING THE APPOINTMENT');
-  console.log(req.body);
   editAppointment(req.body)
     .then(result => {
       console.log("edited appointment", result);
