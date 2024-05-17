@@ -30,7 +30,7 @@ const PatientAppointments = () => {
     }
   }, [getData]);
 
-  console.log("appointments", appointments);
+
   return(
     <>
       <h2>Appointments</h2>
