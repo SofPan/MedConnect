@@ -4,6 +4,7 @@ const { getPatientByUserId } = require('../src/db/queries/patients/getPatientByU
 const { editPatient } = require('../src/db/queries/patients/editPatient');
 const { getPatientsByClinicId } = require('../src/db/queries/patients/getPatientsByClinicId');
 const { getPatientById } = require('../src/db/queries/patients/getPatientById');
+const { mapAndConvertAppointment, dateToString } = require('../helpers/dateConverters');
 const router = express.Router();
 
 
@@ -11,6 +12,10 @@ router.get('/clinic/:id', (req, res) => {
   const clinicId = req.params.id
   getPatientsByClinicId(clinicId)
     .then(patients => {
+      patients.map(patient => {
+        patient.date_of_birth = dateToString(patient.date_of_birth).split("at").shift();
+        return patient;
+      });
       res.status(200).json(patients)
     })
     .catch(err => {
