@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { UserSignedIn } from "../../App";
-import { Button } from "@mui/material";
+import { Button, Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import BasicModal from "../GeneralComponents/BasicModal";
 import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
 
@@ -23,7 +23,6 @@ const RegisterWithDoctor = () => {
   })
 
   const handleRegister = (doctor_id) => {
-    console.log(userInfo)
     setDoctorId(doctor_id);
     axios.get(`http://localhost:8080/patients/${userInfo.user_id}`)
       .then(response => {
@@ -112,27 +111,42 @@ const RegisterWithDoctor = () => {
   
 
   return (
-    <div>
+    <Box>
       {changeDoctor ? 
         <ChangeDoctorModal title={modalTitle} message={errorMessage} handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctorId={doctorId}/> 
         : 
         <BasicModal title={modalTitle} message={errorMessage}/>
       }
-      <h3>{clinicInfo.clinic_name}</h3>
-      <p>{clinicInfo.clinic_address}</p>
-      {filteredDoctors.map(doctor => {
-        return (
-          <div key={doctor.id}>
-            <p>Accepting {doctor.number_of_patients} more patients</p>
-            <p>{doctor.name}</p>
-            <p>{doctor.qualifications}</p>
-            <img src={`./assets/images/${doctor.photo_url}`} alt={doctor.name}/>
-            <Button disabled={requestSent} onClick={() => handleRegister(doctor.id)}>Register</Button>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+      <Typography variant="h3" sx={{ marginBottom: 1, marginTop: 3 }}>{clinicInfo.clinic_name}</Typography>
+      <Typography variant="body1" sx={{ marginBottom: 4 }}> {clinicInfo.clinic_address}</Typography>
+      {filteredDoctors.map(doctor => (
+        <Card key={doctor.id} sx={{ display: 'flex', marginBottom: 2 }}>
+          <CardMedia
+            component="img"
+            sx={{ width: 151 }}
+            image={`./assets/images/${doctor.photo_url}`}
+            alt={doctor.name}
+          />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <CardContent>
+              <Typography variant="subtitle1">Accepting {doctor.number_of_patients} more patients</Typography>
+              <Typography variant="h5">{doctor.name}</Typography>
+              <Typography variant="body2" color="text.secondary">{doctor.qualifications}</Typography>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                disabled={requestSent} 
+                onClick={() => handleRegister(doctor.id)}
+                sx={{ marginTop: 1 }}
+              >
+                Register
+              </Button>
+            </CardContent>
+          </Box>
+        </Card>
+      ))}
+    </Box>
+  );
+};
 
 export default RegisterWithDoctor;
