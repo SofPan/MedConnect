@@ -1,7 +1,5 @@
 import axios from "axios";
-import dayjs from "dayjs";
-import qs from "querystring";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Domain URL, pull from .env when not local
 axios.defaults.baseURL = "http://localhost:8080/";

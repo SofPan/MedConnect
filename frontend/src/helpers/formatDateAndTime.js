@@ -1,7 +1,7 @@
 export const formatDateAndTime = (date) => {
-  const splitDate = date.replace(":00.000Z", "").split("T");
+  const splitDate = date.split(",");
   return {
     date: splitDate[0],
-    time: splitDate[1]
+    time: splitDate[1].replace(":00 ", " ")
   }
 };
