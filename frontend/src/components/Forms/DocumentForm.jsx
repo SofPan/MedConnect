@@ -17,11 +17,11 @@ const DocumentForm = (props) => {
     <form onSubmit={handleSubmit}>
       <StyledBox>
         <InputLabel>Name</InputLabel>
-        <Input id="name" type="text" />
+        <Input id="name" type="text"  onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox>
         <InputLabel>DocumentURL</InputLabel>
-        <Input id="document_url" type="text" value="xray.jpg" disabled/>
+        <Input id="document_url" type="text" value="xray.jpg" disabled onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox>
         <Button type="submit">Submit</Button>
