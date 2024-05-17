@@ -21,7 +21,7 @@ router.get('/request/:patientId', (req, res) => {
   getRequest(request_type, patient_id)
   .then(request => {
     if (request) {
-      res.json({ message: "The request has already been sent" });
+      res.json({ message: "The request has already been sent", request });
     } else {
       res.json(request)
     }
