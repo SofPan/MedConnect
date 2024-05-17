@@ -20,7 +20,7 @@ const NotificationsListItem = (props) => {
   
   useEffect(() => {
     get(
-      'patients',
+      'patients/patient',
       patient_id
     );
   }, []);
