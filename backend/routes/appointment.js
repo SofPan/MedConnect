@@ -121,17 +121,17 @@ router.get("/open/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  const convertedData = mapAndConvertAppointment([req.body], "to_date");
-  console.log("convertedData", convertedData);
-  // editAppointment(convertedData)
-  //   .then(result => {
-  //     return result;
-  //   })
-  //   .catch(error => {
-  //     res
-  //       .status(500)
-  //       .json({ error: error.message });
-  //   });
+  // const convertedData = mapAndConvertAppointment([req.body], "to_date");
+  // console.log("convertedData", convertedData);
+  editAppointment(req.body)
+    .then(result => {
+      return result;
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json({ error: error.message });
+    });
 });
 
 
