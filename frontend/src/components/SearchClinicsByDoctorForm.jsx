@@ -37,6 +37,7 @@ const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter, setMapClinics
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Enter doctor's name"
+          onClick={(e) => e.stopPropagation()}
         />
         <Button type='submit'>Search</Button>
     </form>
