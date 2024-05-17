@@ -51,7 +51,7 @@ function LandingPage() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button variant="contrast" className='text-white'>
                     Contact Us
                   </Button>
                 </Grid>
@@ -65,7 +65,7 @@ function LandingPage() {
             <Grid item xs={12} sm={6} md={4}>
               <Box textAlign="center">
                 <FeatureIcon>
-                  <MedicalServicesIcon fontSize="large" />
+                  <MedicalServicesIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Our Services
@@ -78,7 +78,7 @@ function LandingPage() {
             <Grid item xs={12} sm={6} md={4}>
               <Box textAlign="center">
                 <FeatureIcon>
-                  <PeopleIcon fontSize="large" />
+                  <PeopleIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Meet Our Team
@@ -91,7 +91,7 @@ function LandingPage() {
             <Grid item xs={12} sm={6} md={4}>
               <Box textAlign="center">
                 <FeatureIcon>
-                  <ContactSupportIcon fontSize="large" />
+                  <ContactSupportIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Contact Us

@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { borderColor } from '@mui/system';
 
 export const theme = createTheme({
   palette: {
@@ -19,6 +20,15 @@ export const theme = createTheme({
           margin: "5px",
         }
       },
+      variants: [
+        {
+          props: { variant: 'contrast' },
+          style: {
+            border: "1px solid #fff",
+            color: "#fff"
+          }
+        }
+      ]
     },
     MuiAccordion: {
       defaultProps: {
