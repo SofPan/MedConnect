@@ -15,7 +15,7 @@ const { getCalendarByClinicId } = require("../src/db/queries/calendar/getCalenda
 const { getAppointmentById } = require("../src/db/queries/appointments/getAppointmentById");
 const { deleteAppointment } = require("../src/db/queries/appointments/deleteAppointment");
 const { getClinicsOpenAppointments } = require('../src/db/queries/appointments/getClinicsOpenAppointments');
-const { fixTimeStamp } = require('../helpers/fixTimeStamp');
+const { mapAndConvertAppointment } = require('../helpers/dateConverters');
 
 router.get('/single/:id', (req, res) => {
 
@@ -44,14 +44,9 @@ router.get("/patients/:id", (req, res) => {
   const patientId = req.params.id;
   getAllAppointmentsByPatient(patientId)
     .then(appointmentData => {
-      appointmentData.map(appointment => {
-        appointment.start_time = fixTimeStamp(appointment.start_time);
-        appointment.end_time = fixTimeStamp(appointment.end_time);
-        return appointment;
-      });
-      res.json(appointmentData);
-    })
-    .catch(error => {
+      const convertedData = mapAndConvertAppointment(appointmentData, "to_string");
+      res.json(convertedData);
+    }).catch(error => {
       console.error("Error fetching patient's appointments: ", error);
       res.status(500).json({ error: 'Internal server error' });
     });
@@ -107,12 +102,8 @@ router.get("/open/:id", (req, res) => {
   const doctorId = req.params.id;
   getClinicsOpenAppointments(doctorId)
     .then(appointmentData => {
-      appointmentData.map(appointment => {
-        appointment.start_time = fixTimeStamp(appointment.start_time);
-        appointment.end_time = fixTimeStamp(appointment.end_time);
-        return appointment;
-      });
-      res.json(appointmentData);
+      const convertedData = mapAndConvertAppointment(appointmentData, "to_string");
+      res.json(convertedData);
     })
     .catch(error => {
       console.error("Error fetching clinics's open appointments: ", error);
@@ -130,16 +121,17 @@ router.get("/open/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  editAppointment(req.body)
-    .then(result => {
-      console.log("edited appointment", result);
-      return result;
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .json({ error: error.message });
-    });
+  const convertedData = mapAndConvertAppointment([req.body], "to_date");
+  console.log("convertedData", convertedData);
+  // editAppointment(convertedData)
+  //   .then(result => {
+  //     return result;
+  //   })
+  //   .catch(error => {
+  //     res
+  //       .status(500)
+  //       .json({ error: error.message });
+  //   });
 });
 
 

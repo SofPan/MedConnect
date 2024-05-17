@@ -6,7 +6,6 @@
   if cancelled
 */
 const db = require('../../connection');
-
 const editAppointment = (appointment) => {
   const values = [
     appointment.id, // $1
@@ -36,7 +35,7 @@ const editAppointment = (appointment) => {
 
   return db.query(query, values)
     .then(data => {
-      console.log("data",data);
+      console.log("data", data);
       return data.rows[0];
     })
     .catch(error => console.error('editAppointment query error:', error));
