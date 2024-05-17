@@ -33,12 +33,9 @@ function LandingPage() {
       <main>
         <HeroContent>
           <Container maxWidth="sm">
-            {/* <Typography component="h1" variant="h2" align="center"  gutterBottom className="text-blue"> */}
-              {/* color="textPrimary" */}
-              <h1 className="text-red-900">
+            <Typography component="h1" variant="h2" align="center"  gutterBottom color="textPrimary" className="text-red-900">
                 Welcome to MedConnect
-              </h1>
-            {/* </Typography> */}
+            </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Providing compassionate and comprehensive healthcare to the community.
             </Typography>
