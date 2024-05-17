@@ -10,7 +10,7 @@ const profileLeft = {
 
 const profileRight = {
   className: "profile-right",
-  width: "50%",
+  width: "55%",
   marginLeft: "50px"
 }
 
