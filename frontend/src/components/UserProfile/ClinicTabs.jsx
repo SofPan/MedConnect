@@ -14,13 +14,15 @@ const ClinicTabs = (props) => {
       marginRight: "50px",
       width: "20vw",
       display: 'inline-flex',
+      // flexDirection: 'column',
       justifyContent: 'flex-end',
-      alignContent: 'center',
+      alignContent: 'flex-end',
       borderRight: '1px solid lightgrey',
-      height: "80vh"
+      height: "80vh",
+      paddingTop: "50px"
     }}>
-      <Tabs value={activeTab} onChange={handleTabChange} orientation='vertical' height="100%">
-        <Tab label="Clinic Profile"/>
+      <Tabs value={activeTab} onChange={handleTabChange} orientation='vertical'>
+        <Tab label="Clinic Profile" />
         <Tab label="Scheduling"/>
         <Tab label="Patients" />
       </Tabs>

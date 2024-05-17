@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserSignedIn } from "../../App";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 const UserInformation = (props) => {
   const {userProfile} = props;
@@ -44,26 +45,30 @@ const UserInformation = (props) => {
 
   return(
     <div className='profile-information'>
-      <h2>Information</h2>
+      <Typography variant="h3" sx={{marginBottom: "2rem"}}>Information</Typography>
       <div>
-        <p>Name: {userProfile.name}</p>
-        <p>{userProfile.address && `Address: ${userProfile.address}`}</p>
+        <p><strong>Name:</strong> {userProfile.name}</p>
+        <p>{userProfile.address && <span><strong>Address: </strong>{userProfile.address}</span>}</p>
         <p> 
           {
             userProfile.date_of_birth && 
-            `Date of Birth: ${formatBirthDate(userProfile.date_of_birth)}`
+            <span>
+              <strong>Date of Birth:</strong> {formatBirthDate(userProfile.date_of_birth)}
+            </span>
           }
         </p>
         <p> 
           {
-            userProfile.doctor_id && 
-            `Your Doctor: ${doctor.name}`
+            userProfile.doctor_id &&
+            <span>
+              <strong>Your Doctor:</strong> {doctor.name}
+            </span> 
           }
           </p>
           <p> 
           {
             !userProfile.is_clinic && !userProfile.doctor_id && 
-            `You are not registered with a doctor`
+            <span className="text-red">You are not registered with a doctor</span>
           }
           </p>
           <p> 
@@ -72,7 +77,6 @@ const UserInformation = (props) => {
           }
           </p>
       </div>
-      {/* <Button>Edit</Button> */}
     </div>
   )
 }

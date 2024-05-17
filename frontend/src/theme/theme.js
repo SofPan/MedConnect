@@ -38,6 +38,15 @@ export const theme = createTheme({
             borderRadius: "unset",
             color: "#fff"
           }
+        },
+        {
+          props: { variant: 'small' },
+          style: {
+            color: "#800020",
+            border: "1px solid #800020",
+            padding: "2px 5px",
+            fontSize: "12px"
+          }
         }
       ]
     },
