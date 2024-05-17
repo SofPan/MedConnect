@@ -70,9 +70,9 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        className="flex items-center justify-between"
                     >
-                          <LocalHospitalIcon />
+                          <LocalHospitalIcon className="mr-1"/>
                         <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
                             MEDCONNECT
                         </NavLink>

@@ -9,6 +9,10 @@ import styled from '@emotion/styled';
 const HeroContent = styled(Box)({
   backgroundColor: '#f9f9f9',
   padding: '64px 0 48px',
+  backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 100%, transparent 100%), url("./assets/images/med-bg.jpg")',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center left',
 });
 
 const HeroButtons = styled(Box)({
