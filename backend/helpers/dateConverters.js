@@ -3,6 +3,7 @@ const dateToString = (date) => {
   return date.toLocaleString('en-us', options);
 }
 
+/* We likely do not need this conversion but I will leave it for now in case we do later */
 // const stringToDate = (dateString) => {
 //   const dateObj = Date.parse(dateString);
 //   return dateObj;
@@ -15,12 +16,8 @@ const mapAndConvertAppointment = (appointmentData, conversionType) => {
       appointment.start_time = dateToString(appointment.start_time);
       appointment.end_time = dateToString(appointment.end_time);
     }
-    // if (conversionType === "to_date") {
-    //   appointment.start_time = stringToDate(appointment.start_time);
-    //   appointment.end_time = stringToDate(appointment.end_time);
-    // }
     return appointment;
   });
 }
 
-module.exports = { mapAndConvertAppointment };
+module.exports = { mapAndConvertAppointment, dateToString };
