@@ -9,7 +9,7 @@ import styled from '@emotion/styled';
 const HeroContent = styled(Box)({
   backgroundColor: '#f9f9f9',
   padding: '64px 0 48px',
-  backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 100%, transparent 100%), url("./assets/images/med-bg.jpg")',
+  backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 100%, transparent 100%), url("./assets/images/med-bg.jpg")',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center left',
@@ -37,10 +37,10 @@ function LandingPage() {
       <main>
         <HeroContent>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center"  gutterBottom color="textPrimary" className="text-red-900">
+            <Typography component="h1" variant="h2" align="center"  gutterBottom className="text-white">
                 Welcome to MedConnect
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography variant="h5" align="center" className="text-white" paragraph>
               Providing compassionate and comprehensive healthcare to the community.
             </Typography>
             <HeroButtons>
