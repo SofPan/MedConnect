@@ -27,9 +27,9 @@ router.get('/single/:id', (req, res) => {
         // If no calendar is found for the given clinic ID, return a 404 response
         return res.status(404).json({ error: 'Appointment not found' });
       }
-
+      // Convert the date to locale string
+      appointment = mapAndConvertAppointment([appointment], "to_string")[0];
       // If calendar is found, return it as JSON response
-
       res.json(appointment);
     })
     .catch(error => {
@@ -66,7 +66,6 @@ router.get('/:id', (req, res) => {
       }
 
       // If calendar is found, return it as JSON response
-      console.log(calendar);
       res.json(calendar);
     })
     .catch(error => {
