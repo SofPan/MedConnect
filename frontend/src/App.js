@@ -18,6 +18,7 @@ import BasicModal from './components/GeneralComponents/BasicModal';
 export const UserSignedIn = createContext();
 
 function App() {
+
   const { userState, dispatch } = useApplicationData();
   const [LoginDisplay, setLoginDisplay] = useState(false);
   const [loading, setLoading] = useState(true);

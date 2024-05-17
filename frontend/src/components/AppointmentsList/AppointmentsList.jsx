@@ -9,7 +9,7 @@ const AppointmentsList = (props) => {
     appointmentDispatch,
     name
   } = props;
-  console.log("appointments", appointments);
+
   const mapAppointments = appointments.map(appointment => {
     const startTime = formatDateAndTime(appointment.start_time);
     const endTime = formatDateAndTime(appointment.end_time);

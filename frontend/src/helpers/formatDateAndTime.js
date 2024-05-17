@@ -1,5 +1,5 @@
 export const formatDateAndTime = (date) => {
-  const splitDate = date.replace(":00.000Z", "").split("T");
+  const splitDate = date.split("at");
   return {
     date: splitDate[0],
     time: splitDate[1]

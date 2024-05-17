@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Domain URL, pull from .env when not local
-const API_BASE_URL = "http://localhost:8080/";
+axios.defaults.baseURL = "http://localhost:8080/";
 
 /**
  * Usage:
@@ -28,7 +28,7 @@ export const useGet = () => {
     try {
       setGetLoading(true);
 
-      const response = await axios.get(`${API_BASE_URL}${query}/${id ? id : ""}`);
+      const response = await axios.get(`${query}/${id ? id : ""}`);
 
       setGetData(response.data);
 
@@ -66,7 +66,7 @@ export const usePost = () => {
     try {
       setPostLoading(true);
 
-      const response = await axios.post(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
+      const response = await axios.post(`${query}/${payload.id ? payload.id : ""}`, payload);
 
       setPostData(response.data);
 
@@ -104,7 +104,7 @@ export const usePut = () => {
     try {
       setPutLoading(true);
 
-      const response = await axios.put(`${API_BASE_URL}${query}/${payload.id ? payload.id : ""}`, payload);
+      const response = await axios.put(`${query}/${payload.id ? payload.id : ""}`, payload);
 
       setPutData(response.data);
 
@@ -143,7 +143,7 @@ export const useDelete = () => {
     try {
       setDeleteLoading(true);
 
-      const response = await axios.delete(`${API_BASE_URL}${query}/${id}/delete`);
+      const response = await axios.delete(`${query}/${id}/delete`);
 
       setDeleteData(response.data);
 

@@ -22,7 +22,6 @@ const UnbookedAppointments = (props) => {
       appointmentDispatch({type: "SET_OPEN_APPOINTMENTS", payload: getData});
       setUnbookedAppointments(getData);
     }
-    console.log(unbookedAppointments);
   }, [getData]);
   
   return(

@@ -14,7 +14,7 @@ const AppointmentNotification = (props) => {
 
   const {dispatch} = useContext(UserSignedIn);
   
-  const [appointment, setAppointment] = useState({});
+  const [appointment, setAppointment] = useState(null);
   const [accepting, setAccepting] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -29,10 +29,15 @@ const AppointmentNotification = (props) => {
   useEffect(() => {
     if(getData){
       setAppointment(getData);
-      setStartTime(formatDateAndTime(getData.start_time));
-      setEndTime(formatDateAndTime(getData.end_time));
     } 
   }, [getData]);
+
+  useEffect(() => {
+    if (appointment){
+      setStartTime(formatDateAndTime(getData.start_time));
+      setEndTime(formatDateAndTime(getData.end_time));
+    }
+  }, [appointment])
 
   useEffect(() => {
     if (accepting){
@@ -55,11 +60,16 @@ const AppointmentNotification = (props) => {
       }))
     setAccepting(true);
   }
+
   return(
-    <span>
-      <p>Book an appointment with {appointment.doctor_name} on {null} from {null} - {null}.</p>
-      <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
-    </span>
+    <>
+      {appointment && 
+        <span>
+          <p>Book an appointment with {appointment.doctor_name} on {startTime && startTime.date} from {startTime && startTime.time} - {endTime && endTime.time}.</p>
+          <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
+        </span>
+      }
+    </>
   )
 }
 
