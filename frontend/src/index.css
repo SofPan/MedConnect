@@ -56,3 +56,13 @@ ul {
 .clinics-info{
   line-height: 18px;
 }
+
+.MuiAccordionSummary-content{
+  align-items: center;
+  margin: 6px 0 !important;
+  justify-content: center;
+}
+
+.MuiButtonBase-root.Mui-expanded{
+  min-height: unset !important;
+}
