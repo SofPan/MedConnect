@@ -77,7 +77,7 @@ const ClinicListItem = (props) => {
           <p className="clinics-info">
             {name} <br />
             {address} <br />
-            {distance && `distance: ${distance} km`}
+            {distance > 0 && `distance: ${distance} km`}
           </p>
           <BoxWithScroll height="50px">
             <DoctorsList 
