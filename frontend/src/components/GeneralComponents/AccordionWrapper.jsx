@@ -5,6 +5,7 @@ import {
     AccordionSummary,
     AccordionDetails
   } from '@mui/material';
+import Fade from '@mui/material/Fade';
 import { theme } from '../../theme/theme';
 
 const StyledAccordion = styled(Accordion)({
@@ -24,7 +25,10 @@ const AccordionWrapper = (props) => {
   const [expanded, setExpanded] = useState(false);
 
   return(
-    <StyledAccordion expanded={expanded} onClick={() => setExpanded(true)} onSubmit={() => setExpanded(false)}>
+    <StyledAccordion 
+      expanded={expanded} 
+      onClick={() => setExpanded(!expanded)} 
+    >
       <StyledAccordionSummary>{props.title}</StyledAccordionSummary>
       <AccordionDetails onClick={() => setExpanded(true)}>
         {props.children}

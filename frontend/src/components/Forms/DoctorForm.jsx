@@ -17,19 +17,19 @@ const DoctorForm = (props) => {
     <form onSubmit={handleSubmit}>
       <StyledBox type="div">
         <InputLabel>Name</InputLabel>
-        <Input id="name" type="text" />
+        <Input id="name" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
         <InputLabel>Qualifications</InputLabel>
-        <Input id="qualifications" type="text" />
+        <Input id="qualifications" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
         <InputLabel>Description</InputLabel>
-        <Input id="description" type="text" />
+        <Input id="description" type="text" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div">
         <InputLabel>Number of Patients</InputLabel>
-        <Input id="num_patients" type="number" />
+        <Input id="num_patients" type="number" onClick={e => e.stopPropagation()}/>
       </StyledBox>
       <StyledBox type="div" sx={{display: 'flex', justifyContent: 'space-evenly'}}>
         <Button type="submit">Submit</Button>
