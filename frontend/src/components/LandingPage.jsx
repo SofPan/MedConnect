@@ -63,7 +63,7 @@ function LandingPage() {
         <Container maxWidth="md" component="main">
           <Grid container spacing={5} alignItems="flex-end" padding="36px 0">
             <Grid item xs={12} sm={6} md={4}>
-              <Box textAlign="center">
+              <Box textAlign="center" className="border-r-2 border-red-900 pr-4">
                 <FeatureIcon>
                   <MedicalServicesIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
@@ -71,11 +71,11 @@ function LandingPage() {
                   Our Services
                 </Typography>
                 <Typography variant="subtitle1">
-                  Connecting patients with local health care providers.
+                  Connecting patients with <br /> local health care providers.
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4} >
               <Box textAlign="center">
                 <FeatureIcon>
                   <PeopleIcon fontSize="large" className="text-red-900"/>
@@ -89,7 +89,7 @@ function LandingPage() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Box textAlign="center">
+              <Box textAlign="center" className="border-l-2 border-red-900 pl-4">
                 <FeatureIcon>
                   <ContactSupportIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
@@ -97,7 +97,7 @@ function LandingPage() {
                   Contact Us
                 </Typography>
                 <Typography variant="subtitle1">
-                  We are here to help. Get in touch with us.
+                  We are here to help.<br /> Get in touch with us.
                 </Typography>
               </Box>
             </Grid>
