@@ -27,6 +27,17 @@ export const theme = createTheme({
             border: "1px solid #fff",
             color: "#fff"
           }
+        },
+        {
+          props: { variant: 'nav' },
+          style: {
+            border: "2px solid transparent",
+            borderLeft: "0",
+            borderRight: "0",
+            borderTop: "0",
+            borderRadius: "unset",
+            color: "#fff"
+          }
         }
       ]
     },

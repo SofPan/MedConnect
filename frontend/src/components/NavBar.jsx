@@ -61,65 +61,63 @@ export default function NavBar({setLoginDisplay, LoginDisplay}) {
 
 
     return (
-        
-
-     
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        className="flex items-center justify-between"
-                    >
-                          <LocalHospitalIcon className="mr-1"/>
-                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
-                            MEDCONNECT
-                        </NavLink>
-                    </Typography>
-                    <MenuItem>
-                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/availabledoctors">
-                            AVAILABLE DOCTORS
-                        </NavLink>
-                    </MenuItem>
-
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-                       
-
-                    {userState.userLoggedIn ? (
-    <>
-        <MenuItem onClick={handleProfileClick}>
+      <AppBar position="static">
+          <Toolbar>
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                className="flex items-center justify-between"
+            >
+                  <LocalHospitalIcon className="mr-1"/>
+                <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                    MEDCONNECT
+                </NavLink>
+            </Typography>
+              <MenuItem>
+                  <NavLink to="/availabledoctors" className="hover:border-b-2 hover:border-white border-b-2 border-transparent transition ease-out duration-300 color-white">
+                      AVAILABLE DOCTORS
+                  </NavLink>
+              </MenuItem>
+              <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                  
+    {userState.userLoggedIn ? (
+      <>
+        <MenuItem onClick={handleProfileClick} >
+          <NavLink className="hover:background-transparent hover:border-b-2 hover:border-white border-b-2 border-transparent transition ease-out duration-300 color-white">
             Profile
+          </NavLink>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
-            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
-                Logout
-            </NavLink>
+          <NavLink to="/" className="hover:background-transparent hover:border-b-2 hover:border-white border-b-2 border-transparent transition ease-out duration-300 color-white">
+            Logout
+          </NavLink>
         </MenuItem>
-    </>
-) : (
-    LoginDisplay ? (
-        <LoginForm setLoginDisplay={setLoginDisplay} />
-    ) : (
-        <>
-            <MenuItem onClick={handleLogin}>
-                Login
-            </MenuItem>
-            <MenuItem>
-                <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/signup">
-                    Sign Up
-                </NavLink>
-            </MenuItem>
         </>
-    )
-)}
+      ) : (
+        LoginDisplay ? (
+        <LoginForm setLoginDisplay={setLoginDisplay} />
+      ) : (
+        <>
+          <MenuItem onClick={handleLogin}>
+            <NavLink className="hover:background-transparent hover:border-b-2 hover:border-white border-b-2 border-transparent transition ease-out duration-300 color-white">
+              Login
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+              <NavLink className="hover:background-transparent hover:border-b-2 hover:border-white border-b-2 border-transparent transition ease-out duration-300 color-white" to="/signup">
+                  Sign Up
+              </NavLink>
+          </MenuItem>
+        </>
+      )
+      )}
 
-                    </Box>
-                   
-                </Toolbar>
-            </AppBar>
-        
+          </Box>
+              
+        </Toolbar>
+      </AppBar>
+
     );
 }
