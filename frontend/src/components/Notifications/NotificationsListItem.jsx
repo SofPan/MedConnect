@@ -41,7 +41,7 @@ const NotificationsListItem = (props) => {
   }, [patient])
 
   return(
-    <li>
+    <li className="mb-8 border-b-2 border-red-900 pb-6">
       <span>New request from {patient.name}: {notificationType}</span>
     </li>
   )

@@ -32,14 +32,20 @@ const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter, setMapClinics
   return (
     <Box width="100%">
       <form onSubmit={handleSearchByName} width="100%">
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Enter doctor's name"
-          onClick={(e) => e.stopPropagation()}
-        />
-        <Button type='submit'>Search</Button>
+        <Box className="flex justify-between">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Enter doctor's name"
+            onClick={(e) => e.stopPropagation()}
+            sx={{
+              minWidth: "225px",
+              marginRight: "24px"
+            }}
+          />
+          <Button type='submit' variant="small">Search</Button>
+        </Box>
     </form>
     </Box>
   );

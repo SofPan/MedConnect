@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserSignedIn } from "../../App";
 import PatientsListItem from "./PatientsListItem";
+import { Typography } from "@mui/material";
 
 const PatientsList = () => {
   const [patients, setPatients] = useState([]);
@@ -30,10 +31,13 @@ const PatientsList = () => {
   ));
 
   return (
-    <div>
-      {!mapAndFilterPatients.length && <span>You do not have any patients listed</span>}
-      {mapAndFilterPatients}
-    </div>
+    <>
+      <Typography variant="h3" className="pl-6">Current Patients</Typography>
+      <div className="flex flex-wrap">
+        {!mapAndFilterPatients.length && <span>You do not have any patients listed</span>}
+        {mapAndFilterPatients}
+      </div>
+    </>
   );
 }
 

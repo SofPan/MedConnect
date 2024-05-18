@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { UserSignedIn } from '../../App';
 import axios from 'axios';
 import ChangeDoctor from '../DoctorsList/ChangeDoctor';
+import BasicModal from './BasicModal';
 
 const style = {
   position: 'absolute',
@@ -21,28 +22,13 @@ const style = {
 
 export default function ChangeDoctorModal({ title, message, handleCancel, handleChangeDoctorRequest, doctorId }) {
 
-  const { userState, dispatch } = React.useContext(UserSignedIn);
-  const handleClose = () => dispatch({ type: "SET_MODAL", payload: false});
+  // const { userState, dispatch } = React.useContext(UserSignedIn);
+  // const handleClose = () => dispatch({ type: "SET_MODAL", payload: false});
 
   return (
-    <div>
-      <Modal
-        open={userState.displayModal}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {title}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {message}
-          </Typography>
-          <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>
+  <BasicModal title={title} message={message}>
+    <ChangeDoctor handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctor_id={doctorId}/>
+  </BasicModal>
 
-        </Box>
-      </Modal>
-    </div>
   );
 }
