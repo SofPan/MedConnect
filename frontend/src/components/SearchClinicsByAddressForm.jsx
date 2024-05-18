@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Button, Input, Box } from '@mui/material';
+import { UserSignedIn } from '../App';
 
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { userState } = useContext(UserSignedIn);
 
   const handleSearchByAddress = (e) => {
     e.preventDefault();
-  
-    axios.get(`clinics/api/geocode?address=${searchTerm}`)
+    if (searchTerm) {
+      axios.get(`clinics/api/geocode?address=${searchTerm}`)
       .then(response => {
         const { latitude, longitude } = response.data;
         setCoordinates({ lat: latitude, lng: longitude });
@@ -17,6 +19,7 @@ const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
       .catch(error => {
         console.error('Error geocoding address:', error);
       });
+    }
   };
   
   return (
