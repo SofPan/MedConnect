@@ -12,9 +12,8 @@ const ClinicTabs = (props) => {
   return (
     <Box sx={{
       marginRight: "50px",
-      width: "20vw",
+      width: "15%",
       display: 'inline-flex',
-      // flexDirection: 'column',
       justifyContent: 'flex-end',
       alignContent: 'flex-end',
       borderRight: '1px solid lightgrey',

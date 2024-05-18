@@ -32,7 +32,7 @@ const ProfileDoctors = (props) => {
     <>
     <div>
       <Typography variant="h3">Doctors</Typography>
-      <Box className="mt-8">
+      <Box className="my-8">
         <AccordionWrapper title="New">
           <NewDoctorForm 
           clinic_id={userProfile.id}
@@ -40,7 +40,7 @@ const ProfileDoctors = (props) => {
         </AccordionWrapper>
       </Box>
     </div>
-    <BoxWithScroll height="65vh">
+    <BoxWithScroll height="80vh">
       <DoctorsList clinic_id={userProfile.id} />
     </BoxWithScroll>
     </>

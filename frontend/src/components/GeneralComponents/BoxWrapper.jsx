@@ -5,12 +5,12 @@ import { theme } from "../../theme/theme";
 
 const profileLeft = {
   className: "profile-left",
-  width: "40%",
+  width: "34%",
 }
 
 const profileRight = {
   className: "profile-right",
-  width: "55%",
+  width: "calc(66% - 50px)",
   marginLeft: "50px"
 }
 

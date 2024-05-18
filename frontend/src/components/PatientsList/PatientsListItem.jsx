@@ -15,7 +15,7 @@ const PatientsListItem = (props) => {
   };
 
   return (
-    <Box margin={3} sx={{ width: '45%' }}>
+    <Box margin={3} sx={{ width: 'calc(45% - 24px)' }}>
         <Card sx={{ width: '100%' }}>
           <CardContent>
               <Box className="border-b-2 border-red-900">
