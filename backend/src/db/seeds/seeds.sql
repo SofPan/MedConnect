@@ -18,16 +18,16 @@ INSERT INTO users (email, password_hash, is_clinic, created_at) VALUES
 
 -- Seed data for clinics table
 INSERT INTO clinics (name, user_id, address, latitude, longitude, created_at) VALUES
-('City Medical Center', 15, '13 Mckayfield Rd, East York, ON M4J 4P6', 43.692238730094196, -79.3313392379914, NOW()),
-('West End Medical Center', 6, '495 Jarvis St, Toronto, ON M4Y 2G8', 43.6660108376062, -79.37701143891665, NOW()),
-('Suburb Clinic', 7, '105 McCaul St, Toronto, ON M5T 2X4', 43.65377114804735, -79.39084943620604, NOW()),
-('Rural Health Clinic', 8, '39 Lower Simcoe St, Toronto, ON M5J 3A6', 43.641302, -79.383038, NOW()),
-('Urban Family Clinic', 9, '1154 Danforth Ave, Toronto, ON M4J 1M3', 43.681451, -79.330554, NOW()),
-('Pediatric Clinic', 10, '550 Queens Quay W, Toronto, ON M5V 3M8', 43.638604, -79.397257, NOW()),
-('Monarch Park Clinic', 11, '840 Coxwell Ave #205, Toronto, ON M4C 5T2', 43.689966, -79.319005, NOW()),
-('Albany Medical Clinic', 12, '807 Broadview Ave, Toronto, ON M4K 2P8', 43.678592, -79.356754, NOW()),
-('Paper & Danforth Community Care Clinic', 13, '752 Danforth Ave, Toronto, ON M4J 1L5', 43.678378, -79.348994, NOW()),
-('Lakeview Clinic', 14, '1112 Queen St W, Toronto, ON M6J 1H9', 43.643738, -79.420162, NOW());
+('City Medical Center', 6, '13 Mckayfield Rd, East York, ON M4J 4P6', 43.692238730094196, -79.3313392379914, NOW()),
+('West End Medical Center', 7, '495 Jarvis St, Toronto, ON M4Y 2G8', 43.6660108376062, -79.37701143891665, NOW()),
+('Suburb Clinic', 8, '105 McCaul St, Toronto, ON M5T 2X4', 43.65377114804735, -79.39084943620604, NOW()),
+('Rural Health Clinic', 9, '39 Lower Simcoe St, Toronto, ON M5J 3A6', 43.641302, -79.383038, NOW()),
+('Urban Family Clinic', 10, '1154 Danforth Ave, Toronto, ON M4J 1M3', 43.681451, -79.330554, NOW()),
+('Pediatric Clinic', 11, '550 Queens Quay W, Toronto, ON M5V 3M8', 43.638604, -79.397257, NOW()),
+('Monarch Park Clinic', 12, '840 Coxwell Ave #205, Toronto, ON M4C 5T2', 43.689966, -79.319005, NOW()),
+('Albany Medical Clinic', 13, '807 Broadview Ave, Toronto, ON M4K 2P8', 43.678592, -79.356754, NOW()),
+('Paper & Danforth Community Care Clinic', 14, '752 Danforth Ave, Toronto, ON M4J 1L5', 43.678378, -79.348994, NOW()),
+('Lakeview Clinic', 15, '1112 Queen St W, Toronto, ON M6J 1H9', 43.643738, -79.420162, NOW());
 
 -- Seed data for doctors table
 INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, photo_url, number_of_patients, created_at) VALUES
