@@ -136,8 +136,6 @@ export default function LoginForm({ setLoginDisplay }) {
             name="email"
             sx={textFieldStyles}
           />
-        </Grid>
-        <Grid item>
           <TextField
             id="standard-password-input"
             label="Password"
