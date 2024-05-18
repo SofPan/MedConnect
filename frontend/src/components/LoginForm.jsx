@@ -105,13 +105,13 @@ export default function LoginForm({ setLoginDisplay }) {
     setLoginDisplay(false)
   }
   const textFieldStyles = {
-    '& label': { color: '#FFFDD0' },
-    '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
-    '& .MuiInput-underline:after': { borderBottomColor: '#FFFDD0' }, // Cream color for focused underline (if using the "standard" variant)
+    '& label': { color: 'white' },
+    '& label.Mui-focused': { color: 'white' }, // Cream color for focused label
+    '& .MuiInput-underline:after': { borderBottomColor: 'white' }, // Cream color for focused underline (if using the "standard" variant)
     '& .MuiOutlinedInput-root': {
-      '& fieldset': { borderColor: '#FFFDD0' }, // Cream color for default border
-      '&:hover fieldset': { borderColor: '#FFFDD0' }, // Cream color for hover border
-      '&.Mui-focused fieldset': { borderColor: '#FFFDD0' }, // Cream color for focused border
+      '& fieldset': { borderColor: 'white' }, // Cream color for default border
+      '&:hover fieldset': { borderColor: 'white' }, // Cream color for hover border
+      '&.Mui-focused fieldset': { borderColor: 'white' }, // Cream color for focused border
     },
     '& .MuiInputBase-input': { color: 'white' } // White text color
   };
