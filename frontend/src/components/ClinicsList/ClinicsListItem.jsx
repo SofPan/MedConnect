@@ -81,10 +81,9 @@ const ClinicListItem = (props) => {
               {distance > 0 && `Distance: ${distance} km`}</small>
             </p>
           </Box>
-          <BoxWithScroll height="50px">
+          <BoxWithScroll height="45%">
             <DoctorsList 
               clinic_id={id} 
-              // renderClinic={checkIfRenderClinic}
               changeDoctorState={triggerDoctorStateUpdate}
             />
           </BoxWithScroll>
