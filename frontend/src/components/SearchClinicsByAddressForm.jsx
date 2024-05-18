@@ -22,17 +22,18 @@ const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   return (
     <Box width="100%">
       <form onSubmit={handleSearchByAddress} width="100%">
-        <Box display="flex" justifyContent="space-between">
+        <Box className="flex justify-between mt-4 mb-8 px-2">
           <Input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Enter your zip code or address"
             sx={{
-              minWidth: "300px"
+              minWidth: "250px",
+              marginLeft: "20px"
             }}
           />
-          <Button type='submit'>Search</Button>
+          <Button type='submit' variant="small">Search</Button>
         </Box>
       </form>
     </Box>

@@ -91,7 +91,7 @@ const ClinicListItem = (props) => {
           </div>
           
           <Box textAlign="right">
-              <Button onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
+              <Button variant="small" onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
           </Box>
         </Card>
     }
