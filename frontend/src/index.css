@@ -6,6 +6,7 @@
 /* TEMPORARY STYLES -- CONVERT TO TAILWIND */
 p{
   margin: unset;
+  font-size: 15px;
 }
 
 .available-clinics .roster,

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserSignedIn } from "../../App";
 import axios from "axios";
 import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 const UserInformation = (props) => {
   const {userProfile} = props;
@@ -46,7 +47,7 @@ const UserInformation = (props) => {
   return(
     <div className='profile-information'>
       <Typography variant="h3" sx={{marginBottom: "2rem"}}>Information</Typography>
-      <div>
+      <Box className="pb-8 border-b-2 border-red-900">
         <p><strong>Name:</strong> {userProfile.name}</p>
         <p>{userProfile.address && <span><strong>Address: </strong>{userProfile.address}</span>}</p>
         <p> 
@@ -71,12 +72,14 @@ const UserInformation = (props) => {
             <span className="text-red">You are not registered with a doctor</span>
           }
           </p>
-          <p> 
-          {
-            requestNotification && `${requestNotification}`
-          }
-          </p>
-      </div>
+          <Box className="mt-4 text-red-700">
+            <p> 
+            {
+              requestNotification && `${requestNotification}`
+            }
+            </p>
+          </Box>
+      </Box>
     </div>
   )
 }
