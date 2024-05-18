@@ -62,10 +62,10 @@ const RegisterNotification = (props) => {
     setAccepting(true);
   }
   return(
-    <span>
-      <p>{type === "register" ? "Register with" : "Change doctors to"} {doctor.name}</p>
+    <div>
+      <p className="my-4">{type === "register" ? "Register with" : "Change doctors to"} {doctor.name}</p>
       <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
-    </span>
+    </div>
   )
 }
 

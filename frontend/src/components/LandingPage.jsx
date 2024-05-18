@@ -9,6 +9,10 @@ import styled from '@emotion/styled';
 const HeroContent = styled(Box)({
   backgroundColor: '#f9f9f9',
   padding: '64px 0 48px',
+  backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 100%, transparent 100%), url("./assets/images/med-bg.jpg")',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center left',
 });
 
 const HeroButtons = styled(Box)({
@@ -33,10 +37,10 @@ function LandingPage() {
       <main>
         <HeroContent>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center"  gutterBottom color="textPrimary" className="text-red-900">
+            <Typography component="h1" variant="h2" align="center"  gutterBottom className="text-white">
                 Welcome to MedConnect
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography variant="h5" align="center" className="text-white" paragraph>
               Providing compassionate and comprehensive healthcare to the community.
             </Typography>
             <HeroButtons>
@@ -47,7 +51,7 @@ function LandingPage() {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button variant="contrast" className='text-white'>
                     Contact Us
                   </Button>
                 </Grid>
@@ -59,22 +63,22 @@ function LandingPage() {
         <Container maxWidth="md" component="main">
           <Grid container spacing={5} alignItems="flex-end" padding="36px 0">
             <Grid item xs={12} sm={6} md={4}>
-              <Box textAlign="center">
+              <Box textAlign="center" className="border-r-2 border-red-900 pr-4">
                 <FeatureIcon>
-                  <MedicalServicesIcon fontSize="large" />
+                  <MedicalServicesIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Our Services
                 </Typography>
                 <Typography variant="subtitle1">
-                  Connecting patients with local health care providers.
+                  Connecting patients with <br /> local health care providers.
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4} >
               <Box textAlign="center">
                 <FeatureIcon>
-                  <PeopleIcon fontSize="large" />
+                  <PeopleIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Meet Our Team
@@ -85,15 +89,15 @@ function LandingPage() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
-              <Box textAlign="center">
+              <Box textAlign="center" className="border-l-2 border-red-900 pl-4">
                 <FeatureIcon>
-                  <ContactSupportIcon fontSize="large" />
+                  <ContactSupportIcon fontSize="large" className="text-red-900"/>
                 </FeatureIcon>
                 <Typography variant="h6" gutterBottom>
                   Contact Us
                 </Typography>
                 <Typography variant="subtitle1">
-                  We are here to help. Get in touch with us.
+                  We are here to help.<br /> Get in touch with us.
                 </Typography>
               </Box>
             </Grid>

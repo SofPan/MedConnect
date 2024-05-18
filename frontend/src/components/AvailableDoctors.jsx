@@ -45,7 +45,7 @@ useEffect(() => {
 
 
   return (
-    <Grid container spacing={2} maxWidth={"85vw"} margin="0 auto" height="80vh">
+    <Grid container spacing={2} maxWidth={"90%"} margin="0 auto" height="80vh">
       <Grid item xs={4} display="inline-flex" flexDirection="column">
         <AccordionWrapper title={"Search by doctor's name"}>
           <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter} setMapClinics={setMapClinics}/>

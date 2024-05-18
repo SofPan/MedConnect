@@ -29,11 +29,11 @@ const RenderProfile = (props) => {
   }, []);
 
   return(
-    <>
+    <Box className="mt-5 mx-auto" sx={{maxWidth: "90%"}}>
       {isClinic &&
         <ClinicTabs activeTab={activeTab} handleTabChange={handleTabChange}/>
       }
-      <Box height="80vh" width={isClinic ? "60vw" : "100vw"} margin="0 auto" display={'inline-flex'} justifyContent={"center"} >
+      <Box height="80vh" width={isClinic ? "calc(85% - 50px)" : "100vw"} margin="0 auto" display={'inline-flex'} justifyContent={"center"} >
         <ProfileBody
           isClinic={isClinic}
           userProfile={userProfile}
@@ -42,7 +42,7 @@ const RenderProfile = (props) => {
           activeTab={activeTab}
         />
       </Box>
-    </>
+    </Box>
   )
 }
 

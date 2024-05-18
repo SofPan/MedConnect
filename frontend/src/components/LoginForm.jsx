@@ -101,19 +101,19 @@ export default function LoginForm({ setLoginDisplay }) {
     }
   }
 
-  const handleBack = () => {
-    setLoginDisplay(false)
-  }
-  const textFieldStyles = {
-    '& label': { color: '#FFFDD0' },
-    '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
-    '& .MuiInput-underline:after': { borderBottomColor: '#FFFDD0' }, // Cream color for focused underline (if using the "standard" variant)
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': { borderColor: '#FFFDD0' }, // Cream color for default border
-      '&:hover fieldset': { borderColor: '#FFFDD0' }, // Cream color for hover border
-      '&.Mui-focused fieldset': { borderColor: '#FFFDD0' }, // Cream color for focused border
-    },
-    '& .MuiInputBase-input': { color: 'white' } // White text color
+    const handleBack = () =>{
+      setLoginDisplay(false)
+    }
+    const textFieldStyles = {
+      '& label': { color: '#fff' },
+      '& label.Mui-focused': { color: '#FFFDD0' }, // Cream color for focused label
+      '& .MuiInput-underline:after': { borderBottomColor: '#FFFDD0' }, // Cream color for focused underline (if using the "standard" variant)
+      '& .MuiOutlinedInput-root': {
+          '& fieldset': { borderColor: '#fff' }, // White color for default border
+          '&:hover fieldset': { borderColor: '#fff' }, // White color for hover border
+          '&.Mui-focused fieldset': { borderColor: '#fff' }, // White color for focused border
+      },
+      '& .MuiInputBase-input': { color: 'white' } // White text color
   };
 
   return (
@@ -126,8 +126,7 @@ export default function LoginForm({ setLoginDisplay }) {
       autoComplete="off"
       onSubmit={submitForm}
     >
-      <Grid container >
-        <Grid item>
+      <Box>
           <TextField
             id="standard-helperText"
             label="Email"
@@ -137,8 +136,6 @@ export default function LoginForm({ setLoginDisplay }) {
             name="email"
             sx={textFieldStyles}
           />
-        </Grid>
-        <Grid item>
           <TextField
             id="standard-password-input"
             label="Password"
@@ -150,13 +147,12 @@ export default function LoginForm({ setLoginDisplay }) {
             onChange={handleChange}
             sx={textFieldStyles}
           />
-        </Grid>
+          <Box height="100%" className="inline-flex items-center pt-3">
+            <Button type="submit" variant="nav" className="text-white hover:border-b-2 hover:border-white border-b-2 border-transparent">Submit</Button>
+            <Button onClick={handleBack} variant="nav" className="text-white hover:border-b-2 hover:border-white border-b-2 border-transparent">Back</Button>
+          </Box>
 
-        <Grid item style={{display: 'flex', justifyContent:"center", alignItems: "center"}}>
-          <Button type="submit" variant="contained" sx={{ mt: 2 }}>Submit</Button>
-          <Button onClick={handleBack} variant="contained" sx={{ mt: 2 }}>Back</Button>
-        </Grid>
-      </Grid >
-    </Box >
+      </Box>
+    </Box>
   );
 }

@@ -4,6 +4,7 @@ import { UserSignedIn } from "../../App";
 import { Button, Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import BasicModal from "../GeneralComponents/BasicModal";
 import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
+import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 
 const RegisterWithDoctor = () => {
   const { userState, dispatch } = useContext(UserSignedIn);
@@ -111,40 +112,47 @@ const RegisterWithDoctor = () => {
   
 
   return (
-    <Box>
+    <Box className="py-10 px-20">
       {changeDoctor ? 
         <ChangeDoctorModal title={modalTitle} message={errorMessage} handleCancel={handleCancel} handleChangeDoctorRequest={handleChangeDoctorRequest} doctorId={doctorId}/> 
         : 
         <BasicModal title={modalTitle} message={errorMessage}/>
       }
-      <Typography variant="h3" sx={{ marginBottom: 1, marginTop: 3 }}>{clinicInfo.clinic_name}</Typography>
-      <Typography variant="body1" sx={{ marginBottom: 4 }}> {clinicInfo.clinic_address}</Typography>
-      {filteredDoctors.map(doctor => (
-        <Card key={doctor.id} sx={{ display: 'flex', marginBottom: 2 }}>
-          <CardMedia
-            component="img"
-            sx={{ width: 151 }}
-            image={`./assets/images/${doctor.photo_url}`}
-            alt={doctor.name}
-          />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent>
-              <Typography variant="subtitle1">Accepting {doctor.number_of_patients} more patients</Typography>
-              <Typography variant="h5">{doctor.name}</Typography>
-              <Typography variant="body2" color="text.secondary">{doctor.qualifications}</Typography>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                disabled={requestSent} 
-                onClick={() => handleRegister(doctor.id)}
-                sx={{ marginTop: 1 }}
-              >
-                Register
-              </Button>
-            </CardContent>
+      <Box className="my-8 border-b-2 border-red-900">
+        <Typography variant="h3" sx={{ marginBottom: 1, marginTop: 3 }}>{clinicInfo.clinic_name}</Typography>
+        <Typography variant="body1" sx={{ marginBottom: 4 }}> {clinicInfo.clinic_address}</Typography>
+      </Box>
+      <Box className="flex flex-wrap justify-between">
+        {filteredDoctors.map(doctor => (
+          <Box width="calc((100% / 3) - 24px)">
+            <Card key={doctor.id} sx={{ display: 'flex', marginBottom: 2 }}>
+              <CardMedia
+                component="img"
+                sx={{ width: "40%", marginRight: "12px", borderRight: "0.5px solid #ddd" }}
+                image={`./assets/images/${doctor.photo_url}`}
+                alt={doctor.name}
+              />
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent>
+                  <Typography variant="h5">{doctor.name}</Typography>
+                  <Typography variant="body2" color="text.secondary"><span className="border-b-2 border-red-900 pb-1">{doctor.qualifications}</span></Typography>
+                  <p className="my-4 mx-1"><small>Accepting {doctor.number_of_patients} more patients</small></p>
+                  <Box >
+                    <Button 
+                      variant="small" 
+                      color="primary" 
+                      disabled={requestSent} 
+                      onClick={() => handleRegister(doctor.id)}
+                    >
+                      Register
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Box>
+            </Card>
           </Box>
-        </Card>
-      ))}
+        ))}
+      </Box>
     </Box>
   );
 };

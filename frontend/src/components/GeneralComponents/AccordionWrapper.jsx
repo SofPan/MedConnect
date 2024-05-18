@@ -9,16 +9,20 @@ import Fade from '@mui/material/Fade';
 import { theme } from '../../theme/theme';
 
 const StyledAccordion = styled(Accordion)({
-  borderColor: theme.palette.primary.main,
+  borderColor: "rgba(128, 0, 32, 0.5)",
   color: theme.palette.primary.main,
   fontFamily: "sans-serif",
   padding: "0 15px",
-  minHeight: "unset"
+  minHeight: "unset",
+  '&:hover': {
+    borderColor: theme.palette.primary.main,
+  }
 });
 
 const StyledAccordionSummary = styled(AccordionSummary)({
   textTransform: "uppercase",
-  minHeight: "unset"
+  minHeight: "unset",
+  justifyContent: "center",
 });
 
 const AccordionWrapper = (props) => {
