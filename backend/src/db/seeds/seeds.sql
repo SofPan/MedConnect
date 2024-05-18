@@ -40,18 +40,18 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 (3, 'Dr. Garcia', 'Neurology', 'MD, PhD', 'Expert in neurological disorders.', 'garcia.jpg', 2, NOW()),
 (4, 'Dr. Lopez', 'Psychiatry', 'MD, DNB', 'Specializes in mental health.', 'lopez.jpg', 9, NOW()),
 (4, 'Dr. Flores', 'Endocrinology', 'MD, MBBS', 'Expert in hormonal disorders.', 'flores.jpg', 10, NOW()),
-(5, 'Dr. Walker', 'General Medicine', 'MD, MBBS', 'Experienced general practitioner.', 'smith.jpg', 3, NOW()),
-(5, 'Dr. King', 'Pediatrics', 'MD, DNB', 'Specializes in pediatric care.', 'johnson.jpg', 4, NOW()),
-(6, 'Dr. Green', 'Cardiology', 'MD, PhD', 'Expert in cardiology.', 'brown.jpg', 5, NOW()),
+(5, 'Dr. Walker', 'General Medicine', 'MD, MBBS', 'Experienced general practitioner.', 'walker.jpg', 3, NOW()),
+(5, 'Dr. King', 'Pediatrics', 'MD, DNB', 'Specializes in pediatric care.', 'king.jpg', 4, NOW()),
+(6, 'Dr. Green', 'Cardiology', 'MD, PhD', 'Expert in cardiology.', 'green.jpg', 5, NOW()),
 (6, 'Dr. Wilson', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'wilson.jpg', 11, NOW()),
 (7, 'Dr. Davis', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'davis.jpg', 4, NOW()),
-(7, 'Dr. Carter', 'General Medicine', 'MD, DNB', 'General practitioner.', 'davidson.jpg', 8, NOW()),
-(8, 'Dr. Bailey', 'Obstetrics & Gynecology', 'MD, MBBS', 'Experienced in womens health.', 'martinez.jpg', 9, NOW()),
-(8, 'Dr. Scott', 'Ophthalmology', 'MD, DNB', 'Specializes in eye care.', 'rodriguez.jpg', 7, NOW()),
-(9, 'Dr. Adams', 'Neurology', 'MD, PhD', 'Expert in neurological disorders.', 'garcia.jpg', 6, NOW()),
-(9, 'Dr. Parker', 'Psychiatry', 'MD, DNB', 'Specializes in mental health.', 'lopez.jpg', 4, NOW()),
-(10, 'Dr. Mitchell', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'wilson.jpg', 5, NOW()),
-(10, 'Dr. Reed', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'davis.jpg', 10, NOW());
+(7, 'Dr. Carter', 'General Medicine', 'MD, DNB', 'General practitioner.', 'carter.jpg', 8, NOW()),
+(8, 'Dr. Bailey', 'Obstetrics & Gynecology', 'MD, MBBS', 'Experienced in womens health.', 'bailey.jpg', 9, NOW()),
+(8, 'Dr. Scott', 'Ophthalmology', 'MD, DNB', 'Specializes in eye care.', 'scott.jpg', 7, NOW()),
+(9, 'Dr. Adams', 'Neurology', 'MD, PhD', 'Expert in neurological disorders.', 'adams.jpg', 6, NOW()),
+(9, 'Dr. Parker', 'Psychiatry', 'MD, DNB', 'Specializes in mental health.', 'parker.jpg', 4, NOW()),
+(10, 'Dr. Mitchell', 'Orthopedics', 'MS Ortho', 'Orthopedic specialist.', 'mitchell.jpg', 5, NOW()),
+(10, 'Dr. Reed', 'Dermatology', 'MD, DNB', 'Specializes in dermatological care.', 'reed.jpg', 10, NOW());
 
 
 -- Seed data for patients table

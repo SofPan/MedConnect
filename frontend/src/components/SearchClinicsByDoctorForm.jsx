@@ -7,7 +7,7 @@ import { Box } from '@mui/system';
 const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter, setMapClinics}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const { userState } = useContext(UserSignedIn);
-  console.log(userState)
+  console.log("userState", userState)
 
 
   const handleSearchByName = (e) => {
@@ -23,6 +23,8 @@ const SearchClinicsByDoctorForm = ({setCoordinates, defaultCenter, setMapClinics
       // Calculate the center of filtered clinics
       const filteredClinicsCenter = calculateCenter(filteredClinics, defaultCenter);
       setCoordinates(filteredClinicsCenter);
+      console.log("filtered clinics",filteredClinics)
+      console.log("userState", userState)
     } else {
       setMapClinics(userState.clinics);
       setCoordinates(defaultCenter);
