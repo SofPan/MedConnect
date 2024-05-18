@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import MapModal from './GeneralComponents/MapModal';
+import { borderColor } from '@mui/system';
+import { theme } from '../theme/theme';
 
 
 const mapContainerStyle = {
   width: '50vw',
   height: '50vh',
+  border: '3px solid',
+  borderColor: theme.palette.primary.main
 };
 
 const customMarkerIcon = `
@@ -35,10 +39,11 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
   return (
     <div>
       <GoogleMap
-      mapContainerStyle={mapContainerStyle}
-      zoom={13}
-      center={coordinates}
-     >
+        mapContainerStyle={mapContainerStyle}
+        zoom={13}
+        center={coordinates}
+        className="border-2 border-red-900"
+      >
         { searchTermMarker && 
           <Marker 
             position={coordinates} 

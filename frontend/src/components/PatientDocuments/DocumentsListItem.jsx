@@ -3,6 +3,7 @@ import { useDelete } from '../../hooks/useAPI';
 import { Button } from '@mui/material';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { UserSignedIn } from '../../App';
+import { Box } from '@mui/system';
 
 const DocumentsListItem = (props) => {
   const {
@@ -30,9 +31,13 @@ const DocumentsListItem = (props) => {
 
   return(
     <li>
-      <DescriptionOutlinedIcon/>
-      <span>{name}</span>
-      <Button onClick={() => setDeleting(true)}>Delete</Button>
+      <Box className="flex items-center">
+        <Box className="flex items-center mr-6">
+          <DescriptionOutlinedIcon className="text-red-900 mr-1"/>
+          <span>{name}</span>
+        </Box>
+        <Button variant="small" onClick={() => setDeleting(true)}>DELETE</Button>
+      </Box>
     </li>
   )
 }

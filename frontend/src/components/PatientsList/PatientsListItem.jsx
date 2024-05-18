@@ -15,32 +15,22 @@ const PatientsListItem = (props) => {
   };
 
   return (
-    <Box margin={3} sx={{ width: '100%' }}>
-      <CardWrapper>
+    <Box margin={3} sx={{ width: 'calc(45% - 24px)' }}>
         <Card sx={{ width: '100%' }}>
           <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Box className="border-b-2 border-red-900">
                 <Typography variant="h6"><b>Name:</b> {name}</Typography>
-              </Grid>
-              {date_of_birth && (
-                <Grid item xs={12}>
-                  <Typography variant="body1"><b>Date of Birth:</b> {formatBirthDate(date_of_birth)}</Typography>
-                </Grid>
-              )}
-              <Grid item xs={12}>
+                {date_of_birth && (
+                    <Typography variant="body1"><b>Date of Birth:</b> {formatBirthDate(date_of_birth)}</Typography>
+                )}
+              </Box>
+              <Box className="mt-4">
                 <Typography variant="body1"><b>Gender:</b> {gender}</Typography>
-              </Grid>
-              <Grid item xs={12}>
                 <Typography variant="body1"><b>Health Card:</b> {health_card}</Typography>
-              </Grid>
-              <Grid item xs={12}>
                 <Typography variant="body1"><b>Doctor:</b> {doctor}</Typography>
-              </Grid>
-            </Grid>
+              </Box>
           </CardContent>
         </Card>
-      </CardWrapper>
     </Box>
   );
 };

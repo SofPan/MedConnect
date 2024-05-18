@@ -48,16 +48,16 @@ const DoctorsListItem = (props) => {
       {/* For Clinic Profile Page */}
       <Box type="div" margin="24px auto" >
         <CardWrapper class="roster" >
-            <Box type="div" maxWidth={"15%"}>
+            <Box type="div" className="pr-4">
               <img src={photo} alt={name}/>
             </Box>
-            <Box type="div" width="40%">    
-              <p>{name} <br />
+            <Box type="div" width="40%" className="border-r-2 border-red-900 ">    
+              <p><strong>{name}</strong> <br />
                   Can accept {patients} more patients
               </p>
-              <p> {qualifications} </p>
+              <p> <small><i>{qualifications}</i></small></p>
             </Box>
-            <Box type='div' sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', width: "40%"}} >
+            <Box type='div' sx={{width: "40%"}} className="flex flex-col justify-evenly ml-4" >
               <AccordionWrapper title={"Edit"}>
                 <EditDoctorForm doctor={doctor}/>
               </AccordionWrapper>

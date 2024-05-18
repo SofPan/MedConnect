@@ -27,9 +27,9 @@ const NotificationActions = (props) => {
   };
 
   return(
-    <div>
-      <Button onClick={onAccept}>Accept</Button>
-      <Button onClick={handleDecline}>Decline</Button>
+    <div className="flex pl-0 mt-4">
+      <Button variant="small" onClick={onAccept}>Accept</Button>
+      <Button variant="small" onClick={handleDecline}>Decline</Button>
     </div>
   )
 }

@@ -25,16 +25,22 @@ const SearchClinicsByDoctorForm = ({ setCoordinates, defaultCenter, setDisplayed
 
   return (
     <Box width="100%">
-      <form style={{ width: '100%' }}>
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Enter doctor's name"
-          onClick={(e) => e.stopPropagation()}
-        />
-        <Button onClick={handleCancel}>Cancel</Button>
-      </form>
+      <form width="100%">
+        <Box className="flex justify-between">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Enter doctor's name"
+            onClick={(e) => e.stopPropagation()}
+            sx={{
+              minWidth: "225px",
+              marginRight: "24px"
+            }}
+          />
+          <Button variant="small">Cancel</Button>
+        </Box>
+    </form>
     </Box>
   );
 };

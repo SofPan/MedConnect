@@ -74,11 +74,13 @@ const ClinicListItem = (props) => {
         justifyContent: "space-between"
         }}>
         <div>
-          <p className="clinics-info">
-            {name} <br />
-            {address} <br />
-            {distance > 0 && `distance: ${distance} km`}
-          </p>
+          <Box className="pb-4 pt-2 pl-2 border-b-2 border-red-900">
+            <p className="clinics-info">
+              <strong>{name}</strong> <br />
+              <small>{address} <br />
+              {distance > 0 && `Distance: ${distance} km`}</small>
+            </p>
+          </Box>
           <BoxWithScroll height="50px">
             <DoctorsList 
               clinic_id={id} 
@@ -89,7 +91,7 @@ const ClinicListItem = (props) => {
           </div>
           
           <Box textAlign="right">
-              <Button onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
+              <Button variant="small" onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
           </Box>
         </Card>
     }

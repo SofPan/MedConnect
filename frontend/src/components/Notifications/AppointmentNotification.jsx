@@ -64,10 +64,10 @@ const AppointmentNotification = (props) => {
   return(
     <>
       {appointment && 
-        <span>
-          <p>Book an appointment with {appointment.doctor_name} on {startTime && startTime.date} from {startTime && startTime.time} - {endTime && endTime.time}.</p>
+        <div className="mt-4">
+          <p>Book an appointment with {appointment.doctor_name} <br/> {startTime && startTime.date} from {startTime && startTime.time} - {endTime && endTime.time}.</p>
           <NotificationActions notification_id={notification_id} onAccept={handleAccept} />
-        </span>
+        </div>
       }
     </>
   )
