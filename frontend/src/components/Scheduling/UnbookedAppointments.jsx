@@ -10,11 +10,12 @@ const UnbookedAppointments = (props) => {
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
   useEffect(() => {
-    unbookedAppointments.length !== appointmentState.open_appointments.length && userProfile.doctor_id &&
+    userProfile.doctor_id &&
     get(
       'appointments/open',
       userProfile.doctor_id
-    )
+    );
+
   }, [appointmentState.open_appointments]);
 
   useEffect(() => {
