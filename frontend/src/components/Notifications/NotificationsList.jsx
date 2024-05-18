@@ -14,7 +14,7 @@ const NotificationsList = (props) => {
       />;
   })
   return(
-    <ul>
+    <ul className="p-0 w-72">
       {mapNotifications}
     </ul>
   )

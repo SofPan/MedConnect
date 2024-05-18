@@ -5,7 +5,8 @@ const StyledCard = styled(Card)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  minHeight: "100px"
+  minHeight: "100px",
+  padding: "12px"
 });
 
 const CardWrapper = (props) => {

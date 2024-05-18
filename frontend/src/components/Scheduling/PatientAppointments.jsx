@@ -6,6 +6,8 @@ import UnbookedAppointments from "./UnbookedAppointments";
 import { UserSignedIn } from '../../App';
 import { useAppointments } from "../../hooks/useAppointments";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 const PatientAppointments = () => {
   const { userState, dispatch } = useContext(UserSignedIn);
@@ -33,12 +35,14 @@ const PatientAppointments = () => {
 
   return(
     <>
-      <h2>Appointments</h2>
-      <AccordionWrapper title="Request">
-        <BoxWithScroll height="25vh">
-          <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
-        </BoxWithScroll>
-      </AccordionWrapper>                
+      <Typography variant="h3">Appointments</Typography>
+      <Box className="my-8">
+        <AccordionWrapper title="Request">
+          <BoxWithScroll height="25vh">
+            <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
+          </BoxWithScroll>
+        </AccordionWrapper>                
+      </Box>
       {!appointments.length 
         ? 
         <span>You do not have any appointments booked</span>

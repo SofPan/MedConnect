@@ -58,7 +58,7 @@ function App() {
   }, [userState.userInfo.id, loading]);
 
   return (
-    <div className="App">
+    <div className="App" >
       <UserSignedIn.Provider value={{ userState, dispatch }}>
         <NavBar LoginDisplay={LoginDisplay} setLoginDisplay={setLoginDisplay} loading={loading} />
         <BasicModal />
