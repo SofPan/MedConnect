@@ -72,9 +72,9 @@ VALUES
     (3, 2, 'Michael Johnson', 'Dr. Brown', '2024-05-03 13:00:00', '2024-05-03 14:00:00', 1, 'City Medical Center', FALSE, NOW()),
     (4, 3, 'Emily Brown', 'Dr. Johnson', '2024-05-03 15:30:00', '2024-05-03 16:30:00', 1, 'City Medical Center', FALSE, NOW()),
     (5, 3, 'David Wilson', 'Dr. Johnson', '2024-05-04 10:45:00', '2024-05-04 11:45:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 1, null, 'Dr. Smith', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 2, null, 'Dr. Brown', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', TRUE, NOW()),
-    (null, 3, null, 'Dr. Johnson', '2024-05-16 12:00:00', '2024-05-16 13:00:00', 1, 'City Medical Center', TRUE, NOW());
+    (null, 1, null, 'Dr. Smith', '2024-05-15 09:00:00', '2024-05-15 10:00:00', 1, 'City Medical Center', FALSE, NOW()),
+    (null, 2, null, 'Dr. Brown', '2024-05-16 09:00:00', '2024-05-16 10:00:00', 1, 'City Medical Center', FALSE, NOW()),
+    (null, 3, null, 'Dr. Johnson', '2024-05-16 12:00:00', '2024-05-16 13:00:00', 1, 'City Medical Center', FALSE, NOW());
 
 
 
