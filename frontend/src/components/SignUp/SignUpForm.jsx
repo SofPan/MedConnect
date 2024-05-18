@@ -100,7 +100,7 @@ export default function SignUp({setLoginDisplay}) {
 
           const user = {...userResponse, user_id: userResponse.id}
 
-          console.log("user", user)
+          
           
           sessionStorage.setItem("user_id", user.id);
 
@@ -109,7 +109,7 @@ export default function SignUp({setLoginDisplay}) {
           dispatch({ type: "USER_LOGIN", payload: true });
 
           navigate("/required_information");
-          console.log("use sign up ",user)
+          
 
           setLoginDisplay(false);
                     
@@ -133,7 +133,9 @@ export default function SignUp({setLoginDisplay}) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" style={{
+      marginTop: "5%",
+  }}>
       <BasicModal title={modalTitle} message={errorMessage}/>
       <CssBaseline />
       <div >
