@@ -33,7 +33,7 @@ export default function PatientInfo() {
 
   const registerUserInfo = async (userData) => {
     const userId = sessionStorage.getItem("user_id");
-    console.log("userId", userId)
+   
     try {
       const response = await fetch('http://localhost:8080/register/info', {
         method: 'POST',
@@ -141,11 +141,12 @@ export default function PatientInfo() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={{
+        marginTop: "5%"}}>
         <CssBaseline />
         <div >
 
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
             Please, fill in the required information to use the App
           </Typography>
           <form noValidate onSubmit={handleSubmit}>
