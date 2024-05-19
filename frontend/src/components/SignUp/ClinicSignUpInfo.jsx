@@ -49,8 +49,8 @@ export default function ClinicSignUpInfo() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={{
+        marginTop: "5%"}}>
         <BasicModal title={modalTitle} message={errorMessage} />
         <CssBaseline />
         <Box
@@ -61,7 +61,7 @@ export default function ClinicSignUpInfo() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
             Please, fill in the required information to use the App
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -94,13 +94,12 @@ export default function ClinicSignUpInfo() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              color="primary"
             >
               Confirm
             </Button>
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
