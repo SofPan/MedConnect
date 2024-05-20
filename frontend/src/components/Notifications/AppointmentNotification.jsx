@@ -34,8 +34,8 @@ const AppointmentNotification = (props) => {
 
   useEffect(() => {
     if (appointment){
-      setStartTime(formatDateAndTime(getData.start_time));
-      setEndTime(formatDateAndTime(getData.end_time));
+      setStartTime(formatDateAndTime(getData.start_time_string));
+      setEndTime(formatDateAndTime(getData.end_time_string));
     }
   }, [appointment])
 

@@ -47,6 +47,7 @@ router.get("/patients/:id", (req, res) => {
     .then(appointmentData => {
       const convertedData = mapAndConvertAppointment(appointmentData, "to_string");
       res.json(convertedData);
+      // res.json(appointmentData);
     }).catch(error => {
       console.error("Error fetching patient's appointments: ", error);
       res.status(500).json({ error: 'Internal server error' });
@@ -104,6 +105,7 @@ router.get("/open/:id", (req, res) => {
     .then(appointmentData => {
       const convertedData = mapAndConvertAppointment(appointmentData, "to_string");
       res.json(convertedData);
+      // res.json(appointmentData)
     })
     .catch(error => {
       console.error("Error fetching clinics's open appointments: ", error);

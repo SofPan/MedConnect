@@ -1,5 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import CardWrapper from "../GeneralComponents/CardWrapper";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 
 const PatientsListItem = (props) => {
   const {
