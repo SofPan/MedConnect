@@ -47,8 +47,6 @@ export default function PatientScheduler() {
 
 
     if (userState.userInfo.is_clinic) {
-      console.log("userState", userState);
-      console.log("get Apppoint triggered", userState.userInfo.id);
       try {
         const response = await fetch(`http://localhost:8080/appointments/${userState.userInfo.id}`, {
           method: 'GET',
@@ -63,10 +61,6 @@ export default function PatientScheduler() {
         }
         const responseData = await response.json();
 
-
-        console.log("repsonse", responseData);
-
-
         return responseData;
 
       } catch (error) {
@@ -76,7 +70,7 @@ export default function PatientScheduler() {
     }
   }
 
-  console.log(userState);
+  
   useEffect(() => {
     
     if(userState.userInfo.is_clinic){
@@ -87,6 +81,13 @@ export default function PatientScheduler() {
        
         if (appointments) {
           const dates = appointments.map((date) => {
+            if(date.patient_name === null){
+              return {
+                extendedProps: {
+                  appointmentId: date.id
+                }, title: "Available", start: date.start_time, end: date.end_time, 
+              }
+            }
             return {
               extendedProps: {
                 appointmentId: date.id
@@ -101,7 +102,6 @@ export default function PatientScheduler() {
   
       };
   
-      console.log("use effect for appointments hit");
       fetchAppointments();
     }
 
@@ -112,7 +112,7 @@ export default function PatientScheduler() {
 
   useEffect(() => {
     
-    console.log("appointment id", appointment_id);
+    
     if (appointment_id) {
       
       const getAppointment = async () => {

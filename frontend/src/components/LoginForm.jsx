@@ -17,7 +17,6 @@ export default function LoginForm({ setLoginDisplay }) {
   // Change handler to update state
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
     setFormData({
       ...formData,
       [name]: value
@@ -78,6 +77,7 @@ export default function LoginForm({ setLoginDisplay }) {
             if (!res.data) {
               navigate("/required_information")
             }
+            navigate("/");
           })
           .catch(error => {
             console.error("Error fetching clinic:", error);
@@ -88,6 +88,7 @@ export default function LoginForm({ setLoginDisplay }) {
             if (!res.data) {
               navigate("/required_information")
             }
+            navigate("/");
           })
           .catch(error => {
             console.error("Error fetching patient:", error);
