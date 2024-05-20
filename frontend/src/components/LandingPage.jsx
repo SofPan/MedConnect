@@ -108,11 +108,15 @@ function LandingPage() {
       <Footer>
         <Container maxWidth="lg">
           <Typography variant="h6" align="center">
-            MedConnect
+            <span className="border-b-2 border-red-900 pb-1">
+              MedConnect
+            </span>
           </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Delivering Excellence in Healthcare.
-          </Typography>
+          <Box className="mt-2">
+            <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                Delivering Excellence in Healthcare.
+            </Typography>
+          </Box>
         </Container>
       </Footer>
     </div>

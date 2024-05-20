@@ -33,8 +33,9 @@ const PatientsList = () => {
   return (
     <>
       <Typography variant="h3" className="pl-6">Current Patients</Typography>
+      {!mapAndFilterPatients.length && <div width="100%" className="flex justify-center text-center mt-4"><p className="text-red-500">You do not have any patients listed.</p></div>}
       <div className="flex flex-wrap">
-        {!mapAndFilterPatients.length && <span>You do not have any patients listed</span>}
+        
         {mapAndFilterPatients}
       </div>
     </>

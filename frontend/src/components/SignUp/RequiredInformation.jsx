@@ -7,8 +7,6 @@ const RequiredInformation = () => {
 
   const { userState } = useContext(UserSignedIn);
 
-  console.log(userState);
-
   return (
     <>
     {userState.userInfo.is_clinic && <ClinicSignUpInfo />}

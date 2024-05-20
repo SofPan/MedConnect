@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { usePost, usePut } from "../../hooks/useAPI";
-
 import {
     Box,
     Button,
-    Card,
   } from '@mui/material';
 import { UserSignedIn } from "../../App";
 import CardWrapper from "../GeneralComponents/CardWrapper";
@@ -43,6 +41,7 @@ const AppointmentsListItem = (props) => {
         appointmentDetails
       );
       appointmentDispatch({type: "DELETE_APPOINTMENT", payload: appointmentDetails});
+      appointmentDispatch({type: "ADD_OPEN_APPOINTMENT", payload: appointmentDetails});
     }
   }, [cancelling]);
 

@@ -16,16 +16,16 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/request/:patientId', (req, res) => {
-  const {request_type} = req.query;
+  const { request_type } = req.query;
   const patient_id = req.params.patientId;
   getRequest(request_type, patient_id)
-  .then(request => {
-    if (request) {
-      res.json({ message: "The request has already been sent", request });
-    } else {
-      res.json(request)
-    }
-  })
+    .then(request => {
+      if (request) {
+        res.json({ message: "The request has already been sent", request });
+      } else {
+        res.json(request)
+      }
+    })
     .catch(error => {
       console.error('Error fetching requests:', error);
       res.status(500).json({ error: 'Internal server error' });
@@ -65,6 +65,7 @@ router.delete('/:id/delete', (req, res) => {
       return result;
     })
     .catch(error => {
+      console.error("error deleting", error.message);
       res
         .status(500)
         .json({ error: error.message });

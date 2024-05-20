@@ -38,7 +38,7 @@ const SearchClinicsByDoctorForm = ({ setCoordinates, defaultCenter, setDisplayed
               marginRight: "24px"
             }}
           />
-          <Button variant="small">Cancel</Button>
+          <Button onClick={handleCancel} variant="small">Cancel</Button>
         </Box>
     </form>
     </Box>

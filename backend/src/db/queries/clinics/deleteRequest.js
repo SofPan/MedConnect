@@ -9,9 +9,8 @@ const deleteRequest = (id) => {
   `;
 
   return db.query(query, value)
-    .then(data => {
-      console.log("delete data", data);
-      return data.rows[0];
+    .then(() => {
+      return { success: true, message: "notification deleted" };
     })
     .catch(error => console.error('deleteRequest query error:', error));
 }
