@@ -24,8 +24,10 @@ const ProfileDoctors = (props) => {
   }, [userState.doctors]);
 
   useEffect(() => {
-    getData && dispatch({type: "SET_DOCTORS", payload: getData});
-    setDoctors(getData);
+    if (getData){
+      dispatch({type: "SET_DOCTORS", payload: getData});
+      setDoctors(getData);
+    } 
   }, [getData]);
 
   return(

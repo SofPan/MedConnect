@@ -31,20 +31,21 @@ const RegisterNotification = (props) => {
 
   useEffect(() => {
     if(accepting){
+      console.log("accepting effect triggered")
       put(
         'patients',
         editPatient
-      )
-      put(
-        'doctors',
-        doctor
-      )
-      dispatch({type: "EDIT_DOCTOR", payload: doctor});
+      );
       deleteRecord(
         'requests',
         notification_id
       );
+      put(
+        'doctors',
+        doctor
+      );
       dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
+      dispatch({type: "EDIT_DOCTOR", payload: doctor});
     } 
       
   }, [accepting]);

@@ -23,6 +23,7 @@ const Notifications = (props) => {
 
   useEffect(() => {
     if(getData) {
+      console.log("notifications getData triggered");
       dispatch({type: "SET_NOTIFICATIONS", payload: getData});
       setNotifications(getData);
     } 

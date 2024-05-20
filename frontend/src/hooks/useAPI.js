@@ -39,7 +39,6 @@ export const useGet = () => {
     }
 
   }
-
   return { getLoading, getData, get };
 }
 
