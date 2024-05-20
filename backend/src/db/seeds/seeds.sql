@@ -57,7 +57,7 @@ INSERT INTO doctors (clinic_id, name, specialty, qualifications, description, ph
 -- Seed data for patients table
 INSERT INTO patients (user_id, name, date_of_birth, gender, health_card, doctor_id, created_at) VALUES
 (1, 'John Doe', '1990-05-15', 'Male', '1234567890', 1, NOW()),
-(2, 'Jane Smith', '1985-10-20', 'Female', '0987654321', 2, NOW()),
+(2, 'Jane Smith', '1985-10-20', 'Female', '0987654321', 9, NOW()),
 (3, 'Michael Johnson', '1978-03-08', 'Male', '5678901234', null, NOW()),
 (4, 'Emily Brown', '2000-12-03', 'Female', '4321098765', 3, NOW()),
 (5, 'David Wilson', '1995-08-25', 'Male', '9876543210', 3, NOW());
@@ -90,6 +90,4 @@ INSERT INTO documents (patient_id, document_name, document_url, created_at) VALU
 
 -- Seed data for pending_requests table
 INSERT INTO pending_requests (request_type, patient_id, clinic_id, doctor_id, appointment_id, created_at) VALUES
-('register', 3, 1, 1, null, NOW()),
-('change_doctor', 2, 1, 3, null, NOW()),
 ('appointment', 1, 1, 1, 1, NOW());
