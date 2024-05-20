@@ -102,7 +102,6 @@ export default function PatientScheduler() {
   
       };
   
-      console.log("use effect for appointments hit");
       fetchAppointments();
     }
 
@@ -113,7 +112,7 @@ export default function PatientScheduler() {
 
   useEffect(() => {
     
-    console.log("appointment id", appointment_id);
+    
     if (appointment_id) {
       
       const getAppointment = async () => {
