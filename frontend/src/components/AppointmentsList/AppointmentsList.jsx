@@ -11,8 +11,8 @@ const AppointmentsList = (props) => {
   } = props;
 
   const mapAppointments = appointments.map(appointment => {
-    const startTime = formatDateAndTime(appointment.start_time);
-    const endTime = formatDateAndTime(appointment.end_time);
+    const startTime = formatDateAndTime(appointment.start_time_string);
+    const endTime = formatDateAndTime(appointment.end_time_string);
     return <AppointmentsListItem
             key={appointment.id}
             id={appointment.id}

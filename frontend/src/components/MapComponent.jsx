@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import MapModal from './GeneralComponents/MapModal';
-import { borderColor } from '@mui/system';
 import { theme } from '../theme/theme';
 
 

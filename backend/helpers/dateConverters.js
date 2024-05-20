@@ -13,8 +13,8 @@ const dateToString = (date) => {
 const mapAndConvertAppointment = (appointmentData, conversionType) => {
   return appointmentData.map(appointment => {
     if (conversionType === "to_string") {
-      appointment.start_time = dateToString(appointment.start_time);
-      appointment.end_time = dateToString(appointment.end_time);
+      appointment.start_time_string = dateToString(appointment.start_time);
+      appointment.end_time_string = dateToString(appointment.end_time);
     }
     return appointment;
   });
