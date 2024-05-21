@@ -6,9 +6,9 @@ import { Box } from "@mui/system";
 
 const UserInformation = (props) => {
   const {userProfile} = props;
-  const formatBirthDate = (date) => {
-    return date.split("T").shift();
-  }
+  // const formatBirthDate = (date) => {
+  //   return date.split("T").shift();
+  // }
 
   const [requestNotification, setRequestNotification] = useState("");
 
@@ -54,7 +54,7 @@ const UserInformation = (props) => {
           {
             userProfile.date_of_birth && 
             <span>
-              <strong>Date of Birth:</strong> {formatBirthDate(userProfile.date_of_birth)}
+              <strong>Date of Birth:</strong> {userProfile.date_of_birth}
             </span>
           }
         </p>

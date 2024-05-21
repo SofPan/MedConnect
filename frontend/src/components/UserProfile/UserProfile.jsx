@@ -5,7 +5,7 @@ import { useGet } from '../../hooks/useAPI';
 
 const UserProfile = () => {
 
-  const {userState} = useContext(UserSignedIn);
+  const {userState, dispatch} = useContext(UserSignedIn);
 
   const {getData, get} = useGet();
 
@@ -21,6 +21,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (getData){
+      dispatch({type: "SET_USER_PROFILE", payload: getData});
       setIsClinic(getData.is_clinic);
       setLoaded(true);
     }
@@ -28,7 +29,7 @@ const UserProfile = () => {
 
   return(
     <>
-      {loaded && <RenderProfile userProfile={getData} isClinic={isClinic} />}
+      {loaded && <RenderProfile userProfile={userState.userProfile} isClinic={isClinic} />}
     </>
     
   )
