@@ -15,6 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Grid from '@mui/material/Grid';
 
 import { UserSignedIn } from "../../App"
+import { Typography } from '@mui/material';
 
 
 
@@ -189,9 +190,9 @@ export default function PatientScheduler() {
         doctor_id={appointmentInfo.doctor_id}
         setsingleAppointmentDisplay={setsingleAppointmentDisplay}
         singleAppointmentDisplay={singleAppointmentDisplay}/>
-         :
+        :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <h1>Clinic Appointments</h1>
+          <Typography variant="h3">Clinic Appointments</Typography>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
             initialView='timeGridWeek'

@@ -708,10 +708,6 @@ video {
   justify-content: space-evenly;
 }
 
-.self-center {
-  align-self: center;
-}
-
 .rounded-3xl {
   border-radius: 1.5rem;
 }
@@ -833,6 +829,11 @@ video {
   font-style: italic;
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -846,11 +847,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .underline {
