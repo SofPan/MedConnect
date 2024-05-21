@@ -18,7 +18,8 @@ export default function useApplicationData() {
     clinicInfo: {},
     notifications: [""],
     documents: [""],
-    displayModal: false
+    displayModal: false,
+    userProfile: {}
   }
 
 
@@ -40,6 +41,8 @@ export default function useApplicationData() {
         return { ...userState, userInfo: action.payload, userLoggedIn: true }
       case "USER_SESSION":
         return { ...userState, userLoggedIn: action.payload }
+      case "SET_USER_PROFILE":
+        return { ...userState, userProfile: action.payload }
       case "SET_CLINICS":
         return { ...userState, clinics: action.payload }
       case "SET_DOCTORS":

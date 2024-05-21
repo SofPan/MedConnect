@@ -31,7 +31,6 @@ const RegisterNotification = (props) => {
 
   useEffect(() => {
     if(accepting){
-      console.log("accepting effect triggered")
       put(
         'patients',
         editPatient
@@ -44,6 +43,7 @@ const RegisterNotification = (props) => {
         'doctors',
         doctor
       );
+      dispatch({type: "SET_USER_PROFILE", payload: editPatient});
       dispatch({type: "DELETE_NOTIFICATION", payload: {id: notification_id}});
       dispatch({type: "EDIT_DOCTOR", payload: doctor});
     } 

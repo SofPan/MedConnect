@@ -1,11 +1,14 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGet } from "../../hooks/useAPI";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
+import { UserSignedIn } from "../../App";
 
 const UnbookedAppointments = (props) => {
-    const {userProfile, appointmentDispatch, appointmentState} = props;
-    
+  const {userProfile, appointmentDispatch, appointmentState} = props;
+
+  const {userState} = useContext(UserSignedIn);
+  
   const {getData, get} = useGet();
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
@@ -16,7 +19,7 @@ const UnbookedAppointments = (props) => {
       userProfile.doctor_id
     );
 
-  }, [appointmentState.open_appointments]);
+  }, [userState.userProfile]);
 
   useEffect(() => {
     if(getData){
