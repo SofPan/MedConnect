@@ -54,7 +54,7 @@ const SingleAppointment = (appointment) => {
   const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
   
   
-  console.log("where is this appointment coming from",appointment);
+  
   
   
   const getDoctors = async (clinic_id) =>{
@@ -204,15 +204,29 @@ const SingleAppointment = (appointment) => {
     // Save edited appointment here
     setIsEditing(false);
     // You can perform any action, like sending data to backend
-    console.log("edited appoijtment", editedAppointment);
+    
     const user = await updateAppointment(editedAppointment);
-    console.log("return from update app", user);
+    
   };
 
   const handleCancel = () => {
+    setEditedAppointment({
+      id: appointment.id,
+      patient_id: appointment.patient_id,
+      doctor_id: appointment.doctor_id,
+      patient_name: appointment.patient_name,
+      doctor_name: appointment.doctor_name,
+      start_time: dayjs(appointment.start_time),
+      end_time: dayjs(appointment.end_time),
+      clinic_id: appointment.clinic_id,
+      status: true,
+      created_at: new Date(appointment.created_at),
+      clinic_address: appointment.clinic_address,
+      clinic_name:appointment.clinic_name
+    });
     setIsEditing(false);
     // Reset edited appointment to original appointment
-    setEditedAppointment(appointment);
+    
   };
 
   const handleChange = (e) => {
@@ -239,7 +253,7 @@ const SingleAppointment = (appointment) => {
   } catch (error) {
       console.log("clinic id response error", error);
   }
-    console.log("handle clinic change", editedAppointment);
+    
 };
 
 
