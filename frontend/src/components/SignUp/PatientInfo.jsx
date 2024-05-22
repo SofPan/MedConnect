@@ -71,7 +71,7 @@ export default function PatientInfo() {
     name: '',
     gender: '',
     health_card: '',
-    DOB: dayjs(new Date('2024, 4, 8, 12, 0, 0, 0')),
+    DOB: dayjs(new Date())
   });
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -120,7 +120,7 @@ export default function PatientInfo() {
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    console.log(formData);
+    
     
     const formErrors = validate(formData);
 
@@ -195,7 +195,8 @@ export default function PatientInfo() {
                   value={formData.DOB} // Pass the selected date value
                   onChange={handleDateChange} // Use the date change handler
                   name="DOB"
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => <TextField   {...params} />}
+                  sx={{width: '100%'}}
                 />
               </Grid>
        
