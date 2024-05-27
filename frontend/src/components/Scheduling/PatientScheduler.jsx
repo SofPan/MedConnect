@@ -5,14 +5,14 @@ import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
 import SingleAppointment from '../AppointmentsList/SingleAppointment';
-
+import CreateAvailibility from './CreateAvailibility'
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
-import Grid from '@mui/material/Grid';
+
 
 import { UserSignedIn } from "../../App"
 import { Typography } from '@mui/material';
@@ -22,11 +22,11 @@ import { Typography } from '@mui/material';
 
 export default function PatientScheduler() {
 
-  const { userState, dispatch } = useContext(UserSignedIn);
-
+  const { userState } = useContext(UserSignedIn);
 
   const [events, setEvents] = useState([])
   const [singleAppointmentDisplay, setsingleAppointmentDisplay] = useState(false);
+  const [availabilityDisplay, setAvailabilityDisplay] = useState(false);
   const [appointment_id, setappointment_id] = useState('');
   const [appointmentInfo, setappointmentInfo] = useState({
     id: "",
@@ -172,10 +172,12 @@ export default function PatientScheduler() {
     )
   }
 
-
-
+  const handleAvailabilityVisibility = () =>{
+    setAvailabilityDisplay(!availabilityDisplay);
+  }
   return (
     <Box sx={{width:'90vh'}}>
+      <Button onClick={handleAvailabilityVisibility}>Create</Button>
       {singleAppointmentDisplay ? <SingleAppointment doctor_name={appointmentInfo.doctor_name}
         details={appointmentInfo.start_time}
         clinic_address={appointmentInfo.address}
@@ -192,6 +194,8 @@ export default function PatientScheduler() {
         singleAppointmentDisplay={singleAppointmentDisplay}/>
         :
         <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {availabilityDisplay ? <CreateAvailibility availabilityDisplay={availabilityDisplay} setAvailabilityDisplay={setAvailabilityDisplay}/> :
+          <>
           <Typography variant="h3">Clinic Appointments</Typography>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
@@ -200,10 +204,11 @@ export default function PatientScheduler() {
             events={events}
             eventContent={renderEventContent}
             slotMinTime={"09:00:00"}
-            slotMaxTime={"22:00:00"}
+            slotMaxTime={"17:00:00"}
             eventClick={handleDateClick}
             eventColor='#800020'
           />
+          </>}
         </LocalizationProvider>}
 
     </Box>
