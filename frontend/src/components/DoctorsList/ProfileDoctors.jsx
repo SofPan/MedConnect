@@ -7,6 +7,7 @@ import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import List from '../List/List';
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
@@ -16,19 +17,23 @@ const ProfileDoctors = (props) => {
   const {userState, dispatch} = useContext(UserSignedIn);
   const [doctors, setDoctors] = useState([]);
 
-  useEffect(() => {
-    doctors.length !== userState.doctors.length &&
-    get(
-      "doctors"
-      );
-  }, [userState.doctors]);
+  // useEffect(() => {
+  //   doctors.length !== userState.doctors.length &&
+  //   get(
+  //     "doctors"
+  //     );
+  // }, [userState.doctors]);
 
-  useEffect(() => {
-    if (getData){
-      dispatch({type: "SET_DOCTORS", payload: getData});
-      setDoctors(getData);
-    } 
-  }, [getData]);
+  // useEffect(() => {
+  //   if (getData){
+  //     dispatch({type: "SET_DOCTORS", payload: getData});
+  //     setDoctors(getData);
+  //   } 
+  // }, [getData]);
+
+  const filterDoctorsByClinicId = userState.doctors.filter(doctor => {
+    return doctor.clinic_id === userProfile.id;
+  });
 
   return(
     <>
@@ -43,6 +48,7 @@ const ProfileDoctors = (props) => {
       </Box>
     </div>
     <BoxWithScroll height="80vh">
+      <List listData={filterDoctorsByClinicId} />
       <DoctorsList clinic_id={userProfile.id} />
     </BoxWithScroll>
     </>

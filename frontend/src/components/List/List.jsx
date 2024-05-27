@@ -6,7 +6,8 @@ const List = (props) => {
   const {
     listData
   } = props;
-
+  console.log("listData", listData);
+  
   const {userState} = useContext(UserSignedIn);
 
   const mapListItems = listData.map(data => {
