@@ -1,20 +1,13 @@
-import { useContext } from "react";
-import { UserSignedIn } from "../../App";
-import ListItem from "./ListItem";
-
 const List = (props) => {
   const {
-    listData
+    listItems,
+    ItemComponent
   } = props;
-  console.log("listData", listData);
 
-  const {userState} = useContext(UserSignedIn);
-
-  const mapListItems = listData.map(data => {
-    return <ListItem
+  const mapListItems = listItems.map(data => {
+    return <ItemComponent
               key={data.id}
               dataObject={data}
-              cardClass="roster"
           />
   })
   return(
