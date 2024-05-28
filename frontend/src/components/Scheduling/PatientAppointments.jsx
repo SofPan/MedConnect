@@ -8,10 +8,10 @@ import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import List from "../List/List";
-import AppointmentsListItem from "../AppointmentsList/AppointmentsListItem";
+import AppointmentsListItem from "../List/AppointmentsListItem";
 
 const PatientAppointments = () => {
-  const { userState, dispatch } = useContext(UserSignedIn);
+  const { userState } = useContext(UserSignedIn);
   const [appointments, setAppointments] = useState([]);
   const userProfile = userState.userInfo;
 
@@ -40,7 +40,7 @@ const PatientAppointments = () => {
       <Box className="my-8">
         <AccordionWrapper title="Request">
           <BoxWithScroll height="25vh">
-            <UnbookedAppointments userProfile={userProfile} appointmentDispatch={appointmentDispatch} appointmentState={appointmentState} name={userProfile.name}/>
+            <UnbookedAppointments />
           </BoxWithScroll>
         </AccordionWrapper>                
       </Box>
@@ -50,7 +50,6 @@ const PatientAppointments = () => {
         :
         <div className="appointments-booked">
           <BoxWithScroll height="50vh">
-            {/* <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/> */}
             <List listItems={appointments} ItemComponent={AppointmentsListItem} />
           </BoxWithScroll>
         </div>

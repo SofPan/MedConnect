@@ -1,22 +1,24 @@
 
 import { useContext, useEffect, useState } from "react";
-import { useGet } from "../../hooks/useAPI";
-import AppointmentsList from "../AppointmentsList/AppointmentsList";
 import { UserSignedIn } from "../../App";
+import { useAppointments } from "../../hooks/useAppointments";
+import { useGet } from "../../hooks/useAPI";
+import List from "../List/List";
+import AppointmentsListItem from "../List/AppointmentsListItem";
 
 const UnbookedAppointments = (props) => {
-  const {userProfile, appointmentDispatch, appointmentState} = props;
-
   const {userState} = useContext(UserSignedIn);
+  const {appointmentDispatch} = useAppointments();
+
   
   const {getData, get} = useGet();
   const [unbookedAppointments, setUnbookedAppointments] = useState([]);
 
   useEffect(() => {
-    userProfile.doctor_id &&
+    userState.userInfo.doctor_id &&
     get(
       'appointments/open',
-      userProfile.doctor_id
+      userState.userInfo.doctor_id
     );
 
   }, [userState.userProfile]);
@@ -36,7 +38,7 @@ const UnbookedAppointments = (props) => {
         <span>There are no appointments available to request</span>
         :
         <div className="appointments-open" >
-          <AppointmentsList patient_id={null} appointments={unbookedAppointments} user_id={userProfile.id} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
+          <List listItems={unbookedAppointments} ItemComponent={AppointmentsListItem}/>
         </div>
       }
     </>
