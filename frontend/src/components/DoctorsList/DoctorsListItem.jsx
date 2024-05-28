@@ -55,7 +55,7 @@ const DoctorsListItem = (props) => {
             </Box>
             <Box type='div' sx={{width: "40%"}} className="flex flex-col justify-evenly ml-4" >
               <AccordionWrapper title={"Edit"}>
-                <EditDoctorForm data={data}/>
+                <EditDoctorForm doctor={data}/>
               </AccordionWrapper>
               <Button onClick={handleClickDelete} sx={{marginTop: "12px"}}>Delete</Button>
             </Box>
