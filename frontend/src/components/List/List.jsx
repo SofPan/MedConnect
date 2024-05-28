@@ -7,13 +7,14 @@ const List = (props) => {
     listData
   } = props;
   console.log("listData", listData);
-  
+
   const {userState} = useContext(UserSignedIn);
 
   const mapListItems = listData.map(data => {
     return <ListItem
               key={data.id}
               dataObject={data}
+              cardClass="roster"
           />
   })
   return(
