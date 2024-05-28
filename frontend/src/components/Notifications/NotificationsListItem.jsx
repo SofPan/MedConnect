@@ -5,12 +5,7 @@ import AppointmentNotification from "./AppointmentNotification";
 
 const NotificationsListItem = (props) => {
   const {
-    id,
-    patient_id,
-    doctor_id,
-    type,
-    appointment_id,
-    handleChange
+    data
   } = props;
 
   const {getData, get} = useGet();
@@ -19,9 +14,10 @@ const NotificationsListItem = (props) => {
   const [patient, setPatient] = useState("");
   
   useEffect(() => {
+    console.log("data", data);
     get(
       'patients/patient',
-      patient_id
+      data.patient_id
     );
   }, []);
 
@@ -31,11 +27,11 @@ const NotificationsListItem = (props) => {
 
   useEffect(() => {
     if (patient.name){
-      (type === "register" || type === "change_doctor") 
-      && setNotificationType(<RegisterNotification doctor_id={doctor_id} type={type} notification_id={id} patient={patient} handleChange={handleChange} />);
+      (data.request_type === "register" || data.request_type === "change_doctor") 
+      && setNotificationType(<RegisterNotification doctor_id={data.doctor_id} request_type={data.request_type} notification_id={data.id} patient={patient} handleChange={data.handleChange} />);
 
-      type === "appointment" 
-        && setNotificationType(<AppointmentNotification appointment_id={appointment_id} notification_id={id} patient={patient} handleChange={handleChange} />);
+      data.request_type === "appointment" 
+        && setNotificationType(<AppointmentNotification appointment_id={data.appointment_id} notification_id={data.id} patient={patient} handleChange={data.handleChange} />);
     }
 
   }, [patient])

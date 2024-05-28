@@ -4,6 +4,8 @@ import { UserSignedIn } from "../../App";
 import NotificationsList from "./NotificationsList";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import List from "../List/List";
+import NotificationsListItem from "./NotificationsListItem";
 
 const Notifications = (props) => {
   const {userProfile} = props;
@@ -36,7 +38,8 @@ const Notifications = (props) => {
         ?
         <span>No pending requests.</span>
         :
-        <NotificationsList notifications={notifications}/>
+        <List listItems={notifications} ItemComponent={NotificationsListItem} />
+        // <NotificationsList notifications={notifications}/>
       }
     </Box>
   )

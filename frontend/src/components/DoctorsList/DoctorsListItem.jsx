@@ -17,8 +17,6 @@ const DoctorsListItem = (props) => {
   const [deleting, setDeleting] = useState(false);
   const {deleteRecord} = useDelete();
   const {dispatch} = useContext(UserSignedIn);
-  
-  console.log("data", data);
 
   useEffect(() => {
     if (deleting) {
