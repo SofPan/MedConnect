@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGet } from "../../hooks/useAPI";
-import RegisterNotification from "./RegisterNotification";
-import AppointmentNotification from "./AppointmentNotification";
+import RegisterNotification from "../Notifications/RegisterNotification";
+import AppointmentNotification from "../Notifications/AppointmentNotification";
 
 const NotificationsListItem = (props) => {
   const {

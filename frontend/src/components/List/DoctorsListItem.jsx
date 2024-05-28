@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserSignedIn } from "../../App";
 import { useDelete } from "../../hooks/useAPI";
-import EditDoctorForm from "./EditDoctor";
+import EditDoctorForm from "../DoctorsList/EditDoctor";
 import {
   Box,
     Button,

@@ -5,7 +5,7 @@ import NotificationsList from "./NotificationsList";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import List from "../List/List";
-import NotificationsListItem from "./NotificationsListItem";
+import NotificationsListItem from "../List/NotificationsListItem";
 
 const Notifications = (props) => {
   const {userProfile} = props;
