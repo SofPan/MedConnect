@@ -8,6 +8,7 @@ import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import List from '../List/List';
+import DoctorsListItem from './DoctorsListItem';
 
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
@@ -48,8 +49,7 @@ const ProfileDoctors = (props) => {
       </Box>
     </div>
     <BoxWithScroll height="80vh">
-      <List listData={filterDoctorsByClinicId} />
-      <DoctorsList clinic_id={userProfile.id} />
+      <List listItems={filterDoctorsByClinicId} ItemComponent={DoctorsListItem} />
     </BoxWithScroll>
     </>
 
