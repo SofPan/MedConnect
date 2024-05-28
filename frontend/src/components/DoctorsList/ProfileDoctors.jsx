@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { UserSignedIn } from '../../App';
-import { useGet } from '../../hooks/useAPI';
-import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';
 import AccordionWrapper from '../GeneralComponents/AccordionWrapper';
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
@@ -13,24 +11,7 @@ import DoctorsListItem from './DoctorsListItem';
 const ProfileDoctors = (props) => {
   const {userProfile} = props;
 
-  const {getData, get} = useGet();
-
-  const {userState, dispatch} = useContext(UserSignedIn);
-  const [doctors, setDoctors] = useState([]);
-
-  // useEffect(() => {
-  //   doctors.length !== userState.doctors.length &&
-  //   get(
-  //     "doctors"
-  //     );
-  // }, [userState.doctors]);
-
-  // useEffect(() => {
-  //   if (getData){
-  //     dispatch({type: "SET_DOCTORS", payload: getData});
-  //     setDoctors(getData);
-  //   } 
-  // }, [getData]);
+  const {userState} = useContext(UserSignedIn);
 
   const filterDoctorsByClinicId = userState.doctors.filter(doctor => {
     return doctor.clinic_id === userProfile.id;
