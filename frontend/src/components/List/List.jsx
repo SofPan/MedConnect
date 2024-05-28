@@ -7,7 +7,7 @@ const List = (props) => {
   const mapListItems = listItems.map(data => {
     return <ItemComponent
               key={data.id}
-              dataObject={data}
+              data={data}
           />
   })
   return(
