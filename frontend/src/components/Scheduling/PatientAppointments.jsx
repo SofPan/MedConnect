@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
-import AppointmentsList from "../AppointmentsList/AppointmentsList";
 import UnbookedAppointments from "./UnbookedAppointments";
 import { UserSignedIn } from '../../App';
 import { useAppointments } from "../../hooks/useAppointments";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import List from "../List/List";
+import AppointmentsListItem from "../AppointmentsList/AppointmentsListItem";
 
 const PatientAppointments = () => {
   const { userState, dispatch } = useContext(UserSignedIn);
@@ -49,7 +50,8 @@ const PatientAppointments = () => {
         :
         <div className="appointments-booked">
           <BoxWithScroll height="50vh">
-            <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/>
+            {/* <AppointmentsList patient_id={userProfile.id} appointments={appointments} appointmentDispatch={appointmentDispatch} name={userProfile.name}/> */}
+            <List listItems={appointments} ItemComponent={AppointmentsListItem} />
           </BoxWithScroll>
         </div>
         }
