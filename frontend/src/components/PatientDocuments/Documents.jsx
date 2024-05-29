@@ -5,7 +5,7 @@ import { UserSignedIn } from "../../App";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
 import List from "../List/List";
-import DocumentsListItem from "./DocumentsListItem";
+import DocumentsListItem from "../List/DocumentsListItem";
 import { Box, Typography } from "@mui/material";
 
 
