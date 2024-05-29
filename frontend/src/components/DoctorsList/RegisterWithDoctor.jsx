@@ -124,8 +124,8 @@ const RegisterWithDoctor = () => {
       </Box>
       <Box className="flex flex-wrap justify-between">
         {filteredDoctors.map(doctor => (
-          <Box width="calc((100% / 3) - 24px)">
-            <Card key={doctor.id} sx={{ display: 'flex', marginBottom: 2 }}>
+          <Box  key={doctor.id} width="calc((100% / 3) - 24px)">
+            <Card sx={{ display: 'flex', marginBottom: 2 }}>
               <CardMedia
                 component="img"
                 sx={{ width: "40%", marginRight: "12px", borderRight: "0.5px solid #ddd" }}
