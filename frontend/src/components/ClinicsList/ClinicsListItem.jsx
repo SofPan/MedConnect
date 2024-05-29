@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
-import DoctorsList from "../DoctorsList/DoctorsList";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserSignedIn } from "../../App";
-import { Button, Card } from "@mui/material";
 import axios from "axios";
+import DoctorsListItem from "../List/DoctorsListItem";
+import { Box, Button, Card} from "@mui/material";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
-import CardWrapper from "../GeneralComponents/CardWrapper";
-import { Box } from "@mui/system";
+import List from "../List/List";
 
 const ClinicListItem = (props) => {
   const {name, address, id, distance, setErrorMessage} = props;
@@ -17,21 +16,6 @@ const ClinicListItem = (props) => {
     clinic_id: id,
     clinic_name: name,
     clinic_address: address
-  }
-
-  const [visible, setVisible] = useState(true);
-
- 
-
-  // If there are no doctors to display, hide clinic from list
-  // const checkIfRenderClinic = render => {
-  //   setVisible(render);
-  // };
-
-  const [alterDoctors, setAlterDoctors] = useState(0);
-  const triggerDoctorStateUpdate = () => {
-    setAlterDoctors(alterDoctors + 1);
-
   }
 
   const handleRequest = (info) => {
@@ -61,9 +45,14 @@ const ClinicListItem = (props) => {
     }
   }
 
+
+  const filterDoctorsByClinicId = userState.doctors.filter(doctor => {
+    return doctor.clinic_id === clinicInfo.clinic_id;
+  });
+
+
   return(
     <>
-    { visible &&
       <Card 
       sx={{
         margin: "12px 0", 
@@ -82,10 +71,7 @@ const ClinicListItem = (props) => {
             </p>
           </Box>
           <BoxWithScroll height="45%">
-            <DoctorsList 
-              clinic_id={id} 
-              changeDoctorState={triggerDoctorStateUpdate}
-            />
+              <List listItems={filterDoctorsByClinicId} ItemComponent={DoctorsListItem} />
           </BoxWithScroll>
           </div>
           
@@ -93,7 +79,6 @@ const ClinicListItem = (props) => {
               <Button variant="small" onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
           </Box>
         </Card>
-    }
     </>
   )
 }

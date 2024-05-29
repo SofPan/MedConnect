@@ -30,7 +30,6 @@ useEffect(() => {
   const fetchClinics = async () => {
     try {
       const response = await axios.get('http://localhost:8080/clinics');
-      console.log(response.data)
       setMapClinics(response.data);
       setDisplayedClinics(response.data)
     } catch (error) {
@@ -41,7 +40,6 @@ useEffect(() => {
   const fetchDoctors = async () => {
     try {
       const response = await axios.get('http://localhost:8080/doctors');
-      console.log(response.data)
       setMapDoctors(response.data);
     } catch (error) {
       console.error('Error fetching clinics:', error);
