@@ -2,9 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
 import { UserSignedIn } from "../../App";
 
-import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import NewDocument from "../PatientDocuments/NewDocument";
+import List from "../List/List";
+import DocumentsListItem from "./DocumentsListItem";
 import { Box, Typography } from "@mui/material";
 
 
@@ -31,6 +32,11 @@ const Documents = (props) => {
     }
   }, [getData]);
 
+  const filterDocuments = documents.filter(document => {
+    // Only show the Patient's documents
+    return document.patient_id === userState.userInfo.user_id;
+  });
+
   return(
     <Box type="div" className="mt-8">
       <Typography variant="h3">Documents</Typography>
@@ -41,10 +47,7 @@ const Documents = (props) => {
           />
         </AccordionWrapper>
         <Box className="mt-8">
-          <DocumentsList 
-            patient_id={userProfile.id} 
-            documents={documents}
-          />
+          <List listItems={filterDocuments} ItemComponent={DocumentsListItem} />
         </Box>
       </Box>
     </Box>
