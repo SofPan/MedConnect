@@ -7,8 +7,7 @@ import { Box } from '@mui/system';
 
 const DocumentsListItem = (props) => {
   const {
-    id,
-    name,
+    data
   } = props;
 
   const {dispatch} = useContext(UserSignedIn);
@@ -16,16 +15,13 @@ const DocumentsListItem = (props) => {
   const [deleting, setDeleting] = useState(false);
   const {deleteRecord} = useDelete();
 
-
-
-
   useEffect(() => {
     if(deleting){
       deleteRecord(
         'documents',
-        id
+        data.id
       )
-      dispatch({type: "DELETE_DOCUMENT", payload: {id}});
+      dispatch({type: "DELETE_DOCUMENT", payload: {id: data.id}});
     }
   }, [deleting])
 
@@ -34,7 +30,7 @@ const DocumentsListItem = (props) => {
       <Box className="flex items-center">
         <Box className="flex items-center mr-6">
           <DescriptionOutlinedIcon className="text-red-900 mr-1"/>
-          <span>{name}</span>
+          <span>{data.document_name}</span>
         </Box>
         <Button variant="small" onClick={() => setDeleting(true)}>DELETE</Button>
       </Box>
