@@ -7,12 +7,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import SingleAppointment from '../AppointmentsList/SingleAppointment';
 
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-
-import Grid from '@mui/material/Grid';
 
 import { UserSignedIn } from "../../App"
 import { Typography } from '@mui/material';
@@ -22,7 +18,7 @@ import { Typography } from '@mui/material';
 
 export default function PatientScheduler() {
 
-  const { userState, dispatch } = useContext(UserSignedIn);
+  const { userState } = useContext(UserSignedIn);
 
 
   const [events, setEvents] = useState([])
