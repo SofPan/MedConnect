@@ -14,8 +14,15 @@ import {
   import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
   import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
   import { DatePicker, TimePicker } from '@mui/x-date-pickers';
-  import dayjs from 'dayjs';
+  import dayjs from "dayjs";
   import { UserSignedIn } from "../../App";
+
+import GlobalStyles from '@mui/material/GlobalStyles';
+
+
+ 
+
+ 
 
 const StyledCard = styled(Card)({
   minWidth: 275,
@@ -29,6 +36,8 @@ const StyledTypography = styled(Typography)({
 });
 
 const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appointment}) => {
+
+  
 
   const { userState } = useContext(UserSignedIn);
 
@@ -175,6 +184,8 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
     setAvailibility(prevState =>({ ...prevState, doctor_name: e.target.value }));
   };
 
+  
+
   const handleDateTimeChange = (field, newValue) => {
     setAvailibility(prevState => ({
         ...prevState,
@@ -197,16 +208,43 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           value={selectedDoctor}
           onChange={handleDoctorChange}
           fullWidth
+          SelectProps={{
+            MenuProps: {
+              PopperProps: {
+                sx: { backgroundColor: "blue" }
+              }
+            }
+          }}
           margin="normal"
         >
           {doctors.map((doctor, index) => (
-            <MenuItem key={index} value={doctor}>
+            <MenuItem key={index} value={doctor} >
               {doctor}
+              
+
             </MenuItem>
           ))}
         </TextField>
       )}
      <LocalizationProvider dateAdapter={AdapterDayjs}>
+     <GlobalStyles styles={{
+        '.MuiClockPicker-root .MuiClockPicker-clock, .MuiClockPicker-root .MuiClockPicker-arrowSwitcher': {
+          '&::-webkit-scrollbar': {
+            width: '12px',
+            height: '12px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'red',
+            borderRadius: '10px',
+            '&:hover': {
+              backgroundColor: 'red',
+            },
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'red',
+          },
+        },
+      }} />
           <Box>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -215,18 +253,22 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   value={availibility.start_time}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
+                  
                   margin="normal"
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TimePicker
+                ampm={false}
                   label="Start Time"
                   value={availibility.start_time}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
                   margin="normal"
-                  minutesStep={30}
+                  minTime={dayjs().set('hour', 9)}
+                  maxTime={dayjs().set('hour', 17)}
+                  timeSteps={{ minutes: 30 }}
                   openTo="hours"
                   renderInput={(params) => <TextField {...params} />}
                 />
@@ -239,10 +281,12 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   fullWidth
                   margin="normal"
                   renderInput={(params) => <TextField {...params} />}
+                  PopperProps={{sx: {color:"blue"}}}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TimePicker
+                  ampm={false}
                  openTo="hours"
                   label="End Time"
                   value={availibility.end_time}
@@ -250,6 +294,8 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   fullWidth
                   minutesStep={30}
                   margin="normal"
+                  minTime={dayjs().set('hour', 8)}
+                  maxTime={dayjs().set('hour', 17)}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
