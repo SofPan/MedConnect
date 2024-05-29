@@ -19,7 +19,6 @@ const AvailableDoctors = () => {
   const [coordinates, setCoordinates] = useState(defaultCenter);
   const [mapClinics, setMapClinics] = useState([]);
   const [displayedClinics, setDisplayedClinics] = useState([]);
-  const [mapDoctors, setMapDoctors] = useState([]);
   
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -38,19 +37,9 @@ useEffect(() => {
     }
   };
 
-  const fetchDoctors = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/doctors');
-      console.log(response.data)
-      setMapDoctors(response.data);
-    } catch (error) {
-      console.error('Error fetching clinics:', error);
-    }
-  };
 
   if (isLoaded) {
     fetchClinics();
-    fetchDoctors();
   }
 }, [isLoaded]);
 
@@ -59,7 +48,7 @@ useEffect(() => {
     <Grid container spacing={2} maxWidth={"90%"} margin="0 auto" height="80vh">
       <Grid item xs={4} display="inline-flex" flexDirection="column">
         <AccordionWrapper title={"Search by doctor's name"}>
-          <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter} setDisplayedClinics={setDisplayedClinics} mapDoctors={mapDoctors} mapClinics={mapClinics}/>
+          <SearchClinicsByDoctorForm setCoordinates={setCoordinates} defaultCenter={defaultCenter} setDisplayedClinics={setDisplayedClinics} mapClinics={mapClinics}/>
         </AccordionWrapper>
           <SearchClinicsByAddressForm setCoordinates={setCoordinates} setSearchTermMarker={setSearchTermMarker} />
         <BoxWithScroll height="60vh">
