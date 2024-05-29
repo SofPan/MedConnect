@@ -24,7 +24,7 @@ const DoctorsList = (props) => {
 
   return(
     <ul>
-      {!mapAndFilterDoctors.length && <span>You do not have any doctors listed</span>}
+      {!mapAndFilterDoctors.length && <li><span>You do not have any doctors listed</span></li>}
       {mapAndFilterDoctors}
     </ul>
   )

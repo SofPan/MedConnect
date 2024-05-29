@@ -35,13 +35,13 @@ export default function MapModal({ clinic, showModal, setShowModal }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Box id="modal-modal-description" sx={{ mt: 2 }}>
             <ClinicListItem name={clinic.name} address={clinic.address} id={clinic.id} distance={null} setErrorMessage={setErrorMessage} />
             <Typography>
               {errorMessage}
             </Typography>
             <Button onClick={handleClose}>Back to the list</Button>
-          </Typography>
+          </Box>
         </Box>
       </Modal>
     </div>
