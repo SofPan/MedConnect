@@ -1,19 +1,17 @@
 import './App.css';
 import { useEffect, useState, createContext } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import NavBar from './components/NavBar';
 import useApplicationData from './hooks/useApplicationData';
-import PatientInfo from './components/SignUp/PatientInfo';
 import UserProfile from './components/UserProfile/UserProfile';
 import SignUp from './components/SignUp/SignUpForm';
-import ClinicSignUpInfo from './components/SignUp/ClinicSignUpInfo';
 import AvailableDoctors from './components/AvailableDoctors';
-import PatientAppointments from './components/Scheduling/PatientAppointments';
 import RegisterWithDoctor from './components/DoctorsList/RegisterWithDoctor';
 import LandingPage from './components/LandingPage';
 import RequiredInformation from './components/SignUp/RequiredInformation';
 import BasicModal from './components/GeneralComponents/BasicModal';
+import { MotionWrapper } from './components/GeneralComponents/MotionWrapper';
 
 export const UserSignedIn = createContext();
 
@@ -79,15 +77,5 @@ function App() {
   );
 }
 
-const MotionWrapper = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.7 }}
-  >
-    {children}
-  </motion.div>
-);
 
 export default App;

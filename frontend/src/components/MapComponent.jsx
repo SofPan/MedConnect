@@ -29,7 +29,6 @@ const MapComponent = ({coordinates, searchTermMarker, mapClinics, isLoaded}) => 
   const handleMarkerClick = (id) => {
       setSelectedClinicId(id);
       const clinic = mapClinics.find(clinic => clinic.id === id);
-      console.log(clinic)
       setSelectedClinic(clinic);
       setShowModal(true);
   };
