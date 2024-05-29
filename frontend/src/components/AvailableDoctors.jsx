@@ -29,7 +29,6 @@ useEffect(() => {
   const fetchClinics = async () => {
     try {
       const response = await axios.get('http://localhost:8080/clinics');
-      console.log(response.data)
       setMapClinics(response.data);
       setDisplayedClinics(response.data)
     } catch (error) {

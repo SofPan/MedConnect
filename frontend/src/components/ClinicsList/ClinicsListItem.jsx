@@ -5,7 +5,6 @@ import { UserSignedIn } from "../../App";
 import { Button, Card } from "@mui/material";
 import axios from "axios";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
-import CardWrapper from "../GeneralComponents/CardWrapper";
 import { Box } from "@mui/system";
 
 const ClinicListItem = (props) => {
@@ -18,15 +17,6 @@ const ClinicListItem = (props) => {
     clinic_name: name,
     clinic_address: address
   }
-
-  const [visible, setVisible] = useState(true);
-
- 
-
-  // If there are no doctors to display, hide clinic from list
-  // const checkIfRenderClinic = render => {
-  //   setVisible(render);
-  // };
 
   const [alterDoctors, setAlterDoctors] = useState(0);
   const triggerDoctorStateUpdate = () => {
@@ -63,37 +53,35 @@ const ClinicListItem = (props) => {
 
   return(
     <>
-    { visible &&
-      <Card 
-      sx={{
-        margin: "12px 0", 
-        padding: "12px", 
-        minHeight: "200px", 
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
-        }}>
-        <div>
-          <Box className="pb-4 pt-2 pl-2 border-b-2 border-red-900">
-            <p className="clinics-info">
-              <strong>{name}</strong> <br />
-              <small>{address} <br />
-              {distance > 0 && `Distance: ${distance} km`}</small>
-            </p>
-          </Box>
-          <BoxWithScroll height="45%">
-            <DoctorsList 
-              clinic_id={id} 
-              changeDoctorState={triggerDoctorStateUpdate}
-            />
-          </BoxWithScroll>
-          </div>
-          
-          <Box textAlign="right">
-              <Button variant="small" onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
-          </Box>
-        </Card>
-    }
+    <Card 
+    sx={{
+      margin: "12px 0", 
+      padding: "12px", 
+      minHeight: "200px", 
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between"
+      }}>
+      <div>
+        <Box className="pb-4 pt-2 pl-2 border-b-2 border-red-900">
+          <p className="clinics-info">
+            <strong>{name}</strong> <br />
+            <small>{address} <br />
+            {distance > 0 && `Distance: ${distance} km`}</small>
+          </p>
+        </Box>
+        <BoxWithScroll height="45%">
+          <DoctorsList 
+            clinic_id={id} 
+            changeDoctorState={triggerDoctorStateUpdate}
+          />
+        </BoxWithScroll>
+        </div>
+        
+        <Box textAlign="right">
+            <Button variant="small" onClick={() => handleRequest(clinicInfo)}>Request to Register</Button>
+        </Box>
+      </Card>
     </>
   )
 }

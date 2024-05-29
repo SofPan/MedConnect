@@ -24,7 +24,7 @@ export default function LoginForm({ setLoginDisplay }) {
   };
 
 
-  const { userState, dispatch } = useContext(UserSignedIn);
+  const { dispatch } = useContext(UserSignedIn);
 
   const navigate = useNavigate();
 
@@ -47,7 +47,6 @@ export default function LoginForm({ setLoginDisplay }) {
 
       }
 
-      // Assuming response is JSON
       const userResponse = await response.json();
 
       const userObject = userResponse.reduce((acc, obj) => {
@@ -97,8 +96,6 @@ export default function LoginForm({ setLoginDisplay }) {
 
     } catch (error) {
       console.error('Error:', error);
-      // Handle error
-      console.log(error)
     }
   }
 
