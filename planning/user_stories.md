@@ -30,7 +30,7 @@
 - scheduling app with clinic  
 - Disable full doctors
 
-# GPT USER STORIES
+# USER STORIES
 
 # # Patient 
 - As a patient, I want to be able to login and edit my profile, so that I can keep my information up-to-date and relevant for appointments and medical records.
