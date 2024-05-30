@@ -1,0 +1,8 @@
+scs .grid-radio-container {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-container {
+  flex-direction: row;
+}/*# sourceMappingURL=SignUp.css.map */

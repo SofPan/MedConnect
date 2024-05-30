@@ -208,13 +208,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           value={selectedDoctor}
           onChange={handleDoctorChange}
           fullWidth
-          SelectProps={{
-            MenuProps: {
-              PopperProps: {
-                sx: { backgroundColor: "blue" }
-              }
-            }
-          }}
+          
           margin="normal"
         >
           {doctors.map((doctor, index) => (

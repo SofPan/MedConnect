@@ -1,0 +1,35 @@
+/*
+Material UI scroll bar styling
+
+*/
+
+$scrollcolor: gray;
+
+
+.MuiList-root {
+    &::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: $scrollcolor;
+      border-radius: 10px;
+      border: 2px solid #f1f1f1;
+  
+      &:hover {
+        background-color: $scrollcolor;
+      }
+    }
+  
+    &::-webkit-scrollbar-corner {
+      background: #f1f1f1;
+    }
+  }
+  .MuiMultiSectionDigitalClockSection-root::after{
+    display: none !important;
+  }

@@ -1,27 +1,26 @@
-.MuiList-root {
-    &::-webkit-scrollbar {
-      width: 12px;
-      height: 12px;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background-color: gray;
-      border-radius: 10px;
-      border: 2px solid #f1f1f1;
-  
-      &:hover {
-        background-color: darkred;
-      }
-    }
-  
-    &::-webkit-scrollbar-corner {
-      background: #f1f1f1;
-    }
-  }
-  .MuiMultiSectionDigitalClockSection-root::after{
-    display: none !important;
-  }
+/*
+Material UI scroll bar styling
+
+*/
+.MuiList-root::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.MuiList-root::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.MuiList-root::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+.MuiList-root::-webkit-scrollbar-thumb:hover {
+  background-color: gray;
+}
+.MuiList-root::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+
+.MuiMultiSectionDigitalClockSection-root::after {
+  display: none !important;
+}/*# sourceMappingURL=App.css.map */
