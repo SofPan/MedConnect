@@ -24,7 +24,7 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 
  
 
-const StyledCard = styled(Card)({
+const StyledBox= styled(Box)({
   minWidth: 275,
   margin: "20px",
 });
@@ -42,15 +42,24 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   const { userState } = useContext(UserSignedIn);
 
 
-  
+  const [errors, setErrors ] = useState([])
   const [availibility, setAvailibility] = useState({
-    id: userState.userInfo.id,
-    patient_id: '',
-    patient_name:'',
-    doctor_id: '',
-    doctor_name: '',
-    start_time: null,
-    end_time: null,
+    doctor_id: {
+      value: '',
+      error: false
+    },
+    doctor_name: {
+      value: '',
+      error: false
+    },
+    start_time: {
+      value: null,
+      error: false
+    },
+    end_time:  {
+      value: null,
+      error: false
+    },
     clinic_id: userState.userInfo.id,
     status: false,
     created_at: new Date(),
@@ -58,7 +67,6 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
     clinic_name: userState.userInfo.name
   });
 
-  const [selectedDoctor, setSelectedDoctor] = useState(availibility.doctor_name);
   const [doctors, setDoctors ] = useState([]);
 
   
@@ -155,12 +163,29 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   }
 
   const handleSave = async () => {
-    // Save edited appointment here
-    setAvailabilityDisplay(!availabilityDisplay);
-    // You can perform any action, like sending data to backend
+    let newErrors = {};
+    for (const [key, value] of Object.entries(availibility)) {
+      if (!value) {
+        setAvailibility(prev => ({
+          ...prev,
+          [key]: { ...prev[key], error: true } // Correct syntax to update the error property
+        }));
+        newErrors[key] = true;
+      }
+    }
     
-   
+    setErrors(newErrors);
     
+    if (Object.keys(newErrors).length === 0) {
+      // Construct the data to be sent to the backend
+      const data = {
+        start_time: availibility.start_time.value,
+        end_time: availibility.end_time.value,
+        clinic_name: availibility.clinic_name,
+        doctor_name: availibility.doctor_name.value,
+        // Add other fields as needed
+      };
+    }
   };
 
   const handleCancel = () => {
@@ -170,18 +195,12 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
     
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setAvailibility(prevState => ({ ...prevState, [name]: value }));
-  };
-
-  
-  
 
 
   const handleDoctorChange = (e) => {
-    setSelectedDoctor(e.target.value);
-    setAvailibility(prevState =>({ ...prevState, doctor_name: e.target.value }));
+    const selectedDoctor = userState.doctors.find((doc) => doc.name === e.target.value);
+    const doctor_id = selectedDoctor ? selectedDoctor.id : null;
+    setAvailibility(prevState =>({ ...prevState, doctor_name:{...prev.doctor_name, value: e.target.value}, doctor_id: doctor_id }));
   };
 
   
@@ -195,7 +214,9 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   
 
   return (
-  <StyledCard variant="outlined">
+  <Box 
+  component="form"
+  noValidate >
     <CardContent>
       <StyledTypography variant="h5">
         Create Open Availibility Between Selected Time Frame
@@ -205,10 +226,10 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           select
           name="doctor_name"
           label="Doctor"
-          value={selectedDoctor}
           onChange={handleDoctorChange}
           fullWidth
-          
+          error={availibility.doctor_name.error}
+
           margin="normal"
         >
           {doctors.map((doctor, index) => (
@@ -244,10 +265,11 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
               <Grid item xs={6}>
                 <DatePicker
                   label="Start Date"
-                  value={availibility.start_time}
+                  value={availibility.start_time.value}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
-                  
+                  error={availibility.start_time.error}
+
                   margin="normal"
                   renderInput={(params) => <TextField {...params} />}
                 />
@@ -256,24 +278,29 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                 <TimePicker
                 ampm={false}
                   label="Start Time"
-                  value={availibility.start_time}
+                  value={availibility.start_time.value}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
                   margin="normal"
-                  minTime={dayjs().set('hour', 9)}
+                  minTime={dayjs().set('hour', 9).set('minute', 0).set('second', 0).set('millisecond', 0)}
                   maxTime={dayjs().set('hour', 17)}
                   timeSteps={{ minutes: 30 }}
                   openTo="hours"
+                  error={availibility.start_time.error}
+
+
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
               <Grid item xs={6}>
                 <DatePicker
                   label="End Date"
-                  value={availibility.end_time}
+                  value={availibility.end_time.value}
                   onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
                   fullWidth
                   margin="normal"
+                  error={availibility.end_time.error}
+
                   renderInput={(params) => <TextField {...params} />}
                   PopperProps={{sx: {color:"blue"}}}
                 />
@@ -283,13 +310,14 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   ampm={false}
                  openTo="hours"
                   label="End Time"
-                  value={availibility.end_time}
+                  value={availibility.end_time.value}
                   onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
                   fullWidth
                   minutesStep={30}
                   margin="normal"
                   minTime={dayjs().set('hour', 8)}
                   maxTime={dayjs().set('hour', 17)}
+                  error={availibility.end_time.error}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Grid>
@@ -320,7 +348,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
         </Grid>
       
     </CardContent>
-  </StyledCard>
+  </Box>
 );
 };
 
