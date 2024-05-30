@@ -36,8 +36,9 @@ const StyledTypography = styled(Typography)({
 });
 
 const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appointment}) => {
-
   
+  const timePickerMinTime = dayjs().set('hour', 9).set('minute', 0).set('second', 0).set('millisecond', 0);
+  const timePickerMaxTime = dayjs().set('hour', 17);
 
   const { userState } = useContext(UserSignedIn);
 
@@ -163,9 +164,13 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   }
 
   const handleSave = async () => {
+
     let newErrors = {};
+
     for (const [key, value] of Object.entries(availibility)) {
-      if (!value) {
+      
+      if (value.hasOwnProperty("value") && !value.value) {
+        
         setAvailibility(prev => ({
           ...prev,
           [key]: { ...prev[key], error: true } // Correct syntax to update the error property
@@ -173,7 +178,8 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
         newErrors[key] = true;
       }
     }
-    
+    console.log(availibility);
+    debugger;
     setErrors(newErrors);
     
     if (Object.keys(newErrors).length === 0) {
@@ -200,7 +206,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   const handleDoctorChange = (e) => {
     const selectedDoctor = userState.doctors.find((doc) => doc.name === e.target.value);
     const doctor_id = selectedDoctor ? selectedDoctor.id : null;
-    setAvailibility(prevState =>({ ...prevState, doctor_name:{...prev.doctor_name, value: e.target.value}, doctor_id: doctor_id }));
+    setAvailibility(prev =>({ ...prev, doctor_name:{...prev.doctor_name, value: e.target.value}, doctor_id: doctor_id }));
   };
 
   
@@ -268,10 +274,15 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   value={availibility.start_time.value}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
-                  error={availibility.start_time.error}
-
+                  
                   margin="normal"
-                  renderInput={(params) => <TextField {...params} />}
+                  slotProps={{
+                    textField: {
+                      
+                      variant: 'outlined',
+                      error: availibility.start_time.error
+                    
+                    }}}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -282,14 +293,18 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
                   margin="normal"
-                  minTime={dayjs().set('hour', 9).set('minute', 0).set('second', 0).set('millisecond', 0)}
-                  maxTime={dayjs().set('hour', 17)}
-                  timeSteps={{ minutes: 30 }}
+                  minTime={timePickerMinTime}
+                  maxTime={timePickerMaxTime}
+                  timeSteps={{ minutes: 15 }}
                   openTo="hours"
-                  error={availibility.start_time.error}
-
-
-                  renderInput={(params) => <TextField {...params} />}
+                  slotProps={{
+                    textField: {
+                      
+                      variant: 'outlined',
+                      error: availibility.start_time.error
+                    
+                    }}}
+                 
                 />
               </Grid>
               <Grid item xs={6}>
@@ -299,10 +314,15 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
                   fullWidth
                   margin="normal"
-                  error={availibility.end_time.error}
+                  slotProps={{
+                    textField: {
+                      
+                      variant: 'outlined',
+                      error: availibility.end_time.error
+                    
+                    }}}
 
-                  renderInput={(params) => <TextField {...params} />}
-                  PopperProps={{sx: {color:"blue"}}}
+                 
                 />
               </Grid>
               <Grid item xs={6}>
@@ -313,12 +333,17 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                   value={availibility.end_time.value}
                   onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
                   fullWidth
-                  minutesStep={30}
+                  timeSteps={{ minutes: 15 }}
                   margin="normal"
-                  minTime={dayjs().set('hour', 8)}
-                  maxTime={dayjs().set('hour', 17)}
-                  error={availibility.end_time.error}
-                  renderInput={(params) => <TextField {...params} />}
+                  minTime={timePickerMinTime}
+                  maxTime={timePickerMaxTime}
+                  slotProps={{
+                    textField: {
+                      
+                      variant: 'outlined',
+                      error: availibility.end_time.error
+                    
+                    }}}
                 />
               </Grid>
             </Grid>
