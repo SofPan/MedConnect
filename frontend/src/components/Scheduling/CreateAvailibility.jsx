@@ -10,13 +10,17 @@ import {
     TextField,
     MenuItem
   } from '@mui/material';
+
   import { styled } from '@mui/system';
   import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
   import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
   import { DatePicker, TimePicker, DateTimePicker } from '@mui/x-date-pickers';
   import dayjs from "dayjs";
   import { UserSignedIn } from "../../App";
-
+  import FullCalendar from '@fullcalendar/react'
+  import dayGridPlugin from '@fullcalendar/daygrid';
+  import timeGridPlugin from '@fullcalendar/timegrid';
+  import interactionPlugin from '@fullcalendar/interaction';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
 const isSameOrAfter = require('dayjs/plugin/isSameOrAfter')
@@ -215,32 +219,12 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
       <StyledTypography variant="h5">
         Create Open Availibility Between Selected Time Frame
       </StyledTypography>
-      {doctors && doctors.length > 0 && (
-        <TextField
-          select
-          name="doctor_name"
-          label="Doctor"
-          onChange={handleDoctorChange}
-          fullWidth
-          error={availibility.doctor_name.error}
-
-          margin="normal"
-        >
-          {doctors.map((doctor, index) => (
-            <MenuItem key={index} value={doctor} >
-              {doctor}
-              
-
-            </MenuItem>
-          ))}
-        </TextField>
-      )}
      <LocalizationProvider dateAdapter={AdapterDayjs}>
      <GlobalStyles styles={{
-        '.MuiClockPicker-root .MuiClockPicker-clock, .MuiClockPicker-root .MuiClockPicker-arrowSwitcher': {
-          '&::-webkit-scrollbar': {
-            width: '12px',
-            height: '12px',
+       '.MuiClockPicker-root .MuiClockPicker-clock, .MuiClockPicker-root .MuiClockPicker-arrowSwitcher': {
+         '&::-webkit-scrollbar': {
+           width: '12px',
+           height: '12px',
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: 'red',
@@ -256,8 +240,8 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
       }} />
           <Box>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <DateTimePicker
+              
+                {/* <DateTimePicker
                   label="Start Date"
                   value={availibility.start_time.value}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
@@ -275,13 +259,25 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                       error: availibility.start_time.error
                     
                     }}}
-                />
+                  /> */}
+              
+              <Grid item xs={12}>
+              <FullCalendar
+      plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+      headerToolbar={{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay' // Buttons to switch between views
+      }}
+      selectable
+      selectMirror
+      unselectAuto
+    />
               </Grid>
               
-              
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <DateTimePicker
-                  label="End Date"
+                label="End Date"
                   ampm={false}
                   openTo="hours"
                   value={availibility.end_time.value}
@@ -295,16 +291,36 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                       
                       variant: 'outlined',
                       error: availibility.end_time.error
-                    
+                      
                     }}}
-
-                 
+                    
+                    
                 />
-              </Grid>
-             
+                </Grid>
+              */}
             </Grid>
           </Box>
         </LocalizationProvider>
+        {doctors && doctors.length > 0 && (
+          <TextField
+            select
+            name="doctor_name"
+            label="Doctor"
+            onChange={handleDoctorChange}
+            fullWidth
+            error={availibility.doctor_name.error}
+  
+            margin="normal"
+          >
+            {doctors.map((doctor, index) => (
+              <MenuItem key={index} value={doctor} >
+                {doctor}
+                
+  
+              </MenuItem>
+            ))}
+          </TextField>
+        )}
         <TextField
           
           name="clinic_name"
@@ -312,7 +328,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           value={availibility.clinic_name}
           fullWidth
           margin="normal"
-        ></TextField>
+          ></TextField>
           
       
         <Grid container spacing={2} justifyContent="flex-end">
