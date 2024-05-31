@@ -51,7 +51,7 @@ const SingleAppointment = (appointment) => {
   const [selectedDoctor, setSelectedDoctor] = useState(appointment.doctor_name);
   const [doctors, setDoctors ] = useState([]);
   const [clinics, setClinics] = useState([]);
-  const [selectedClinic, setSelectedClinic] = useState(editedAppointment.clinic_name || appointment.clinic_name);
+ 
   
   
   
@@ -266,6 +266,7 @@ const SingleAppointment = (appointment) => {
         ...prevState,
         [field]: newValue
     }));
+   
   };
   const handleBack = () =>{
     setsingleAppointmentDisplay(!singleAppointmentDisplay);

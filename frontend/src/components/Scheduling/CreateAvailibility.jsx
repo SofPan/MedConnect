@@ -13,13 +13,14 @@ import {
   import { styled } from '@mui/system';
   import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
   import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-  import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+  import { DatePicker, TimePicker, DateTimePicker } from '@mui/x-date-pickers';
   import dayjs from "dayjs";
   import { UserSignedIn } from "../../App";
 
 import GlobalStyles from '@mui/material/GlobalStyles';
 
-
+const isSameOrAfter = require('dayjs/plugin/isSameOrAfter')
+dayjs.extend(isSameOrAfter)
  
 
  
@@ -121,29 +122,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
     }
   };
 
-  const updateAppointment = async (availibility) =>{
-    
-    try {
-      const response = await fetch(`http://localhost:8080/appointments/:id`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body:
-          JSON.stringify(availibility)
-        
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to update appointment');
-      }
-      ;
-      
-
-    } catch (error) {
-      console.log("Error", error);
-    }
-  }
+  
 
   useEffect(()=>{
 
@@ -178,20 +157,29 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
         newErrors[key] = true;
       }
     }
-    console.log(availibility);
-    debugger;
+
+    
+   console.log(availibility);
+   debugger;
+    
+
     setErrors(newErrors);
     
+    //Send data if there are no errors
     if (Object.keys(newErrors).length === 0) {
-      // Construct the data to be sent to the backend
-      const data = {
-        start_time: availibility.start_time.value,
-        end_time: availibility.end_time.value,
-        clinic_name: availibility.clinic_name,
-        doctor_name: availibility.doctor_name.value,
-        // Add other fields as needed
-      };
+      const dayjsStartDate = dayjs(availibility.start_time.value)
     }
+    const data = {
+      start_time: availibility.start_time.value,
+      end_time: availibility.end_time.value,
+      clinic_name: availibility.clinic_name,
+      doctor_name: availibility.doctor_name.value,
+      patient_id: null,
+      patient_name: null,
+      status: false
+    };
+    
+
   };
 
   const handleCancel = () => {
@@ -214,7 +202,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
   const handleDateTimeChange = (field, newValue) => {
     setAvailibility(prevState => ({
         ...prevState,
-        [field]: newValue
+        [field]: dayjs(newValue)
     }));
   };
   
@@ -269,34 +257,17 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           <Box>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <DatePicker
+                <DateTimePicker
                   label="Start Date"
                   value={availibility.start_time.value}
                   onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
                   fullWidth
-                  
-                  margin="normal"
-                  slotProps={{
-                    textField: {
-                      
-                      variant: 'outlined',
-                      error: availibility.start_time.error
-                    
-                    }}}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TimePicker
-                ampm={false}
-                  label="Start Time"
-                  value={availibility.start_time.value}
-                  onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
-                  fullWidth
-                  margin="normal"
+                  ampm={false}
                   minTime={timePickerMinTime}
                   maxTime={timePickerMaxTime}
                   timeSteps={{ minutes: 15 }}
                   openTo="hours"
+                  margin="normal"
                   slotProps={{
                     textField: {
                       
@@ -304,16 +275,21 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                       error: availibility.start_time.error
                     
                     }}}
-                 
                 />
               </Grid>
+              
+              
               <Grid item xs={6}>
-                <DatePicker
+                <DateTimePicker
                   label="End Date"
+                  ampm={false}
+                  openTo="hours"
                   value={availibility.end_time.value}
                   onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
                   fullWidth
                   margin="normal"
+                  minTime={timePickerMinTime}
+                  maxTime={timePickerMaxTime}
                   slotProps={{
                     textField: {
                       
@@ -325,27 +301,7 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                  
                 />
               </Grid>
-              <Grid item xs={6}>
-                <TimePicker
-                  ampm={false}
-                 openTo="hours"
-                  label="End Time"
-                  value={availibility.end_time.value}
-                  onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
-                  fullWidth
-                  timeSteps={{ minutes: 15 }}
-                  margin="normal"
-                  minTime={timePickerMinTime}
-                  maxTime={timePickerMaxTime}
-                  slotProps={{
-                    textField: {
-                      
-                      variant: 'outlined',
-                      error: availibility.end_time.error
-                    
-                    }}}
-                />
-              </Grid>
+             
             </Grid>
           </Box>
         </LocalizationProvider>
