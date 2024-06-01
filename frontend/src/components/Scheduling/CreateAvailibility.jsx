@@ -209,6 +209,10 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
         [field]: dayjs(newValue)
     }));
   };
+
+  const handleClear = () =>{
+   
+  }
   
 
   return (
@@ -260,10 +264,10 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
                     
                     }}}
                   /> */}
-              
-              <Grid item xs={12}>
-              <FullCalendar
-      plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+             {availibility.doctor_name.value && (
+  <Grid item xs={12}>
+    <FullCalendar
+      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       headerToolbar={{
         left: 'prev,next today',
         center: 'title',
@@ -271,9 +275,12 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
       }}
       selectable
       selectMirror
-      unselectAuto
+      unselectAuto={false}
     />
-              </Grid>
+  </Grid>
+)}
+
+                
               
               {/* <Grid item xs={6}>
                 <DateTimePicker
@@ -335,6 +342,11 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
           <Grid item>
             <Button variant="contained" color="primary" onClick={handleSave}>
               Save
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" onClick={handleClear}>
+              Clear
             </Button>
           </Grid>
           <Grid item>
