@@ -244,26 +244,6 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
       }} />
           <Box>
             <Grid container spacing={2}>
-              
-                {/* <DateTimePicker
-                  label="Start Date"
-                  value={availibility.start_time.value}
-                  onChange={(newValue) => handleDateTimeChange('start_time', newValue)}
-                  fullWidth
-                  ampm={false}
-                  minTime={timePickerMinTime}
-                  maxTime={timePickerMaxTime}
-                  timeSteps={{ minutes: 15 }}
-                  openTo="hours"
-                  margin="normal"
-                  slotProps={{
-                    textField: {
-                      
-                      variant: 'outlined',
-                      error: availibility.start_time.error
-                    
-                    }}}
-                  /> */}
              {availibility.doctor_name.value && (
   <Grid item xs={12}>
     <FullCalendar
@@ -271,40 +251,18 @@ const CreateAvailibility = ({availabilityDisplay, setAvailabilityDisplay, appoin
       headerToolbar={{
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay' // Buttons to switch between views
+        right: 'timeGridWeek,timeGridDay' // Buttons to switch between views
       }}
       selectable
       selectMirror
       unselectAuto={false}
+      initialView="timeGridWeek"
+      dataSet={handleDateTimeChange}
+      allDaySlot={false}
     />
   </Grid>
 )}
 
-                
-              
-              {/* <Grid item xs={6}>
-                <DateTimePicker
-                label="End Date"
-                  ampm={false}
-                  openTo="hours"
-                  value={availibility.end_time.value}
-                  onChange={(newValue) => handleDateTimeChange('end_time', newValue)}
-                  fullWidth
-                  margin="normal"
-                  minTime={timePickerMinTime}
-                  maxTime={timePickerMaxTime}
-                  slotProps={{
-                    textField: {
-                      
-                      variant: 'outlined',
-                      error: availibility.end_time.error
-                      
-                    }}}
-                    
-                    
-                />
-                </Grid>
-              */}
             </Grid>
           </Box>
         </LocalizationProvider>
