@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 import DocumentsList from "../PatientDocuments/DocumentsList";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";

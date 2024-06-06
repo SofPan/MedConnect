@@ -1,30 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
-import { UserSignedIn } from "../../App";
-import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, InputLabel} from "@mui/material";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
+import { Snackbar, Button, CssBaseline, TextField, Grid, Box, Typography, Container, InputLabel} from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { useNavigate } from "react-router-dom";
 
-/* 
-CREATE TABLE patients (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,
-  date_of_birth DATE,
-  gender VARCHAR(10),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-*/
 
 export default function PatientInfo() {
 
@@ -50,8 +34,6 @@ export default function PatientInfo() {
       const responseData = await response.text();
       
       console.log(responseData, "patient info");
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
       if (userState.clinicInfo.clinic_id) {
         navigate("/register")
       } else {
@@ -62,7 +44,6 @@ export default function PatientInfo() {
 
     } catch (error) {
       console.error('Error registering user:', error);
-      // Handle error
     }
   };
 
@@ -77,7 +58,6 @@ export default function PatientInfo() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errors, setErrors] = useState({});
 
-  // Change handler to update state
   const handleChange = (e) => {
    
     const { name, value } = e.target;
@@ -90,14 +70,12 @@ export default function PatientInfo() {
   };
 
   const handleDateChange = (date) => {
-    
     setFormData({
       ...formData,
-      DOB: dayjs(date) // Store the selected date
+      DOB: dayjs(date) 
     });
    
   };
-
 
   const validate = (formData) => {
     const errors = {};
@@ -109,19 +87,12 @@ export default function PatientInfo() {
       }
     }
 
-    console.log(errors);
-
-    // You can add more complex validation rules here
-
     return errors;
   };
 
-
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    
-    
+        
     const formErrors = validate(formData);
 
     if (Object.keys(formErrors).length === 0) {
@@ -131,8 +102,6 @@ export default function PatientInfo() {
       setErrors(formErrors);
       setOpenSnackbar(true);
     }
-
-
   }
 
   const handleCloseSnackbar = () => {

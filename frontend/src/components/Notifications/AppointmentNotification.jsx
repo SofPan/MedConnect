@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useDelete, useGet, usePut } from "../../hooks/useAPI";
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import {formatDateAndTime} from '../../helpers/formatDateAndTime';
 import NotificationActions from "./NotificationActions";
 

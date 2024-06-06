@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { UserSignedIn } from '../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 

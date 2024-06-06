@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Button, Input, Box } from '@mui/material';
-import { UserSignedIn } from '../App';
 
 const SearchClinicsByAddressForm = ({setCoordinates, setSearchTermMarker}) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { userState } = useContext(UserSignedIn);
 
   const handleSearchByAddress = (e) => {
     e.preventDefault();

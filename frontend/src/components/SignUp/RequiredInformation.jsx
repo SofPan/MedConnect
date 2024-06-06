@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ClinicSignUpInfo from "./ClinicSignUpInfo";
 import PatientInfo from "./PatientInfo";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 const RequiredInformation = () => {
 

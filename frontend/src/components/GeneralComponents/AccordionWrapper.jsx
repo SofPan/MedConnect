@@ -5,7 +5,6 @@ import {
     AccordionSummary,
     AccordionDetails
   } from '@mui/material';
-import Fade from '@mui/material/Fade';
 import { theme } from '../../theme/theme';
 
 const StyledAccordion = styled(Accordion)({

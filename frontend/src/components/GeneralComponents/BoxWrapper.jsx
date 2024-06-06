@@ -1,7 +1,5 @@
 import { Box } from "@mui/material";
-import { borderColor, borderRight } from "@mui/system";
 import { useEffect, useState } from "react";
-import { theme } from "../../theme/theme";
 
 const profileLeft = {
   className: "profile-left",

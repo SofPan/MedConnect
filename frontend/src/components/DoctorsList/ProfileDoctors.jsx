@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { useGet } from '../../hooks/useAPI';
 import DoctorsList from '../DoctorsList/DoctorsList'
 import NewDoctorForm from '../DoctorsList/NewDoctor';

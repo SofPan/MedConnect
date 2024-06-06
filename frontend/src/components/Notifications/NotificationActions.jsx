@@ -1,6 +1,6 @@
 import { useDelete } from "../../hooks/useAPI";
 import { useContext, useEffect, useState } from "react";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import {Button} from "@mui/material"
 
 const NotificationActions = (props) => {

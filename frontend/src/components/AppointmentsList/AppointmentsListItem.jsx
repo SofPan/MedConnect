@@ -4,8 +4,8 @@ import {
     Box,
     Button,
   } from '@mui/material';
-import { UserSignedIn } from "../../App";
 import CardWrapper from "../GeneralComponents/CardWrapper";
+import UserSignedIn from "../GeneralComponents/UserSignedIn";
 
 const AppointmentsListItem = (props) => {
   

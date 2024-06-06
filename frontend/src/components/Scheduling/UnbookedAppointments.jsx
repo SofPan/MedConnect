@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useGet } from "../../hooks/useAPI";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 const UnbookedAppointments = (props) => {
   const {userProfile, appointmentDispatch, appointmentState} = props;

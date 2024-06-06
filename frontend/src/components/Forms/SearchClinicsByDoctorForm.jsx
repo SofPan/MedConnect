@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { calculateCenter } from '../helpers/calcCenter';
-import { UserSignedIn } from '../App';
+import { calculateCenter } from '../../helpers/calcCenter';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { Button, Input } from '@mui/material';
 import { Box } from '@mui/system';
 

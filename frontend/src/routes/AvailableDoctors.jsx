@@ -1,13 +1,13 @@
-import ClinicsList from './ClinicsList/ClinicsList';
-import SearchClinicsByAddressForm from './SearchClinicsByAddressForm';
-import MapComponent from './MapComponent';
-import SearchClinicsByDoctorForm from './SearchClinicsByDoctorForm';
+import ClinicsList from '../components/ClinicsList/ClinicsList';
+import SearchClinicsByAddressForm from '../components/Forms/SearchClinicsByAddressForm';
+import MapComponent from '../components/GeneralComponents/MapComponent';
+import SearchClinicsByDoctorForm from '../components/Forms/SearchClinicsByDoctorForm';
 import { useEffect, useState } from 'react';
-import AccordionWrapper from './GeneralComponents/AccordionWrapper';
+import AccordionWrapper from '../components/GeneralComponents/AccordionWrapper';
 import { useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
 import { Grid } from '@mui/material';
-import BoxWithScroll from './GeneralComponents/BoxWithScroll';
+import BoxWithScroll from '../components/GeneralComponents/BoxWithScroll';
 
 const defaultCenter = {
   lat: 43.642567, // default latitude

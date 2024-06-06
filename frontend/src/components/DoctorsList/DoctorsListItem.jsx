@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { UserSignedIn } from "../../App";
 import { useDelete } from "../../hooks/useAPI";
 import EditDoctorForm from "./EditDoctor";
 import {
@@ -8,6 +7,7 @@ import {
   } from '@mui/material';
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import CardWrapper from "../GeneralComponents/CardWrapper";
+import UserSignedIn from "../GeneralComponents/UserSignedIn";
 
 const DoctorsListItem = (props) => {
   const {

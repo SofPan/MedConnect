@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { usePost } from '../../hooks/useAPI';
 import DocumentForm from '../Forms/DocumentForm';
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 const NewDocument = (props) => {
   const {patient_id} = props;

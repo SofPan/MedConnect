@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { Button, Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import BasicModal from "../GeneralComponents/BasicModal";
 import ChangeDoctorModal from "../GeneralComponents/ChangeDoctorModal";
-import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 
 const RegisterWithDoctor = () => {
   const { userState, dispatch } = useContext(UserSignedIn);

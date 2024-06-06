@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import DoctorForm from '../Forms/DoctorForm';
 import { usePut } from '../../hooks/useAPI';
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 const EditDoctorForm = (props) => {
   const {doctor} = props;

@@ -3,7 +3,7 @@ import { useGet } from "../../hooks/useAPI";
 import AccordionWrapper from "../GeneralComponents/AccordionWrapper";
 import AppointmentsList from "../AppointmentsList/AppointmentsList";
 import UnbookedAppointments from "./UnbookedAppointments";
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { useAppointments } from "../../hooks/useAppointments";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Typography } from "@mui/material";

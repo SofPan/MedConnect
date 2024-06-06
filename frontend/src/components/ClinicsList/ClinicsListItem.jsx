@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import DoctorsList from "../DoctorsList/DoctorsList";
 import { useNavigate } from "react-router-dom";
-import { UserSignedIn } from "../../App";
 import { Button, Card, Typography } from "@mui/material";
 import axios from "axios";
 import BoxWithScroll from "../GeneralComponents/BoxWithScroll";
 import { Box } from "@mui/system";
+import UserSignedIn from "../GeneralComponents/UserSignedIn";
 
 const ClinicListItem = (props) => {
   const { name, address, id, distance, setErrorMessage } = props;

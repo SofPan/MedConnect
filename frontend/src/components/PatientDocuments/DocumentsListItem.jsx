@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useDelete } from '../../hooks/useAPI';
 import { Button } from '@mui/material';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { Box } from '@mui/system';
 
 const DocumentsListItem = (props) => {

@@ -3,23 +3,17 @@ import { useState } from "react";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { useContext } from "react";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { useNavigate } from "react-router-dom";
-import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from "@mui/material";
+import { Snackbar, Button, CssBaseline, TextField, FormControlLabel, Link, Grid, Box, Typography, Container } from "@mui/material";
 import BasicModal from "../GeneralComponents/BasicModal";
-// import './SignUp.scss'; // Import the specific SASS file
 
-
-
-
-export default function SignUp({setLoginDisplay}) {
+export default function SignUp() {
   const navigate = useNavigate();
-  const { dispatch } = useContext(UserSignedIn);
+  const { dispatch, setLoginDisplay } = useContext(UserSignedIn);
   const [modalTitle, setModalTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
-
 
   const [formData, setFormData] = useState({
     email: '',
@@ -30,7 +24,6 @@ export default function SignUp({setLoginDisplay}) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errors, setErrors] = useState({});
 
-  // Change handler to update state
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -53,14 +46,8 @@ export default function SignUp({setLoginDisplay}) {
       }
     }
 
-    
-
-    // You can add more complex validation rules here
-
     return errors;
   };
-
-
 
   const registerUser = async (userData) => {
     try {
@@ -77,16 +64,10 @@ export default function SignUp({setLoginDisplay}) {
       }
       ;
       const responseData = await response.json();
-      
-      
-      // Assuming the response contains some information about the newly registered user
-      // You can handle the response data as needed
-      
       return responseData;
 
     } catch (error) {
       console.error('Error registering user:', error);
-      // Handle error
     }
   };
 
@@ -118,15 +99,13 @@ export default function SignUp({setLoginDisplay}) {
           setModalTitle("Error")
           setErrorMessage("A user with this email address has already been registered");
           dispatch({ type: "SET_MODAL", payload: true})
-          // Handle registration failure (e.g., notify the user)
         }
-      // setSignInDisplay(!SignInDisplay);
+      
     } else {
         setErrors(formErrors);
         setOpenSnackbar(true);
     }
 };
-
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -206,7 +185,6 @@ export default function SignUp({setLoginDisplay}) {
             fullWidth
             variant="contained"
             color="primary"
-
           >
             Sign Up
           </Button>
@@ -225,9 +203,6 @@ export default function SignUp({setLoginDisplay}) {
           />
         </form>
       </div>
-      <Box mt={5}>
-
-      </Box>
     </Container>
   );
 }

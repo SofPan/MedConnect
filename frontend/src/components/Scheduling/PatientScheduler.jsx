@@ -5,25 +5,14 @@ import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
 import SingleAppointment from '../AppointmentsList/SingleAppointment';
-
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-
-import Grid from '@mui/material/Grid';
-
-import { UserSignedIn } from "../../App"
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { Typography } from '@mui/material';
-
-
-
 
 export default function PatientScheduler() {
 
-  const { userState, dispatch } = useContext(UserSignedIn);
-
+  const { userState } = useContext(UserSignedIn);
 
   const [events, setEvents] = useState([])
   const [singleAppointmentDisplay, setsingleAppointmentDisplay] = useState(false);
@@ -45,7 +34,6 @@ export default function PatientScheduler() {
  
 
   const getAppointments = async () => {
-
 
     if (userState.userInfo.is_clinic) {
       try {
@@ -79,7 +67,6 @@ export default function PatientScheduler() {
 
         const appointments = await getAppointments();
         
-       
         if (appointments) {
           const dates = appointments.map((date) => {
             if(date.patient_name === null){
@@ -104,11 +91,8 @@ export default function PatientScheduler() {
       };
   
       fetchAppointments();
-    }
-
+    } 
     
-    
-
   }, [userState.userInfo.is_clinic, singleAppointmentDisplay]);
 
   useEffect(() => {
@@ -120,7 +104,6 @@ export default function PatientScheduler() {
         
         if (appointment_id) {
 
-    
           try {
             const response = await fetch(`http://localhost:8080/appointments/single/${appointment_id}`, {
               method: 'GET',
@@ -149,18 +132,10 @@ export default function PatientScheduler() {
       getAppointment();
   }
 
-
-
   }, [appointment_id]);
 
- 
-
-
-
   const handleDateClick =  (e) => {
-    
     setappointment_id(e.event.extendedProps.appointmentId);
-
   }
 
   function renderEventContent(eventInfo) {
@@ -171,8 +146,6 @@ export default function PatientScheduler() {
       </>
     )
   }
-
-
 
   return (
     <Box sx={{width:'90vh'}}>

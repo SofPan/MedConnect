@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import DoctorsListItem from "./DoctorsListItem";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from "../GeneralComponents/UserSignedIn";
 
 const DoctorsList = (props) => {
   const {clinic_id} = props;

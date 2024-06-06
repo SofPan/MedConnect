@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import axios from "axios";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useGet } from "../../hooks/useAPI";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import NotificationsList from "./NotificationsList";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";

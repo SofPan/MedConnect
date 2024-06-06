@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useGet, usePut, useDelete } from "../../hooks/useAPI";
 import NotificationActions from "./NotificationActions";
-import { UserSignedIn } from "../../App";
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 
 
 const RegisterNotification = (props) => {

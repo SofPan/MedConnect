@@ -5,16 +5,16 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
-import { UserSignedIn } from "../App"
-import LoginForm from './LoginForm';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
+import LoginForm from '../Forms/LoginForm';
 import { NavLink, useNavigate } from "react-router-dom";
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import axios from 'axios';
 
 
-export default function NavBar({setLoginDisplay, LoginDisplay}) {
+export default function NavBar() {
 
-    const { userState, dispatch } = useContext(UserSignedIn);
+    const { userState, dispatch, setLoginDisplay, LoginDisplay } = useContext(UserSignedIn);
     
     const navigate = useNavigate();
     

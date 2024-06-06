@@ -5,14 +5,11 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { UserSignedIn } from '../../App';
+import UserSignedIn from '../GeneralComponents/UserSignedIn';
 import { useNavigate } from "react-router-dom";
 import BasicModal from '../GeneralComponents/BasicModal';
 
-
-const defaultTheme = createTheme();
 
 export default function ClinicSignUpInfo() {
 

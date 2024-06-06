@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import MapModal from './GeneralComponents/MapModal';
-import { theme } from '../theme/theme';
+import MapModal from './MapModal';
+import { theme } from '../../theme/theme';
 
 
 const mapContainerStyle = {
